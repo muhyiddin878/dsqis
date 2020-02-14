@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "349423376226",
+    "firebase_url": "https://qis-cyberschool.firebaseio.com",
+    "project_id": "qis-cyberschool",
+    "storage_bucket": "qis-cyberschool.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349423376226:android:999236507899689c873e3b",
+        "android_client_info": {
+          "package_name": "com.muhyiddin.dsqis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349423376226-635ajga5iss3c4jhq7vurnnr8b4he37p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6nEvputZZbOyFQqodDedmFY9lQFCm2Vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349423376226-635ajga5iss3c4jhq7vurnnr8b4he37p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349423376226:android:d09579b13a89f076873e3b",
+        "android_client_info": {
+          "package_name": "com.muhyiddin.qis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349423376226-635ajga5iss3c4jhq7vurnnr8b4he37p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6nEvputZZbOyFQqodDedmFY9lQFCm2Vo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349423376226-635ajga5iss3c4jhq7vurnnr8b4he37p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "32200939523",
+    "firebase_url": "https://lool-28ed8.firebaseio.com",
+    "project_id": "lool-28ed8",
+    "storage_bucket": "lool-28ed8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32200939523:android:f660343c28e456c4eb9636",
+        "android_client_info": {
+          "package_name": "com.muhyiddin.tesupload"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32200939523-2abgpfjb8l4skj7tmk2269g10hkkal3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbbZzcA8aXWfu9K97fgRKFlspAR0hNLbU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32200939523-2abgpfjb8l4skj7tmk2269g10hkkal3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

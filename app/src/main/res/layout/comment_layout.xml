@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardElevation="0.5dp"
+    app:contentPadding="16dp"
+    android:layout_marginBottom="16dp"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@color/colorPrimary"
+            android:id="@+id/commenter_pic"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/commenter_pic"
+            android:textColor="@android:color/black"
+            tools:text="Arinal Izza Y"
+            android:id="@+id/commenter_name"
+            android:textSize="16sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/commenter_pic"
+            android:layout_below="@id/commenter_name"
+            tools:text="18 November 2018"
+            android:id="@+id/comment_date"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/commenter_pic"
+            android:id="@+id/comment"
+            tools:text="Comment goes here"
+            android:textColor="@android:color/black"
+            />
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
