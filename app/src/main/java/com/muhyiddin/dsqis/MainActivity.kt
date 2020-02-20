@@ -62,17 +62,25 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
     }
 
+    fun frg2(){
+        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentChatPakar()).commit()
+    }
+
+
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.profil -> {
-                Log.d("TAG", "tes masuk")
+            R.id.profil -> { Log.d("TAG", "tes masuk")
                 Toast.makeText(this, "TES PROFIL", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this,NewPostActivity::class.java))
             }
             R.id.timeline -> {
-                Log.d("TAG", "tes masuk")
                 Toast.makeText(this, "MASUK BERANDA ARTIKEL", Toast.LENGTH_SHORT).show()
                 frg()
+
+            }
+            R.id.chat -> {
+                Toast.makeText(this, "MASUK CHATROOM", Toast.LENGTH_SHORT).show()
+                frg2()
 
             }
         }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
+        android:text="Dokter Gigi"
+        android:id="@+id/nama_pengirim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_below="@id/nama_pengirim"
+        android:layout_marginTop="8dp"
+        android:id="@+id/isi_chat"
+        android:text="Selamat malam, ada yang bisa saya bantu ?"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_alignParentEnd="true"
+        android:id="@+id/waktu_chat"
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/badge_unread_chat"
+        android:layout_below="@id/waktu_chat"
+        android:layout_marginTop="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/badges_background"/>
+</RelativeLayout>

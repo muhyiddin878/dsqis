@@ -12,11 +12,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".DetailPostActivity"></activity>
+        <activity android:name=".admin.ListGuruFragment"></activity>
+        <activity android:name=".admin.TambahGuruFragment" />
+        <activity android:name=".admin.BuatAkunFragment" />
+        <activity android:name=".admin.InputNilaiFragment" />
+        <activity android:name=".admin.ListAkunFragment" />
+        <activity android:name=".admin.List_Akun_Fragment" />
+        <activity android:name=".admin.HomeFragment" />
+        <activity android:name=".admin.AdminActivity" />
+        <activity android:name=".FragmentChatPakar" />
+        <activity android:name=".NewChatPakarActivity" />
+        <activity android:name=".ChatPakarActivity" />
+        <activity android:name=".ChatDetailActivity" />
+        <activity android:name=".ChatDetail" />
+        <activity android:name=".DetailPostActivity" />
         <activity android:name=".NewPostActivity" />
         <activity android:name=".ArtikelActivity" />
         <activity android:name=".ProfilActivity" />
-        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".SplashActivity" />
         <activity android:name="com.muhyiddin.qis.login.login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

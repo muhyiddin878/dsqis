@@ -1,4 +1,27 @@
 <resources>
     <string name="app_name">DSQIS</string>
     <string name="writer">Oleh: %1s</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <array name="semester">
+        <item>Kelas Persiapan</item>
+        <item>Tahun Pertama</item>
+        <item>Tahun Kedua</item>
+
+    </array>
+
+    <array name="mata_pelajaran">
+        <item>Penilaian Sikap</item>
+        <item>Kelas Pra Akademik</item>
+        <item>Kelas Komputer</item>
+        <item>Kelas Muraja'ah</item>
+        <item>Ekstrakulikuler</item>
+        <item>Laporan Perkembangan Anak</item>
+        <item>Saran Guru</item>
+        <item>Tinggi dan Berat Badan</item>
+        <item>Evaluasi Pertumbuhan Anak</item>
+        <item>Absensi</item>
+        <item>Evaluasi Perkembangan Anak</item>
+    </array>
 </resources>

@@ -118,15 +118,15 @@
                 android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Atau"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:textColor="@android:color/white"
-                />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="Atau"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_marginLeft="16dp"-->
+<!--                android:layout_marginRight="16dp"-->
+<!--                android:textColor="@android:color/white"-->
+<!--                />-->
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -135,19 +135,19 @@
                 android:layout_weight="1"
                 />
         </LinearLayout>
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            app:backgroundTint="@color/colorAccent"
-            android:layout_marginLeft="36dp"
-            android:layout_marginRight="36dp"
-            app:cornerRadius="25dp"
-            android:id="@+id/go_register"
-            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
-            android:layout_marginTop="16dp"
-            android:text="Daftar Sekarang"
-            android:textAllCaps="false"
-            />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="50dp"-->
+<!--            app:backgroundTint="@color/colorAccent"-->
+<!--            android:layout_marginLeft="36dp"-->
+<!--            android:layout_marginRight="36dp"-->
+<!--            app:cornerRadius="25dp"-->
+<!--            android:id="@+id/go_register"-->
+<!--            style="@style/Widget.MaterialComponents.Button.UnelevatedButton"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:text="Daftar Sekarang"-->
+<!--            android:textAllCaps="false"-->
+<!--            />-->
 
     </LinearLayout>
 

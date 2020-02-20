@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:padding="15dp"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:id="@+id/admin_image"
+                android:layout_gravity="center"
+                android:src="@drawable/admin"
+                android:layout_width="match_parent"
+                android:layout_height="170dp" />
+            <TextView
+                android:id="@+id/greetings"
+                android:textSize="40sp"
+                android:layout_marginTop="20dp"
+                android:textAllCaps="false"
+                android:textAlignment="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TableLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow>
+
+
+                    <TextView
+                        android:text="Username"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="0.3"
+                        />
+                    <EditText
+                        android:layout_marginLeft="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/username"
+                        android:layout_weight="20"
+                        />
+                </TableRow>
+                <TableRow
+                    android:layout_marginTop="10dp"
+                    >
+                    <TextView
+                        android:text="Email"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="0.3"
+                        />
+                    <EditText
+                        android:layout_marginLeft="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/email"
+                        android:layout_weight="20"
+                        />
+                </TableRow>
+                <TableRow
+                    android:layout_marginTop="10dp"
+                    >
+                    <TextView
+                        android:text="Password"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="0.3"
+                        />
+                    <EditText
+                        android:layout_marginLeft="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/password"
+                        android:inputType="textPassword"
+                        android:layout_weight="20"
+                        />
+                </TableRow>
+            </TableLayout>
+            <TableLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow>
+                    <com.google.android.material.button.MaterialButton
+                        android:text="Edit Info"
+                        android:id="@+id/edit_info_admin"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                        android:elevation="0dp"
+                        app:cornerRadius="25dp"
+                        android:layout_weight="2"
+
+                        ></com.google.android.material.button.MaterialButton>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/simpan_perubahan"
+                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+                        android:elevation="0dp"
+                        android:text="Simpan Perubahan"
+                        app:cornerRadius="25dp"
+                        android:layout_weight="2"
+
+                        ></com.google.android.material.button.MaterialButton>
+                    <!--                    <Button-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Edit info"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:id="@+id/edit_info_admin"-->
+<!--                        android:layout_weight="2"-->
+<!--                        android:background="@color/info"-->
+<!--                        />-->
+<!--                    <Button-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:background="@color/success"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Simpan Perubahan"-->
+<!--                        android:id="@+id/simpan_perubahan"-->
+<!--                        android:layout_weight="1"-->
+<!--                        />-->
+                </TableRow>
+            </TableLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

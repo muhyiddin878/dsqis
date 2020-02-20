@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.muhyiddin.dsqis.MainActivity
 import com.muhyiddin.dsqis.R
+import com.muhyiddin.dsqis.admin.AdminActivity
 import com.muhyiddin.dsqis.model.User
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_login.*
@@ -85,9 +86,11 @@ class login : AppCompatActivity(){
                         }
                             hideLoading()
                         if (prefs.role==1){
-                            Toast.makeText(this, "TES ROLE", Toast.LENGTH_SHORT).show()
+                            showLoginSuccess()
                         } else if (prefs.role == 2){
                             showLoginSuccess()
+                        }else if (prefs.role==3){
+                            showLoginSuccessAdmin()
                         }
                     }
                     .addOnFailureListener {
@@ -128,6 +131,11 @@ class login : AppCompatActivity(){
 
     fun showLoginSuccess() {
         startActivity(Intent(this,MainActivity::class.java))
+        finish()
+    }
+    fun showLoginSuccessAdmin() {
+
+        startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME","ADMIN"))
         finish()
     }
     fun showLoginSuccess2(msg: String) {

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/dashboard"
+            android:icon="@drawable/ic_house"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/lihat_nilai"
+            android:icon="@drawable/ic_lihat_nilai"
+            android:title="Lihat Nilai" />
+        <item
+            android:id="@+id/daftar_guru"
+            android:icon="@drawable/ic_teacher"
+            android:title="Daftar Guru" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
+
+    </group>
+
+
+</menu>

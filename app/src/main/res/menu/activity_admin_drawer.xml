@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_house"
+            android:title="Home" />
+        <item
+            android:id="@+id/input_nilai"
+            android:icon="@drawable/ic_input_nilai"
+            android:title="Input Nilai" />
+        <item
+            android:id="@+id/list_akun"
+            android:icon="@drawable/ic_list_akun"
+            android:title="List Akun" />
+        <item
+            android:id="@+id/list_guru"
+            android:icon="@drawable/ic_teacher"
+            android:title="Daftar Guru" />
+        <item
+            android:id="@+id/input_bio_guru"
+            android:icon="@drawable/ic_tambah_guru"
+            android:title="Tambah Daftar Guru" />
+        <item
+            android:id="@+id/buat_akun"
+            android:icon="@drawable/ic_tambah_akun_siswa"
+            android:title="Buat Akun Siswa Baru" />
+        <item
+            android:id="@+id/logout"
+            android:icon="@drawable/ic_logout"
+            android:title="Logout" />
+
+
+    </group>
+    
+
+</menu>
