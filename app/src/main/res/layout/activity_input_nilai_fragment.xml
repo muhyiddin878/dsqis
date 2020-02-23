@@ -49,7 +49,7 @@
 
             <Spinner
                 android:id="@+id/pelajaran"
-                android:entries="@array/mata_pelajaran"
+                android:entries="@array/aspek_pelajaran"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></Spinner>
 

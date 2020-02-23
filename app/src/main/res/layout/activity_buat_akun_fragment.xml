@@ -7,6 +7,7 @@
 
     >
 
+
     <ScrollView
         android:padding="15dp"
         android:layout_width="match_parent"
@@ -15,6 +16,39 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/progress_bar_layout_siswa"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:contentPadding="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="16dp"
+                app:cardElevation="3dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sedang Mengupload"
+                        android:textColor="@android:color/black"
+                        android:textStyle="bold"
+                        />
+                    <ProgressBar
+                        android:id="@+id/progress_bar_post"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                        android:progress="25"
+                        />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,6 +106,21 @@
                     android:layout_height="wrap_content"
                     android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:hint="NISN Anak"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:boxBackgroundMode="none"
+                >
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nisn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 <!--            <TextView-->
 <!--                android:text="Tempat Tanggal Lahir"-->
 <!--                android:textSize="17sp"-->
@@ -101,57 +150,52 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <RadioButton
-                        android:id="@+id/sepuluh"
+                        android:id="@+id/persiapan"
                         android:text="Tahun Persiapan"
                         android:textSize="15sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <RadioButton
-                        android:id="@+id/sebelas"
+                        android:id="@+id/pertama"
                         android:text="Tahun Pertama"
                         android:textSize="15sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                     <RadioButton
-                        android:id="@+id/duabelas"
+                        android:id="@+id/kedua"
                         android:text="Tahun Kedua"
                         android:textSize="15sp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                 </RadioGroup>
-                <RadioGroup
-                    android:id="@+id/list_jurusan"
-                    android:layout_weight="2"
-                    android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-                    <RadioButton
-                        android:id="@+id/ipa"
-                        android:text="IPA"
-                        android:textSize="15sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <RadioButton
-                        android:id="@+id/ips"
-                        android:text="IPS"
-                        android:textSize="15sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <RadioButton
-                        android:id="@+id/bahasa"
-                        android:text="BAHASA"
-                        android:textSize="15sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+<!--                <RadioGroup-->
+<!--                    android:id="@+id/list_jurusan"-->
+<!--                    android:layout_weight="2"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content">-->
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/ipa"-->
+<!--                        android:text="IPA"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content" />-->
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/ips"-->
+<!--                        android:text="IPS"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content" />-->
+<!--                    <RadioButton-->
+<!--                        android:id="@+id/bahasa"-->
+<!--                        android:text="BAHASA"-->
+<!--                        android:textSize="15sp"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content" />-->
 
-                </RadioGroup>
-                <EditText
-                    android:id="@+id/nomor_kelas"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+<!--                </RadioGroup>-->
+
             </LinearLayout>
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -183,6 +227,21 @@
                     android:layout_height="wrap_content"
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Foto Anak"
+                android:textSize="20sp"
+                android:layout_marginTop="10dp">
+
+            </TextView>
+            <ImageView
+                android:background="#ededed"
+                android:src="@drawable/ic_photo_camera_black_24dp"
+                android:id="@+id/image_post"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

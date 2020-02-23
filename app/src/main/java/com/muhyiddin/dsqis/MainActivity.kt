@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         val prefs = AppPreferences(this)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
+        frg2()
 
 
 

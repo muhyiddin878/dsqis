@@ -26,9 +26,9 @@ class InputNilaiFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinner = view.findViewById<EditText>(R.id.daftar_siswa)
-        val semester = view.findViewById<EditText>(R.id.semester)
-        val mata_pelajaran = view.findViewById<EditText>(R.id.pelajaran)
+        val spinner = view.findViewById<Spinner>(R.id.daftar_siswa)
+        val semester = view.findViewById<Spinner>(R.id.semester)
+        val mata_pelajaran = view.findViewById<Spinner>(R.id.pelajaran)
 
         val tugas = view.findViewById<EditText>(R.id.nilai_tugas)
         val uh = view.findViewById<EditText>(R.id.nilai_uh)

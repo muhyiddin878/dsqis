@@ -11,11 +11,11 @@
 
     </array>
 
-    <array name="mata_pelajaran">
+    <array name="aspek_pelajaran">
         <item>Penilaian Sikap</item>
         <item>Kelas Pra Akademik</item>
         <item>Kelas Komputer</item>
-        <item>Kelas Muraja'ah</item>
+        <item>Kelas Muraja\'ah</item>
         <item>Ekstrakulikuler</item>
         <item>Laporan Perkembangan Anak</item>
         <item>Saran Guru</item>
@@ -24,4 +24,5 @@
         <item>Absensi</item>
         <item>Evaluasi Perkembangan Anak</item>
     </array>
+
 </resources>
