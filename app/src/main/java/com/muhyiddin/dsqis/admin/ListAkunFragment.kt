@@ -2,6 +2,7 @@ package com.muhyiddin.dsqis.admin
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.firestore.FirebaseFirestore
 import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.adapter.ListSiswaAdapter
+import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.model.Siswa
 import kotlinx.android.synthetic.main.activity_list_akun_fragment.*
 
@@ -18,10 +20,11 @@ class ListAkunFragment : Fragment() {
 
 
 
-    val siswa:MutableList<Siswa> = mutableListOf()
+
     private val mDatabase = FirebaseFirestore.getInstance()
     private val refSemuaSiswa = mDatabase.collection("students")
     private lateinit var adapter: ListSiswaAdapter
+    private val siswa:MutableList<Siswa> = mutableListOf()
 
 
     override fun onCreateView(
@@ -65,6 +68,9 @@ class ListAkunFragment : Fragment() {
                     siswa.add(student.toObject(Siswa::class.java))
                 }
                 showSiswa(siswa)
+                siswa.let {
+                    Log.d("TAG", it.toString())
+                }
             }
         }
 

@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.ListGuruFragment"></activity>
+        <activity android:name=".FragmentLihatLaporan"></activity>
+        <activity android:name=".FragmentLaporan" />
+        <activity android:name=".FragmentProfil" />
+        <activity android:name=".admin.ListGuruFragment" />
         <activity android:name=".admin.TambahGuruFragment" />
         <activity android:name=".admin.BuatAkunFragment" />
         <activity android:name=".admin.InputNilaiFragment" />

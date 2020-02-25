@@ -41,7 +41,6 @@ class SiswaHolder(val view: View):RecyclerView.ViewHolder(view) {
         siswaName.text = item.nama
         kelas.text=item.kelas
 
-
         Glide.with(view)
             .asBitmap()
             .thumbnail(0.25f)

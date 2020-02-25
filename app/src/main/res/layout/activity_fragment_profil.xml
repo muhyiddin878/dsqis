@@ -68,14 +68,14 @@
                         android:layout_height="wrap_content"
                         tools:text="7"
                         android:textSize="22sp"
-                        android:id="@+id/count_jualan"
+                        android:id="@+id/count_bookmark"
                         />
                     <TextView
                         android:layout_centerHorizontal="true"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Artikel Tersimpan"
-                        android:layout_below="@id/count_jualan"
+                        android:layout_below="@id/count_bookmark"
                         />
                 </RelativeLayout>
             </LinearLayout>
@@ -117,7 +117,7 @@
                 android:text="Artikel Saya"/>
             <TextView
                 android:textStyle="bold"
-                android:id="@+id/jualan_saya"
+                android:id="@+id/bookmark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

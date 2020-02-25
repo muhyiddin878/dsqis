@@ -134,7 +134,7 @@ class ArtikelAdapter(private val context: Context, private val list:List<Post>, 
             val firestore = mDatabase.collection("user")
                 .document(FirebaseAuth.getInstance().currentUser?.uid.toString())
                 .collection("savedPost")
-            val key = firestore.document().id
+//            val key = firestore.document().id
             firestore.document(key).delete()
                 .addOnSuccessListener {
                     Toast.makeText(view.context, "Dihapus dari Bookmark", Toast.LENGTH_SHORT).show()

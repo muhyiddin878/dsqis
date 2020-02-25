@@ -45,6 +45,7 @@ class FragmentArtikel:Fragment() {
 
 
 
+
         rv_artikel.layoutManager = LinearLayoutManager(context)
 
 
@@ -105,8 +106,6 @@ class FragmentArtikel:Fragment() {
                 showArtikel(list)
             }
         }
-
-
 
 
     }
