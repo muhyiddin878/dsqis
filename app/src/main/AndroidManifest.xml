@@ -12,11 +12,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".FragmentLihatLaporan"></activity>
+        <activity android:name=".admin.DetailSiswaFragment"></activity>
+        <activity android:name=".admin.ListAkunPakarFragment" />
+        <activity android:name=".FragmentLihatLaporan" />
         <activity android:name=".FragmentLaporan" />
         <activity android:name=".FragmentProfil" />
         <activity android:name=".admin.ListGuruFragment" />
-        <activity android:name=".admin.TambahGuruFragment" />
+        <activity android:name=".admin.TambahPakarFragment" />
         <activity android:name=".admin.BuatAkunFragment" />
         <activity android:name=".admin.InputNilaiFragment" />
         <activity android:name=".admin.ListAkunFragment" />

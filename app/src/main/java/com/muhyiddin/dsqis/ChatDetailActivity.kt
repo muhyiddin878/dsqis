@@ -46,7 +46,7 @@ class ChatDetailActivity : AppCompatActivity() {
 
         btn_send_chat.setOnClickListener() {
             if (input_chat.text.isEmpty()){
-                Toast.makeText(this,"Ketikkan Pesan Terlebbih Dahulu",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Ketikkan Pesan Terlebih Dahulu",Toast.LENGTH_SHORT).show()
             } else{
                 sendChat(roomId, input_chat.text.toString())
                 input_chat.text.clear()

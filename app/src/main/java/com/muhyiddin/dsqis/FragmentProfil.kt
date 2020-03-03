@@ -7,13 +7,11 @@ import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,22 +24,22 @@ import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.model.SavedPost
 import com.muhyiddin.dsqis.model.User
+import com.muhyiddin.dsqis.utils.AppPreferences
+import com.muhyiddin.qis.login.login
 import kotlinx.android.synthetic.main.activity_fragment_profil.*
 import kotlinx.android.synthetic.main.activity_list_akun_fragment.*
 
 class FragmentProfil : Fragment() {
 
     private val user = FirebaseAuth.getInstance().currentUser
-    private val list:MutableList<Post> = mutableListOf()
-    private val listsemuaArtikel:MutableList<Post> = mutableListOf()
-    private val listBookmark:MutableList<String> = mutableListOf()
-//    private val listbookmark: MutableList<SavedPost> = mutableListOf()
+    lateinit var prefs: AppPreferences
+    private val list: MutableList<Post> = mutableListOf()
+    private val listsemuaArtikel: MutableList<Post> = mutableListOf()
+    private val listBookmark: MutableList<String> = mutableListOf()
     private lateinit var adapter: ArtikelAdapter
     private val mDatabase = FirebaseFirestore.getInstance()
     private val refSemuaArtikel = mDatabase.collection("posts")
     private val mAuth = FirebaseAuth.getInstance().currentUser
-    private val mStorage = FirebaseStorage.getInstance()
-//    private lateinit var count:String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,22 +47,20 @@ class FragmentProfil : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.activity_fragment_profil, container, false)
+        setHasOptionsMenu(true)
     }
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "Profil"
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar!!.title = "Profil"
+        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        prefs= AppPreferences(context)
 
 
 
         rv_profile.layoutManager = LinearLayoutManager(context)
-
-
-
-
 
 
 
@@ -77,13 +73,13 @@ class FragmentProfil : Fragment() {
         profile_name.text = user?.displayName
 
         edit_profil.setOnClickListener {
-//            startActivity(Intent(context, EditProfilActivity::class.java))
+            //            startActivity(Intent(context, EditProfilActivity::class.java))
         }
 
 
 
-        adapter = ArtikelAdapter(context!!, list){
-//            startActivity<DetailPostActivity>("post" to it, "source" to "profile")
+        adapter = ArtikelAdapter(context!!, list) {
+            //            startActivity<DetailPostActivity>("post" to it, "source" to "profile")
 //            startActivity(Intent(context, DetailPostActivity::class.java).putExtra("post",it).putExtra("source","profile"))
         }
 
@@ -113,10 +109,52 @@ class FragmentProfil : Fragment() {
         }
 
 
+    }
 
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.profil_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+            val id = item!!.itemId
+            //handle item clicks
+            if (id == R.id.edit_profil){
+                //do your action here, im just showing toast
+                Toast.makeText(context, "Edit Profil", Toast.LENGTH_SHORT).show()
+            }
+            if (id == R.id.logout){
+            val builder = AlertDialog.Builder(context!!)
+            // Set the alert dialog title
+            builder.setTitle("Hapus")
+            builder.setMessage("Are you want to set the app background color to RED?")
+            // Set a positive button and its click listener on alert dialog
+            builder.setPositiveButton("YES") { dialog, which ->
+                FirebaseAuth.getInstance().signOut()
+                prefs.resetPreference()
+                startActivity(Intent(context, login::class.java))
+                activity?.finish()
+            }
+            // Display a negative button on alert dialog
+            builder.setNegativeButton("No") { dialog, which ->
+                Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+            }
+
+
+            // Display a neutral button on alert dialog
+            builder.setNeutralButton("Cancel") { _, _ ->
+                Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+            }
+            builder.show()
+
+        }
+
+        return super.onOptionsItemSelected(item)
 
     }
+
     override fun onResume() {
         super.onResume()
         Glide.with(this)
@@ -218,34 +256,26 @@ class FragmentProfil : Fragment() {
 
                     }
 
-                    listSemuaArtikel.forEach{
-                        if (it.postId == listBookmark.toString()){
-                            listSemuaArtikel.clear()
-                            listSemuaArtikel.add(it)
-                        }
-
-                    }
-//                    listSemuaArtikel.filter {
-//                            it.postId !in listBookmark
+//                    listBookmark.forEach{
+//                        listSemuaArtikel.forEach {
+//                            if (it.postId == listBookmark.toString()){
+//                                listSemuaArtikel.clear()
+//                                listSemuaArtikel.add(it)
+//                            }
 //
-//                    }
-
-
-                    for (tes2 in listSemuaArtikel)
-                        Log.d("ini listsemuaArtikel", tes2.postId)
-//
-//                    for (tes in listBookmark)
-//
-//                        Log.d("ini listbookmark",tes)
-
-//                    listSemuaArtikel.forEach{
-//                        if (it.postId == listBookmark.toString()){
-//                            listSemuaArtikel.clear()
-//                            listSemuaArtikel.add(it)
 //                        }
 //
 //                    }
-                    showBookmark(listSemuaArtikel)
+                    val listFiltered=listSemuaArtikel.filter {
+                            it.postId in listBookmark
+//
+                    }
+
+
+                    for (tes2 in listFiltered)
+                        Log.d("ini list terfilter", tes2.postId)
+
+                    showBookmark(listFiltered)
 
 
 

@@ -18,7 +18,7 @@
         <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:id="@+id/profile_pic_siswa"
+            android:id="@+id/profile_pic_pakar"
             android:src="@color/dark_grey"
             android:layout_marginRight="16dp"
             app:civ_border_color="@color/colorPrimaryDark"
@@ -28,24 +28,22 @@
             android:layout_marginTop="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/profile_pic_siswa"
-            android:id="@+id/nama_siswa"
+            android:layout_toEndOf="@id/profile_pic_pakar"
+            android:id="@+id/nama_pakar"
             tools:text="Deliar Nur"
             android:textColor="@android:color/black"
             android:textSize="15sp"
             />
         <TextView
-            android:id="@+id/kelas"
+            android:id="@+id/jenispakar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Kelas Persiapan"
-            android:layout_below="@id/nama_siswa"
-            android:layout_toEndOf="@id/profile_pic_siswa"
+            tools:text="Okupasi"
+            android:layout_below="@id/nama_pakar"
+            android:layout_toEndOf="@id/profile_pic_pakar"
             android:textSize="12sp"
             android:layout_marginBottom="16dp"
             />
 
     </RelativeLayout>
 </LinearLayout>
-
-

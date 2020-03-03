@@ -1,6 +1,8 @@
 package com.muhyiddin.dsqis.model
 
-class Siswa {
+import java.io.Serializable
+
+class Siswa: Serializable {
 
     var id: String=""
     var nama: String=""

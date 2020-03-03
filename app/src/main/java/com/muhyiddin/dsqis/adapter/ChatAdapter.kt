@@ -10,34 +10,37 @@ import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.model.ChatList
 import com.muhyiddin.dsqis.utils.AppPreferences
 import org.w3c.dom.Text
+import java.text.FieldPosition
+class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->Unit):RecyclerView.Adapter<ChatHolder>() {
 
-class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->Unit):RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatAdapter.ViewHolder {
-        return ChatAdapter.ViewHolder(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatHolder {
+        return ChatHolder(
             LayoutInflater.from(parent.context).inflate(
-                R.layout.activity_fragment_chat_pakar,
+                R.layout.layout_chat_pakar,
                 parent,
                 false
             )
         )
+
     }
 
-//    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-//        return ViewHolder(LayoutInflater.from(p0.context).inflate(R.layout.layout_chat_pakar, p0, false))
-//    }
 
-    override fun getItemCount(): Int = listChat.size
 
-    override fun onBindViewHolder(p0: ViewHolder, p1: Int) {
-        p0.bindItem(listChat[p1], listener)
+    override fun getItemCount(): Int {
+        return listChat.size
     }
 
-    class ViewHolder(val view: View): RecyclerView.ViewHolder(view) {
+    override fun onBindViewHolder(holder: ChatHolder, position: Int) {
+        holder.bindItem(listChat[position], listener)
+    }
+
+}
+    class ChatHolder(val view: View): RecyclerView.ViewHolder(view) {
 
         val namaDokter = view.findViewById<TextView>(R.id.nama_pengirim)
         val isiChat = view.findViewById<TextView>(R.id.isi_chat)
-        val waktuChat = view.findViewById<TextView>(R.id.waktu_chat)
-        val badgeUnread = view.findViewById<TextView>(R.id.badge_unread_chat)
+//        val waktuChat = view.findViewById<TextView>(R.id.waktu_chat)
+//        val badgeUnread = view.findViewById<TextView>(R.id.badge_unread_chat)
 
         val prefs = AppPreferences(view.context)
 
@@ -55,4 +58,3 @@ class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->
             }
         }
     }
-}

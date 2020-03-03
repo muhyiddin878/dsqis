@@ -187,31 +187,8 @@ class NewPostActivity : AppCompatActivity() {
                         "judul" to judulBaru
                     )).addOnSuccessListener {
                         hideLoading(true, "BERHASIL DI UPDATE")
-//                        savedDbRef.addListenerForSingleValueEvent(object: ValueEventListener{
-//                            override fun onCancelled(p0: DatabaseError) {
-//                            }
-//                            override fun onDataChange(snapshot: DataSnapshot) {
-//                                snapshot.children.forEach {
-//                                    it.child("saved_post").children.forEach {
-//                                        if (it.child("postId").value == id){
-//                                            it.ref.updateChildren(mapOf(
-//                                                "cover" to imageLocation,
-//                                                "isi" to isi,
-//                                                "judul" to judulBaru
-//                                            ))
-//                                        }
-//                                    }
-//                                }
-//
-//                            }
-//
-//                        })
-//                        if (it.isSuccessful){
-//                            hideLoading(true,"update")
-//                        } else{
-//                            hideLoading(false, "Error ${it.exception?.message}")
-//                        }
-                    }.addOnFailureListener {
+                    }
+                        .addOnFailureListener {
                         hideLoading(false, "Error ${it.localizedMessage}")
                     }
                 } else{
@@ -226,30 +203,8 @@ class NewPostActivity : AppCompatActivity() {
                 "judul" to judulBaru
             )).addOnCompleteListener {
                 hideLoading(true, "BERHASIL DI UPDATE")
-//                savedDbRef.get(object: ValueEventListener{
-//                    override fun onCancelled(p0: DatabaseError) {
-//
-//                    }
-//
-//                    override fun onDataChange(snapshot: DataSnapshot) {
-//                        snapshot.child("saved_post").children.forEach {
-//                            if (it.child("postId").value == id){
-//                                it.ref.updateChildren(mapOf(
-//                                    "cover" to imageLocation,
-//                                    "isi" to isi,
-//                                    "judul" to judulBaru
-//                                ))
-//                            }
-//                        }
-//                    }
-//
-//                })
-//                if (it.isSuccessful){
-//                    hideLoading(true,"")
-//                } else{
-//                    hideLoading(false, "Error ${it.exception?.message}")
-//                }
-            }.addOnFailureListener {
+            }
+                .addOnFailureListener {
                 hideLoading(false, "Error ${it.localizedMessage}")
             }
         }
@@ -341,7 +296,7 @@ class NewPostActivity : AppCompatActivity() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val value = snapshot.getValue(Post::class.java)
                         Toast.makeText(this@NewPostActivity,"BERHASIL",Toast.LENGTH_SHORT).show()
-                        startActivity(Intent(this@NewPostActivity,ArtikelActivity::class.java))
+                        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
                         finish()
 
                     }

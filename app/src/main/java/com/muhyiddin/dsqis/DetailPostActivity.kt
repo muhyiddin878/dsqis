@@ -43,7 +43,6 @@ class DetailPostActivity : AppCompatActivity() {
     private val mStorage = FirebaseStorage.getInstance()
     private val mAuth = FirebaseAuth.getInstance().currentUser
     private val mFirestore = FirebaseFirestore.getInstance()
-    private val refSemuaKomen = mDatabase.collection("posts")
 
 
     private val currentUser = FirebaseAuth.getInstance().currentUser

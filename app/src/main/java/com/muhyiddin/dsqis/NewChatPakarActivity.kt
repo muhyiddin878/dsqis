@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.muhyiddin.dsqis.model.ChatList
+import com.muhyiddin.dsqis.model.Pakar
 import com.muhyiddin.dsqis.model.User
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_new_chat_pakar.*
@@ -47,16 +48,24 @@ class NewChatPakarActivity : AppCompatActivity() {
             }
 
         lv_kontak_dokter.setOnItemClickListener { adapterView, view, position, l ->
-            val ref = FirebaseFirestore.getInstance().collection("chat")
-            val key = ref.document().id
-//            val key = ref.push().key.toString()
+
+            val ref = FirebaseDatabase.getInstance().getReference("chat")
+            val key = ref.push().key.toString()
             val chatList = ChatList(listNamaDokter[position], listUser[position].userId.toString(), "Muhyiddin", prefs.uid, "", key)
-            ref.document(key).set(chatList)
-            .addOnSuccessListener {
+            ref.child(key).setValue(chatList).addOnSuccessListener {
                 startActivity(Intent(this, ChatDetailActivity::class.java).putExtra("room_id",key))
-//                startActivity<ChatDetailActivity>("room_id" to key)
                 finish()
             }
+//            val ref = FirebaseFirestore.getInstance().collection("chat")
+//            val key = ref.document().id
+////            val key = ref.push().key.toString()
+//            val chatList = ChatList(listNamaDokter[position], listUser[position].id, prefs.nama, prefs.uid, "", key)
+//            ref.document(key).set(chatList)
+//            .addOnSuccessListener {
+//                startActivity(Intent(this, ChatDetailActivity::class.java).putExtra("room_id",key))
+////                startActivity<ChatDetailActivity>("room_id" to key)
+//                finish()
+//            }
         }
     }
 

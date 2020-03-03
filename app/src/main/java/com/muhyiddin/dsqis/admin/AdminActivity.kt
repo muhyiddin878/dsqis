@@ -1,7 +1,6 @@
 package com.muhyiddin.dsqis.admin
 
 import android.content.DialogInterface
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -13,10 +12,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.FirebaseAuth
 import com.muhyiddin.dsqis.R
-import com.muhyiddin.dsqis.utils.AppPreferences
-import com.muhyiddin.qis.login.login
 
 class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
     private var count: Int = 0
@@ -156,10 +152,10 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             fragment = ListAkunFragment()
             count = 1
         } else if (id == R.id.input_bio_guru) {
-            fragment = TambahGuruFragment()
+            fragment = TambahPakarFragment()
             count = 1
         } else if (id == R.id.list_guru) {
-            fragment = ListGuruFragment()
+            fragment = ListAkunPakarFragment()
             count = 1
         } else if (id == R.id.logout) {
             val builder = AlertDialog.Builder(this)

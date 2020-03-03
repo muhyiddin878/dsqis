@@ -100,8 +100,6 @@ class BuatAkunFragment : Fragment() {
                 .load(siswa?.cover)
                 .thumbnail(0.15f)
                 .into(add_photo_post)
-//            judul_post.setText(post?.judul)
-//            isi_post.setText(post?.isi)
         }
         jenis_kelamin.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
@@ -153,27 +151,14 @@ class BuatAkunFragment : Fragment() {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         } else{
             Toast.makeText(context,"BERHASIL DITAMBAHKAN",Toast.LENGTH_SHORT).show()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(com.muhyiddin.dsqis.R.id.screen_area, ListAkunFragment())?.commit()
 //            startActivity(Intent(context,HomeFragment::class.java))
 
 //            val ft = fragmentManager!!.beginTransaction()
 //            ft.replace(com.muhyiddin.dsqis.R.id.frame_admin, HomeFragment(), "HomeFragmentTag")
 //            ft.commit()
 //            ft.addToBackStack(null);
-            if (message=="update"){
-                FirebaseDatabase.getInstance().getReference("students/${siswa?.id}").addListenerForSingleValueEvent(object:
-                    ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-                    }
-                    override fun onDataChange(snapshot: DataSnapshot) {
-                        val value = snapshot.getValue(Post::class.java)
-                        Toast.makeText(context,"BERHASIL",Toast.LENGTH_SHORT).show()
-                        HomeFragment()
-//                        getActivity()?.finish()
 
-                    }
-
-                })
-            }
         }
     }
     fun setProgressBarLength(total: Int) {
