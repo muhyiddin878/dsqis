@@ -154,7 +154,7 @@ class DetailPostActivity : AppCompatActivity() {
                     .addOnSuccessListener {
 
                     Toast.makeText(this,"Artikel Berhasil dihapus",Toast.LENGTH_SHORT).show()
-                        FragmentArtikel()
+                        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
                     }.addOnFailureListener {
                         Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
                     }

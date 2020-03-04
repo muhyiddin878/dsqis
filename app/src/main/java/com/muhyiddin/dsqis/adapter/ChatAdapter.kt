@@ -49,7 +49,7 @@ class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->
                 namaDokter.text = "Orang Tua ${item.nama_member}"
                 isiChat.text = item.last_chat
             } else{
-                namaDokter.text = "Dokter ${item.nama_pakar}"
+                namaDokter.text = "${item.nama_pakar}"
                 isiChat.text = item.last_chat
             }
 

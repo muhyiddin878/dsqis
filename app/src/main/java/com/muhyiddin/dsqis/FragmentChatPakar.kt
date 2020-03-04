@@ -72,28 +72,32 @@ class FragmentChatPakar : Fragment() {
     fun getAllChatList(){
         listChat.clear()
         showLoading()
-        val ref = mDatabase.getReference("chat").child("conversation")
+        val ref = mDatabase.getReference("chat")
         ref.addListenerForSingleValueEvent(object: ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{
                     val chatList = it.getValue(ChatList::class.java)
+//                    for (tes2 in chatList)
+                        Log.d("ini listchat", chatList?.last_chat)
                     if (chatList != null) {
                         Log.d("ini tes", "MASUKKK")
-                        if (prefs.role==2){
-                            if (prefs.uid==chatList.id_pakar){
-                                 listChat.add(chatList)
-                            }
-                        }
-                        else if (prefs.role==1){
-                            if (prefs.uid==chatList.id_member){
-                                listChat.add(chatList)
-                            }
-                        }
+                        listChat.add(chatList)
+                        showListChat(listChat)
+//                        if (prefs.role==2){
+//                            if (prefs.uid==chatList.id_pakar){
+//                                 listChat.add(chatList)
+//                            }
+//                        }
+//                        else if (prefs.role==1){
+//                            if (prefs.uid==chatList.id_member){
+//                                listChat.add(chatList)
+//                            }
+//                        }
 
                     }
                 }
                 hideLoading()
-                showListChat(listChat)
+
                 for (tes2 in listChat)
                     Log.d("ini listchat", tes2.last_chat)
 //                if (listChat.size>0){
@@ -103,7 +107,7 @@ class FragmentChatPakar : Fragment() {
 //                }
             }
             override fun onCancelled(p0: DatabaseError) {
-//                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
         })

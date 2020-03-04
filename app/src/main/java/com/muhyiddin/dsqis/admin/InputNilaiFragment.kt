@@ -9,14 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.muhyiddin.dsqis.R
+import com.muhyiddin.dsqis.model.Nilai
 import com.muhyiddin.dsqis.model.SavedPost
 import com.muhyiddin.dsqis.model.Siswa
+import kotlinx.android.synthetic.main.activity_buat_akun_fragment.*
 import kotlinx.android.synthetic.main.activity_input_nilai_fragment.*
 import java.util.ArrayList
 
@@ -29,6 +32,15 @@ class InputNilaiFragment : Fragment() {
     private val siswaId:MutableList<String> = mutableListOf()
     private lateinit var spinner:Spinner
     private lateinit var mapel:String
+    private lateinit var minggu:String
+    private lateinit var student:String
+    private lateinit var mingguke_sikap_sosial:String
+    private lateinit var minggumurajaah:String
+    private lateinit var mingguke_murajaah:String
+    private lateinit var idSiswa:String
+    private  val arrayList = ArrayList<String>()
+    private val mAuth = FirebaseAuth.getInstance()
+    private lateinit var cobak:String
 //    private val spinner_siswa = view?.findViewById<Spinner>(R.id.daftar_siswa)
 
 
@@ -47,6 +59,14 @@ class InputNilaiFragment : Fragment() {
         val spinner = view.findViewById<Spinner>(R.id.daftar_siswa)
         val semester = view.findViewById<Spinner>(R.id.semester)
         val mata_pelajaran = view.findViewById<Spinner>(R.id.pelajaran)
+        val mingguke_sikap_sosial_spinner= view.findViewById<Spinner>(R.id.mingguke)
+        val mingguke_murajaah_spinner=view.findViewById<Spinner>(R.id.minggukeMurajaah)
+        val cobak1= view.findViewById<EditText>(R.id.sikap_sosial)
+        cobak = cobak1.text.toString()
+        val cobak3= sikap_sosial.text.toString()
+
+
+
 
 
 
@@ -73,6 +93,144 @@ class InputNilaiFragment : Fragment() {
 
             }
         }
+
+        spinner.onItemSelectedListener= object :AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                student= spinner.selectedItem.toString()
+                getIdSiswa(student)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+        mingguke_sikap_sosial_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
+                minggu = mingguke_sikap_sosial_spinner.selectedItem.toString()
+                if (minggu=="1"){
+                    mingguke_sikap_sosial="1"
+                }else if (minggu=="2"){
+                    mingguke_sikap_sosial="2"
+                }else if (minggu=="3"){
+                    mingguke_sikap_sosial="3"
+                }else if (minggu=="4"){
+                    mingguke_sikap_sosial="4"
+                }else if (minggu=="5"){
+                    mingguke_sikap_sosial="5"
+                }else if (minggu=="6"){
+                    mingguke_sikap_sosial="6"
+                }else if (minggu=="7"){
+                    mingguke_sikap_sosial="7"
+                }else if (minggu=="8"){
+                    mingguke_sikap_sosial="8"
+                }else if (minggu=="9"){
+                    mingguke_sikap_sosial="9"
+                }else if (minggu=="10"){
+                    mingguke_sikap_sosial="10"
+                }else if (minggu=="11"){
+                    mingguke_sikap_sosial="11"
+                }else if (minggu=="12"){
+                    mingguke_sikap_sosial="12"
+                }
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+        mingguke_murajaah_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
+                minggumurajaah = mingguke_murajaah_spinner.selectedItem.toString()
+                if (minggumurajaah=="1"){
+                    mingguke_murajaah="1"
+                }else if (minggumurajaah=="2"){
+                    mingguke_murajaah="2"
+                }else if (minggumurajaah=="3"){
+                    mingguke_murajaah="3"
+                }else if (minggumurajaah=="4"){
+                    mingguke_murajaah="4"
+                }else if (minggumurajaah=="5"){
+                    mingguke_murajaah="5"
+                }else if (minggumurajaah=="6"){
+                    mingguke_murajaah="6"
+                }else if (minggumurajaah=="7"){
+                    mingguke_murajaah="7"
+                }else if (minggumurajaah=="8"){
+                    mingguke_murajaah="8"
+                }else if (minggumurajaah=="9"){
+                    mingguke_murajaah="9"
+                }else if (minggumurajaah=="10"){
+                    mingguke_murajaah="10"
+                }else if (minggumurajaah=="11"){
+                    mingguke_murajaah="11"
+                }else if (minggumurajaah=="12"){
+                    mingguke_murajaah="12"
+                }
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+        }
+
+
+//        arrayList.add(sikap_spiritual.text.toString())
+//        arrayList.add(sikap_sosial.text.toString())
+
+
+
+       submit_nilai.setOnClickListener {
+            Log.d("ini cobak", cobak)
+            Log.d("ini cobak3", cobak3)
+           val nilai = Nilai()
+           nilai.Penilaian_Sikap?.put("Sikap Spiritual",cobak)
+           Log.d("ini nilai1", nilai.toString())
+           nilai.Penilaian_Sikap?.put("Sikap Sosisal",sikap_sosial.text.toString())
+           Log.d("ini nilai 2", nilai.toString())
+           nilai.Kelas_Pra_Akademik?.put("Minggu Ke-",mingguke_sikap_sosial)
+           nilai.Kelas_Pra_Akademik?.put("Materi",materi_sikap_sosial.text.toString())
+           nilai.Kelas_Pra_Akademik?.put("Keterangan",ket_sikap_sosial.text.toString())
+           nilai.Kelas_Pra_Akademik?.put("Nilai",nilai_sikap_sosial.text.toString())
+           nilai.Kelas_Komputer?.put("Materi",nilaikomputer.text.toString())
+           nilai.Kelas_Komputer?.put("Keterangan",ket_komputer.text.toString())
+           nilai.Kelas_Komputer?.put("Nilai",nilai_komputer.text.toString())
+           nilai.Kelas_Murajaah?.put("Minggu Ke",mingguke_murajaah)
+           nilai.Kelas_Murajaah?.put("Materi",materi_murajaah.text.toString())
+           nilai.Kelas_Murajaah?.put("Keterangan",ket_murajaah.text.toString())
+           nilai.Kelas_Murajaah?.put("Nilai",nilai_murajaah.text.toString())
+           nilai.Ekstrakulikuler?.put("Nama Ektra",nama_ekstra.text.toString())
+           nilai.Ekstrakulikuler?.put("Keterangan",ket_ekstra.text.toString())
+           nilai.Laporan_Perkembangan_Anak?.put("Perkembangan Anak",perkembangan_anak.text.toString())
+           nilai.Saran_Guru?.put("Saran Guru", saran_guru.text.toString())
+           nilai.TbBb?.put("Tinggi Badan",tinggi_badan.text.toString())
+           nilai.TbBb?.put("Berat Badan", berat_badan.text.toString())
+           nilai.Kondisi_Kesehatan?.put("Kesehatan Penglihatan",penglihatan.text.toString())
+           nilai.Kondisi_Kesehatan?.put("Kesehatan Pendengaran",pendengaran.text.toString())
+           nilai.Kondisi_Kesehatan?.put("Kondisi Gigi",gigi.text.toString())
+           nilai.Evaluasi_Pertumbuhan_Anak?.put("Kondisi Saat Ini",kondisi_saat_ini.text.toString())
+           nilai.Evaluasi_Pertumbuhan_Anak?.put("Kondisi Ideal",kondisi_ideal.text.toString())
+           nilai.Evaluasi_Pertumbuhan_Anak?.put("Saran Dokter",saran_dokter.text.toString())
+           nilai.Absensi?.put("Izin",izin.inputType)
+           nilai.Absensi?.put("Sakit",sakit.inputType)
+           nilai.Absensi?.put("Tanpa Keterangan",tidak_ada_keterangan.inputType)
+           nilai.Evaluasi_Perkembangan_Anak?.put("Kondisi Psikologi Saat Ini",kondisi_psikologi_saat_ini.text.toString())
+           nilai.Evaluasi_Perkembangan_Anak?.put("Kondisi Psikologi Ideal",kondisi_ideal_psikologi.text.toString())
+           nilai.Evaluasi_Perkembangan_Anak?.put("Saran Psikolog",saran_psikolog.text.toString())
+           nilai.Evaluasi_Perkembangan_Anak?.put("Kondisi Okupasi Saat Ini",kondisi_okupasi_saat_ini.text.toString())
+           nilai.Evaluasi_Perkembangan_Anak?.put("Kondisi Okupasi Ideal",kondisi_ideal_okupasi.text.toString())
+           nilai.Evaluasi_Perkembangan_Anak?.put("Saran Okupasi",saran_okupasi.text.toString())
+
+           inputNilai(nilai)
+       }
+
+
 
         mata_pelajaran.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
@@ -170,7 +328,6 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.GONE
 
                 }
-
                 if(mapel=="Kelas Pra Akademik"){
                     tv_spiritual.visibility = View.GONE
                     sikap_spiritual.visibility = View.GONE
@@ -357,7 +514,6 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.GONE
 
                 }
-
                 if(mapel=="Kelas Muraja'ah"){
                     tv_spiritual.visibility = View.GONE
                     sikap_spiritual.visibility = View.GONE
@@ -451,7 +607,7 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.GONE
 
                 }
-                if(mapel=="Ektrakulikuler"){
+                if(mapel=="Ekstrakulikuler"){
                     tv_spiritual.visibility = View.GONE
                     sikap_spiritual.visibility = View.GONE
                     tv_sosial.visibility = View.GONE
@@ -637,7 +793,6 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.GONE
 
                 }
-
                 if(mapel=="Saran Guru"){
                     tv_spiritual.visibility = View.GONE
                     sikap_spiritual.visibility = View.GONE
@@ -732,7 +887,6 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.GONE
 
                 }
-
                 if(mapel=="Tinggi dan Berat Badan"){
                     tv_spiritual.visibility = View.GONE
                     sikap_spiritual.visibility = View.GONE
@@ -826,8 +980,7 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.GONE
 
                 }
-
-                if(mapel=="Evaluasi pertumbuhan Anak"){
+                if(mapel=="Evaluasi Pertumbuhan Anak"){
                     tv_spiritual.visibility = View.GONE
                     sikap_spiritual.visibility = View.GONE
                     tv_sosial.visibility = View.GONE
@@ -920,7 +1073,6 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.GONE
 
                 }
-
                 if(mapel=="Absensi"){
                     tv_spiritual.visibility = View.GONE
                     sikap_spiritual.visibility = View.GONE
@@ -1014,7 +1166,6 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.GONE
 
                 }
-
                 if(mapel=="Evaluasi Perkembangan Anak"){
                     tv_spiritual.visibility = View.GONE
                     sikap_spiritual.visibility = View.GONE
@@ -1109,12 +1260,6 @@ class InputNilaiFragment : Fragment() {
 
                 }
 
-
-
-
-
-
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -1126,6 +1271,42 @@ class InputNilaiFragment : Fragment() {
 
 
 
+
+
+
+
+    }
+
+
+    private fun inputNilai(nilai:Nilai){
+        mFirestore.collection("nilai")
+            .document(idSiswa)
+            .set(nilai)
+            .addOnSuccessListener {
+                Toast.makeText(context, "Nilai Berhasil Ditambahkan", Toast.LENGTH_SHORT)
+                    .show()
+//                for (tes2 in nilai.toString())
+//                    Log.d("ini nilai", tes2.toString())
+            }.addOnFailureListener {
+                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
+                    .show()
+
+            }
+//        val key = firestore3.document().id
+//        val nilai = Nilai(key,)
+
+    }
+
+    private fun getIdSiswa(namaSiswa:String){
+        mFirestore.collection("students")
+            .whereEqualTo("nama", namaSiswa)
+            .get()
+            .addOnSuccessListener {
+                for (siswa in it){
+                    idSiswa=siswa.id
+                }
+
+            }
     }
 
 

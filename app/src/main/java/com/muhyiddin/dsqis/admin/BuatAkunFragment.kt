@@ -121,10 +121,6 @@ class BuatAkunFragment : Fragment() {
 
         submit.setOnClickListener {
             validate()
-//            showLoading()
-//            setProgressBarLength(45)
-
-
 
         }
 

@@ -53,16 +53,13 @@ class FragmentProfil : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar!!.title = "Profil"
-        (activity as AppCompatActivity).supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        (activity as AppCompatActivity).supportActionBar?.title = "Profil"
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         prefs= AppPreferences(context)
 
-
-
         rv_profile.layoutManager = LinearLayoutManager(context)
-
-
 
         Glide.with(this)
             .asBitmap()
