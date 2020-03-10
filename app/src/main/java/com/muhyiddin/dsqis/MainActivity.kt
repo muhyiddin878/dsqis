@@ -29,35 +29,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
 
 
-
-
-//        keluar.setOnClickListener() {
-//            val builder = AlertDialog.Builder(this)
-//            // Set the alert dialog title
-//            builder.setTitle("Hapus")
-//            builder.setMessage("Are you want to set the app background color to RED?")
-//            // Set a positive button and its click listener on alert dialog
-//            builder.setPositiveButton("YES"){dialog, which ->
-//                FirebaseAuth.getInstance().signOut()
-//                prefs.resetPreference()
-//                startActivity(Intent(this,login::class.java))
-//                finish()
-//            }
-//            // Display a negative button on alert dialog
-//            builder.setNegativeButton("No"){dialog,which ->
-//                Toast.makeText(applicationContext,"You cancelled the dialog.",Toast.LENGTH_SHORT).show()
-//            }
-//
-//
-//            // Display a neutral button on alert dialog
-//            builder.setNeutralButton("Cancel"){_,_ ->
-//                Toast.makeText(applicationContext,"You cancelled the dialog.",Toast.LENGTH_SHORT).show()
-//            }
-//            builder.show()
-//
-//        }
-
-
     }
     fun frg(){
         supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
@@ -70,7 +41,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentProfil()).commit()
     }
     fun frg4(){
-        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentLaporan()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentLihatLaporan()).commit()
     }
 
 

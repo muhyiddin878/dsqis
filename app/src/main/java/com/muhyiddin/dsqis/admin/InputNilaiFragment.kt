@@ -48,7 +48,6 @@ class InputNilaiFragment : Fragment() {
     private val arrayList = ArrayList<String>()
     private val mAuth = FirebaseAuth.getInstance()
     private lateinit var cobak: String
-//    private val spinner_siswa = view?.findViewById<Spinner>(R.id.daftar_siswa)
 
 
     override fun onCreateView(
@@ -57,18 +56,18 @@ class InputNilaiFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         (activity as AdminActivity).setActionBarTitle("Input Nilai Siswa")
-        return inflater.inflate(com.muhyiddin.dsqis.R.layout.activity_input_nilai_fragment, null)
+        return inflater.inflate(R.layout.activity_input_nilai_fragment, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val spinner = view.findViewById<Spinner>(com.muhyiddin.dsqis.R.id.daftar_siswa)
-        val semester = view.findViewById<Spinner>(com.muhyiddin.dsqis.R.id.semester)
-        val mata_pelajaran = view.findViewById<Spinner>(com.muhyiddin.dsqis.R.id.pelajaran)
-        val mingguke_sikap_sosial_spinner = view.findViewById<Spinner>(com.muhyiddin.dsqis.R.id.mingguke)
-        val mingguke_murajaah_spinner = view.findViewById<Spinner>(com.muhyiddin.dsqis.R.id.minggukeMurajaah)
-        val cobak1 = view.findViewById<EditText>(com.muhyiddin.dsqis.R.id.sikap_sosial)
+        val spinner = view.findViewById<Spinner>(R.id.daftar_siswa)
+        val semester = view.findViewById<Spinner>(R.id.semester)
+        val mata_pelajaran = view.findViewById<Spinner>(R.id.pelajaran)
+        val mingguke_sikap_sosial_spinner = view.findViewById<Spinner>(R.id.mingguke)
+        val mingguke_murajaah_spinner = view.findViewById<Spinner>(R.id.minggukeMurajaah)
+        val cobak1 = view.findViewById<EditText>(R.id.sikap_sosial)
         cobak = cobak1.text.toString()
 
 
@@ -81,9 +80,7 @@ class InputNilaiFragment : Fragment() {
                 return@addSnapshotListener
             }
             if (querySnapshot != null) {
-//                akun.clear()
                 for (student in querySnapshot) {
-//                    akun.add(student.toObject(Siswa::class.java))
                     val nama_siswa = student.toObject(Siswa::class.java)
                     siswa.add(nama_siswa.nama)
                     siswaId.add(nama_siswa.id)
@@ -96,9 +93,7 @@ class InputNilaiFragment : Fragment() {
             }
         }
 
-        Log.d("ini nama siswa", spinner.toString())
-//        getIdSiswa(student)
-//        getLatestNilai()
+
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -107,16 +102,10 @@ class InputNilaiFragment : Fragment() {
                 position: Int,
                 id: Long
             ) {
-
                 student = spinner.selectedItem.toString()
                 getIdSiswa(student)
-                getLatestNilai(idSiswa)
-
-
             }
-
             override fun onNothingSelected(parent: AdapterView<*>) {
-
             }
         }
 
@@ -201,8 +190,6 @@ class InputNilaiFragment : Fragment() {
 
         submit_nilai.setOnClickListener {
 
-//            Log.d("ini cobak", cobak)
-//            Log.d("ini cobak3", cobak3)
             val Penilaian_Sikap = HashMap<String, String>()
             Penilaian_Sikap.put("Sikap Spiritual", sikap_spiritual.text.toString())
             Penilaian_Sikap.put("Sikap Sosisal", sikap_sosial.text.toString())
@@ -1429,8 +1416,6 @@ class InputNilaiFragment : Fragment() {
             .addOnSuccessListener {
                 Toast.makeText(context, "Nilai Berhasil Ditambahkan", Toast.LENGTH_SHORT)
                     .show()
-//                for (tes2 in nilai.toString())
-//                    Log.d("ini nilai", tes2.toString())
             }.addOnFailureListener {
                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
                     .show()
@@ -1446,6 +1431,7 @@ class InputNilaiFragment : Fragment() {
             .addOnSuccessListener {
                 for (siswa in it) {
                     idSiswa = siswa.id
+                    getLatestNilai(idSiswa)
                 }
 
             }
@@ -1456,7 +1442,6 @@ class InputNilaiFragment : Fragment() {
             .document(siswaId)
             .get()
             .addOnSuccessListener {
-//                Log.d("ini isi tes ",it.data.toString() )
                 val isi=it.toObject(Nilai::class.java)
                 sikap_spiritual.setText("${isi?.Penilaian_Sikap?.get("Sikap Spiritual")}")
                 sikap_sosial.setText("${isi?.Penilaian_Sikap?.get("Sikap Sosial")}")

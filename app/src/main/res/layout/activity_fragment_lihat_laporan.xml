@@ -1,9 +1,833 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FragmentLihatLaporan">
+    android:orientation="vertical"
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/logo_siswa1"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/avatar_male" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp">
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Nama Lengkap"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_weight="0.3"
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nama_siswa1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:textColor="@android:color/black"
+                        android:text="Muhyiddin Ubaidillah"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="TTL"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_weight="0.3"
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tempat_tanggal_lahir1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:textColor="@android:color/black"
+                        android:text="Mojokerto,23-02-1998"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Jenis Kelamin"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_weight="0.3"
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/jenis_kelamin1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:textColor="@android:color/black"
+                        android:text="Laki-Laki"
+                        android:textSize="20sp" />
+
+                    <!--                    <RadioGroup-->
+                    <!--                        android:id="@+id/jenis_kelamin_siswa"-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:orientation="horizontal"-->
+                    <!--                        android:layout_weight="20"-->
+                    <!--                        android:layout_height="wrap_content">-->
+                    <!--                        <RadioButton-->
+                    <!--                            android:id="@+id/lk_detail"-->
+                    <!--                            android:text="Laki-Laki"-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:layout_weight="2"-->
+                    <!--                            />-->
+                    <!--                        <RadioButton-->
+                    <!--                            android:id="@+id/pr_detail"-->
+                    <!--                            android:layout_weight="2"-->
+                    <!--                            android:text="Perempuan"-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content" />-->
+                    <!--                    </RadioGroup>-->
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Kelas"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_weight="0.3"
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tingkatan_kelas1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:textColor="@android:color/black"
+                        android:text="kelas Persiapan"
+                        android:textSize="20sp" />
+                    <!--                    <RadioGroup-->
+                    <!--                        android:id="@+id/tingkatan_kelas_siswa"-->
+                    <!--                        android:layout_weight="20"-->
+                    <!--                        android:orientation="vertical"-->
+                    <!--                        android:layout_width="wrap_content"-->
+                    <!--                        android:layout_height="wrap_content">-->
+                    <!--                        <RadioButton-->
+                    <!--                            android:id="@+id/persiapan_siswa"-->
+                    <!--                            android:text="Tahun Persiapan"-->
+                    <!--                            android:textSize="15sp"-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content" />-->
+                    <!--                        <RadioButton-->
+                    <!--                            android:id="@+id/pertama_siswa"-->
+                    <!--                            android:text="Tahun Pertama"-->
+                    <!--                            android:textSize="15sp"-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content" />-->
+                    <!--                        <RadioButton-->
+                    <!--                            android:id="@+id/kedua_siswa"-->
+                    <!--                            android:text="Tahun Kedua"-->
+                    <!--                            android:textSize="15sp"-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content" />-->
+
+                    <!--                    </RadioGroup>-->
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Alamat"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_weight="0.3"
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/alamat_siswa1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="20"
+                        android:textColor="@android:color/black"
+                        android:text="Ngarjo Mojoanyar"
+                        android:textSize="20sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="NISN"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:layout_weight="0.3"
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nisn_siswa1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="20"
+                        android:inputType="number"
+                        android:text="879879877978798"
+                        android:textSize="20sp" />
+                </TableRow>
+
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border3"
+                android:padding="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp">
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/pelajaran1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/aspek_pelajaran"
+
+                        ></Spinner>
+
+                </TableRow>
+            </TableLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border2"
+                android:padding="10dp"
+                android:layout_marginBottom="60dp">
+
+            <TableLayout
+                android:id="@+id/tabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/tv_spiritual1"
+                    android:layout_width="178dp"
+                    android:text="Sikap Spiritual"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/sikap_spiritual1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_sosial1"
+                    android:text="Sikap Sosial"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/sikap_sosial1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_mingguke1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Minggu Ke"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <Spinner
+                android:id="@+id/mingguke1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/minggu"></Spinner>
+
+                <TextView
+                    android:id="@+id/tv_materi1"
+                    android:text="Materi"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/materi_sikap_sosial1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_ket1"
+                    android:text="Keterangan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/ket_sikap_sosial1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_nilai_sosial1"
+                    android:text="Nilai"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/nilai_sikap_sosial1"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_materi_komputer1"
+                    android:text="Materi"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/nilaikomputer1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_ket_komputer1"
+                    android:text="Keterangan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/ket_komputer1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_nilai_komputer1"
+                    android:text="Nilai"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/nilai_komputer1"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_mingguke_murajaah1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="Minggu Ke"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <Spinner
+                    android:id="@+id/minggukeMurajaah1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:entries="@array/minggu"></Spinner>
+
+                <TextView
+                    android:id="@+id/tv_materi_murajaah1"
+                    android:text="Materi"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/materi_murajaah1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_ket_murajaah1"
+                    android:text="Keterangan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/ket_murajaah1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_nilai_murajaah1"
+                    android:text="Nilai"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/nilai_murajaah1"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_nama_ekstra1"
+                    android:text="Nama Kegiatan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/nama_ekstra1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_ket_ekstra1"
+                    android:text="Keterangan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/ket_ekstra1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_laporan_perkembangan_anak1"
+                    android:layout_weight="0"
+                    android:text="Laporan Perkembangan Anak"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/perkembangan_anak1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_saran_guru1"
+                    android:text="Saran Guru"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/saran_guru1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+
+                <TextView
+                    android:id="@+id/tv_tinggi_badan1"
+                    android:text="Tinggi Badan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/tinggi_badan1"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_berat_badan1"
+                    android:text="Berat Badan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/berat_badan1"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TableRow
+                    android:id="@+id/tv_kondisi_kesehatan1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Kondisi Kesehatan1"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/tv_penglihatan1"
+                    android:layout_weight="1"
+                    android:text="Penglihatan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/penglihatan1"
+                    android:layout_weight="1"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_pendengaran1"
+                    android:text="Pendengaran"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/pendengaran1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_gigi1"
+                    android:text="Gigi"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/gigi1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_daya_tahan_tubuh1"
+                    android:text="Daya Tahan Tubuh"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/daya_tahan1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TableRow
+                    android:id="@+id/tv_evaluasi_pertumbuhan_anak1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Evaluasi Pertumbuhan Anak1"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/tv_kondisi_anak_saat_ini1"
+                    android:text="Kondisi Anak Saat Ini"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/kondisi_saat_ini1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_kondisi_ideal1"
+                    android:text="Kondisi Ideal Anak"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/kondisi_ideal1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_saran_dokter1"
+                    android:text="Saran Dokter"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/saran_dokter1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TableRow
+                    android:id="@+id/tv_absensi1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Absensi"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/tv_izin1"
+                    android:text="Izin"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/izin1"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_sakit1"
+                    android:text="Sakit"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/sakit1"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_tidak_ada_ket1"
+                    android:text="Tidak Ada Keterangan"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/tidak_ada_keterangan1"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TableRow
+                    android:id="@+id/tv_evaluasi_perkembangan_anak1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Evaluasi Perkembangan Anak"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/tv_kondisi_psikologi_saat_ini1"
+                    android:layout_weight="0"
+                    android:text="Kondisi Anak Saat Ini"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/kondisi_psikologi_saat_ini1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_kondisi_ideal_psikologi1"
+                    android:layout_weight="0"
+                    android:text="Kondisi Ideal Anak"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/kondisi_ideal_psikologi1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_saran_psikologi1"
+                    android:text="Saran Psikolog"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/saran_psikolog1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TableRow
+                    android:id="@+id/tv_evaluasi_perkembangan_anak_okupasi1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Evaluasi Perkembangan Anak"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/tv_kondisi_okupasi_saat_ini1"
+                    android:layout_weight="0"
+                    android:text="Kondisi Anak Saat Ini"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/kondisi_okupasi_saat_ini1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_kondisi_ideal_okupasi1"
+                    android:layout_weight="0"
+                    android:text="Kondisi Ideal Anak"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/kondisi_ideal_okupasi1"
+                    android:layout_weight="2"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/tv_saran_okupasi1"
+                    android:text="Saran Okupasi"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black" />
+
+                <TextView
+                    android:id="@+id/saran_okupasi1"
+                    android:layout_weight="0"
+                    android:inputType="text"
+                    android:text="isi"
+                    android:textColor="#FFF"
+                    android:textSize="20sp"/>
+
+            </TableLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

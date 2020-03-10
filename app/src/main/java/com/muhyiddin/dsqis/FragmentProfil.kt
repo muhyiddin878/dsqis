@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.model.SavedPost
+import com.muhyiddin.dsqis.model.Siswa
 import com.muhyiddin.dsqis.model.User
 import com.muhyiddin.dsqis.utils.AppPreferences
 import com.muhyiddin.qis.login.login
@@ -37,6 +38,7 @@ class FragmentProfil : Fragment() {
     private val user = FirebaseAuth.getInstance().currentUser
     lateinit var prefs: AppPreferences
     private val list: MutableList<Post> = mutableListOf()
+    private val listArtikelSaya: MutableList<String> = mutableListOf()
     private val listsemuaArtikel: MutableList<Post> = mutableListOf()
     private val listBookmark: MutableList<String> = mutableListOf()
     private lateinit var adapter: ArtikelAdapter
@@ -57,7 +59,6 @@ class FragmentProfil : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        (activity as MainActivity).supportActionBar?.title = "Profil"
         (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         prefs= AppPreferences(context)
@@ -93,7 +94,8 @@ class FragmentProfil : Fragment() {
             bookmark.setTextColor(ContextCompat.getColor(context!!, R.color.dark_grey))
             bookmark.setTypeface(artikel_saya.typeface, Typeface.NORMAL)
             rv_profile.adapter = adapter
-            getArtikelSaya()
+            getAllArtikel()
+            getArtikelSaya(listsemuaArtikel)
         }
 
 
@@ -174,7 +176,6 @@ class FragmentProfil : Fragment() {
 
     fun showBookmark(data: List<Post>) {
         data.let {
-
             list.clear()
             list.addAll(it)
             adapter.notifyDataSetChanged()
@@ -193,26 +194,59 @@ class FragmentProfil : Fragment() {
 //    }
 
 
-    fun getArtikelSaya(){
-        refSemuaArtikel.addSnapshotListener { querySnapshot, error ->
-            if(error!=null){
-                Toast.makeText(view?.context, error?.localizedMessage, Toast.LENGTH_SHORT).show()
-                return@addSnapshotListener
-            }
-            if(querySnapshot != null){
+//    fun getArtikelSaya(listSemuaArtikel:MutableList<Post>){
+//        refSemuaArtikel
+//            .get()
+//            .addOnSuccessListener {
+////                val uid=prefs.uid
+//                listArtikelSaya.clear()
+//                listArtikelSaya.add(prefs.uid)
+////                for (artikel in it){
+////                    val artikelsaya = artikel.toObject(Post::class.java)
+////                }
+//                val listArtikelSaya=listSemuaArtikel.filter {
+//                    it.writerId in listArtikelSaya
+//                }
+//            }
+////        refSemuaArtikel.addSnapshotListener { querySnapshot, error ->
+////            if(error!=null){
+////                Toast.makeText(view?.context, error?.localizedMessage, Toast.LENGTH_SHORT).show()
+////                return@addSnapshotListener
+////            }
+////            if(querySnapshot != null){
+////                listArtikelSaya.clear()
+////                listArtikelSaya.forEach {
+////                    if (it!=null &&  it.writerId==prefs.uid){
+////                        for (artikel in querySnapshot){
+////                            listArtikelSaya.add(artikel.toObject(Post::class.java))
+////                        }
+////                        showArtikel(listArtikelSaya)
+////                    }
+////                }
+////
+////            }
+////        }
+//    }
 
-                list.clear()
-                list.forEach {
-                    if (it!=null &&  it.writerId==mAuth?.uid){
-                        for (artikel in querySnapshot){
-                            list.add(artikel.toObject(Post::class.java))
-                        }
-                showArtikel(list)
-                    }
+    fun getArtikelSaya(listSemuaArtikel:MutableList<Post>){
+        refSemuaArtikel
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    Toast.makeText(view?.context, error?.localizedMessage, Toast.LENGTH_SHORT)
+                        .show()
+                    return@addSnapshotListener
                 }
+                if (querySnapshot != null) {
+                    listArtikelSaya.clear()
+                    listArtikelSaya.add(prefs.uid)
+                    val listFiltered=listSemuaArtikel.filter {
+                        it.writerId in listArtikelSaya
+                    }
+                    showArtikel(listFiltered)
 
+                }
             }
-        }
+
     }
 
     fun getAllArtikel(){
@@ -248,15 +282,10 @@ class FragmentProfil : Fragment() {
                     for (bookmark in querySnapshot) {
                         val idSavedPost = bookmark.toObject(SavedPost::class.java)
                         listBookmark.add(idSavedPost.postId)
-
                     }
                     val listFiltered=listSemuaArtikel.filter {
                             it.postId in listBookmark
                     }
-
-                    for (tes2 in listFiltered)
-                        Log.d("ini list terfilter", tes2.postId)
-
                     showBookmark(listFiltered)
 
                 }

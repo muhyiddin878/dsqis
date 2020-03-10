@@ -29,15 +29,11 @@ import kotlinx.android.synthetic.main.activity_new_post.*
 
 class DetailSiswaFragment : Fragment() {
     private lateinit var JK_SISWA: String
-
-
     private lateinit var  nama: EditText
     private lateinit var  ttl:EditText
     private lateinit var  alamat:EditText
     private lateinit var  nisn:EditText
-    private lateinit var  edit: Button
     private lateinit var  simpan:Button
-    private lateinit var  hapus:Button
     private lateinit var  jk: RadioGroup
     private var  jk2: String=""
     private lateinit var  lk: RadioButton
@@ -47,16 +43,13 @@ class DetailSiswaFragment : Fragment() {
     private lateinit var kedua_siswa:RadioButton
     private lateinit var bundlesiswa:Bundle
 
-    private lateinit var  logo: ImageView
     private var siswa:Siswa? = null
     private val CHOOSE_IMAGE = 101
     var resolver: ContentResolver?=null
-    private val mAuth = FirebaseAuth.getInstance()
     private val mStorage = FirebaseStorage.getInstance()
     private val mFirestore = FirebaseFirestore.getInstance()
     lateinit var prefs:AppPreferences
     private var uriImageSiswa: Uri? = null
-    lateinit var jurusan:String
     lateinit var kls:RadioGroup
     lateinit var kelas_siswa:String
     private var kls2:String=""
@@ -69,23 +62,23 @@ class DetailSiswaFragment : Fragment() {
     ): View? {
         (activity as AdminActivity).setActionBarTitle("Detail Akun Siswa")
 
-        return inflater.inflate(com.muhyiddin.dsqis.R.layout.activity_detail_siswa_fragment, null)
+        return inflater.inflate(R.layout.activity_detail_siswa_fragment, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val foto = view.findViewById<ImageView>(com.muhyiddin.dsqis.R.id.logo_siswa)
+        val foto = view.findViewById<ImageView>(R.id.logo_siswa)
         resolver = getActivity()?.getApplicationContext()!!.getContentResolver()
         prefs= AppPreferences(context)
 
         bundlesiswa = Bundle()
         val siswa = arguments?.getSerializable("siswa") as Siswa
 
-        nama=view.findViewById<EditText>(com.muhyiddin.dsqis.R.id.nama_siswa)
-        ttl=view.findViewById<EditText>(com.muhyiddin.dsqis.R.id.tempat_tanggal_lahir)
+        nama=view.findViewById<EditText>(R.id.nama_siswa)
+        ttl=view.findViewById<EditText>(R.id.tempat_tanggal_lahir)
 //        kelas=view.findViewById<EditText>(com.muhyiddin.dsqis.R.id.kelas_siswa)
-        alamat=view.findViewById<EditText>(com.muhyiddin.dsqis.R.id.alamat_siswa)
-        nisn=view.findViewById<EditText>(com.muhyiddin.dsqis.R.id.nisn_siswa)
+        alamat=view.findViewById<EditText>(R.id.alamat_siswa)
+        nisn=view.findViewById<EditText>(R.id.nisn_siswa)
         jk = view.findViewById(R.id.jenis_kelamin_siswa) as RadioGroup
         kls = view.findViewById(R.id.tingkatan_kelas_siswa) as RadioGroup
         persiapan_siswa= view.findViewById(R.id.persiapan_siswa) as RadioButton

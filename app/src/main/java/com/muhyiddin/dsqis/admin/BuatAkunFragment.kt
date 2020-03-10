@@ -72,23 +72,14 @@ class BuatAkunFragment : Fragment() {
         prefs= AppPreferences(context)
 
 
-//        val input_nama = view.findViewById<EditText>(R.id.input_nama)
-//        val ttl = view.findViewById<EditText>(R.id.ttl)
-//        val nomor_kelas = view.findViewById<EditText>(R.id.nomor_kelas)
-//        val alamat = view.findViewById<EditText>(R.id.alamat)
-//        var nisn= view.findViewById<EditText>(R.id.nisn)
-//        val nomor = view.findViewById<EditText>(R.id.nomor)
-//        val email = view.findViewById<EditText>(R.id.email)
-//        val namaortu = view.findViewById<EditText>(R.id.namaortu)
-//        val password = view.findViewById<EditText>(R.id.password)
 
         val submit = view.findViewById<Button>(com.muhyiddin.dsqis.R.id.submit)
+        val scroll = view.findViewById<ScrollView>(com.muhyiddin.dsqis.R.id.scroll_view)
 
         val jenis_kelamin = view.findViewById<RadioGroup>(com.muhyiddin.dsqis.R.id.jenis_kelamin)
         val tingkatan_kelas = view.findViewById<RadioGroup>(com.muhyiddin.dsqis.R.id.tingkatan_kelas)
 
-//        val lk = view.findViewById<RadioButton>(R.id.lk)
-//        val pr = view.findViewById<RadioButton>(R.id.pr)
+
 
         (activity as AppCompatActivity).supportActionBar?.title = "Daftar Siswa Baru"
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -120,6 +111,7 @@ class BuatAkunFragment : Fragment() {
         }
 
         submit.setOnClickListener {
+            scroll.setScrollY(0)
             validate()
 
         }
@@ -190,8 +182,7 @@ class BuatAkunFragment : Fragment() {
                             .set(user)
                             .addOnSuccessListener {
                                 val firestore = mFirestore.collection("parents")
-
-                                val key = firestore.document().id
+                                val key = prefs.uid
                                 val ortu = Ortu(key,namaortu,email,password)
                                 firestore.document(key)
                                     .set(ortu)
@@ -226,28 +217,12 @@ class BuatAkunFragment : Fragment() {
                             }
                             .addOnFailureListener{
                                 hideLoading(false, "Error ${it.localizedMessage}")
-//                                info("failed => ${it.localizedMessage}")
                             }
                     }
 
 
                 }
 
-//                if (it.isSuccessful) {
-//                    imageLocation = it.result.toString()
-//                    setProgressBarLength(75)
-//                    val siswa = Siswa(key,input_nama.text.toString(),jk, ttl, nisn,kls,alamat,nomor,imageLocation)
-//
-//                    firestore.document(key)
-//                        .set(siswa)
-//                        .addOnSuccessListener {
-//                            hideLoading(true, "newstudent")
-//                            HomeFragment()
-//                        }
-//                        .addOnFailureListener {
-//                            hideLoading(false, "Error ${it.localizedMessage}")
-//                        }
-//                }
             }
         }
     }
@@ -324,15 +299,11 @@ class BuatAkunFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-//        info("ACTIVITY RESULT $data AND ${data?.data}")
         if (requestCode == CHOOSE_IMAGE && resultCode == Activity.RESULT_OK && data!=null && data.data!=null){
-//            info("MASUK COY BISMILLAH")
             uriImageArtikel = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(resolver, uriImageArtikel)
             image_post.setImageBitmap(bitmap)
             image_post.scaleType = ImageView.ScaleType.CENTER_CROP
-//            presenter.publishPost(uriImageArtikel)
         }
     }
 

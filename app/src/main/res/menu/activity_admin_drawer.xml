@@ -25,7 +25,7 @@
         <item
             android:id="@+id/buat_akun"
             android:icon="@drawable/ic_tambah_akun_siswa"
-            android:title="Buat Ddata Siswa Baru" />
+            android:title="Buat Data Siswa Baru" />
         <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_logout"

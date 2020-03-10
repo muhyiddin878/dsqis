@@ -40,7 +40,7 @@ class ListAkunFragment : Fragment() {
     ): View? {
         (activity as AdminActivity).setActionBarTitle("Daftar Akun Siswa")
 
-        return inflater.inflate(com.muhyiddin.dsqis.R.layout.activity_list_akun_fragment, null)
+        return inflater.inflate(R.layout.activity_list_akun_fragment, null)
 
 
     }
@@ -50,7 +50,7 @@ class ListAkunFragment : Fragment() {
 //        val strtext = arguments!!.getString("siswa")
         var fragment=DetailSiswaFragment()
 
-        var rv_siswaa = view.findViewById(com.muhyiddin.dsqis.R.id.rv_siswa) as RecyclerView
+        var rv_siswaa = view.findViewById(R.id.rv_siswa) as RecyclerView
         rv_siswa.layoutManager = LinearLayoutManager(context)
 
 

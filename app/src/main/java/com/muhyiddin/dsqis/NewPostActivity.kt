@@ -10,6 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
+import android.widget.ScrollView
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -33,8 +34,9 @@ class NewPostActivity : AppCompatActivity() {
     private val mStorage = FirebaseStorage.getInstance()
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mFirestore = FirebaseFirestore.getInstance()
-
     private var uriImageArtikel: Uri? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_post)
@@ -65,37 +67,6 @@ class NewPostActivity : AppCompatActivity() {
         startActivityForResult(Intent.createChooser(intent, "Pilih Foto Pofil"), CHOOSE_IMAGE)
     }
 
-
-//    fun getCurrentUser(){
-//        val user = mAuth.currentUser
-//        setProfileUser(user?.displayName, user?.photoUrl.toString())
-//    }
-
-//    fun uploadImage(uri:Uri){
-//        showLoading()
-//        val ref = mStorage.getReference("profilepic/${mAuth.currentUser?.uid}")
-//
-//        ref.putFile(uri).continueWithTask {
-//            if (!it.isSuccessful){
-//                it.exception?.let {
-//                    throw it
-//                }
-//                hideLoading(true, "Error ${it.exception?.message}")
-//            }
-//            return@continueWithTask ref.downloadUrl
-//        }.addOnCompleteListener {
-//            if (it.isSuccessful){
-////                info(it.result)
-//                val profile =  UserProfileChangeRequest.Builder().setPhotoUri(it.result).build()
-//                mAuth.currentUser?.updateProfile(profile)?.addOnCompleteListener {
-//                    hideLoading(true, "")
-//                }
-//            } else{
-////                info(it.exception?.message)
-//                hideLoading(false, "Error ${it.exception?.message}")
-//            }
-//        }
-//    }
 
     fun getCurrentDate():String{
         val date = Calendar.getInstance().get(Calendar.DATE)
@@ -235,6 +206,7 @@ class NewPostActivity : AppCompatActivity() {
         when(item?.itemId){
             R.id.publish_post ->{
                 if (!onGoing){
+                    scroll_view2.setScrollY(0)
                     validate()
                     return true
                 } else{
