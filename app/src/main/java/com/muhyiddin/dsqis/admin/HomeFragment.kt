@@ -35,6 +35,7 @@ class HomeFragment : Fragment() {
         val greetings = view.findViewById<TextView>(R.id.greetings)
 
         val username = view.findViewById<EditText>(R.id.username)
+        username.setText(uname)
         val email = view.findViewById<EditText>(R.id.email)
         val password = view.findViewById<EditText>(R.id.password)
 

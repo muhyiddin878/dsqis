@@ -1,5 +1,6 @@
 package com.muhyiddin.dsqis
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ArrayAdapter
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -28,6 +30,7 @@ import com.muhyiddin.dsqis.utils.AppPreferences
 import com.muhyiddin.qis.login.login
 import kotlinx.android.synthetic.main.activity_fragment_profil.*
 import kotlinx.android.synthetic.main.activity_list_akun_fragment.*
+import kotlinx.android.synthetic.main.activity_new_chat_pakar.*
 
 class FragmentProfil : Fragment() {
 
@@ -46,16 +49,16 @@ class FragmentProfil : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.activity_fragment_profil, container, false)
         setHasOptionsMenu(true)
-    }
 
+
+        return inflater.inflate(R.layout.activity_fragment_profil, container, false)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        (activity as AppCompatActivity).supportActionBar?.title = "Profil"
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        (activity as MainActivity).supportActionBar?.title = "Profil"
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         prefs= AppPreferences(context)
 
@@ -67,7 +70,7 @@ class FragmentProfil : Fragment() {
             .load(user?.photoUrl)
             .into(profile_pic)
 
-        profile_name.text = user?.displayName
+        profile_name.text = prefs.nama
 
         edit_profil.setOnClickListener {
             //            startActivity(Intent(context, EditProfilActivity::class.java))
@@ -84,14 +87,14 @@ class FragmentProfil : Fragment() {
 //        getBookmark(listsemuaArtikel)
 
 
-//        artikel_saya.setOnClickListener {
-//            artikel_saya.setTextColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
-//            artikel_saya.setTypeface(artikel_saya.typeface, Typeface.BOLD)
-//            bookmark.setTextColor(ContextCompat.getColor(context!!, R.color.dark_grey))
-//            bookmark.setTypeface(artikel_saya.typeface, Typeface.NORMAL)
-//            rv_profile.adapter = adapter
-//            getArtikelSaya()
-//        }
+        artikel_saya.setOnClickListener {
+            artikel_saya.setTextColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
+            artikel_saya.setTypeface(artikel_saya.typeface, Typeface.BOLD)
+            bookmark.setTextColor(ContextCompat.getColor(context!!, R.color.dark_grey))
+            bookmark.setTypeface(artikel_saya.typeface, Typeface.NORMAL)
+            rv_profile.adapter = adapter
+            getArtikelSaya()
+        }
 
 
         bookmark.setOnClickListener {
@@ -100,7 +103,6 @@ class FragmentProfil : Fragment() {
             bookmark.setTextColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
             bookmark.setTypeface(artikel_saya.typeface, Typeface.BOLD)
             rv_profile.adapter = adapter
-//            rv_profile.adapter = adapter
             getAllArtikel()
             getBookmark(listsemuaArtikel)
         }
@@ -125,8 +127,8 @@ class FragmentProfil : Fragment() {
             if (id == R.id.logout){
             val builder = AlertDialog.Builder(context!!)
             // Set the alert dialog title
-            builder.setTitle("Hapus")
-            builder.setMessage("Are you want to set the app background color to RED?")
+            builder.setTitle("LOGOUT")
+            builder.setMessage("Are you want to Logout ?")
             // Set a positive button and its click listener on alert dialog
             builder.setPositiveButton("YES") { dialog, which ->
                 FirebaseAuth.getInstance().signOut()
@@ -138,8 +140,6 @@ class FragmentProfil : Fragment() {
             builder.setNegativeButton("No") { dialog, which ->
                 Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
             }
-
-
             // Display a neutral button on alert dialog
             builder.setNeutralButton("Cancel") { _, _ ->
                 Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
@@ -160,7 +160,7 @@ class FragmentProfil : Fragment() {
             .load(user?.photoUrl)
             .into(profile_pic)
         profile_name.text = user?.displayName
-        (activity as AppCompatActivity).supportActionBar?.title = user?.displayName
+        (activity as AppCompatActivity).supportActionBar?.title = prefs.nama
     }
 
     fun showArtikel(data: List<Post>) {
@@ -169,7 +169,7 @@ class FragmentProfil : Fragment() {
             list.addAll(it)
             adapter.notifyDataSetChanged()
         }
-//        count_artikel.text = list.size.toString()
+        count_artikel.text = list.size.toString()
     }
 
     fun showBookmark(data: List<Post>) {
@@ -179,8 +179,7 @@ class FragmentProfil : Fragment() {
             list.addAll(it)
             adapter.notifyDataSetChanged()
         }
-//        adapter.notifyDataSetChanged()
-//        count_bookmark.text = listBookmark.size.toString()
+        count_bookmark.text = listBookmark.size.toString()
     }
 
 //     fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -207,7 +206,6 @@ class FragmentProfil : Fragment() {
                     if (it!=null &&  it.writerId==mAuth?.uid){
                         for (artikel in querySnapshot){
                             list.add(artikel.toObject(Post::class.java))
-
                         }
                 showArtikel(list)
                     }
@@ -252,31 +250,14 @@ class FragmentProfil : Fragment() {
                         listBookmark.add(idSavedPost.postId)
 
                     }
-
-//                    listBookmark.forEach{
-//                        listSemuaArtikel.forEach {
-//                            if (it.postId == listBookmark.toString()){
-//                                listSemuaArtikel.clear()
-//                                listSemuaArtikel.add(it)
-//                            }
-//
-//                        }
-//
-//                    }
                     val listFiltered=listSemuaArtikel.filter {
                             it.postId in listBookmark
-//
                     }
-
 
                     for (tes2 in listFiltered)
                         Log.d("ini list terfilter", tes2.postId)
 
                     showBookmark(listFiltered)
-
-
-
-
 
                 }
             }

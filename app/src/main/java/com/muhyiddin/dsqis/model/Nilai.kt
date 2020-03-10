@@ -3,18 +3,18 @@ package com.muhyiddin.dsqis.model
 data class Nilai (
 //    var idNilai: String=""
 //    var idAnak:String=""
-    val Penilaian_Sikap: HashMap<String, String>? = null,
-    val Kelas_Pra_Akademik: HashMap<String, String>? = null,
-    val Kelas_Komputer: HashMap<String, Any> ?=null,
-    val Kelas_Murajaah: HashMap<String, String>? = null,
-    val Ekstrakulikuler: HashMap<String, String>? = null,
-    val Laporan_Perkembangan_Anak: HashMap<String, String>? = null,
-    val Saran_Guru: HashMap<String, String>? = null,
-    val TbBb: HashMap<String, String>? = null,
-    val Kondisi_Kesehatan: HashMap<String, String>? = null,
-    val Evaluasi_Pertumbuhan_Anak: HashMap<String, String>? = null,
-    val Absensi: HashMap<String, Int>? = null,
-    val Evaluasi_Perkembangan_Anak: HashMap<String, String>? = null
+    var Penilaian_Sikap: HashMap<String, String>? = null,
+    var Kelas_Pra_Akademik: HashMap<String, String>? = null,
+    var Kelas_Komputer: HashMap<String, Any> ?=null,
+    var Kelas_Murajaah: HashMap<String, String>? = null,
+    var Ekstrakulikuler: HashMap<String, String>? = null,
+    var Laporan_Perkembangan_Anak: HashMap<String, String>? = null,
+    var Saran_Guru: HashMap<String, String>? = null,
+    var TbBb: HashMap<String, String>? = null,
+    var Kondisi_Kesehatan: HashMap<String, String>? = null,
+    var Evaluasi_Pertumbuhan_Anak: HashMap<String, String>? = null,
+    var Absensi: HashMap<String, Int>? = null,
+    var Evaluasi_Perkembangan_Anak: HashMap<String, String>? = null
 )
 
 //    constructor()

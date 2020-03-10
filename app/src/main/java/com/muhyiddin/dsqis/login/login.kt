@@ -134,8 +134,7 @@ class login : AppCompatActivity(){
         finish()
     }
     fun showLoginSuccessAdmin() {
-
-        startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME","ADMIN"))
+        startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME",prefs.nama))
         finish()
     }
     fun showLoginSuccess2(msg: String) {

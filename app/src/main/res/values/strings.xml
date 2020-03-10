@@ -20,6 +20,7 @@
         <item>Laporan Perkembangan Anak</item>
         <item>Saran Guru</item>
         <item>Tinggi dan Berat Badan</item>
+        <item>Kondisi Kesehatan</item>
         <item>Evaluasi Pertumbuhan Anak</item>
         <item>Absensi</item>
         <item>Evaluasi Perkembangan Anak</item>
@@ -32,6 +33,12 @@
         <item>Psikolog</item>
         <item>Terapi</item>
 
+    </string-array>
+
+    <string-array name="tentang_profil">
+        <item>Artikel Saya</item>
+        <item>Bookmark</item>
+        <item>Logout</item>
     </string-array>
 
     <string-array name="minggu">

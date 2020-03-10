@@ -22,27 +22,25 @@
         <activity android:name=".admin.BuatAkunFragment" />
         <activity android:name=".admin.InputNilaiFragment" />
         <activity android:name=".admin.ListAkunFragment" />
-        <activity android:name=".admin.List_Akun_Fragment" />
         <activity android:name=".admin.HomeFragment" />
         <activity android:name=".admin.AdminActivity" />
         <activity android:name=".FragmentChatPakar" />
         <activity android:name=".NewChatPakarActivity" />
-        <activity android:name=".ChatPakarActivity" />
         <activity android:name=".ChatDetailActivity" />
-        <activity android:name=".ChatDetail" />
         <activity android:name=".DetailPostActivity" />
         <activity android:name=".NewPostActivity" />
         <activity android:name=".ArtikelActivity" />
-        <activity android:name=".ProfilActivity" />
-        <activity android:name=".SplashActivity" />
-        <activity android:name="com.muhyiddin.qis.login.login">
+        <activity android:name="com.muhyiddin.qis.login.login" />
+        <activity android:name=".MainActivity" />
+
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+
     </application>
 
 </manifest>

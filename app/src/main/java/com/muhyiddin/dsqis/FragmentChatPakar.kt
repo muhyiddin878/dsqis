@@ -81,30 +81,30 @@ class FragmentChatPakar : Fragment() {
                         Log.d("ini listchat", chatList?.last_chat)
                     if (chatList != null) {
                         Log.d("ini tes", "MASUKKK")
-                        listChat.add(chatList)
-                        showListChat(listChat)
-//                        if (prefs.role==2){
-//                            if (prefs.uid==chatList.id_pakar){
-//                                 listChat.add(chatList)
-//                            }
-//                        }
-//                        else if (prefs.role==1){
-//                            if (prefs.uid==chatList.id_member){
-//                                listChat.add(chatList)
-//                            }
-//                        }
+//                        listChat.add(chatList)
+//                        showListChat(listChat)
+                        if (prefs.role==2){
+                            if (prefs.uid==chatList.id_pakar){
+                                 listChat.add(chatList)
+                            }
+                        }
+                        else if (prefs.role==1){
+                            if (prefs.uid==chatList.id_member){
+                                listChat.add(chatList)
+                            }
+                        }
 
                     }
                 }
                 hideLoading()
 
-                for (tes2 in listChat)
-                    Log.d("ini listchat", tes2.last_chat)
-//                if (listChat.size>0){
-//                    showListChat(listChat)
-//                } else{
-//                    showEmptyChat()
-//                }
+//                for (tes2 in listChat)
+//                    Log.d("ini listchat", tes2.last_chat)
+                if (listChat.size>0){
+                    showListChat(listChat)
+                } else{
+                    showEmptyChat()
+                }
             }
             override fun onCancelled(p0: DatabaseError) {
 

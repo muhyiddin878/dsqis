@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/chat"
-        android:icon="@drawable/logoqis"
+        android:icon="@drawable/ic_message_black_24dp"
         android:title="Chat" />
 
     <item android:id="@+id/timeline"
-        android:icon="@drawable/logoqis"
+        android:icon="@drawable/ic_timeline_black_24dp"
         android:title="Timeline" />
 
     <item android:id="@+id/laporan"
-        android:icon="@drawable/logoqis"
+        android:icon="@drawable/ic_assignment_black_24dp"
         android:title="Laporan" />
 
     <item android:id="@+id/profil"
-        android:icon="@drawable/logoqis"
+        android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="Profil" />
 
 </menu>

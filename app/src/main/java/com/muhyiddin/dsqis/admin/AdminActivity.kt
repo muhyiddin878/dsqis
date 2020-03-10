@@ -1,10 +1,12 @@
 package com.muhyiddin.dsqis.admin
 
 import android.content.DialogInterface
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -12,11 +14,15 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import com.muhyiddin.dsqis.R
+import com.muhyiddin.dsqis.utils.AppPreferences
+import com.muhyiddin.qis.login.login
 
 class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener  {
     private var count: Int = 0
     private var uname:String=""
+    lateinit var prefs: AppPreferences
 //    val prefs = AppPreferences(this)
 
 
@@ -28,6 +34,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
         //untuk memanggil default fragment yang diinginkan ketika aplikasi baru dijalankan
         val fragment = HomeFragment()
+        prefs= AppPreferences(this)
 
         val bundle = Bundle()
         bundle.putString("USERNAME", uname)
@@ -159,23 +166,27 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             count = 1
         } else if (id == R.id.logout) {
             val builder = AlertDialog.Builder(this)
-            builder.setMessage("Anda yakin mau logout ?")
-                .setCancelable(true)
-                .setPositiveButton(
-                    "Ya"
-                ) { dialog, which ->
-//                    FirebaseAuth.getInstance().signOut()
-//                    prefs.resetPreference()
-//                    startActivity(Intent(this,login::class.java))
-//                    finish()
-                }
-                .setNegativeButton("Tidak") { dialog, which ->
-                    dialog.cancel()
-                    val navigationView = findViewById(R.id.nav_view) as NavigationView
-//                    navigationView.setCheckedItem(R.id.dashboard)
-                }
-            val alert = builder.create()
-            alert.show()
+            // Set the alert dialog title
+            builder.setTitle("LOGOUT")
+            builder.setMessage("Are you want to Logout?")
+            // Set a positive button and its click listener on alert dialog
+            builder.setPositiveButton("YES") { dialog, which ->
+                FirebaseAuth.getInstance().signOut()
+                prefs.resetPreference()
+                startActivity(Intent(this, login::class.java))
+                finish()
+            }
+            // Display a negative button on alert dialog
+            builder.setNegativeButton("No") { dialog, which ->
+                Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+            }
+
+
+            // Display a neutral button on alert dialog
+            builder.setNeutralButton("Cancel") { _, _ ->
+                Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+            }
+            builder.show()
         }
 
         if (fragment != null) {
