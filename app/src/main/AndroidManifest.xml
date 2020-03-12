@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".admin.DetailSiswaFragment"></activity>
+        <activity android:name=".OnBoardingActivity"></activity>
+        <activity android:name=".EditProfilFragment" />
+        <activity android:name=".admin.DetailPakarFragment" />
+        <activity android:name=".admin.DetailSiswaFragment" />
         <activity android:name=".admin.ListAkunPakarFragment" />
         <activity android:name=".FragmentLihatLaporan" />
         <activity android:name=".FragmentLaporan" />
@@ -32,15 +35,15 @@
         <activity android:name=".ArtikelActivity" />
         <activity android:name="com.muhyiddin.qis.login.login" />
         <activity android:name=".MainActivity" />
-
-        <activity android:name=".SplashActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

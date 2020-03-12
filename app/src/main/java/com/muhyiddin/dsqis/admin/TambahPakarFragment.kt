@@ -45,19 +45,18 @@ class TambahPakarFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(com.muhyiddin.dsqis.R.layout.activity_tambah_pakar_fragment, null)
+        return inflater.inflate(R.layout.activity_tambah_pakar_fragment, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val foto = view.findViewById<ImageView>(com.muhyiddin.dsqis.R.id.user_profile_photo)
+        val foto = view.findViewById<ImageView>(R.id.user_profile_photo)
         resolver = getActivity()?.getApplicationContext()!!.getContentResolver()
         prefs= AppPreferences(context)
 
 
-        val submit = view.findViewById<Button>(com.muhyiddin.dsqis.R.id.submit_button)
-
-        val jenis_pakar = view.findViewById<Spinner>(com.muhyiddin.dsqis.R.id.listpakar)
+        val submit = view.findViewById<Button>(R.id.submit_button)
+        val jenis_pakar = view.findViewById<Spinner>(R.id.listpakar)
         jenispakar = jenis_pakar.getSelectedItem().toString()
 
 
@@ -116,8 +115,6 @@ class TambahPakarFragment : Fragment() {
                         val value = snapshot.getValue(Post::class.java)
                         Toast.makeText(context,"BERHASIL", Toast.LENGTH_SHORT).show()
                         HomeFragment()
-//                        getActivity()?.finish()
-
                     }
 
                 })
@@ -217,15 +214,11 @@ class TambahPakarFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-
-//        info("ACTIVITY RESULT $data AND ${data?.data}")
         if (requestCode == CHOOSE_IMAGE && resultCode == Activity.RESULT_OK && data!=null && data.data!=null){
-//            info("MASUK COY BISMILLAH")
             uriImageArtikel = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(resolver, uriImageArtikel)
             user_profile_photo.setImageBitmap(bitmap)
             user_profile_photo.scaleType = ImageView.ScaleType.CENTER_CROP
-//            presenter.publishPost(uriImageArtikel)
         }
     }
 

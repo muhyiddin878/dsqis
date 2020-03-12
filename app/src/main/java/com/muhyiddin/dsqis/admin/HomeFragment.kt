@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_home_fragment.*
 
 class HomeFragment : Fragment() {
 
-    lateinit var uname:String
+    lateinit var uname: String
 
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
     ): View? {
 
         uname = arguments!!.getString("USERNAME")
-        (activity as AdminActivity).setActionBarTitle(uname)
+//        (activity as AdminActivity).setActionBarTitle(uname)
         return inflater.inflate(R.layout.activity_home_fragment, null)
     }
 
@@ -34,57 +34,56 @@ class HomeFragment : Fragment() {
 
         val greetings = view.findViewById<TextView>(R.id.greetings)
 
-        val username = view.findViewById<EditText>(R.id.username)
-        username.setText(uname)
-        val email = view.findViewById<EditText>(R.id.email)
-        val password = view.findViewById<EditText>(R.id.password)
+//        val username = view.findViewById<EditText>(R.id.username)
+//        username.setText(uname)
+//        val email = view.findViewById<EditText>(R.id.email)
+//        val password = view.findViewById<EditText>(R.id.password)
 
-        val edit = view.findViewById<Button>(R.id.edit_info_admin)
-        val save = view.findViewById<Button>(R.id.simpan_perubahan)
-
-
+//        val edit = view.findViewById<Button>(R.id.edit_info_admin)
+//        val save = view.findViewById<Button>(R.id.simpan_perubahan)
 
 
         greetings.text = "Selamat datang, $uname"
 
-        username.isFocusable = false
-        username.isClickable = false
-        username.isLongClickable = false
-        password.isFocusable = false
-        password.isClickable = false
-        password.isLongClickable = false
-        email.isFocusable = false
-        email.isClickable = false
-        email.isLongClickable = false
+//        username.isFocusable = false
+//        username.isClickable = false
+//        username.isLongClickable = false
+//        password.isFocusable = false
+//        password.isClickable = false
+//        password.isLongClickable = false
+//        email.isFocusable = false
+//        email.isClickable = false
+//        email.isLongClickable = false
 
-        save.isEnabled = false
+//        save.isEnabled = false
 
-        edit.setOnClickListener {
-            username.isFocusableInTouchMode = true
-            username.isLongClickable = true
-            email.isFocusableInTouchMode = true
-            email.isLongClickable = true
-            password.isFocusableInTouchMode = true
-            password.isLongClickable = true
-            save.isEnabled = true
-            edit.isEnabled = false
-        }
-        save.setOnClickListener {
-//            setAdminInfo()
-            username.isFocusable = false
-            username.isClickable = false
-            username.isLongClickable = false
-            password.isFocusable = false
-            password.isClickable = false
-            password.isLongClickable = false
-            email.isFocusable = false
-            email.isClickable = false
-            email.isLongClickable = false
+//        edit.setOnClickListener {
+//            username.isFocusableInTouchMode = true
+//            username.isLongClickable = true
+//            email.isFocusableInTouchMode = true
+//            email.isLongClickable = true
+//            password.isFocusableInTouchMode = true
+//            password.isLongClickable = true
+//            save.isEnabled = true
+//            edit.isEnabled = false
+//        }
+//        save.setOnClickListener {
+////            setAdminInfo()
+//            username.isFocusable = false
+//            username.isClickable = false
+//            username.isLongClickable = false
+//            password.isFocusable = false
+//            password.isClickable = false
+//            password.isLongClickable = false
+//            email.isFocusable = false
+//            email.isClickable = false
+//            email.isLongClickable = false
+//
+//            save.isEnabled = false
+//            edit.isEnabled = true
+//        }
+//    }
 
-            save.isEnabled = false
-            edit.isEnabled = true
-        }
+
     }
-
-
 }

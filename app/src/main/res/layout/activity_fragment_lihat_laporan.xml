@@ -271,7 +271,7 @@
                     android:id="@+id/sikap_spiritual1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFFF"
                     android:textSize="20sp"/>
 
@@ -285,7 +285,7 @@
                     android:id="@+id/sikap_sosial1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -314,7 +314,7 @@
                     android:id="@+id/materi_sikap_sosial1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -328,7 +328,7 @@
                     android:id="@+id/ket_sikap_sosial1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -342,7 +342,7 @@
                     android:id="@+id/nilai_sikap_sosial1"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -356,7 +356,7 @@
                     android:id="@+id/nilaikomputer1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -370,7 +370,7 @@
                     android:id="@+id/ket_komputer1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -384,7 +384,7 @@
                     android:id="@+id/nilai_komputer1"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -413,7 +413,7 @@
                     android:id="@+id/materi_murajaah1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -427,7 +427,7 @@
                     android:id="@+id/ket_murajaah1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -441,7 +441,7 @@
                     android:id="@+id/nilai_murajaah1"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -456,7 +456,7 @@
                     android:id="@+id/nama_ekstra1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -470,7 +470,7 @@
                     android:id="@+id/ket_ekstra1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -486,7 +486,7 @@
                     android:id="@+id/perkembangan_anak1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -501,7 +501,7 @@
                     android:id="@+id/saran_guru1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -516,7 +516,7 @@
                     android:id="@+id/tinggi_badan1"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -530,7 +530,7 @@
                     android:id="@+id/berat_badan1"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -557,7 +557,7 @@
                     android:id="@+id/penglihatan1"
                     android:layout_weight="1"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -571,7 +571,7 @@
                     android:id="@+id/pendengaran1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -585,7 +585,7 @@
                     android:id="@+id/gigi1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -599,7 +599,7 @@
                     android:id="@+id/daya_tahan1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -625,7 +625,7 @@
                     android:id="@+id/kondisi_saat_ini1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -639,7 +639,7 @@
                     android:id="@+id/kondisi_ideal1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -653,7 +653,7 @@
                     android:id="@+id/saran_dokter1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -666,9 +666,7 @@
                         android:text="Absensi"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
-
                 </TableRow>
-
                 <TextView
                     android:id="@+id/tv_izin1"
                     android:text="Izin"
@@ -679,7 +677,7 @@
                     android:id="@+id/izin1"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -693,7 +691,7 @@
                     android:id="@+id/sakit1"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -707,7 +705,7 @@
                     android:id="@+id/tidak_ada_keterangan1"
                     android:layout_weight="2"
                     android:inputType="number"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -734,7 +732,7 @@
                     android:id="@+id/kondisi_psikologi_saat_ini1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -749,7 +747,7 @@
                     android:id="@+id/kondisi_ideal_psikologi1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -763,7 +761,7 @@
                     android:id="@+id/saran_psikolog1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -790,7 +788,7 @@
                     android:id="@+id/kondisi_okupasi_saat_ini1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -805,7 +803,7 @@
                     android:id="@+id/kondisi_ideal_okupasi1"
                     android:layout_weight="2"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
@@ -819,7 +817,7 @@
                     android:id="@+id/saran_okupasi1"
                     android:layout_weight="0"
                     android:inputType="text"
-                    android:text="isi"
+                    android:text="Kosong"
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 

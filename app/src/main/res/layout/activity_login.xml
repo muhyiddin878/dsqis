@@ -95,13 +95,14 @@
                 android:layout_marginBottom="10dp"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Lupa kata sandi ?"
-                android:textSize="12sp"
-                />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_horizontal"-->
+<!--                android:text="Lupa kata sandi ?"-->
+<!--                android:textSize="12sp"-->
+<!--                />-->
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

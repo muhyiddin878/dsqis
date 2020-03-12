@@ -152,7 +152,6 @@ class DetailPostActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 mStorage.getReference("posts/$judul-$id").delete()
                     .addOnSuccessListener {
-
                     Toast.makeText(this,"Artikel Berhasil dihapus",Toast.LENGTH_SHORT).show()
                         supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
                     }.addOnFailureListener {

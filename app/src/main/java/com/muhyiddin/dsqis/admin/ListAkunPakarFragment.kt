@@ -14,7 +14,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.adapter.ListPakarAdapter
 import com.muhyiddin.dsqis.model.Pakar
+import kotlinx.android.synthetic.main.activity_list_akun_fragment.*
+import kotlinx.android.synthetic.main.activity_list_akun_pakar_fragment.*
 import kotlinx.android.synthetic.main.activity_list_guru_fragment.*
+import kotlinx.android.synthetic.main.activity_list_guru_fragment.rv_pakar
 
 class ListAkunPakarFragment : Fragment() {
 
@@ -37,14 +40,18 @@ class ListAkunPakarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-//        var rv_pakar = view.findViewById(R.id.rv_pakar) as RecyclerView
+        var fragment=DetailPakarFragment()
         rv_pakar.layoutManager =LinearLayoutManager(this.context)
 
 
-        adapter= ListPakarAdapter(context!!,pakar){pakar ->
-            //            startActivity(Intent(context, DetailSiswaActivity::class.java).putExtra("siswa",it))
 
+        adapter= ListPakarAdapter(context!!,pakar){
+            val bundle = Bundle()
+            bundle.putSerializable("pakar", it)
+            fragment?.arguments = bundle
+            val tx = activity?.supportFragmentManager?.beginTransaction()
+            tx?.replace(R.id.screen_area, fragment!!)
+            tx?.commit()
         }
 
         rv_pakar.adapter = adapter
@@ -63,10 +70,13 @@ class ListAkunPakarFragment : Fragment() {
                 for (expert in querySnapshot) {
                     pakar.add(expert.toObject(Pakar::class.java))
                 }
-                showPakar(pakar)
-                for (tes2 in pakar)
-                    Log.d("ini list pakar", tes2.namapakar)
+                if (pakar.size>0){
+                    showPakar(pakar)
+                }else{
+                    showEmptyChat()
+                }
             }
+
         }
 
     }
@@ -78,6 +88,9 @@ class ListAkunPakarFragment : Fragment() {
             adapter.notifyDataSetChanged()
         }
 
+    }
+    fun showEmptyChat() {
+        empty_chat2.visibility = View.VISIBLE
     }
 
 

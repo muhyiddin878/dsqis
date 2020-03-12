@@ -1,6 +1,8 @@
 package com.muhyiddin.dsqis.model
 
-class Pakar {
+import java.io.Serializable
+
+class Pakar: Serializable {
     var id: String=""
     var namapakar: String=""
     var email:String=""

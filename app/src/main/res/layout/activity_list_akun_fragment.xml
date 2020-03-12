@@ -12,5 +12,13 @@
         android:layout_height="match_parent"
         />
 
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/empty_chat1"
+        android:text="Data Kosong"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

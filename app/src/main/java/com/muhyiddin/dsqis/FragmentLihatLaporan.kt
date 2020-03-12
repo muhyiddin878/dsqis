@@ -28,9 +28,6 @@ class FragmentLihatLaporan : Fragment() {
     private val CHOOSE_IMAGE = 101
     var resolver: ContentResolver?=null
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -1205,53 +1202,73 @@ class FragmentLihatLaporan : Fragment() {
             .addOnSuccessListener {
                 //                Log.d("ini isi tes ",it.data.toString() )
                 val isi = it.toObject(Nilai::class.java)
-                sikap_spiritual1.setText("${isi?.Penilaian_Sikap?.get("Sikap Spiritual")}")
-                sikap_sosial1.setText("${isi?.Penilaian_Sikap?.get("Sikap Sosial")}")
-//                mingguke1
-                materi_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Materi")}")
-                ket_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Keterangan")}")
-                nilai_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Nilai")}")
-
-                nilaikomputer1.setText("${isi?.Kelas_Komputer?.get("Materi")}")
-                ket_komputer1.setText("${isi?.Kelas_Komputer?.get("Keterangan")}")
-                nilai_komputer1.setText("${isi?.Kelas_Komputer?.get("Nilai")}")
-
-//                mingguke_murajaah
-                materi_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Materi")}")
-                ket_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Keterangan")}")
-                nilai_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Nilai")}")
-
-
-                nama_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Nama Ektra")}")
-                ket_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Keterangan")}")
-
-                perkembangan_anak1.setText("${isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")}")
-
-                saran_guru1.setText("${isi?.Saran_Guru?.get("Saran Guru")}")
-
-                tinggi_badan1.setText("${isi?.TbBb?.get("Tinggi Badan")}")
-                berat_badan1.setText("${isi?.TbBb?.get("Berat Badan")}")
-
-                penglihatan1.setText("${isi?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")}")
-                pendengaran1.setText("${isi?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")}")
-                daya_tahan1.setText("${isi?.Kondisi_Kesehatan?.get("Daya Tahan")}")
-                gigi1.setText("${isi?.Kondisi_Kesehatan?.get("Kondisi Gigi")}")
-
-                kondisi_saat_ini1.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")}")
-                kondisi_ideal1.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")}")
-                saran_dokter1.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")}")
-
-                izin1.setText("${isi?.Absensi?.get("Izin")}")
-                sakit1.setText("${isi?.Absensi?.get("Sakit")}")
-                tidak_ada_keterangan1.setText("${isi?.Absensi?.get("Tanpa Keterangan")}")
-
-                kondisi_psikologi_saat_ini1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")}")
-                kondisi_ideal_psikologi1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")}")
-                saran_psikolog1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")}")
-
-                kondisi_okupasi_saat_ini1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")}")
-                kondisi_ideal_okupasi1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")}")
-                saran_okupasi1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")}")
+                if (isi?.Penilaian_Sikap?.get("Sikap Spiritual") !=null) {
+                    sikap_spiritual1.setText("${isi?.Penilaian_Sikap?.get("Sikap Spiritual")}")
+                }else if(isi?.Penilaian_Sikap?.get("Sikap Sosial")!=null){
+                    sikap_sosial1.setText("${isi?.Penilaian_Sikap?.get("Sikap Sosial")}")
+                }else if(isi?.Kelas_Pra_Akademik?.get("Materi")!=null){
+                    materi_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Materi")}")
+                }else if (isi?.Kelas_Pra_Akademik?.get("Keterangan")!=null){
+                    ket_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Keterangan")}")
+                }else if(isi?.Kelas_Pra_Akademik?.get("Nilai")!=null){
+                    nilai_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Nilai")}")
+                }else if(isi?.Kelas_Komputer?.get("Materi")!=null){
+                    nilaikomputer1.setText("${isi?.Kelas_Komputer?.get("Materi")}")
+                }else if(isi?.Kelas_Komputer?.get("Keterangan")!=null){
+                    ket_komputer1.setText("${isi?.Kelas_Komputer?.get("Keterangan")}")
+                }else if(isi?.Kelas_Komputer?.get("Nilai")!=null){
+                    nilai_komputer1.setText("${isi?.Kelas_Komputer?.get("Nilai")}")
+                }else if (isi?.Kelas_Murajaah?.get("Materi")!=null){
+                    materi_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Materi")}")
+                }else if(isi?.Kelas_Murajaah?.get("Keterangan")!=null){
+                    ket_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Keterangan")}")
+                }else if(isi?.Kelas_Murajaah?.get("Nilai")!=null){
+                    nilai_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Nilai")}")
+                }else if(isi?.Ekstrakulikuler?.get("Nama Ektra")!=null){
+                    nama_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Nama Ektra")}")
+                }else if(isi?.Ekstrakulikuler?.get("Keterangan")!=null){
+                    ket_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Keterangan")}")
+                }else if (isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
+                    perkembangan_anak1.setText("${isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")}")
+                }else if (isi?.Saran_Guru?.get("Saran Guru")!=null){
+                    saran_guru1.setText("${isi?.Saran_Guru?.get("Saran Guru")}")
+                }else if(isi?.TbBb?.get("Tinggi Badan")!=null){
+                    tinggi_badan1.setText("${isi?.TbBb?.get("Tinggi Badan")}")
+                }else if (isi?.TbBb?.get("Berat Badan")!=null){
+                    berat_badan1.setText("${isi?.TbBb?.get("Berat Badan")}")
+                }else if(isi?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")!=null){
+                    penglihatan1.setText("${isi?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")}")
+                }else if(isi?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")!=null){
+                    pendengaran1.setText("${isi?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")}")
+                }else if (isi?.Kondisi_Kesehatan?.get("Daya Tahan")!=null){
+                    daya_tahan1.setText("${isi?.Kondisi_Kesehatan?.get("Daya Tahan")}")
+                }else if(isi?.Kondisi_Kesehatan?.get("Kondisi Gigi")!=null){
+                    gigi1.setText("${isi?.Kondisi_Kesehatan?.get("Kondisi Gigi")}")
+                }else if(isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")!=null){
+                    kondisi_saat_ini1.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")}")
+                }else if(isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")!=null){
+                    kondisi_ideal1.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")}")
+                }else if(isi?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")!=null){
+                    saran_dokter1.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")}")
+                }else if(isi?.Absensi?.get("Izin")!= null){
+                    izin1.setText("${isi?.Absensi?.get("Izin")}")
+                }else if(isi?.Absensi?.get("Sakit")!=null){
+                    sakit1.setText("${isi?.Absensi?.get("Sakit")}")
+                }else if (isi?.Absensi?.get("Tanpa Keterangan")!=null){
+                    tidak_ada_keterangan1.setText("${isi?.Absensi?.get("Tanpa Keterangan")}")
+                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")!=null){
+                    kondisi_psikologi_saat_ini1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")}")
+                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")!=null){
+                    kondisi_ideal_psikologi1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")}")
+                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")!=null){
+                    saran_psikolog1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")}")
+                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")!=null){
+                    kondisi_okupasi_saat_ini1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")}")
+                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")!=null){
+                    kondisi_ideal_okupasi1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")}")
+                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")!=null){
+                    saran_okupasi1.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")}")
+                }
             }.addOnFailureListener {
                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
                     .show()

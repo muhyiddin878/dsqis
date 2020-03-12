@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="100dp"
+    >
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+<!--        <ProgressBar-->
+<!--            android:visibility="gone"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:layout_centerHorizontal="true"-->
+<!--            android:id="@+id/progress_loading"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:src="@color/grey"
+            android:id="@+id/profile_pic_edit"
+
+            />
+        <ImageButton
+            android:id="@+id/edit_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/circle_background"
+            android:src="@drawable/ic_photo_camera_black_24dp"
+            android:layout_alignEnd="@id/profile_pic_edit"
+            android:layout_alignBottom="@id/profile_pic_edit"
+            />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/nama_pengguna_layout"
+            android:layout_below="@id/profile_pic_edit"
+            android:layout_marginTop="32dp"
+            app:boxBackgroundMode="none"
+            android:hint="Nama Pengguna"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/nama_pengguna1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textCapSentences"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!--<com.google.android.material.textfield.TextInputLayout-->
+        <!--android:id="@+id/email_pengguna_layout"-->
+        <!--android:layout_below="@id/nama_pengguna_layout"-->
+        <!--app:boxBackgroundMode="none"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:hint="Email Pengguna"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<com.google.android.material.textfield.TextInputEditText-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:id="@+id/email_pengguna"-->
+        <!--android:inputType="textEmailAddress"-->
+        <!--android:layout_height="wrap_content"/>-->
+        <!--</com.google.android.material.textfield.TextInputLayout>-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_lama_pengguna_layout"
+            android:layout_below="@id/nama_pengguna_layout"
+            android:layout_marginTop="16dp"
+            app:boxBackgroundMode="none"
+            android:hint="Password Lama"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:inputType="textPassword"
+                android:id="@+id/password_lama_pengguna"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_pengguna_layout"
+            android:layout_below="@id/password_lama_pengguna_layout"
+            android:layout_marginTop="16dp"
+            app:boxBackgroundMode="none"
+            android:hint="Password Baru"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:inputType="textPassword"
+                android:id="@+id/password_pengguna"
+                android:layout_height="wrap_content" android:layout_alignStart="@+id/password_pengguna_layout"
+                android:layout_alignBottom="@+id/password_pengguna_layout"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/konfirm_password_pengguna_layout"
+            android:layout_below="@id/password_pengguna_layout"
+            app:boxBackgroundMode="none"
+            android:layout_marginTop="16dp"
+            android:hint="Konfirmasi Password Baru"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:inputType="textPassword"
+                android:id="@+id/konfirm_password_pengguna"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
+
+</ScrollView>

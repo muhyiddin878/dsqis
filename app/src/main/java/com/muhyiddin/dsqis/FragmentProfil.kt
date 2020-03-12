@@ -23,6 +23,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.muhyiddin.dsqis.admin.ListAkunPakarFragment
 import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.model.SavedPost
 import com.muhyiddin.dsqis.model.Siswa
@@ -121,28 +122,24 @@ class FragmentProfil : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
             val id = item!!.itemId
-            //handle item clicks
             if (id == R.id.edit_profil){
-                //do your action here, im just showing toast
                 Toast.makeText(context, "Edit Profil", Toast.LENGTH_SHORT).show()
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_container, EditProfilFragment())?.commit()
+
             }
             if (id == R.id.logout){
             val builder = AlertDialog.Builder(context!!)
-            // Set the alert dialog title
             builder.setTitle("LOGOUT")
             builder.setMessage("Are you want to Logout ?")
-            // Set a positive button and its click listener on alert dialog
             builder.setPositiveButton("YES") { dialog, which ->
                 FirebaseAuth.getInstance().signOut()
                 prefs.resetPreference()
                 startActivity(Intent(context, login::class.java))
                 activity?.finish()
             }
-            // Display a negative button on alert dialog
             builder.setNegativeButton("No") { dialog, which ->
                 Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
             }
-            // Display a neutral button on alert dialog
             builder.setNeutralButton("Cancel") { _, _ ->
                 Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
             }
@@ -183,50 +180,6 @@ class FragmentProfil : Fragment() {
         count_bookmark.text = listBookmark.size.toString()
     }
 
-//     fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        when(item?.itemId){
-//            android.R.id.home -> {
-//                getActivity()?.finish()
-//                getActivity()?.onBackPressed()
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
-
-
-//    fun getArtikelSaya(listSemuaArtikel:MutableList<Post>){
-//        refSemuaArtikel
-//            .get()
-//            .addOnSuccessListener {
-////                val uid=prefs.uid
-//                listArtikelSaya.clear()
-//                listArtikelSaya.add(prefs.uid)
-////                for (artikel in it){
-////                    val artikelsaya = artikel.toObject(Post::class.java)
-////                }
-//                val listArtikelSaya=listSemuaArtikel.filter {
-//                    it.writerId in listArtikelSaya
-//                }
-//            }
-////        refSemuaArtikel.addSnapshotListener { querySnapshot, error ->
-////            if(error!=null){
-////                Toast.makeText(view?.context, error?.localizedMessage, Toast.LENGTH_SHORT).show()
-////                return@addSnapshotListener
-////            }
-////            if(querySnapshot != null){
-////                listArtikelSaya.clear()
-////                listArtikelSaya.forEach {
-////                    if (it!=null &&  it.writerId==prefs.uid){
-////                        for (artikel in querySnapshot){
-////                            listArtikelSaya.add(artikel.toObject(Post::class.java))
-////                        }
-////                        showArtikel(listArtikelSaya)
-////                    }
-////                }
-////
-////            }
-////        }
-//    }
 
     fun getArtikelSaya(listSemuaArtikel:MutableList<Post>){
         refSemuaArtikel
@@ -260,7 +213,6 @@ class FragmentProfil : Fragment() {
                 for (artikel in querySnapshot){
                     listsemuaArtikel.add(artikel.toObject(Post::class.java))
                 }
-//                showArtikel(list)
             }
         }
 

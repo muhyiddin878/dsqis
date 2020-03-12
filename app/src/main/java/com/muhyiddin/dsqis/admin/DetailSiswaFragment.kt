@@ -11,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
@@ -23,6 +24,7 @@ import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.model.Siswa
 import com.muhyiddin.dsqis.utils.AppPreferences
+import com.muhyiddin.qis.login.login
 import kotlinx.android.synthetic.main.activity_detail_siswa_fragment.*
 import kotlinx.android.synthetic.main.activity_new_post.*
 
@@ -74,11 +76,10 @@ class DetailSiswaFragment : Fragment() {
         bundlesiswa = Bundle()
         val siswa = arguments?.getSerializable("siswa") as Siswa
 
-        nama=view.findViewById<EditText>(R.id.nama_siswa)
-        ttl=view.findViewById<EditText>(R.id.tempat_tanggal_lahir)
-//        kelas=view.findViewById<EditText>(com.muhyiddin.dsqis.R.id.kelas_siswa)
-        alamat=view.findViewById<EditText>(R.id.alamat_siswa)
-        nisn=view.findViewById<EditText>(R.id.nisn_siswa)
+        nama=view.findViewById(R.id.nama_siswa)
+        ttl=view.findViewById(R.id.tempat_tanggal_lahir)
+        alamat=view.findViewById(R.id.alamat_siswa)
+        nisn=view.findViewById(R.id.nisn_siswa)
         jk = view.findViewById(R.id.jenis_kelamin_siswa) as RadioGroup
         kls = view.findViewById(R.id.tingkatan_kelas_siswa) as RadioGroup
         persiapan_siswa= view.findViewById(R.id.persiapan_siswa) as RadioButton
@@ -137,6 +138,27 @@ class DetailSiswaFragment : Fragment() {
         simpan.setOnClickListener {
             updateSiswa(siswa!!.id,uriImageSiswa,siswa!!.nama,nama_siswa.text.toString(),tempat_tanggal_lahir.text.toString(),jk2,kls2,alamat_siswa.text.toString(),nisn_siswa.text.toString())
 
+        }
+
+
+        hapus_akun.setOnClickListener {
+            val builder = AlertDialog.Builder(context!!)
+            // Set the alert dialog title
+            builder.setTitle("HAPUS DATA")
+            builder.setMessage("Are you want to Delete This Data?")
+            // Set a positive button and its click listener on alert dialog
+            builder.setPositiveButton("YES") { dialog, which ->
+                hapusAkun(siswa.id,siswa.nama)
+            }
+            // Display a negative button on alert dialog
+            builder.setNegativeButton("No") { dialog, which ->
+                Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+            }
+            // Display a neutral button on alert dialog
+            builder.setNeutralButton("Cancel") { _, _ ->
+                Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+            }
+            builder.show()
         }
 
 
@@ -215,22 +237,6 @@ class DetailSiswaFragment : Fragment() {
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
         } else{
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
-//            this.activity?.finish()
-//            if (message=="update"){
-//                FirebaseDatabase.getInstance().getReference("students/${siswa?.id}").addListenerForSingleValueEvent(object:
-//                    ValueEventListener {
-//                    override fun onCancelled(p0: DatabaseError) {
-//                    }
-//                    override fun onDataChange(snapshot: DataSnapshot) {
-//                        val value = snapshot.getValue(Post::class.java)
-//                        Toast.makeText(context,"BERHASIL",Toast.LENGTH_SHORT).show()
-//                        startActivity(Intent(context, ArtikelActivity::class.java))
-//                        activity?.finish()
-//
-//                    }
-//
-//                })
-//            }
         }
     }
 
@@ -295,11 +301,7 @@ class DetailSiswaFragment : Fragment() {
 //        email.isEnabled=false
 //        password.isEnabled=false
 
-
         updateSiswa(siswa!!.id,uriImageSiswa,siswa!!.nama,nama_siswa.text.toString(),tempat_tanggal_lahir.text.toString(),jk2,kls2,alamat_siswa.text.toString(),nisn_siswa.text.toString())
-
-
-
 
     }
 
@@ -313,11 +315,41 @@ class DetailSiswaFragment : Fragment() {
         }
     }
 
-
-
-
-
-
-
+    private fun hapusAkun(id:String,namaSiswa:String){
+        mFirestore.collection("students").document(id)
+            .delete()
+            .addOnSuccessListener {
+                mStorage.getReference("students/$namaSiswa-$id").delete()
+                    .addOnSuccessListener {
+                        mFirestore.collection("parents")
+                            .get()
+                            .addOnSuccessListener {
+                                it.forEach {
+                                    it.reference.collection("students")
+                                        .document(id)
+                                        .delete()
+                                        .addOnSuccessListener {
+                                            mFirestore.collection("nilai").document(id)
+                                                .delete()
+                                                .addOnSuccessListener {
+                                                    Toast.makeText(context, "Data Berhasil Di Hapus", Toast.LENGTH_SHORT).show()
+                                                    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
+                                                }.addOnFailureListener {
+                                                    Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                                                }
+                                        }.addOnFailureListener {
+                                            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                                        }
+                                }
+                            }.addOnFailureListener {
+                                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                            }
+                    }.addOnFailureListener {
+                        Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                    }
+            }.addOnFailureListener {
+                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+            }
+    }
 
 }

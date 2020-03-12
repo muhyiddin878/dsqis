@@ -22,6 +22,7 @@ import kotlinx.android.synthetic.main.activity_list_akun_fragment.*
 import android.R.attr.fragment
 import android.R.id.message
 import com.muhyiddin.dsqis.FragmentLaporan
+import kotlinx.android.synthetic.main.activity_fragment_chat_pakar.*
 
 
 class ListAkunFragment : Fragment() {
@@ -63,28 +64,9 @@ class ListAkunFragment : Fragment() {
             val tx = activity?.supportFragmentManager?.beginTransaction()
             tx?.replace(R.id.screen_area, fragment!!)
             tx?.commit()
-
-
-//            activity?.supportFragmentManager?.beginTransaction()?.replace(com.muhyiddin.dsqis.R.id.frame_container, DetailSiswaFragment())?.commit()
-
-//            val intent = Intent(
-//                activity!!.baseContext,
-//                TargetActivity::class.java
-//            )
-//            intent.putExtra("message", it)
-//            activity!!.startActivity(intent)
-
-
-
-//            startActivity(Intent(context, DetailSiswaFragment::class.java).putExtra("siswa",it))
-
         }
 
         rv_siswaa.adapter = adapter
-
-
-
-
 
     }
 
@@ -99,10 +81,13 @@ class ListAkunFragment : Fragment() {
                 for (student in querySnapshot) {
                     siswa.add(student.toObject(Siswa::class.java))
                 }
-                showSiswa(siswa)
-                for (tes2 in siswa)
-                    Log.d("ini list siswa", tes2.nama)
+                if (siswa.size>0){
+                    showSiswa(siswa)
+                }else{
+                    showEmptyChat()
+                }
             }
+
         }
 
     }
@@ -115,12 +100,7 @@ class ListAkunFragment : Fragment() {
         }
 
     }
-
-
-
-
-
-
-
-
+    fun showEmptyChat() {
+        empty_chat1.visibility = View.VISIBLE
+    }
 }
