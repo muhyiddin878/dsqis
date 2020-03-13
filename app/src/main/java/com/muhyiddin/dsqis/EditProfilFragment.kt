@@ -52,7 +52,7 @@ class EditProfilFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         (activity as AppCompatActivity).supportActionBar?.title = "Edit Profil"
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         resolver = getActivity()?.getApplicationContext()!!.getContentResolver()
         prefs= AppPreferences(context)
 
@@ -88,8 +88,8 @@ class EditProfilFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean  {
 
         val id = item!!.itemId
-        if (id==R.id.home){
-//            onBackPressed()
+        if (id==android.R.id.home){
+            (activity as AppCompatActivity).onBackPressed()
         }
         if(id==R.id.confirm){
             validate()
@@ -250,6 +250,10 @@ class EditProfilFragment : Fragment() {
             profile_pic_edit.setImageBitmap(bitmap)
             profile_pic_edit.scaleType = ImageView.ScaleType.CENTER_CROP
         }
+    }
+
+    fun onBackPressed() {
+        return
     }
 
 

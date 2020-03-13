@@ -5,9 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
@@ -33,6 +35,7 @@ class FragmentLihatLaporan : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         (activity as MainActivity).supportActionBar?.title = "Laporan Anak"
         return inflater.inflate(R.layout.activity_fragment_lihat_laporan, null)
     }
@@ -1295,6 +1298,15 @@ class FragmentLihatLaporan : Fragment() {
                 tingkatan_kelas1.setText(isi?.kelas)
                 nisn_siswa1.setText(isi?.nisn)
             }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean  {
+        val id = item!!.itemId
+        if (id==android.R.id.home){
+            (activity as AppCompatActivity).onBackPressed()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
 }
