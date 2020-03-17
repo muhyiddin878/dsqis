@@ -10,7 +10,9 @@ import android.widget.Toast
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.MainActivity
+import com.muhyiddin.dsqis.OnBoardingActivity
 import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.admin.AdminActivity
 import com.muhyiddin.dsqis.model.User
@@ -25,6 +27,7 @@ class login : AppCompatActivity(){
 //    private val prefs = AppPreferences(this)
     private lateinit var prefs:AppPreferences
     val user = FirebaseAuth.getInstance().currentUser
+    private val mStorage = FirebaseStorage.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -130,7 +133,12 @@ class login : AppCompatActivity(){
     }
 
     fun showLoginSuccess() {
-        startActivity(Intent(this,MainActivity::class.java))
+        val ref = user?.photoUrl
+        if(ref!==null){
+            startActivity(Intent(this,OnBoardingActivity::class.java))
+        }else{
+            startActivity(Intent(this,MainActivity::class.java))
+        }
         finish()
     }
     fun showLoginSuccessAdmin() {

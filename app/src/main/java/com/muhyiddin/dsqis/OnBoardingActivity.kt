@@ -11,6 +11,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
+import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_on_boarding.*
 
 class OnBoardingActivity : AppCompatActivity() {
@@ -19,11 +20,13 @@ class OnBoardingActivity : AppCompatActivity() {
     private lateinit var uriProfilImage: Uri
     private val mAuth = FirebaseAuth.getInstance()
     private val mStorage = FirebaseStorage.getInstance()
+    lateinit var prefs: AppPreferences
     private val mDatabase = FirebaseDatabase.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_on_boarding)
+        prefs= AppPreferences(this)
 
 
         add_photo.setOnClickListener() {
@@ -81,7 +84,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     fun uploadImage(uri:Uri){
         showLoading()
-        val ref = mStorage.getReference("profilepic/${mAuth.currentUser?.uid}")
+        val ref = mStorage.getReference("profilepic/${prefs.uid}")
 
         ref.putFile(uri).continueWithTask {
             if (!it.isSuccessful){

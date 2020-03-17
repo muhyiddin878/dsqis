@@ -57,11 +57,11 @@ class EditProfilFragment : Fragment() {
         prefs= AppPreferences(context)
 
 
-//        Glide.with(this)
-//            .asBitmap()
-//            .thumbnail(0.2f)
-//            .load(currentUser?.photoUrl)
-//            .into(profile_pic_edit)
+        Glide.with(this)
+            .asBitmap()
+            .thumbnail(0.2f)
+            .load(currentUser?.photoUrl)
+            .into(profile_pic_edit)
 
         nama_pengguna1.setText(prefs.nama)
         edit_photo.setOnClickListener() {
