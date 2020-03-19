@@ -60,7 +60,7 @@ class FragmentProfil : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         prefs= AppPreferences(context)
 
@@ -75,7 +75,8 @@ class FragmentProfil : Fragment() {
         profile_name.text = prefs.nama
 
         edit_profil.setOnClickListener {
-            //            startActivity(Intent(context, EditProfilActivity::class.java))
+            Toast.makeText(context, "Edit Profil", Toast.LENGTH_SHORT).show()
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_container, EditProfilFragment())?.commit()
         }
 
 
@@ -122,11 +123,11 @@ class FragmentProfil : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
             val id = item!!.itemId
-            if (id == R.id.edit_profil){
-                Toast.makeText(context, "Edit Profil", Toast.LENGTH_SHORT).show()
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_container, EditProfilFragment())?.commit()
-
-            }
+//            if (id == R.id.edit_profil){
+//                Toast.makeText(context, "Edit Profil", Toast.LENGTH_SHORT).show()
+//                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_container, EditProfilFragment())?.commit()
+//
+//            }
             if (id == R.id.logout){
             val builder = AlertDialog.Builder(context!!)
             builder.setTitle("LOGOUT")

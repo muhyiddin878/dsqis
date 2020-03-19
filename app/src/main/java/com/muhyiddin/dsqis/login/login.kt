@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.MainActivity
+import com.muhyiddin.dsqis.MainActivityPakar
 import com.muhyiddin.dsqis.OnBoardingActivity
 import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.admin.AdminActivity
@@ -91,7 +92,7 @@ class login : AppCompatActivity(){
                         if (prefs.role==1){
                             showLoginSuccess()
                         } else if (prefs.role == 2){
-                            showLoginSuccess()
+                            showLoginSuccessPakar()
                         }else if (prefs.role==3){
                             showLoginSuccessAdmin()
                         }
@@ -138,6 +139,15 @@ class login : AppCompatActivity(){
             startActivity(Intent(this,OnBoardingActivity::class.java))
         }else{
             startActivity(Intent(this,MainActivity::class.java))
+        }
+        finish()
+    }
+    fun showLoginSuccessPakar(){
+        val ref = user?.photoUrl
+        if(ref!==null){
+            startActivity(Intent(this,OnBoardingActivity::class.java))
+        }else{
+            startActivity(Intent(this,MainActivityPakar::class.java))
         }
         finish()
     }

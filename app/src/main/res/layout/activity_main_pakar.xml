@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivityPakar">
 
     <FrameLayout
         android:id="@+id/frame_container"
@@ -22,7 +22,7 @@
         android:layout_alignParentBottom="true"
         android:background="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottom_nav"
+        app:menu="@menu/bottom_nav_pakar"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
 
