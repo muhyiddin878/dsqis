@@ -56,6 +56,8 @@ class EditProfilFragment : Fragment() {
         resolver = getActivity()?.getApplicationContext()!!.getContentResolver()
         prefs= AppPreferences(context)
 
+        val backStackCount = (activity as MainActivity).supportFragmentManager.backStackEntryCount
+        Log.d("Back Stack Count", "$backStackCount")
 
         Glide.with(this)
             .asBitmap()
@@ -89,7 +91,15 @@ class EditProfilFragment : Fragment() {
 
         val id = item!!.itemId
         if (id==android.R.id.home){
-            (activity as AppCompatActivity).onBackPressed()
+            Log.d("ON Options Item", "Triggered Edit Profil fragment")
+//            (activity as MainActivity).onBackPressed()
+
+//            activity?.getFragmentManager()?.popBackStack()\
+            val itung=(activity as AppCompatActivity).supportFragmentManager.getBackStackEntryCount()
+            Log.d("isi itung:",itung.toString())
+            if (itung > 0) {
+                (activity as AppCompatActivity).supportFragmentManager.popBackStackImmediate()
+            }
         }
         if(id==R.id.confirm){
             validate()
@@ -252,9 +262,11 @@ class EditProfilFragment : Fragment() {
         }
     }
 
-    fun onBackPressed() {
-        return
-    }
+
+
+//    fun onBackPressed() {
+//        activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(null)?.replace(R.id.frame_container, FragmentProfil())?.commit()
+//    }
 
 
 

@@ -20,6 +20,13 @@ import com.muhyiddin.dsqis.model.Siswa
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_detail_siswa_fragment.*
 import kotlinx.android.synthetic.main.activity_fragment_lihat_laporan.*
+import com.jjoe64.graphview.series.LineGraphSeries
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.LegendRenderer
+import com.jjoe64.graphview.series.DataPoint
+import com.jjoe64.graphview.series.PointsGraphSeries
+import com.muhyiddin.dsqis.model.Post
+import java.util.*
 
 
 class FragmentLihatLaporan : Fragment() {
@@ -29,6 +36,8 @@ class FragmentLihatLaporan : Fragment() {
     lateinit var prefs: AppPreferences
     private val CHOOSE_IMAGE = 101
     var resolver: ContentResolver?=null
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -1173,7 +1182,64 @@ class FragmentLihatLaporan : Fragment() {
             }
         }
 
+        val list:MutableList<Double> = mutableListOf()
+        list.add(2.3)
+        list.add(5.3)
+        list.add(7.5)
+        list.add(9.8)
 
+
+        val dataPoints =arrayOfNulls<DataPoint>(list.size)
+        for (i in list.indices) {
+            dataPoints[i] = DataPoint(
+                i+0.0,
+                list.get(i)
+            )
+        }
+        val series = LineGraphSeries<DataPoint>(dataPoints)
+        graph.addSeries(series)
+        series.setTitle("Perkembangan Anak");
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
+        series.setDataPointsRadius(10F)
+        series.setThickness(8)
+
+
+
+//        val graph = view.findViewById<GraphView>(R.id.graph)
+//        val series = LineGraphSeries<DataPoint>(
+//            arrayOf<DataPoint>(
+//                DataPoint(0.0, 1.0),
+//                DataPoint(1.0, 5.0),
+//                DataPoint(2.0, 3.0),
+//                DataPoint(3.0, 2.0),
+//                DataPoint(4.0, 6.0)
+//            )
+//        )
+//        graph.addSeries(series)
+
+
+    }
+
+    fun getCurrentDate():String{
+        val date = Calendar.getInstance().get(Calendar.DATE)
+        val month = Calendar.getInstance().get(Calendar.MONTH)+1
+        val year = Calendar.getInstance().get(Calendar.YEAR)
+        when(month){
+            1 -> return "$date Januari $year"
+            2 -> return "$date Februari $year"
+            3 -> return "$date Maret $year"
+            4 -> return "$date April $year"
+            5 -> return "$date Mei $year"
+            6 -> return "$date Juni $year"
+            7 -> return "$date Juli $year"
+            8 -> return "$date Agustus $year"
+            9 -> return "$date September $year"
+            10 -> return "$date Oktober $year"
+            11 -> return "$date November $year"
+            12 -> return "$date Desember $year"
+            else -> return month.toString()
+        }
     }
 
 

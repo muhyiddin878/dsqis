@@ -31,17 +31,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     }
     fun frg(){
-        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
+        supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.frame_container, FragmentArtikel()).commit()
     }
 
     fun frg2(){
-        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentChatPakar()).commit()
+        supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.frame_container, FragmentChatPakar()).commit()
     }
     fun frg3(){
-        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentProfil()).commit()
+        supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.frame_container, FragmentProfil()).commit()
     }
     fun frg4(){
-        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentLihatLaporan()).commit()
+        supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.frame_container, FragmentLihatLaporan()).commit()
     }
 
 
@@ -70,6 +70,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+
+//        val backStackCount = supportFragmentManager.backStackEntryCount
+//        Log.d("ON BACK PRESS", "$backStackCount")
+//        if (backStackCount > 0) {
+//            supportFragmentManager.popBackStack()
+//            Log.d("ON BACK PRESS", "$backStackCount")
+//        }
     }
 }
 

@@ -76,7 +76,7 @@ class FragmentProfil : Fragment() {
 
         edit_profil.setOnClickListener {
             Toast.makeText(context, "Edit Profil", Toast.LENGTH_SHORT).show()
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_container, EditProfilFragment())?.commit()
+            activity?.supportFragmentManager?.beginTransaction()?.addToBackStack(null)?.replace(R.id.frame_container, EditProfilFragment())?.commit()
         }
 
 
@@ -128,6 +128,16 @@ class FragmentProfil : Fragment() {
 //                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame_container, EditProfilFragment())?.commit()
 //
 //            }
+        if (id==android.R.id.home){
+            (activity as MainActivity).onBackPressed()
+
+//            activity?.getFragmentManager()?.popBackStack()\
+//            val itung=(activity as AppCompatActivity).supportFragmentManager.getBackStackEntryCount()
+//            Log.d("isi itung:",itung.toString())
+//            if (itung > 0) {
+//                (activity as AppCompatActivity).supportFragmentManager.popBackStackImmediate()
+//            }
+        }
             if (id == R.id.logout){
             val builder = AlertDialog.Builder(context!!)
             builder.setTitle("LOGOUT")

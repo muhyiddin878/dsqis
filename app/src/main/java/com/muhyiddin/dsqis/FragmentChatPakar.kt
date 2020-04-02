@@ -49,7 +49,7 @@ class FragmentChatPakar : Fragment() {
         } else{
             start_new_chat.show()
             (activity as AppCompatActivity).supportActionBar?.title = "Chat Pakar"
-            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+//            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         adapter = ChatAdapter(listChat){
             updateUnreadChat(it.roomId)

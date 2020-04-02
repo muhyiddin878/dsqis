@@ -58,6 +58,9 @@ dependencies {
     //////////////////  FLEXBOX  /////////////////
     implementation 'com.google.android:flexbox:1.1.0'
 
+    ////////////////// GraphView //////////////////
+    implementation 'com.jjoe64:graphview:4.2.2'
+
 
 }
 
