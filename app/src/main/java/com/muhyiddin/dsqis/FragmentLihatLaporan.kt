@@ -25,6 +25,7 @@ import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.LegendRenderer
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.PointsGraphSeries
+import com.muhyiddin.dsqis.model.Grafik
 import com.muhyiddin.dsqis.model.Post
 import java.util.*
 
@@ -102,6 +103,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -195,6 +197,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -288,6 +291,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -381,6 +385,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -493,6 +498,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_daya_tahan_tubuh1.visibility = View.GONE
                     daya_tahan1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_evaluasi_pertumbuhan_anak1.visibility = View.GONE
                     tv_kondisi_anak_saat_ini1.visibility = View.GONE
@@ -567,6 +573,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.VISIBLE
                     perkembangan_anak1.visibility = View.VISIBLE
+                    graph.visibility=View.VISIBLE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -660,6 +667,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.VISIBLE
                     saran_guru1.visibility = View.VISIBLE
@@ -753,6 +761,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -845,6 +854,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -937,6 +947,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -1030,6 +1041,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -1122,6 +1134,7 @@ class FragmentLihatLaporan : Fragment() {
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
                     perkembangan_anak1.visibility = View.GONE
+                    graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -1182,27 +1195,28 @@ class FragmentLihatLaporan : Fragment() {
             }
         }
 
-        val list:MutableList<Double> = mutableListOf()
-        list.add(2.3)
-        list.add(5.3)
-        list.add(7.5)
-        list.add(9.8)
-
-
-        val dataPoints =arrayOfNulls<DataPoint>(list.size)
-        for (i in list.indices) {
-            dataPoints[i] = DataPoint(
-                i+0.0,
-                list.get(i)
-            )
-        }
-        val series = LineGraphSeries<DataPoint>(dataPoints)
-        graph.addSeries(series)
-        series.setTitle("Perkembangan Anak");
-        graph.getLegendRenderer().setVisible(true);
-        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
-        series.setDataPointsRadius(10F)
-        series.setThickness(8)
+//        val list:MutableList<Double> = mutableListOf()
+//        list.add(2.3)
+//        list.add(5.3)
+//        list.add(7.5)
+//        list.add(9.8)
+//
+//
+//        val dataPoints =arrayOfNulls<DataPoint>(list.size)
+//        for (i in list.indices) {
+//            dataPoints[i] = DataPoint(
+//                i+0.0,
+//                list.get(i)
+//            )
+//        }
+//        val series = LineGraphSeries<DataPoint>(dataPoints)
+//        val series2 = PointsGraphSeries<DataPoint>(dataPoints)
+//        graph.addSeries(series)
+//        graph.addSeries(series2)
+//        series2.setShape(PointsGraphSeries.Shape.POINT)
+//        series.setTitle("Perkembangan Anak")
+//        graph.getLegendRenderer().setVisible(true)
+//        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
 
 
 
@@ -1269,7 +1283,6 @@ class FragmentLihatLaporan : Fragment() {
             .document(siswaId)
             .get()
             .addOnSuccessListener {
-                //                Log.d("ini isi tes ",it.data.toString() )
                 val isi = it.toObject(Nilai::class.java)
                 if (isi?.Penilaian_Sikap?.get("Sikap Spiritual") !=null) {
                     sikap_spiritual1.setText("${isi?.Penilaian_Sikap?.get("Sikap Spiritual")}")
@@ -1297,9 +1310,28 @@ class FragmentLihatLaporan : Fragment() {
                     nama_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Nama Ektra")}")
                 }else if(isi?.Ekstrakulikuler?.get("Keterangan")!=null){
                     ket_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Keterangan")}")
-                }else if (isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
-                    perkembangan_anak1.setText("${isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")}")
-                }else if (isi?.Saran_Guru?.get("Saran Guru")!=null){
+                }
+                else if (isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
+                    val graph1= isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")
+                    Log.d("TES ISI graph1", "$graph1")
+                    val dataPoints =arrayOfNulls<DataPoint>(graph1!!.size)
+                    for (i in graph1.indices) {
+                        dataPoints[i] = DataPoint(
+                            graph1[i].angka!!.plus(0.0),
+                            graph1[i].minggu!!.plus(0.0)
+                        )
+                    }
+                    val series = LineGraphSeries<DataPoint>(dataPoints)
+                    val series2 = PointsGraphSeries<DataPoint>(dataPoints)
+                    graph.addSeries(series)
+                    graph.addSeries(series2)
+                    series2.setShape(PointsGraphSeries.Shape.POINT)
+                    series.setTitle("Perkembangan Anak")
+                    graph.getLegendRenderer().setVisible(true)
+                    graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
+
+                }
+                else if (isi?.Saran_Guru?.get("Saran Guru")!=null){
                     saran_guru1.setText("${isi?.Saran_Guru?.get("Saran Guru")}")
                 }else if(isi?.TbBb?.get("Tinggi Badan")!=null){
                     tinggi_badan1.setText("${isi?.TbBb?.get("Tinggi Badan")}")

@@ -196,7 +196,8 @@ class DetailPostActivity : AppCompatActivity() {
         val firestore = mFirestore.collection("posts").document(postId).collection("comment")
         val key = firestore.document().id
         val comment = Comment(key, komentar,getCurrentDate(), currentUser?.uid.toString(), currentUser?.displayName.toString(), currentUser?.photoUrl.toString())
-        firestore.document(key).set(comment)
+        firestore.document(key)
+            .set(comment)
             .addOnSuccessListener {
                 Toast.makeText(this@DetailPostActivity,"Komentar Berhasil Ditambahkan!",Toast.LENGTH_SHORT).show()
                 clearField()

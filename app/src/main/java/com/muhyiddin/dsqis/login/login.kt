@@ -134,7 +134,7 @@ class login : AppCompatActivity(){
     }
 
     fun showLoginSuccess() {
-        val ref = mStorage.getReference("profilepic/${prefs.uid}")
+        val ref = user?.photoUrl
         if(ref==null){
             startActivity(Intent(this,OnBoardingActivity::class.java))
         }else{
@@ -143,7 +143,7 @@ class login : AppCompatActivity(){
         finish()
     }
     fun showLoginSuccessPakar(){
-        val ref = mStorage.getReference("profilepic/${prefs.uid}")
+        val ref = user?.photoUrl
         if(ref==null){
             startActivity(Intent(this,OnBoardingActivity::class.java))
         }else{

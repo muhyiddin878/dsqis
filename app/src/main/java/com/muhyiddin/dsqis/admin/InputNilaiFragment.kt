@@ -1,6 +1,6 @@
 package com.muhyiddin.dsqis.admin
 
-import android.app.ProgressDialog
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -16,9 +16,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.muhyiddin.dsqis.R
-import com.muhyiddin.dsqis.model.Nilai
-import com.muhyiddin.dsqis.model.SavedPost
-import com.muhyiddin.dsqis.model.Siswa
 import kotlinx.android.synthetic.main.activity_buat_akun_fragment.*
 import kotlinx.android.synthetic.main.activity_input_nilai_fragment.*
 import java.util.ArrayList
@@ -28,6 +25,9 @@ import androidx.annotation.NonNull
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.firestore.DocumentReference
 import android.content.ContentValues.TAG
+import com.jjoe64.graphview.series.DataPoint
+import com.muhyiddin.dsqis.model.*
+import kotlinx.android.synthetic.main.activity_fragment_lihat_laporan.*
 
 
 class InputNilaiFragment : Fragment() {
@@ -37,6 +37,7 @@ class InputNilaiFragment : Fragment() {
     private lateinit var akun: MutableList<Siswa>
     private val siswa: MutableList<String> = mutableListOf()
     private val siswaId: MutableList<String> = mutableListOf()
+    private val grafik:MutableList<Grafik> = mutableListOf()
     private lateinit var spinner: Spinner
     private lateinit var mapel: String
     private lateinit var minggu: String
@@ -44,9 +45,8 @@ class InputNilaiFragment : Fragment() {
     private lateinit var mingguke_sikap_sosial: String
     private lateinit var minggumurajaah: String
     private lateinit var mingguke_murajaah: String
+    private var mingguke_perkembangan: Int=0
     private lateinit var idSiswa: String
-    private val arrayList = ArrayList<String>()
-    private val mAuth = FirebaseAuth.getInstance()
     private lateinit var minggukee: String
     private lateinit var mingguke_sikap_sosial_spinner:Spinner
 
@@ -64,14 +64,12 @@ class InputNilaiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val spinner = view.findViewById<Spinner>(R.id.daftar_siswa)
-        val semester = view.findViewById<Spinner>(R.id.semester)
         val mata_pelajaran = view.findViewById<Spinner>(R.id.pelajaran)
         mingguke_sikap_sosial_spinner = view.findViewById(R.id.mingguke)
         val mingguke_murajaah_spinner = view.findViewById<Spinner>(R.id.minggukeMurajaah)
-        val cobak1 = view.findViewById<EditText>(R.id.sikap_sosial)
-
-
+        val mingguke_perkembangan_spinner = view.findViewById<Spinner>(R.id.minggukePerkembangan)
         val submit_nilai = view.findViewById<Button>(R.id.submit_nilai)
+        val submit_nilai_perkembangan = view.findViewById<Button>(R.id.submit_nilai_perkembangan)
 
 
         data_siswa.addSnapshotListener { querySnapshot, error ->
@@ -183,12 +181,55 @@ class InputNilaiFragment : Fragment() {
                 }
             }
 
+        mingguke_perkembangan_spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
+                    minggu = mingguke_sikap_sosial_spinner.selectedItem.toString()
+                    if (minggu == "1") {
+                        mingguke_perkembangan = 1
+                    } else if (minggu == "2") {
+                        mingguke_perkembangan = 2
+                    } else if (minggu == "3") {
+                        mingguke_perkembangan = 3
+                    } else if (minggu == "4") {
+                        mingguke_perkembangan = 4
+                    } else if (minggu == "5") {
+                        mingguke_perkembangan = 5
+                    } else if (minggu == "6") {
+                        mingguke_perkembangan = 6
+                    } else if (minggu == "7") {
+                        mingguke_perkembangan = 7
+                    } else if (minggu == "8") {
+                        mingguke_perkembangan = 8
+                    } else if (minggu == "9") {
+                        mingguke_perkembangan = 9
+                    } else if (minggu == "10") {
+                        mingguke_perkembangan = 10
+                    } else if (minggu == "11") {
+                        mingguke_perkembangan = 11
+                    } else if (minggu == "12") {
+                        mingguke_perkembangan = 12
+                    }
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+                }
+            }
+
 
 //        arrayList.add(sikap_spiritual.text.toString())
 //        arrayList.add(sikap_sosial.text.toString())
 
 
+        submit_nilai_perkembangan.setOnClickListener {
+            submit_perkembangan()
+        }
+
         submit_nilai.setOnClickListener {
+//            grafik.clear()
+
 
             val Penilaian_Sikap = HashMap<String, String>()
             Penilaian_Sikap.put("Sikap Spiritual", sikap_spiritual.text.toString())
@@ -215,9 +256,6 @@ class InputNilaiFragment : Fragment() {
             val Ekstrakulikuler = HashMap<String, String>()
             Ekstrakulikuler.put("Nama Ektra", nama_ekstra.text.toString())
             Ekstrakulikuler.put("Keterangan", ket_ekstra.text.toString())
-
-            val Laporan_Perkembangan_Anak = HashMap<String, String>()
-            Laporan_Perkembangan_Anak.put("Perkembangan Anak", perkembangan_anak.text.toString())
 
             val Saran_Guru = HashMap<String, String>()
             Saran_Guru.put("Saran Guru", saran_guru.text.toString())
@@ -267,7 +305,6 @@ class InputNilaiFragment : Fragment() {
             nilai.Kelas_Komputer = Kelas_Komputer
             nilai.Kelas_Murajaah = Kelas_Murajaah
             nilai.Ekstrakulikuler = Ekstrakulikuler
-            nilai.Laporan_Perkembangan_Anak = Laporan_Perkembangan_Anak
             nilai.Saran_Guru = Saran_Guru
             nilai.TbBb = TbBb
             nilai.Kondisi_Kesehatan = Kondisi_Kesehatan
@@ -323,6 +360,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -416,6 +455,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -509,6 +550,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -602,6 +645,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -695,6 +740,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -788,6 +835,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.VISIBLE
                     perkembangan_anak.visibility = View.VISIBLE
+                    tv_mingguke_perkembangan.visibility= View.VISIBLE
+                    minggukePerkembangan.visibility=View.VISIBLE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -881,6 +930,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.VISIBLE
                     saran_guru.visibility = View.VISIBLE
@@ -975,6 +1026,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1068,6 +1121,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1160,6 +1215,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1252,6 +1309,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1345,6 +1404,8 @@ class InputNilaiFragment : Fragment() {
 
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    minggukePerkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1424,6 +1485,35 @@ class InputNilaiFragment : Fragment() {
             }
 
     }
+    private fun submit_perkembangan(){
+        mFirestore.collection("nilai")
+            .document(idSiswa)
+            .get()
+            .addOnSuccessListener {
+                val isi = it.toObject(Nilai::class.java)
+                grafik.clear()
+                if (isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
+                    val graph1= isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak") as List<Grafik>
+
+                    grafik.addAll(graph1)
+
+                    val graphic = Grafik(perkembangan_anak.text.toString().toInt(),mingguke_perkembangan)
+                    grafik.add(graphic)
+
+                    val Laporan_Perkembangan_Anak = HashMap<String, MutableList<Grafik>>()
+                    Laporan_Perkembangan_Anak.put("Perkembangan Anak", grafik)
+                    val nilai = Nilai()
+                    nilai.Laporan_Perkembangan_Anak = Laporan_Perkembangan_Anak
+                    inputNilai(nilai)
+//                    for (i in graph1.indices) {
+//                        grafik[i].minggu=graph1[i].minggu
+//                        grafik[i].angka=graph1[i].angka
+//                    }
+                }
+
+            }
+
+    }
 
     private fun getIdSiswa(namaSiswa: String) {
         mFirestore.collection("students")
@@ -1483,8 +1573,6 @@ class InputNilaiFragment : Fragment() {
                     nama_ekstra.setText("${isi?.Ekstrakulikuler?.get("Nama Ektra")}")
                 }else if(isi?.Ekstrakulikuler?.get("Keterangan")!=null){
                     ket_ekstra.setText("${isi?.Ekstrakulikuler?.get("Keterangan")}")
-                }else if (isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
-                    perkembangan_anak.setText("${isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")}")
                 }else if (isi?.Saran_Guru?.get("Saran Guru")!=null){
                     saran_guru.setText("${isi?.Saran_Guru?.get("Saran Guru")}")
                 }else if(isi?.TbBb?.get("Tinggi Badan")!=null){
