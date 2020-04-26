@@ -15,8 +15,6 @@ import com.bumptech.glide.Glide
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.adapter.ListSiswaAdapter
-import com.muhyiddin.dsqis.model.Nilai
-import com.muhyiddin.dsqis.model.Siswa
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_detail_siswa_fragment.*
 import kotlinx.android.synthetic.main.activity_fragment_lihat_laporan.*
@@ -25,8 +23,7 @@ import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.LegendRenderer
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.PointsGraphSeries
-import com.muhyiddin.dsqis.model.Grafik
-import com.muhyiddin.dsqis.model.Post
+import com.muhyiddin.dsqis.model.*
 import java.util.*
 
 
@@ -37,6 +34,9 @@ class FragmentLihatLaporan : Fragment() {
     lateinit var prefs: AppPreferences
     private val CHOOSE_IMAGE = 101
     var resolver: ContentResolver?=null
+    private lateinit var minggumurajaah: String
+    private lateinit var mingguke_murajaah: String
+    private val murajaah2:MutableList<Murajaah> = mutableListOf()
 
 
 
@@ -58,6 +58,7 @@ class FragmentLihatLaporan : Fragment() {
 
         val foto = view.findViewById<ImageView>(R.id.logo_siswa1)
         resolver = getActivity()?.getApplicationContext()!!.getContentResolver()
+        val mingguke_murajaah_spinner = view.findViewById<Spinner>(R.id.minggukeMurajaah)
 
 
         mata_pelajaran.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -102,7 +103,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -196,7 +197,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -290,7 +291,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -384,7 +385,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -478,7 +479,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
                     saran_guru1.visibility = View.GONE
@@ -572,7 +573,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.VISIBLE
-                    perkembangan_anak1.visibility = View.VISIBLE
+//                    perkembangan_anak1.visibility = View.VISIBLE
                     graph.visibility=View.VISIBLE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -666,7 +667,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.VISIBLE
@@ -760,7 +761,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -853,7 +854,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -946,7 +947,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -1040,7 +1041,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -1133,7 +1134,7 @@ class FragmentLihatLaporan : Fragment() {
 
 
                     tv_laporan_perkembangan_anak1.visibility = View.GONE
-                    perkembangan_anak1.visibility = View.GONE
+//                    perkembangan_anak1.visibility = View.GONE
                     graph.visibility=View.GONE
 
                     tv_saran_guru1.visibility = View.GONE
@@ -1195,42 +1196,42 @@ class FragmentLihatLaporan : Fragment() {
             }
         }
 
-//        val list:MutableList<Double> = mutableListOf()
-//        list.add(2.3)
-//        list.add(5.3)
-//        list.add(7.5)
-//        list.add(9.8)
-//
-//
-//        val dataPoints =arrayOfNulls<DataPoint>(list.size)
-//        for (i in list.indices) {
-//            dataPoints[i] = DataPoint(
-//                i+0.0,
-//                list.get(i)
-//            )
-//        }
-//        val series = LineGraphSeries<DataPoint>(dataPoints)
-//        val series2 = PointsGraphSeries<DataPoint>(dataPoints)
-//        graph.addSeries(series)
-//        graph.addSeries(series2)
-//        series2.setShape(PointsGraphSeries.Shape.POINT)
-//        series.setTitle("Perkembangan Anak")
-//        graph.getLegendRenderer().setVisible(true)
-//        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
+        mingguke_murajaah_spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
+                    minggumurajaah = mingguke_murajaah_spinner.selectedItem.toString()
+                    if (minggumurajaah == "1") {
+                        mingguke_murajaah = "1"
+                    } else if (minggumurajaah == "2") {
+                        mingguke_murajaah = "2"
+                    } else if (minggumurajaah == "3") {
+                        mingguke_murajaah = "3"
+                    } else if (minggumurajaah == "4") {
+                        mingguke_murajaah = "4"
+                    } else if (minggumurajaah == "5") {
+                        mingguke_murajaah = "5"
+                    } else if (minggumurajaah == "6") {
+                        mingguke_murajaah = "6"
+                    } else if (minggumurajaah == "7") {
+                        mingguke_murajaah = "7"
+                    } else if (minggumurajaah == "8") {
+                        mingguke_murajaah = "8"
+                    } else if (minggumurajaah == "9") {
+                        mingguke_murajaah = "9"
+                    } else if (minggumurajaah == "10") {
+                        mingguke_murajaah = "10"
+                    } else if (minggumurajaah == "11") {
+                        mingguke_murajaah = "11"
+                    } else if (minggumurajaah == "12") {
+                        mingguke_murajaah = "12"
+                    }
 
+                }
 
+                override fun onNothingSelected(parent: AdapterView<*>) {
 
-//        val graph = view.findViewById<GraphView>(R.id.graph)
-//        val series = LineGraphSeries<DataPoint>(
-//            arrayOf<DataPoint>(
-//                DataPoint(0.0, 1.0),
-//                DataPoint(1.0, 5.0),
-//                DataPoint(2.0, 3.0),
-//                DataPoint(3.0, 2.0),
-//                DataPoint(4.0, 6.0)
-//            )
-//        )
-//        graph.addSeries(series)
+                }
+            }
 
 
     }
@@ -1300,13 +1301,33 @@ class FragmentLihatLaporan : Fragment() {
                     ket_komputer1.setText("${isi?.Kelas_Komputer?.get("Keterangan")}")
                 }else if(isi?.Kelas_Komputer?.get("Nilai")!=null){
                     nilai_komputer1.setText("${isi?.Kelas_Komputer?.get("Nilai")}")
-                }else if (isi?.Kelas_Murajaah?.get("Materi")!=null){
+                }
+
+                else if (isi?.Kelas_Murajaah?.get("Kelas Murajaah")!=null){
+                    val murajaah1= isi?.Kelas_Murajaah?.get("Kelas Murajaah")
+                    for (i in murajaah1!!.indices) {
+                        if (mingguke_murajaah== murajaah1[i].minggu.toString()){
+                            materi_murajaah1.setText(murajaah1[i].materi)
+                            ket_murajaah1.setText(murajaah1[i].keterangan)
+                            nilai_murajaah1.setText(murajaah1[i].nilai.toString())
+                            break
+                        }
+                    }
+
+                }
+                else if (isi?.Kelas_Murajaah?.get("Materi")!=null){
                     materi_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Materi")}")
-                }else if(isi?.Kelas_Murajaah?.get("Keterangan")!=null){
+                }
+                else if(isi?.Kelas_Murajaah?.get("Keterangan")!=null){
                     ket_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Keterangan")}")
-                }else if(isi?.Kelas_Murajaah?.get("Nilai")!=null){
+                }
+                else if(isi?.Kelas_Murajaah?.get("Nilai")!=null){
                     nilai_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Nilai")}")
-                }else if(isi?.Ekstrakulikuler?.get("Nama Ektra")!=null){
+                }
+
+
+
+                else if(isi?.Ekstrakulikuler?.get("Nama Ektra")!=null){
                     nama_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Nama Ektra")}")
                 }else if(isi?.Ekstrakulikuler?.get("Keterangan")!=null){
                     ket_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Keterangan")}")

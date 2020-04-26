@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="20"
                         android:textColor="@android:color/black"
-                        android:text="Muhyiddin Ubaidillah"
+                        android:text="Nama Anak"
                         android:textSize="20sp" />
                 </TableRow>
 
@@ -103,26 +103,6 @@
                         android:text="Laki-Laki"
                         android:textSize="20sp" />
 
-                    <!--                    <RadioGroup-->
-                    <!--                        android:id="@+id/jenis_kelamin_siswa"-->
-                    <!--                        android:layout_width="match_parent"-->
-                    <!--                        android:orientation="horizontal"-->
-                    <!--                        android:layout_weight="20"-->
-                    <!--                        android:layout_height="wrap_content">-->
-                    <!--                        <RadioButton-->
-                    <!--                            android:id="@+id/lk_detail"-->
-                    <!--                            android:text="Laki-Laki"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content"-->
-                    <!--                            android:layout_weight="2"-->
-                    <!--                            />-->
-                    <!--                        <RadioButton-->
-                    <!--                            android:id="@+id/pr_detail"-->
-                    <!--                            android:layout_weight="2"-->
-                    <!--                            android:text="Perempuan"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content" />-->
-                    <!--                    </RadioGroup>-->
                 </TableRow>
 
                 <TableRow>
@@ -482,13 +462,13 @@
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
-                <TextView
-                    android:id="@+id/perkembangan_anak1"
-                    android:layout_weight="2"
-                    android:inputType="text"
-                    android:text="Kosong"
-                    android:textColor="#FFF"
-                    android:textSize="20sp"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/perkembangan_anak1"-->
+<!--                    android:layout_weight="2"-->
+<!--                    android:inputType="text"-->
+<!--                    android:text="Kosong"-->
+<!--                    android:textColor="#FFF"-->
+<!--                    android:textSize="20sp"/>-->
 
                 <com.jjoe64.graphview.GraphView
                     android:layout_width="match_parent"

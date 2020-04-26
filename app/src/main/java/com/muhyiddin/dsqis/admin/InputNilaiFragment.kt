@@ -38,6 +38,7 @@ class InputNilaiFragment : Fragment() {
     private val siswa: MutableList<String> = mutableListOf()
     private val siswaId: MutableList<String> = mutableListOf()
     private val grafik:MutableList<Grafik> = mutableListOf()
+    private val murajaah:MutableList<Murajaah> = mutableListOf()
     private lateinit var spinner: Spinner
     private lateinit var mapel: String
     private lateinit var minggu: String
@@ -70,7 +71,7 @@ class InputNilaiFragment : Fragment() {
         val mingguke_perkembangan_spinner = view.findViewById<Spinner>(R.id.minggukePerkembangan)
         val submit_nilai = view.findViewById<Button>(R.id.submit_nilai)
         val submit_nilai_perkembangan = view.findViewById<Button>(R.id.submit_nilai_perkembangan)
-
+        val submit_nilai_murajaah = view.findViewById<Button>(R.id.submit_nilai_murajaah1)
 
         data_siswa.addSnapshotListener { querySnapshot, error ->
             if (error != null) {
@@ -184,7 +185,7 @@ class InputNilaiFragment : Fragment() {
         mingguke_perkembangan_spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
-                    minggu = mingguke_sikap_sosial_spinner.selectedItem.toString()
+                    minggu =  mingguke_perkembangan_spinner.selectedItem.toString()
                     if (minggu == "1") {
                         mingguke_perkembangan = 1
                     } else if (minggu == "2") {
@@ -218,18 +219,14 @@ class InputNilaiFragment : Fragment() {
                 }
             }
 
-
-//        arrayList.add(sikap_spiritual.text.toString())
-//        arrayList.add(sikap_sosial.text.toString())
-
-
         submit_nilai_perkembangan.setOnClickListener {
             submit_perkembangan()
         }
+        submit_nilai_murajaah.setOnClickListener {
+            submit_murajaah1()
+        }
 
         submit_nilai.setOnClickListener {
-//            grafik.clear()
-
 
             val Penilaian_Sikap = HashMap<String, String>()
             Penilaian_Sikap.put("Sikap Spiritual", sikap_spiritual.text.toString())
@@ -247,11 +244,6 @@ class InputNilaiFragment : Fragment() {
             Kelas_Komputer.put("Keterangan", ket_komputer.text.toString())
             Kelas_Komputer.put("Nilai", nilai_komputer.text.toString())
 
-            val Kelas_Murajaah = HashMap<String, String>()
-            Kelas_Murajaah.put("Minggu Ke", mingguke_murajaah)
-            Kelas_Murajaah.put("Materi", materi_murajaah.text.toString())
-            Kelas_Murajaah.put("Keterangan", ket_murajaah.text.toString())
-            Kelas_Murajaah.put("Nilai", nilai_murajaah.text.toString())
 
             val Ekstrakulikuler = HashMap<String, String>()
             Ekstrakulikuler.put("Nama Ektra", nama_ekstra.text.toString())
@@ -303,7 +295,6 @@ class InputNilaiFragment : Fragment() {
             nilai.Penilaian_Sikap = Penilaian_Sikap
             nilai.Kelas_Pra_Akademik = Kelas_Pra_Akademik
             nilai.Kelas_Komputer = Kelas_Komputer
-            nilai.Kelas_Murajaah = Kelas_Murajaah
             nilai.Ekstrakulikuler = Ekstrakulikuler
             nilai.Saran_Guru = Saran_Guru
             nilai.TbBb = TbBb
@@ -351,6 +342,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -362,6 +354,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -446,6 +439,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -457,6 +451,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -541,6 +536,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -552,6 +548,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -636,6 +633,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.VISIBLE
                     tv_nilai_murajaah.visibility = View.VISIBLE
                     nilai_murajaah.visibility = View.VISIBLE
+                    submit_nilai_murajaah.visibility=View.VISIBLE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -647,6 +645,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -731,6 +730,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.VISIBLE
                     nama_ekstra.visibility = View.VISIBLE
@@ -742,6 +742,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -826,6 +827,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -837,6 +839,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.VISIBLE
                     tv_mingguke_perkembangan.visibility= View.VISIBLE
                     minggukePerkembangan.visibility=View.VISIBLE
+                    submit_nilai_perkembangan.visibility=View.VISIBLE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -921,6 +924,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -932,6 +936,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.VISIBLE
                     saran_guru.visibility = View.VISIBLE
@@ -1017,6 +1022,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -1028,6 +1034,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1112,6 +1119,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -1123,6 +1131,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1206,6 +1215,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -1217,6 +1227,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1300,6 +1311,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -1311,6 +1323,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1395,6 +1408,7 @@ class InputNilaiFragment : Fragment() {
                     ket_murajaah.visibility = View.GONE
                     tv_nilai_murajaah.visibility = View.GONE
                     nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
 
                     tv_nama_ekstra.visibility = View.GONE
                     nama_ekstra.visibility = View.GONE
@@ -1406,6 +1420,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
                     saran_guru.visibility = View.GONE
@@ -1494,22 +1509,42 @@ class InputNilaiFragment : Fragment() {
                 grafik.clear()
                 if (isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
                     val graph1= isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak") as List<Grafik>
-
                     grafik.addAll(graph1)
 
-                    val graphic = Grafik(perkembangan_anak.text.toString().toInt(),mingguke_perkembangan)
-                    grafik.add(graphic)
-
-                    val Laporan_Perkembangan_Anak = HashMap<String, MutableList<Grafik>>()
-                    Laporan_Perkembangan_Anak.put("Perkembangan Anak", grafik)
-                    val nilai = Nilai()
-                    nilai.Laporan_Perkembangan_Anak = Laporan_Perkembangan_Anak
-                    inputNilai(nilai)
-//                    for (i in graph1.indices) {
-//                        grafik[i].minggu=graph1[i].minggu
-//                        grafik[i].angka=graph1[i].angka
-//                    }
                 }
+                val graphic = Grafik(perkembangan_anak.text.toString().toInt(),mingguke_perkembangan)
+                grafik.add(graphic)
+
+                val Laporan_Perkembangan_Anak = HashMap<String, MutableList<Grafik>>()
+                Laporan_Perkembangan_Anak.put("Perkembangan Anak", grafik)
+                val nilai = Nilai()
+                nilai.Laporan_Perkembangan_Anak = Laporan_Perkembangan_Anak
+                inputNilai(nilai)
+
+            }
+
+    }
+
+    private fun submit_murajaah1(){
+        mFirestore.collection("nilai")
+            .document(idSiswa)
+            .get()
+            .addOnSuccessListener {
+                val isi = it.toObject(Nilai::class.java)
+                murajaah.clear()
+                if (isi?.Kelas_Murajaah?.get("Kelas Murajaah")!=null){
+                    val murajaah1= isi?.Kelas_Murajaah?.get("Kelas Murajaah") as List<Murajaah>
+                    murajaah.addAll(murajaah1)
+                }
+
+                val murajaah2 = Murajaah(mingguke_murajaah,materi_murajaah.text.toString(),ket_murajaah.text.toString(),nilai_murajaah.text.toString().toInt())
+                murajaah.add(murajaah2)
+
+                val Kelas_Murajaah = HashMap<String, MutableList<Murajaah>>()
+                Kelas_Murajaah.put("Kelas Murajaah", murajaah)
+                val nilai = Nilai()
+                nilai.Kelas_Murajaah = Kelas_Murajaah
+                inputNilai(nilai)
 
             }
 
@@ -1563,13 +1598,15 @@ class InputNilaiFragment : Fragment() {
                     ket_komputer.setText("${isi?.Kelas_Komputer?.get("Keterangan")}")
                 }else if(isi?.Kelas_Komputer?.get("Nilai")!=null){
                     nilai_komputer.setText("${isi?.Kelas_Komputer?.get("Nilai")}")
-                }else if (isi?.Kelas_Murajaah?.get("Materi")!=null){
-                    materi_murajaah.setText("${isi?.Kelas_Murajaah?.get("Materi")}")
-                }else if(isi?.Kelas_Murajaah?.get("Keterangan")!=null){
-                    ket_murajaah.setText("${isi?.Kelas_Murajaah?.get("Keterangan")}")
-                }else if(isi?.Kelas_Murajaah?.get("Nilai")!=null){
-                    nilai_murajaah.setText("${isi?.Kelas_Murajaah?.get("Nilai")}")
-                }else if(isi?.Ekstrakulikuler?.get("Nama Ektra")!=null){
+                }
+//                else if (isi?.Kelas_Murajaah?.get("Materi")!=null){
+//                    materi_murajaah.setText("${isi?.Kelas_Murajaah?.get("Materi")}")
+//                }else if(isi?.Kelas_Murajaah?.get("Keterangan")!=null){
+//                    ket_murajaah.setText("${isi?.Kelas_Murajaah?.get("Keterangan")}")
+//                }else if(isi?.Kelas_Murajaah?.get("Nilai")!=null){
+//                    nilai_murajaah.setText("${isi?.Kelas_Murajaah?.get("Nilai")}")
+//                }
+                else if(isi?.Ekstrakulikuler?.get("Nama Ektra")!=null){
                     nama_ekstra.setText("${isi?.Ekstrakulikuler?.get("Nama Ektra")}")
                 }else if(isi?.Ekstrakulikuler?.get("Keterangan")!=null){
                     ket_ekstra.setText("${isi?.Ekstrakulikuler?.get("Keterangan")}")

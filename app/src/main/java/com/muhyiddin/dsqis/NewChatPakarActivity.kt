@@ -51,7 +51,7 @@ class NewChatPakarActivity : AppCompatActivity() {
 
             val ref = FirebaseDatabase.getInstance().getReference("chat")
             val key = ref.push().key.toString()
-            val chatList = ChatList(listNamaDokter[position], listUser[position].userId.toString(), "Muhyiddin", prefs.uid, "", key)
+            val chatList = ChatList(listNamaDokter[position], listUser[position].userId.toString(), prefs.nama, prefs.uid, "", key)
             ref.child(key).setValue(chatList).addOnSuccessListener {
                 startActivity(Intent(this, ChatDetailActivity::class.java).putExtra("room_id",key))
                 finish()
