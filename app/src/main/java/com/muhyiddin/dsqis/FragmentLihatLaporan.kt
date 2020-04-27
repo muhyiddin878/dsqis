@@ -36,6 +36,7 @@ class FragmentLihatLaporan : Fragment() {
     var resolver: ContentResolver?=null
     private lateinit var minggumurajaah: String
     private lateinit var mingguke_murajaah: String
+    private lateinit var mingguke_murajaah_spinner:Spinner
     private val murajaah2:MutableList<Murajaah> = mutableListOf()
 
 
@@ -54,11 +55,51 @@ class FragmentLihatLaporan : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mata_pelajaran = view.findViewById<Spinner>(R.id.pelajaran1)
         prefs=AppPreferences(context)
-        getIdFromParent()
 
-        val foto = view.findViewById<ImageView>(R.id.logo_siswa1)
+        getIdFromParent()
         resolver = getActivity()?.getApplicationContext()!!.getContentResolver()
-        val mingguke_murajaah_spinner = view.findViewById<Spinner>(R.id.minggukeMurajaah)
+
+        mingguke_murajaah_spinner = view.findViewById<Spinner>(R.id.minggukeMurajaah1)
+
+        mingguke_murajaah_spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
+                    minggumurajaah = mingguke_murajaah_spinner.selectedItem.toString()
+                    if (minggumurajaah == "1") {
+                        mingguke_murajaah = "1"
+                    } else if (minggumurajaah == "2") {
+                        mingguke_murajaah = "2"
+                    } else if (minggumurajaah == "3") {
+                        mingguke_murajaah = "3"
+                    } else if (minggumurajaah == "4") {
+                        mingguke_murajaah = "4"
+                    } else if (minggumurajaah == "5") {
+                        mingguke_murajaah = "5"
+                    } else if (minggumurajaah == "6") {
+                        mingguke_murajaah = "6"
+                    } else if (minggumurajaah == "7") {
+                        mingguke_murajaah = "7"
+                    } else if (minggumurajaah == "8") {
+                        mingguke_murajaah = "8"
+                    } else if (minggumurajaah == "9") {
+                        mingguke_murajaah = "9"
+                    } else if (minggumurajaah == "10") {
+                        mingguke_murajaah = "10"
+                    } else if (minggumurajaah == "11") {
+                        mingguke_murajaah = "11"
+                    } else if (minggumurajaah == "12") {
+                        mingguke_murajaah = "12"
+                    }
+
+                    getIdFromParent()
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+                }
+            }
+
 
 
         mata_pelajaran.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -1196,42 +1237,7 @@ class FragmentLihatLaporan : Fragment() {
             }
         }
 
-        mingguke_murajaah_spinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
-                    minggumurajaah = mingguke_murajaah_spinner.selectedItem.toString()
-                    if (minggumurajaah == "1") {
-                        mingguke_murajaah = "1"
-                    } else if (minggumurajaah == "2") {
-                        mingguke_murajaah = "2"
-                    } else if (minggumurajaah == "3") {
-                        mingguke_murajaah = "3"
-                    } else if (minggumurajaah == "4") {
-                        mingguke_murajaah = "4"
-                    } else if (minggumurajaah == "5") {
-                        mingguke_murajaah = "5"
-                    } else if (minggumurajaah == "6") {
-                        mingguke_murajaah = "6"
-                    } else if (minggumurajaah == "7") {
-                        mingguke_murajaah = "7"
-                    } else if (minggumurajaah == "8") {
-                        mingguke_murajaah = "8"
-                    } else if (minggumurajaah == "9") {
-                        mingguke_murajaah = "9"
-                    } else if (minggumurajaah == "10") {
-                        mingguke_murajaah = "10"
-                    } else if (minggumurajaah == "11") {
-                        mingguke_murajaah = "11"
-                    } else if (minggumurajaah == "12") {
-                        mingguke_murajaah = "12"
-                    }
 
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-
-                }
-            }
 
 
     }
@@ -1257,6 +1263,33 @@ class FragmentLihatLaporan : Fragment() {
         }
     }
 
+//    private fun getLatestNilaiMurajaah(siswaId: String){
+//        mFirestore.collection("nilai")
+//            .document(siswaId)
+//            .get()
+//            .addOnSuccessListener {
+//                val isi = it.toObject(Nilai::class.java)
+//                if (isi?.Kelas_Murajaah?.get("Kelas Murajaah") != null) {
+//                    val murajaah1 = isi?.Kelas_Murajaah?.get("Kelas Murajaah")
+//                    for (i in murajaah1!!.indices) {
+//                        if (mingguke_murajaah == murajaah1[i].minggu) {
+//                            materi_murajaah1.setText(murajaah1[i].materi)
+//                            ket_murajaah1.setText(murajaah1[i].keterangan)
+//                            nilai_murajaah1.setText(murajaah1[i].nilai.toString())
+//                            break
+//                        }
+//                    }
+//
+//                }
+//
+//
+//            }.addOnFailureListener {
+//                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
+//                    .show()
+//            }
+//
+//    }
+
 
     private fun getIdFromParent() {
         Log.d("ini uid",prefs.uid)
@@ -1278,6 +1311,8 @@ class FragmentLihatLaporan : Fragment() {
                     .show()
             }
     }
+
+
 
     private fun getLatestNilai(siswaId: String) {
         mFirestore.collection("nilai")
@@ -1301,21 +1336,7 @@ class FragmentLihatLaporan : Fragment() {
                     ket_komputer1.setText("${isi?.Kelas_Komputer?.get("Keterangan")}")
                 }else if(isi?.Kelas_Komputer?.get("Nilai")!=null){
                     nilai_komputer1.setText("${isi?.Kelas_Komputer?.get("Nilai")}")
-                }
-
-                else if (isi?.Kelas_Murajaah?.get("Kelas Murajaah")!=null){
-                    val murajaah1= isi?.Kelas_Murajaah?.get("Kelas Murajaah")
-                    for (i in murajaah1!!.indices) {
-                        if (mingguke_murajaah== murajaah1[i].minggu.toString()){
-                            materi_murajaah1.setText(murajaah1[i].materi)
-                            ket_murajaah1.setText(murajaah1[i].keterangan)
-                            nilai_murajaah1.setText(murajaah1[i].nilai.toString())
-                            break
-                        }
-                    }
-
-                }
-                else if (isi?.Kelas_Murajaah?.get("Materi")!=null){
+                }else if (isi?.Kelas_Murajaah?.get("Materi")!=null){
                     materi_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Materi")}")
                 }
                 else if(isi?.Kelas_Murajaah?.get("Keterangan")!=null){
@@ -1324,9 +1345,18 @@ class FragmentLihatLaporan : Fragment() {
                 else if(isi?.Kelas_Murajaah?.get("Nilai")!=null){
                     nilai_murajaah1.setText("${isi?.Kelas_Murajaah?.get("Nilai")}")
                 }
+                else if (isi?.Kelas_Murajaah?.get("Kelas Murajaah") != null) {
+                    val murajaah1 = isi?.Kelas_Murajaah?.get("Kelas Murajaah")
+                    for (i in murajaah1!!.indices) {
+                        if (mingguke_murajaah == murajaah1[i].minggu) {
+                            materi_murajaah1.setText(murajaah1[i].materi)
+                            ket_murajaah1.setText(murajaah1[i].keterangan)
+                            nilai_murajaah1.setText(murajaah1[i].nilai.toString())
+                            break
+                        }
+                    }
 
-
-
+                }
                 else if(isi?.Ekstrakulikuler?.get("Nama Ektra")!=null){
                     nama_ekstra1.setText("${isi?.Ekstrakulikuler?.get("Nama Ektra")}")
                 }else if(isi?.Ekstrakulikuler?.get("Keterangan")!=null){
