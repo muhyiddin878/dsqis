@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -58,7 +59,6 @@ class DetailPostActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-
         post = intent.extras.getSerializable("post") as Post
 
         Glide.with(this)
@@ -68,7 +68,7 @@ class DetailPostActivity : AppCompatActivity() {
             .into(image_post)
 
         title_post.text = post.judul
-        nama_penulis.text = String.format(resources.getString(R.string.writer, post.writerName))
+        nama_penulis.text = String.format(resources.getString(R.string.writer, post?.writerName))
         isi_post.text = post.isi
         tanggal_post.text = post.postDate
 
@@ -136,14 +136,14 @@ class DetailPostActivity : AppCompatActivity() {
                 finish()
                 startActivity(Intent(this, NewPostActivity::class.java).putExtra("post", post))
             }
-            R.id.hapus_post -> deletePost(post.postId, post.judul)
+            R.id.hapus_post -> hapusArtikel(post.postId, post.judul)
         }
         return super.onOptionsItemSelected(item)
     }
 
-    private fun deletePost(id: String, judul:String) {
-        hapusArtikel(id, judul)
-    }
+//    private fun deletePost(id: String, judul:String) {
+//        hapusArtikel(id, judul)
+//    }
 
 
     fun hapusArtikel(id:String, judul:String){
@@ -153,7 +153,8 @@ class DetailPostActivity : AppCompatActivity() {
                 mStorage.getReference("posts/$judul-$id").delete()
                     .addOnSuccessListener {
                     Toast.makeText(this,"Artikel Berhasil dihapus",Toast.LENGTH_SHORT).show()
-                        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
+//                        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
+//                        finish()
                     }.addOnFailureListener {
                         Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
                     }
@@ -230,7 +231,7 @@ class DetailPostActivity : AppCompatActivity() {
     fun deleteKomentar(postId:String, komentarId:String){
         mDatabase.collection("posts").document(postId).collection("comment").document(komentarId).delete()
             .addOnSuccessListener {
-                Toast.makeText(this,"Artikel Berhasil dihapus",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Komentar Berhasil dihapus",Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
             }

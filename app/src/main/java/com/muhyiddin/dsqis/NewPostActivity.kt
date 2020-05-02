@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.model.Post
+import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_new_post.*
 import java.util.*
 
@@ -35,6 +36,7 @@ class NewPostActivity : AppCompatActivity() {
     private val mDatabase = FirebaseDatabase.getInstance()
     private val mFirestore = FirebaseFirestore.getInstance()
     private var uriImageArtikel: Uri? = null
+    lateinit var prefs: AppPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +45,7 @@ class NewPostActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Buat Diskusi Baru"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        prefs = AppPreferences(this)
 
         if (intent?.getSerializableExtra("post") != null){
             post = intent.getSerializableExtra("post") as Post
@@ -51,6 +54,7 @@ class NewPostActivity : AppCompatActivity() {
                 .load(post?.cover)
                 .thumbnail(0.15f)
                 .into(add_photo_post)
+
             judul_post.setText(post?.judul)
             isi_post.setText(post?.isi)
         }
@@ -110,7 +114,7 @@ class NewPostActivity : AppCompatActivity() {
                 if (it.isSuccessful) {
                     imageLocation = it.result.toString()
                     setProgressBarLength(75)
-                    val post = Post(judul,isi,imageLocation,getCurrentDate(), mAuth.currentUser?.displayName, mAuth.currentUser?.uid, mAuth.currentUser?.photoUrl.toString(), key)
+                    val post = Post(judul,isi,imageLocation,getCurrentDate(), prefs.nama, mAuth.currentUser?.uid, mAuth.currentUser?.photoUrl.toString(), key)
                     firestore.document(key)
                         .set(post)
                         .addOnSuccessListener {

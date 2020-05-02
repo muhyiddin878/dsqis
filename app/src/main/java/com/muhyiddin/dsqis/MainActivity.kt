@@ -18,15 +18,23 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
+
+
+        var isLoading: Boolean = false
+            // getter
+            get() = field
+            // setter
+            set(value) {
+                field = value
+            }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         val prefs = AppPreferences(this)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
         frg2()
-
-
 
 
     }
@@ -48,14 +56,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.profil -> {
-                Toast.makeText(this, "MASUK HALAMAN PROFIL", Toast.LENGTH_SHORT).show()
-//                supportActionBar?.title="Profil"
-                frg3()
+                if (isLoading==false){
+                    Toast.makeText(this, "MASUK HALAMAN PROFIL", Toast.LENGTH_SHORT).show()
+                    frg3()
+                }else{
+                    Toast.makeText(this, "Mohon Tunggu Sebentar", Toast.LENGTH_SHORT).show()
+                }
             }
             R.id.timeline -> {
-                Toast.makeText(this, "MASUK BERANDA ARTIKEL", Toast.LENGTH_SHORT).show()
-                frg()
-
+                if(isLoading==false){
+                    Toast.makeText(this, "MASUK BERANDA ARTIKEL", Toast.LENGTH_SHORT).show()
+                    frg()
+                }else{
+                    Toast.makeText(this, "Mohon Tunggu Sebentar", Toast.LENGTH_SHORT).show()
+                }
             }
             R.id.chat -> {
                 Toast.makeText(this, "MASUK CHATROOM", Toast.LENGTH_SHORT).show()
@@ -63,8 +77,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
             }
             R.id.laporan -> {
-                Toast.makeText(this, "MASUK HALAMAN LAPORAN", Toast.LENGTH_SHORT).show()
-                frg4()
+                if(isLoading==false){
+                    Toast.makeText(this, "MASUK HALAMAN LAPORAN", Toast.LENGTH_SHORT).show()
+                    frg4()
+                }else{
+                    Toast.makeText(this, "Mohon Tunggu Sebentar", Toast.LENGTH_SHORT).show()
+                }
+
 
             }
         }

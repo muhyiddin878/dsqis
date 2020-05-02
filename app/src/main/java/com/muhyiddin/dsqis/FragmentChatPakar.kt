@@ -41,6 +41,8 @@ class FragmentChatPakar : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+
         prefs = AppPreferences(context)
 
         if (prefs.role==2){
@@ -60,6 +62,7 @@ class FragmentChatPakar : Fragment() {
         rv_chat.adapter = adapter
 
         getAllChatList()
+
 
         start_new_chat.setOnClickListener() {
             startActivity(Intent(context,NewChatPakarActivity::class.java))
@@ -97,6 +100,7 @@ class FragmentChatPakar : Fragment() {
                     }
                 }
                 hideLoading()
+
 
 //                for (tes2 in listChat)
 //                    Log.d("ini listchat", tes2.last_chat)
@@ -136,10 +140,14 @@ class FragmentChatPakar : Fragment() {
 
 
     fun showLoading() {
+        val cek= MainActivity()
+        cek.isLoading=true
         progress_bar.visibility = View.VISIBLE
     }
 
     fun hideLoading() {
+        val cek= MainActivity()
+        cek.isLoading=false
         progress_bar.visibility = View.GONE
     }
 

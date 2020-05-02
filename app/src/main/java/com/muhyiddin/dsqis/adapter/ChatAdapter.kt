@@ -46,10 +46,10 @@ class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->
 
         fun bindItem(item:ChatList, listener:(ChatList)->Unit){
             if (prefs.role==1){
-                namaDokter.text = "Orang Tua ${item.nama_member}"
+                namaDokter.text ="${item.nama_pakar}"
                 isiChat.text = item.last_chat
             } else{
-                namaDokter.text = "${item.nama_pakar}"
+                namaDokter.text = "Orang Tua ${item.nama_member}"
                 isiChat.text = item.last_chat
             }
 

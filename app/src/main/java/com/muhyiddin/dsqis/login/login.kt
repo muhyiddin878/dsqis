@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
@@ -134,8 +135,10 @@ class login : AppCompatActivity(){
     }
 
     fun showLoginSuccess() {
-        val ref = user?.photoUrl
-        if(ref==null){
+        val ref = FirebaseStorage.getInstance().getReference("profilpic/${prefs.uid}")
+        val cek= ref.downloadUrl
+        Log.d("url:",cek.toString())
+        if(cek==null){
             startActivity(Intent(this,OnBoardingActivity::class.java))
         }else{
             startActivity(Intent(this,MainActivity::class.java))

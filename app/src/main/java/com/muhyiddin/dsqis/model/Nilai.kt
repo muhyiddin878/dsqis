@@ -3,7 +3,7 @@ package com.muhyiddin.dsqis.model
 data class Nilai (
 
     var Penilaian_Sikap: HashMap<String, String>? = null,
-    var Kelas_Pra_Akademik: HashMap<String, String>? = null,
+    var Kelas_Pra_Akademik: HashMap<String, MutableList<Murajaah>>? = null,
     var Kelas_Komputer: HashMap<String, Any> ?=null,
     var Kelas_Murajaah: HashMap<String, MutableList<Murajaah>>? = null,
     var Ekstrakulikuler: HashMap<String, String>? = null,

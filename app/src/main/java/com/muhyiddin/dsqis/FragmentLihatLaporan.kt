@@ -24,6 +24,7 @@ import com.jjoe64.graphview.LegendRenderer
 import com.jjoe64.graphview.series.DataPoint
 import com.jjoe64.graphview.series.PointsGraphSeries
 import com.muhyiddin.dsqis.model.*
+import kotlinx.android.synthetic.main.activity_input_nilai_fragment.*
 import java.util.*
 
 
@@ -37,6 +38,9 @@ class FragmentLihatLaporan : Fragment() {
     private lateinit var minggumurajaah: String
     private lateinit var mingguke_murajaah: String
     private lateinit var mingguke_murajaah_spinner:Spinner
+    private lateinit var minggu: String
+    private lateinit var mingguke_sikap_sosial: String
+    private lateinit var mingguke_sikap_sosial_spinner:Spinner
     private val murajaah2:MutableList<Murajaah> = mutableListOf()
 
 
@@ -59,7 +63,46 @@ class FragmentLihatLaporan : Fragment() {
         getIdFromParent()
         resolver = getActivity()?.getApplicationContext()!!.getContentResolver()
 
-        mingguke_murajaah_spinner = view.findViewById<Spinner>(R.id.minggukeMurajaah1)
+        mingguke_murajaah_spinner = view.findViewById(R.id.minggukeMurajaah1)
+        mingguke_sikap_sosial_spinner = view.findViewById(R.id.mingguke1)
+
+        mingguke_sikap_sosial_spinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
+                    minggu = mingguke_sikap_sosial_spinner.selectedItem.toString()
+                    if (minggu == "1") {
+                        mingguke_sikap_sosial = "1"
+                    } else if (minggu == "2") {
+                        mingguke_sikap_sosial = "2"
+                    } else if (minggu == "3") {
+                        mingguke_sikap_sosial = "3"
+                    } else if (minggu == "4") {
+                        mingguke_sikap_sosial = "4"
+                    } else if (minggu == "5") {
+                        mingguke_sikap_sosial = "5"
+                    } else if (minggu == "6") {
+                        mingguke_sikap_sosial = "6"
+                    } else if (minggu == "7") {
+                        mingguke_sikap_sosial = "7"
+                    } else if (minggu == "8") {
+                        mingguke_sikap_sosial = "8"
+                    } else if (minggu == "9") {
+                        mingguke_sikap_sosial = "9"
+                    } else if (minggu == "10") {
+                        mingguke_sikap_sosial = "10"
+                    } else if (minggu == "11") {
+                        mingguke_sikap_sosial = "11"
+                    } else if (minggu == "12") {
+                        mingguke_sikap_sosial = "12"
+                    }
+                    getIdFromParent()
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+                }
+            }
 
         mingguke_murajaah_spinner.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
@@ -1263,32 +1306,7 @@ class FragmentLihatLaporan : Fragment() {
         }
     }
 
-//    private fun getLatestNilaiMurajaah(siswaId: String){
-//        mFirestore.collection("nilai")
-//            .document(siswaId)
-//            .get()
-//            .addOnSuccessListener {
-//                val isi = it.toObject(Nilai::class.java)
-//                if (isi?.Kelas_Murajaah?.get("Kelas Murajaah") != null) {
-//                    val murajaah1 = isi?.Kelas_Murajaah?.get("Kelas Murajaah")
-//                    for (i in murajaah1!!.indices) {
-//                        if (mingguke_murajaah == murajaah1[i].minggu) {
-//                            materi_murajaah1.setText(murajaah1[i].materi)
-//                            ket_murajaah1.setText(murajaah1[i].keterangan)
-//                            nilai_murajaah1.setText(murajaah1[i].nilai.toString())
-//                            break
-//                        }
-//                    }
-//
-//                }
-//
-//
-//            }.addOnFailureListener {
-//                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
-//                    .show()
-//            }
-//
-//    }
+
 
 
     private fun getIdFromParent() {
@@ -1324,13 +1342,20 @@ class FragmentLihatLaporan : Fragment() {
                     sikap_spiritual1.setText("${isi?.Penilaian_Sikap?.get("Sikap Spiritual")}")
                 }else if(isi?.Penilaian_Sikap?.get("Sikap Sosial")!=null){
                     sikap_sosial1.setText("${isi?.Penilaian_Sikap?.get("Sikap Sosial")}")
-                }else if(isi?.Kelas_Pra_Akademik?.get("Materi")!=null){
-                    materi_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Materi")}")
-                }else if (isi?.Kelas_Pra_Akademik?.get("Keterangan")!=null){
-                    ket_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Keterangan")}")
-                }else if(isi?.Kelas_Pra_Akademik?.get("Nilai")!=null){
-                    nilai_sikap_sosial1.setText("${isi?.Kelas_Pra_Akademik?.get("Nilai")}")
-                }else if(isi?.Kelas_Komputer?.get("Materi")!=null){
+                }
+                if (isi?.Kelas_Pra_Akademik?.get("Kelas Pra Akademik") != null) {
+                    val akademik1 = isi?.Kelas_Pra_Akademik?.get("Kelas Pra Akademik")
+                    for (i in akademik1!!.indices) {
+                        if (mingguke_sikap_sosial == akademik1[i].minggu) {
+                            materi_sikap_sosial1.setText(akademik1[i].materi)
+                            ket_sikap_sosial1.setText(akademik1[i].keterangan)
+                            nilai_sikap_sosial1.setText(akademik1[i].nilai.toString())
+                            break
+                        }
+                    }
+                }
+
+                else if(isi?.Kelas_Komputer?.get("Materi")!=null){
                     nilaikomputer1.setText("${isi?.Kelas_Komputer?.get("Materi")}")
                 }else if(isi?.Kelas_Komputer?.get("Keterangan")!=null){
                     ket_komputer1.setText("${isi?.Kelas_Komputer?.get("Keterangan")}")

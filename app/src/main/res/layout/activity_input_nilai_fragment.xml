@@ -132,6 +132,18 @@
                     android:inputType="number"
                     />
 
+                <com.google.android.material.button.MaterialButton
+                    android:textColor="@color/white"
+                    android:background="@color/success"
+                    android:id="@+id/submit_nilai_akademik"
+                    android:layout_marginTop="10dp"
+                    android:text="Isi Sikap Sosial"
+                    app:cornerRadius="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
