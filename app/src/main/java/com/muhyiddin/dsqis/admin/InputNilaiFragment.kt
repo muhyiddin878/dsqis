@@ -139,7 +139,8 @@ class InputNilaiFragment : Fragment() {
                     } else if (minggu == "12") {
                         mingguke_sikap_sosial = "12"
                     }
-                    getIdSiswa(student)
+
+//                    getIdSiswa(student)
 
                 }
 
@@ -177,7 +178,7 @@ class InputNilaiFragment : Fragment() {
                     } else if (minggumurajaah == "12") {
                         mingguke_murajaah = "12"
                     }
-                    getIdSiswa(student)
+//                    getIdSiswa(student)
 
 
                 }
@@ -216,7 +217,7 @@ class InputNilaiFragment : Fragment() {
                     } else if (minggu == "12") {
                         mingguke_perkembangan = 12
                     }
-                    getIdSiswa(student)
+//                    getIdSiswa(student)
 
                 }
 

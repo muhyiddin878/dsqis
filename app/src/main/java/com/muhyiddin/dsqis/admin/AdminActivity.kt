@@ -164,7 +164,10 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         } else if (id == R.id.list_guru) {
             fragment = ListAkunPakarFragment()
             count = 1
-        } else if (id == R.id.logout) {
+        } else if(id==R.id.list_artikel_admin){
+            fragment=ListArtikelFragment()
+            count = 1
+        }else if (id == R.id.logout) {
             val builder = AlertDialog.Builder(this)
             // Set the alert dialog title
             builder.setTitle("LOGOUT")

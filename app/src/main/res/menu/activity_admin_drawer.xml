@@ -27,6 +27,10 @@
             android:icon="@drawable/ic_tambah_guru"
             android:title="Tambah Daftar Pakar" />
         <item
+            android:id="@+id/list_artikel_admin"
+            android:icon="@drawable/ic_input_nilai"
+            android:title="List Artikel" />
+        <item
             android:id="@+id/logout"
             android:icon="@drawable/ic_logout"
             android:title="Logout" />
