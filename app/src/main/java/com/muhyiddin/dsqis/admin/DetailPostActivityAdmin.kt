@@ -1,39 +1,31 @@
-package com.muhyiddin.dsqis
+package com.muhyiddin.dsqis.admin
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.muhyiddin.dsqis.NewPostActivity
+import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.adapter.CommentAdapter
-import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.model.Comment
+import com.muhyiddin.dsqis.model.Post
 import kotlinx.android.synthetic.main.activity_detail_post.*
-import kotlinx.android.synthetic.main.comment_layout.*
-import kotlinx.android.synthetic.main.popup_option.*
-import java.nio.file.Files.find
+import kotlinx.android.synthetic.main.activity_detail_post.image_post
+import kotlinx.android.synthetic.main.activity_detail_post_admin.*
 import java.util.*
 
-
-class DetailPostActivity : AppCompatActivity() {
+class DetailPostActivityAdmin : AppCompatActivity() {
 
     private val list:MutableList<Comment> = mutableListOf()
 
@@ -54,7 +46,7 @@ class DetailPostActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_post)
+        setContentView(R.layout.activity_detail_post_admin)
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -67,10 +59,10 @@ class DetailPostActivity : AppCompatActivity() {
             .load(post.cover)
             .into(image_post)
 
-        title_post.text = post.judul
-        nama_penulis.text = String.format(resources.getString(R.string.writer, post?.writerName))
-        isi_post.text = post.isi
-        tanggal_post.text = post.postDate
+        title_post_admin.text = post.judul
+        nama_penulis_admin.text = String.format(resources.getString(R.string.writer, post?.writerName))
+        isi_post_admin.text = post.isi
+        tanggal_post_admin.text = post.postDate
 
         supportActionBar?.title = post.judul
 
@@ -78,7 +70,6 @@ class DetailPostActivity : AppCompatActivity() {
 
         adapter = CommentAdapter(this, list){comment ->
 
-            if (post.writerId==FirebaseAuth.getInstance().currentUser?.uid||comment.commentWriterId==FirebaseAuth.getInstance().currentUser?.uid){
                 val view = LayoutInflater.from(this).inflate(R.layout.popup_option, null)
                 val builder = AlertDialog.Builder(this)
                     .setView(view)
@@ -89,12 +80,12 @@ class DetailPostActivity : AppCompatActivity() {
                     deleteKomentar(post.postId, comment.commentid)
                     dialog.dismiss()
                 }
-            }
+
 
         }
 
-        rv_comment.layoutManager = LinearLayoutManager(this)
-        rv_comment.adapter = adapter
+        rv_comment_admin.layoutManager = LinearLayoutManager(this)
+        rv_comment_admin.adapter = adapter
 
         getAllKomentar(post.postId)
 
@@ -102,21 +93,21 @@ class DetailPostActivity : AppCompatActivity() {
             .asBitmap()
             .thumbnail(0.5f)
             .load(currentUser?.photoUrl)
-            .into(profile_pic)
+            .into(profile_pic_admin)
 
-        input_komentar.addTextChangedListener(afterTextChanged = {
-            if (input_komentar.text.toString().isNotEmpty()){
-                submit_komentar.isClickable = true
-                submit_komentar.isEnabled = true
+        input_komentar_admin.addTextChangedListener(afterTextChanged = {
+            if (input_komentar_admin.text.toString().isNotEmpty()){
+                submit_komentar_admin.isClickable = true
+                submit_komentar_admin.isEnabled = true
             } else{
-                submit_komentar.isClickable = false
-                submit_komentar.isEnabled = false
+                submit_komentar_admin.isClickable = false
+                submit_komentar_admin.isEnabled = false
             }
         })
 
 
-        submit_komentar.setOnClickListener(){
-            submitKomentar(input_komentar.text.toString(), post.postId)
+        submit_komentar_admin.setOnClickListener(){
+            submitKomentar(input_komentar_admin.text.toString(), post.postId)
         }
     }
 
@@ -124,9 +115,8 @@ class DetailPostActivity : AppCompatActivity() {
     ///////////////////////////////FUNCTION ARTIKEL//////////////////////////////////////////////
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        if (post.writerId== FirebaseAuth.getInstance().currentUser?.uid){
             menuInflater.inflate(R.menu.detail_menu,menu)
-        }
+
         return super.onCreateOptionsMenu(menu)
     }
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -134,7 +124,7 @@ class DetailPostActivity : AppCompatActivity() {
             android.R.id.home -> onBackPressed()
             R.id.edit_post -> {
                 finish()
-                startActivity(Intent(this, NewPostActivity::class.java).putExtra("post", post))
+//                startActivity(Intent(this, NewPostActivity::class.java).putExtra("post", post))
             }
             R.id.hapus_post -> hapusArtikel(post.postId, post.judul)
         }
@@ -152,7 +142,7 @@ class DetailPostActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 mStorage.getReference("posts/$judul-$id").delete()
                     .addOnSuccessListener {
-                    Toast.makeText(this,"Artikel Berhasil dihapus",Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this,"Artikel Berhasil dihapus", Toast.LENGTH_SHORT).show()
 //                        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
                         finish()
                     }.addOnFailureListener {
@@ -181,10 +171,10 @@ class DetailPostActivity : AppCompatActivity() {
                 .load(it.get(0)?.cover)
                 .into(image_post)
 
-            title_post.text = it.get(0)?.judul
-            nama_penulis.text = String.format(resources.getString(R.string.writer, it.get(0)?.writerName))
-            isi_post.text = it.get(0)?.isi
-            tanggal_post.text = it.get(0)?.postDate
+            title_post_admin.text = it.get(0)?.judul
+            nama_penulis_admin.text = String.format(resources.getString(R.string.writer, it.get(0)?.writerName))
+            isi_post_admin.text = it.get(0)?.isi
+            tanggal_post_admin.text = it.get(0)?.postDate
         }
     }
 
@@ -200,7 +190,7 @@ class DetailPostActivity : AppCompatActivity() {
         firestore.document(key)
             .set(comment)
             .addOnSuccessListener {
-                Toast.makeText(this@DetailPostActivity,"Komentar Berhasil Ditambahkan!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@DetailPostActivityAdmin,"Komentar Berhasil Ditambahkan!", Toast.LENGTH_SHORT).show()
                 clearField()
             }.addOnFailureListener {
                 Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
@@ -216,11 +206,11 @@ class DetailPostActivity : AppCompatActivity() {
                 }
                 if (querySnapshot != null){
 
-                list.clear()
-                for (comment in querySnapshot){
-                    list.add(comment.toObject(Comment::class.java))
-                }
-                showComment(list)
+                    list.clear()
+                    for (comment in querySnapshot){
+                        list.add(comment.toObject(Comment::class.java))
+                    }
+                    showComment(list)
 
                 }
             }
@@ -231,7 +221,7 @@ class DetailPostActivity : AppCompatActivity() {
     fun deleteKomentar(postId:String, komentarId:String){
         mDatabase.collection("posts").document(postId).collection("comment").document(komentarId).delete()
             .addOnSuccessListener {
-                Toast.makeText(this,"Komentar Berhasil dihapus",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,"Komentar Berhasil dihapus", Toast.LENGTH_SHORT).show()
             }.addOnFailureListener {
                 Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
             }

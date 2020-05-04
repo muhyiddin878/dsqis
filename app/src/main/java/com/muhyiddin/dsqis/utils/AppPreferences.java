@@ -9,6 +9,7 @@ public class AppPreferences {
     private static final String UID = "uid";
     private static final String ROLE = "role";
     private static final String NAMA = "nama";
+    private static final String ISLOADING = "isLoading";
 
     private final SharedPreferences prefs;
 
@@ -50,6 +51,16 @@ public class AppPreferences {
 
     public int getRole(){
         return prefs.getInt(ROLE, 0);
+    }
+
+    public void setIsLoading(Boolean loading){
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean(ISLOADING, loading);
+        editor.apply();
+    }
+
+    public Boolean getIsLoading(){
+        return prefs.getBoolean(ISLOADING, false);
     }
 
 

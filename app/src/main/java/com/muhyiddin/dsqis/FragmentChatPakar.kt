@@ -140,15 +140,13 @@ class FragmentChatPakar : Fragment() {
 
 
     fun showLoading() {
-        val cek= MainActivity()
-        cek.isLoading=true
+        prefs.isLoading=true
         progress_bar.visibility = View.VISIBLE
     }
 
     fun hideLoading() {
-        val cek= MainActivity()
-        cek.isLoading=false
         progress_bar.visibility = View.GONE
+        prefs.isLoading=false
     }
 
     fun showEmptyChat() {

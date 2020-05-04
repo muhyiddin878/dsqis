@@ -55,7 +55,7 @@ class ListArtikelFragment : Fragment() {
 
         adapter = ArtikelAdapterAdmin(context!!,list){
 
-            //            startActivity(Intent(context, DetailPostActivity::class.java).putExtra("post",it))
+                        startActivity(Intent(context, DetailPostActivityAdmin::class.java).putExtra("post",it))
 
         }
 
