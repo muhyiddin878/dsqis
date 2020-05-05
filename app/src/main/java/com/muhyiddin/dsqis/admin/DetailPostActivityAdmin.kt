@@ -124,7 +124,7 @@ class DetailPostActivityAdmin : AppCompatActivity() {
             android.R.id.home -> onBackPressed()
             R.id.edit_post -> {
                 finish()
-//                startActivity(Intent(this, NewPostActivity::class.java).putExtra("post", post))
+                startActivity(Intent(this, NewPostActivityAdmin::class.java).putExtra("post", post))
             }
             R.id.hapus_post -> hapusArtikel(post.postId, post.judul)
         }

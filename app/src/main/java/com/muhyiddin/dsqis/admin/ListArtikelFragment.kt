@@ -66,9 +66,9 @@ class ListArtikelFragment : Fragment() {
         val fab: FloatingActionButton? = fab2
         fab?.show()
 
-//        fab?.setOnClickListener {
-//            startActivity(Intent(context, NewPostActivity::class.java))
-//        }
+        fab?.setOnClickListener {
+            startActivity(Intent(context, NewPostActivityAdmin::class.java))
+        }
 
 
         rv_artikel_admin.addOnScrollListener(object: RecyclerView.OnScrollListener(){

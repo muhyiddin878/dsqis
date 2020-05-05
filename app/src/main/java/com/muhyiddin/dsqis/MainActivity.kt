@@ -51,11 +51,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.profil -> {
                 if (prefs.isLoading==false){
                     item.setCheckable(true)
-                    item.setEnabled(true)
                     Toast.makeText(this, "MASUK HALAMAN PROFIL", Toast.LENGTH_SHORT).show()
                     frg3()
                 }else{
-                    item.setEnabled(false)
                     item.setCheckable(false)
                     Toast.makeText(this, "Mohon Tunggu Sebentar", Toast.LENGTH_SHORT).show()
                 }
@@ -63,11 +61,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.timeline -> {
                 if(prefs.isLoading==false){
                     item.setCheckable(true)
-                    item.setEnabled(true)
                     Toast.makeText(this, "MASUK BERANDA ARTIKEL", Toast.LENGTH_SHORT).show()
                     frg()
                 }else{
-                    item.setEnabled(false)
                     item.setCheckable(false)
                     Toast.makeText(this, "Mohon Tunggu Sebentar", Toast.LENGTH_SHORT).show()
                 }
@@ -80,11 +76,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.laporan -> {
                 if(prefs.isLoading==false){
                     item.setCheckable(true)
-                    item.setEnabled(true)
                     Toast.makeText(this, "MASUK HALAMAN LAPORAN", Toast.LENGTH_SHORT).show()
                     frg4()
                 }else{
-                    item.setEnabled(false)
                     item.setCheckable(false)
                     Toast.makeText(this, "Mohon Tunggu Sebentar", Toast.LENGTH_SHORT).show()
                 }
