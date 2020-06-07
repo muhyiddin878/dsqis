@@ -146,8 +146,9 @@ class login : AppCompatActivity(){
         finish()
     }
     fun showLoginSuccessPakar(){
-        val ref = user?.photoUrl
-        if(ref==null){
+        val ref = FirebaseStorage.getInstance().getReference("profilpic/${prefs.uid}")
+        val cek= ref.downloadUrl
+        if(cek==null){
             startActivity(Intent(this,OnBoardingActivity::class.java))
         }else{
             startActivity(Intent(this,MainActivityPakar::class.java))

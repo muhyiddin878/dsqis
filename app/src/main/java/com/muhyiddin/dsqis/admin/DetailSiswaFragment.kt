@@ -7,9 +7,8 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.util.Log
+import android.view.*
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -20,6 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.ArtikelActivity
 import com.muhyiddin.dsqis.FragmentLaporan
+import com.muhyiddin.dsqis.MainActivity
 import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.model.Siswa
@@ -62,8 +62,8 @@ class DetailSiswaFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         (activity as AdminActivity).setActionBarTitle("Detail Akun Siswa")
-
         return inflater.inflate(R.layout.activity_detail_siswa_fragment, null)
     }
 
@@ -71,6 +71,9 @@ class DetailSiswaFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val foto = view.findViewById<ImageView>(R.id.logo_siswa)
         resolver = getActivity()?.getApplicationContext()!!.getContentResolver()
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val backStackCount = (activity as AdminActivity).supportFragmentManager.backStackEntryCount
+        Log.d("Back Stack Count", "$backStackCount")
         prefs= AppPreferences(context)
 
         bundlesiswa = Bundle()
@@ -352,4 +355,18 @@ class DetailSiswaFragment : Fragment() {
             }
     }
 
+
+
+//    override fun onOptionsItemSelected(item: MenuItem): Boolean  {
+//
+//        val id = item!!.itemId
+//        if (id==android.R.id.home){
+//            val itung=(activity as AppCompatActivity).supportFragmentManager.getBackStackEntryCount()
+//            Log.d("isi itung:",itung.toString())
+//            if (itung > 0) {
+//                (activity as AppCompatActivity).supportFragmentManager.popBackStackImmediate()
+//            }
+//        }
+//        return super.onOptionsItemSelected(item)
+//    }
 }

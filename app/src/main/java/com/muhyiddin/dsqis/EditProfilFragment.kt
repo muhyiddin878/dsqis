@@ -91,10 +91,7 @@ class EditProfilFragment : Fragment() {
 
         val id = item!!.itemId
         if (id==android.R.id.home){
-            Log.d("ON Options Item", "Triggered Edit Profil fragment")
-//            (activity as MainActivity).onBackPressed()
 
-//            activity?.getFragmentManager()?.popBackStack()\
             val itung=(activity as AppCompatActivity).supportFragmentManager.getBackStackEntryCount()
             Log.d("isi itung:",itung.toString())
             if (itung > 0) {

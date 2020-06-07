@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.Window
 import android.widget.Toast
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -23,12 +24,14 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     private var count: Int = 0
     private var uname:String=""
     lateinit var prefs: AppPreferences
+    lateinit var toolbar: Toolbar
 //    val prefs = AppPreferences(this)
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_admin)
+
 
         uname = intent.getStringExtra("USERNAME")
 
@@ -40,13 +43,13 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         bundle.putString("USERNAME", uname)
         fragment.arguments = bundle
 
-        val tx = supportFragmentManager.beginTransaction()
+        val tx = supportFragmentManager.beginTransaction().addToBackStack(null)
 
         tx.replace(R.id.screen_area, fragment)
         tx.commit()
 
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        toolbar = findViewById<Toolbar>(R.id.toolbar)
 //        setSupportActionBar(toolbar)
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
@@ -89,7 +92,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             } else {
                 var fragment2: Fragment? = null
                 val fm = supportFragmentManager
-                val ft = fm.beginTransaction().setCustomAnimations(
+                val ft = fm.beginTransaction().addToBackStack(null).setCustomAnimations(
                     android.R.anim.slide_in_left,
                     android.R.anim.slide_out_right,
                     0,
@@ -98,24 +101,24 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
 
                 val fragment = supportFragmentManager.findFragmentByTag("DETAIL_SISWA")
 
-                if (fragment != null && fragment.isVisible) {
-                    fragment2 = ListAkunFragment()
-                    ft.replace(R.id.screen_area, fragment2)
-                    count = 1
-                    ft.commit()
-                    val navigationView = findViewById(R.id.nav_view) as NavigationView
-                    navigationView.setCheckedItem(R.id.list_akun)
-                } else {
-                    fragment2 = HomeFragment()
-                    val `var` = Bundle()
-                    `var`.putString("USERNAME", uname)
-                    fragment2!!.setArguments(`var`)
-                    ft.replace(R.id.screen_area, fragment2)
-                    count = 0
-                    ft.commit()
-                    val navigationView = findViewById(R.id.nav_view) as NavigationView
-                    navigationView.setCheckedItem(R.id.home)
-                }
+                        if (fragment != null && fragment.isVisible) {
+                            fragment2 = ListAkunFragment()
+                            ft.replace(R.id.screen_area, fragment2)
+                            count = 1
+                            ft.commit()
+                            val navigationView = findViewById(R.id.nav_view) as NavigationView
+                            navigationView.setCheckedItem(R.id.list_akun)
+                        } else {
+                            fragment2 = HomeFragment()
+                            val `var` = Bundle()
+                            `var`.putString("USERNAME", uname)
+                            fragment2!!.setArguments(`var`)
+                            ft.replace(R.id.screen_area, fragment2)
+                            count = 0
+                            ft.commit()
+                            val navigationView = findViewById(R.id.nav_view) as NavigationView
+                            navigationView.setCheckedItem(R.id.home)
+                        }
             }
         }
     }
@@ -197,7 +200,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
             `var`.putString("USERNAME", uname)
             fragment.arguments = `var`
             val fm = supportFragmentManager
-            val ft = fm.beginTransaction()
+            val ft = fm.beginTransaction().addToBackStack(null)
                 .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right)
 
             //setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out)
@@ -212,6 +215,6 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     fun setActionBarTitle(title: String) {
-        supportActionBar?.setTitle(title)
+        toolbar.setTitle(title)
     }
 }

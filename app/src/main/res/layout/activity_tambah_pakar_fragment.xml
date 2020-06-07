@@ -106,7 +106,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="22dp"
-                android:background="#d67601"
+                android:backgroundTint="@color/success"
                 android:text="Submit"
                 app:cornerRadius="20dp"
                 android:textAllCaps="false"

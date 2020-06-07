@@ -40,7 +40,7 @@ class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->
         val namaDokter = view.findViewById<TextView>(R.id.nama_pengirim)
         val isiChat = view.findViewById<TextView>(R.id.isi_chat)
 //        val waktuChat = view.findViewById<TextView>(R.id.waktu_chat)
-//        val badgeUnread = view.findViewById<TextView>(R.id.badge_unread_chat)
+        val badgeUnread = view.findViewById<TextView>(R.id.badge_unread_chat)
 
         val prefs = AppPreferences(view.context)
 

@@ -30,7 +30,8 @@
         <activity android:name=".admin.InputNilaiFragment" />
         <activity android:name=".admin.ListAkunFragment" />
         <activity android:name=".admin.HomeFragment" />
-        <activity android:name=".admin.AdminActivity" />
+        <activity android:name=".admin.AdminActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
         <activity android:name=".FragmentChatPakar" />
         <activity android:name=".NewChatPakarActivity" />
         <activity android:name=".ChatDetailActivity" />

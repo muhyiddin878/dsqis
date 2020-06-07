@@ -134,7 +134,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:textColor="@color/white"
-                    android:background="@color/success"
+                    android:backgroundTint="@color/danger"
                     android:id="@+id/submit_nilai_akademik"
                     android:layout_marginTop="10dp"
                     android:text="Isi Pra Akademik"
@@ -231,7 +231,7 @@
                     />
                 <com.google.android.material.button.MaterialButton
                     android:textColor="@color/white"
-                    android:background="@color/success"
+                    android:backgroundTint="@color/danger"
                     android:id="@+id/submit_nilai_murajaah1"
                     android:layout_marginTop="10dp"
                     android:text="Isi Murajaah"
@@ -296,7 +296,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:textColor="@color/white"
-                    android:background="@color/success"
+                    android:backgroundTint="@color/danger"
                     android:id="@+id/submit_nilai_perkembangan"
                     android:layout_marginTop="10dp"
                     android:text="Isi "
@@ -604,7 +604,7 @@
             </TableLayout>
             <com.google.android.material.button.MaterialButton
                 android:textColor="@color/white"
-                android:background="@color/success"
+                android:backgroundTint="@color/success"
                 android:id="@+id/submit_nilai"
                 android:layout_marginTop="25dp"
                 android:text="Submit"
