@@ -4,18 +4,26 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RelativeLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.model.ChatList
 import com.muhyiddin.dsqis.utils.AppPreferences
+
 import org.w3c.dom.Text
 import java.text.FieldPosition
-class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->Unit):RecyclerView.Adapter<ChatHolder>() {
+
+class ChatAdapter(private val ctx: Context,private val listChat:List<ChatList>,
+                  val listener:(ChatList)->Unit):RecyclerView.Adapter<ChatAdapter.ChatHolder>() {
+
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChatHolder {
         return ChatHolder(
-            LayoutInflater.from(parent.context).inflate(
+            LayoutInflater.from(ctx).inflate(
                 R.layout.layout_chat_pakar,
                 parent,
                 false
@@ -34,13 +42,17 @@ class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->
         holder.bindItem(listChat[position], listener)
     }
 
-}
-    class ChatHolder(val view: View): RecyclerView.ViewHolder(view) {
+
+   inner class ChatHolder(val view: View): RecyclerView.ViewHolder(view) {
+
 
         val namaDokter = view.findViewById<TextView>(R.id.nama_pengirim)
         val isiChat = view.findViewById<TextView>(R.id.isi_chat)
-//        val waktuChat = view.findViewById<TextView>(R.id.waktu_chat)
+        val card_chat= view.findViewById<RelativeLayout>(R.id.cardChat)
+        //        val waktuChat = view.findViewById<TextView>(R.id.waktu_chat)
         val badgeUnread = view.findViewById<TextView>(R.id.badge_unread_chat)
+        val hapus = view.findViewById<TextView>(R.id.hapus)
+
 
         val prefs = AppPreferences(view.context)
 
@@ -56,5 +68,31 @@ class ChatAdapter(private val listChat:List<ChatList>, val listener:(ChatList)->
             itemView.setOnClickListener() {
                 listener(item)
             }
+//
+            card_chat.setOnLongClickListener {
+                deleteChat()
+                return@setOnLongClickListener true
+            }
+
+        }
+//
+        private fun deleteChat(){
+            val view = LayoutInflater.from(ctx).inflate(R.layout.popup_option, null)
+            val builder = AlertDialog.Builder(ctx)
+                .setView(view)
+
+            val dialog = builder.show()
+            val hapus = view.findViewById<TextView>(R.id.hapus)
+            hapus.setOnClickListener() {
+
+                dialog.dismiss()
+            }
+
+
         }
     }
+
+
+
+}
+

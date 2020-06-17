@@ -53,7 +53,7 @@ class FragmentChatPakar : Fragment() {
             (activity as AppCompatActivity).supportActionBar?.title = "Chat Pakar"
 //            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
-        adapter = ChatAdapter(listChat){
+        adapter = ChatAdapter(requireContext(),listChat){
             updateUnreadChat(it.roomId)
             startActivity(Intent(context, ChatDetailActivity::class.java).putExtra("room_id",it.roomId))
 

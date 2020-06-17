@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-        <ImageView
+        <com.github.chrisbanes.photoview.PhotoView
             android:background="@color/colorPrimaryDark"
             android:src="@drawable/ic_group_3"
             android:id="@+id/image_post"

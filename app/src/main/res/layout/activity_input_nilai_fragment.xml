@@ -68,7 +68,7 @@
                 <EditText
                     android:id="@+id/sikap_spiritual"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -79,7 +79,7 @@
                 <EditText
                     android:id="@+id/sikap_sosial"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                     <TextView
@@ -105,7 +105,7 @@
                 <EditText
                     android:id="@+id/materi_sikap_sosial"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -117,7 +117,7 @@
                 <EditText
                     android:id="@+id/ket_sikap_sosial"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -153,7 +153,7 @@
                 <EditText
                     android:id="@+id/nilaikomputer"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -165,7 +165,7 @@
                 <EditText
                     android:id="@+id/ket_komputer"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -203,7 +203,7 @@
                 <EditText
                     android:id="@+id/materi_murajaah"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -215,7 +215,7 @@
                 <EditText
                     android:id="@+id/ket_murajaah"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -250,7 +250,7 @@
                 <EditText
                     android:id="@+id/nama_ekstra"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -262,7 +262,7 @@
                 <EditText
                     android:id="@+id/ket_ekstra"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
 
@@ -315,7 +315,7 @@
                 <EditText
                     android:id="@+id/saran_guru"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
 
@@ -364,7 +364,7 @@
                 <EditText
                     android:id="@+id/penglihatan"
                     android:layout_weight="1"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -376,7 +376,7 @@
                 <EditText
                     android:id="@+id/pendengaran"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -388,7 +388,7 @@
                 <EditText
                     android:id="@+id/gigi"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -399,7 +399,7 @@
                 <EditText
                     android:id="@+id/daya_tahan"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TableRow
@@ -424,7 +424,7 @@
                 <EditText
                     android:id="@+id/kondisi_saat_ini"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -436,7 +436,7 @@
                 <EditText
                     android:id="@+id/kondisi_ideal"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -448,7 +448,7 @@
                 <EditText
                     android:id="@+id/saran_dokter"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TableRow
@@ -522,7 +522,7 @@
                 <EditText
                     android:id="@+id/kondisi_psikologi_saat_ini"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -535,7 +535,7 @@
                 <EditText
                     android:id="@+id/kondisi_ideal_psikologi"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -547,7 +547,7 @@
                 <EditText
                     android:id="@+id/saran_psikolog"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TableRow
@@ -573,7 +573,7 @@
                 <EditText
                     android:id="@+id/kondisi_okupasi_saat_ini"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -586,7 +586,7 @@
                 <EditText
                     android:id="@+id/kondisi_ideal_okupasi"
                     android:layout_weight="2"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
                 <TextView
@@ -598,7 +598,7 @@
                 <EditText
                     android:id="@+id/saran_okupasi"
                     android:layout_weight="0"
-                    android:inputType="text"
+                    android:inputType="textMultiLine"
                     />
 
             </TableLayout>
