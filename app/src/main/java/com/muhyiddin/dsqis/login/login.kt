@@ -8,18 +8,22 @@ import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.iid.FirebaseInstanceId
 import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.MainActivity
 import com.muhyiddin.dsqis.MainActivityPakar
 import com.muhyiddin.dsqis.OnBoardingActivity
 import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.admin.AdminActivity
+import com.muhyiddin.dsqis.model.Token
 import com.muhyiddin.dsqis.model.User
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_login.*
+import java.io.IOException
 
 
 class login : AppCompatActivity(){
@@ -31,6 +35,7 @@ class login : AppCompatActivity(){
     val user = FirebaseAuth.getInstance().currentUser
     private val mStorage = FirebaseStorage.getInstance()
     private val list:MutableList<String> = mutableListOf()
+    private lateinit var token:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +51,27 @@ class login : AppCompatActivity(){
 
         go_login.setOnClickListener() {
 
+            FirebaseInstanceId.getInstance().instanceId
+                .addOnCompleteListener(OnCompleteListener { task ->
+                    if (!task.isSuccessful) {
+                        Log.w("getInstanceId failed", task.exception)
+                        return@OnCompleteListener
+                    }
+
+                    // Get new Instance ID token
+                    token = task.result?.token!!
+                    prefs.token=token
+
+                    // Log and toast
+                    val msg = getString(R.string.msg_token_fmt, token)
+                    Log.d("msg", msg)
+                })
+
             val email = email_pengguna.text.toString()
             val password = password_pengguna.text.toString()
             validate(email,password)
             doLogin(email, password)
+
 
         }
     }
@@ -98,6 +120,13 @@ class login : AppCompatActivity(){
                         }else if (prefs.role==3){
                             showLoginSuccessAdmin()
                         }
+
+                        val isiToken= Token(prefs.uid,token)
+                        mFirestore.collection("token")
+                            .document().set(isiToken)
+                            .addOnSuccessListener {
+                                Toast.makeText(this,"Berhasil Menambahkan TOKEN ",Toast.LENGTH_SHORT).show()
+                            }
                     }
                     .addOnFailureListener {
                         prefs.resetPreference()
@@ -136,6 +165,8 @@ class login : AppCompatActivity(){
     }
 
     fun showLoginSuccess() {
+
+
         val ref = mStorage.getReference("profilpic/${prefs.uid}")
         val cek= ref.downloadUrl.toString()
         Log.d("url:",cek)
@@ -162,6 +193,21 @@ class login : AppCompatActivity(){
         startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME",prefs.nama))
         finish()
     }
+
+//    private fun getToken() {
+//
+//        Thread(Runnable {
+//            try {
+//
+//                val newToken = FirebaseInstanceId.getInstance()
+//                    .getToken(senderID, "FCM")
+//                println("Token --> $newToken")
+//
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }).start()
+//    }
     fun showLoginSuccess2(msg: String) {
         sendToast(msg)
     }

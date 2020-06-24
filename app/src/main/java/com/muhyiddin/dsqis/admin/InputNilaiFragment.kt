@@ -171,7 +171,6 @@ class InputNilaiFragment : Fragment() {
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
                     minggumurajaah = mingguke_murajaah_spinner.selectedItem.toString()
-                    Log.d("minggu",minggumurajaah)
                     if (minggumurajaah == "1") {
                         mingguke_murajaah = "1"
                         nilai_murajaah.setText("")
@@ -240,7 +239,7 @@ class InputNilaiFragment : Fragment() {
             submit_perkembangan()
         }
         submit_nilai_murajaah.setOnClickListener {
-            Toast.makeText(requireContext(),"MASUK TOMBOL SUBMIT MURAJAAH",Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),"Data Murajaah Ditambahkan ke Lokal",Toast.LENGTH_SHORT).show()
             submit_murajaah1()
         }
         submit_nilai_akademik.setOnClickListener{
@@ -261,9 +260,6 @@ class InputNilaiFragment : Fragment() {
             Kelas_Komputer.put("Keterangan", ket_komputer.text.toString())
             Kelas_Komputer.put("Nilai", nilai_komputer.text.toString())
 
-            Log.d("ISI KOMPUTER HASHMAP","${Kelas_Komputer}")
-
-            Toast.makeText(requireContext(),"${Kelas_Komputer}",Toast.LENGTH_SHORT).show()
 
 
             val Ekstrakulikuler = HashMap<String, String>()
@@ -429,7 +425,6 @@ class InputNilaiFragment : Fragment() {
 
 
                 if(Kelas_Murajaah.size>0){
-                    Log.d("Masuk if 1","Masuk")
                     nilai.Kelas_Murajaah = Kelas_Murajaah
                 }else{
                     val isiMur=this.nilai?.Kelas_Murajaah?.get("Kelas Murajaah")
@@ -1650,9 +1645,7 @@ class InputNilaiFragment : Fragment() {
 
         tanggal_nilai.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
-
             override fun onItemSelected(
                 parent: AdapterView<*>?,
                 view: View?,
@@ -1713,12 +1706,10 @@ class InputNilaiFragment : Fragment() {
                         }
                         "Kelas Pra Akademik" -> {
                             if(nilai?.Kelas_Pra_Akademik!=null){
-                                Log.d("Pra Akademik", "${nilai?.Kelas_Pra_Akademik}")
                                 Kelas_Pra_Akademik = nilai?.Kelas_Pra_Akademik!!
                                 Kelas_Pra_Akademik?.get("Kelas Pra Akademik")?.forEach {
                                     listPraAkademik.add(it)
                                 }
-                                Log.d("LIST_MURAJAAH", "$listPraAkademik")
                             }
 
                         }
@@ -1736,12 +1727,10 @@ class InputNilaiFragment : Fragment() {
                         }
                         "Kelas Muraja'ah" -> {
                             if(nilai?.Kelas_Murajaah!=null){
-                                Log.d("MURAJAAH", "${nilai?.Kelas_Murajaah}")
                                 Kelas_Murajaah = nilai?.Kelas_Murajaah!!
                                 Kelas_Murajaah?.get("Kelas Murajaah")?.forEach {
                                     listMurajaah.add(it)
                                 }
-                                Log.d("LIST_MURAJAAH", "$listMurajaah")
                             }
 
                         }
@@ -1756,12 +1745,10 @@ class InputNilaiFragment : Fragment() {
                         }
                         "Laporan Perkembangan Anak" -> {
                             if(nilai?.Laporan_Perkembangan_Anak!=null){
-                                Log.d("Perkembangan", "${nilai?.Laporan_Perkembangan_Anak}")
                                 Laporan_Perkembangan_Anak = nilai?.Laporan_Perkembangan_Anak!!
                                 Laporan_Perkembangan_Anak?.get("Laporan Perkembangan Anak")?.forEach {
                                     listPerkembangan.add(it)
                                 }
-                                Log.d("LIST_MURAJAAH", "$listPerkembangan")
                             }
 
                         }
@@ -1881,7 +1868,6 @@ class InputNilaiFragment : Fragment() {
     }
 
     private fun getNilaiEachStudent(idSiswa: String) {
-//        tanggal_nilai.adapter = null
         listTanggal.clear()
         listTanggal.add("Tambah Data Baru")
         var ref = mFirestore.collection("nilai")
@@ -1892,7 +1878,6 @@ class InputNilaiFragment : Fragment() {
                     val nilai = it.toObject(Nilai::class.java)
                     listNilai.add(nilai)
                 }
-                Log.d("LIST_NILAI", "${listNilai}")
 
                 if (listNilai.size > 0) {
                     listNilai.map {nilai ->
@@ -1901,7 +1886,6 @@ class InputNilaiFragment : Fragment() {
                         listTanggal.add(it.toString())
                     }
                 }
-//                Log.d("LIST_TANGGAL", "$listTanggal")
 
                 tanggal_nilai.setAdapter(null)
                 tanggal_nilai.adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, listTanggal)
@@ -1913,16 +1897,12 @@ class InputNilaiFragment : Fragment() {
 
 
     private fun inputNilai(nilai: Nilai) {
-
-
         if (tanggal_nilai.selectedItemPosition == 0) {
             val sekarang=SimpleDateFormat("dd-MM-yyyy").format(Date())
-            Log.d("sekarang:",sekarang)
             val tanggal=listTanggal.find {
                 it==sekarang
             }
                 if(tanggal==null){
-                    Toast.makeText(requireContext(),"Atas",Toast.LENGTH_SHORT).show()
                     mFirestore.collection("nilai").add(nilai)?.addOnSuccessListener {
                         Toast.makeText(context, "Nilai Baru Berhasil Ditambahkan", Toast.LENGTH_SHORT)
                             .show()
@@ -1933,7 +1913,6 @@ class InputNilaiFragment : Fragment() {
 
                     }
                 }else{
-                    Toast.makeText(requireContext(),"Bawah",Toast.LENGTH_SHORT).show()
                     mFirestore.collection("nilai")
                         .whereEqualTo("idSiswa", siswaId)
                         .get()
@@ -1962,7 +1941,6 @@ class InputNilaiFragment : Fragment() {
                 }
 
         } else {
-//            Log.d("ISI TRANSFER NILAI","${nilai}")
             mFirestore.collection("nilai")
                 .whereEqualTo("idSiswa", siswaId)
                 .get()
@@ -1997,8 +1975,6 @@ class InputNilaiFragment : Fragment() {
 
     }
     private fun submit_perkembangan(){
-
-
         val perkembangan2=Grafik(perkembangan_anak.text.toString().toInt(), mingguke_perkembangan)
         perkembangan.add(perkembangan2)
         perkembangan.forEach { per ->
@@ -2014,13 +1990,9 @@ class InputNilaiFragment : Fragment() {
 
         }
 
-        Log.d("ISI LIST PERKEMBANGAN","${perkembangan}")
-
-
     }
 
     private fun submit_murajaah1(){
-
         val murajaah2 = Murajaah(mingguke_murajaah,materi_murajaah.text.toString(),ket_murajaah.text.toString(),nilai_murajaah.text.toString().toInt())
         murajaah.add(murajaah2)
         murajaah.forEach { mur ->
@@ -2035,7 +2007,6 @@ class InputNilaiFragment : Fragment() {
             }
 
         }
-        Log.d("ISI LIST MURAJAAH","${murajaah}")
 
     }
 
@@ -2043,7 +2014,6 @@ class InputNilaiFragment : Fragment() {
 
         val akademik= Murajaah(mingguke_sikap_sosial,materi_sikap_sosial.text.toString(),ket_sikap_sosial.text.toString(),nilai_sikap_sosial.text.toString().toInt())
         praAkademik.add(akademik)
-        Log.d("PraBroooo","${praAkademik}")
         praAkademik.forEach { akad->
             val listPraAkademik= Kelas_Pra_Akademik.get("Kelas Pra Akademik")
             val index = listPraAkademik?.indexOfFirst {
@@ -2055,7 +2025,6 @@ class InputNilaiFragment : Fragment() {
                 listPraAkademik.add(akad)
             }
         }
-        Log.d("ISI LIST PRA AKADEMIK","${praAkademik}")
 
 
     }
@@ -2069,9 +2038,6 @@ class InputNilaiFragment : Fragment() {
                 for (siswa in it) {
                     val sis = siswa.toObject(Siswa::class.java)
                     idSiswa = sis.id
-//                    getLatestNilai(idSiswa)
-//                    setMinggu(idSiswa)
-
                 }
 
             }

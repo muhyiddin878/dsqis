@@ -1,0 +1,668 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NILAI"
+                android:textStyle="bold"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:textColor="#3F51B5"
+                />
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border3"
+                android:padding="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp">
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/pelajaran2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/aspek_pelajaran"
+
+                        ></Spinner>
+
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border4"
+                android:padding="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp">
+
+
+
+
+                <TableRow>
+
+
+                    <Spinner
+                        android:id="@+id/tanggal_nilai2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:ignore="DuplicateIds"></Spinner>
+
+                </TableRow>
+
+            </TableLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border2"
+                android:padding="10dp"
+                android:layout_marginBottom="60dp">
+
+                <TableLayout
+                    android:id="@+id/tabel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/tv_spiritual2"
+                        android:layout_width="178dp"
+                        android:text="Sikap Spiritual"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/sikap_spiritual2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_sosial2"
+                        android:text="Sikap Sosial"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/sikap_sosial2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_mingguke2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Minggu Ke"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <Spinner
+                        android:id="@+id/mingguke2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/minggu"></Spinner>
+
+                    <TextView
+                        android:id="@+id/tv_materi2"
+                        android:text="Materi"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/materi_sikap_sosial2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ket2"
+                        android:text="Keterangan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/ket_sikap_sosial2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_nilai_sosial2"
+                        android:text="Nilai"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nilai_sikap_sosial2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_materi_komputer2"
+                        android:text="Materi"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nilaikomputer2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ket_komputer2"
+                        android:text="Keterangan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/ket_komputer2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_nilai_komputer2"
+                        android:text="Nilai"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nilai_komputer2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_mingguke_murajaah2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Minggu Ke"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <Spinner
+                        android:id="@+id/minggukeMurajaah2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/minggu"></Spinner>
+
+                    <TextView
+                        android:id="@+id/tv_materi_murajaah2"
+                        android:text="Materi"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/materi_murajaah2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ket_murajaah2"
+                        android:text="Keterangan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/ket_murajaah2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_nilai_murajaah2"
+                        android:text="Nilai"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nilai_murajaah2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_nama_ekstra2"
+                        android:text="Nama Kegiatan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nama_ekstra2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ket_ekstra2"
+                        android:text="Keterangan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/ket_ekstra2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_laporan_perkembangan_anak2"
+                        android:layout_weight="0"
+                        android:text="Laporan Perkembangan Anak"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <!--                <TextView-->
+                    <!--                    android:id="@+id/perkembangan_anak1"-->
+                    <!--                    android:layout_weight="2"-->
+                    <!--                    android:inputType="text"-->
+                    <!--                    android:text="Kosong"-->
+                    <!--                    android:textColor="#FFF"-->
+                    <!--                    android:textSize="20sp"/>-->
+
+                    <com.jjoe64.graphview.GraphView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dip"
+                        android:id="@+id/graph2" />
+
+
+                    <TextView
+                        android:id="@+id/tv_saran_guru2"
+                        android:text="Saran Guru"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/saran_guru2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_tinggi_badan2"
+                        android:text="Tinggi Badan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tinggi_badan2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_berat_badan2"
+                        android:text="Berat Badan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/berat_badan2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TableRow
+                        android:id="@+id/tv_kondisi_kesehatan2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="Kondisi Kesehatan2"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black" />
+
+                    </TableRow>
+
+                    <TextView
+                        android:id="@+id/tv_penglihatan2"
+                        android:layout_weight="1"
+                        android:text="Penglihatan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/penglihatan2"
+                        android:layout_weight="1"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_pendengaran2"
+                        android:text="Pendengaran"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/pendengaran2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_gigi2"
+                        android:text="Gigi"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/gigi2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_daya_tahan_tubuh2"
+                        android:text="Daya Tahan Tubuh"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/daya_tahan2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TableRow
+                        android:id="@+id/tv_evaluasi_pertumbuhan_anak2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="Evaluasi Pertumbuhan Anak2"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black" />
+
+                    </TableRow>
+
+                    <TextView
+                        android:id="@+id/tv_kondisi_anak_saat_ini2"
+                        android:text="Kondisi Anak Saat Ini"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/kondisi_saat_ini2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_kondisi_ideal2"
+                        android:text="Kondisi Ideal Anak"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/kondisi_ideal2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_saran_dokter2"
+                        android:text="Saran Dokter"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/saran_dokter2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TableRow
+                        android:id="@+id/tv_absensi2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="Absensi"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black" />
+                    </TableRow>
+                    <TextView
+                        android:id="@+id/tv_izin2"
+                        android:text="Izin"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/izin2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_sakit2"
+                        android:text="Sakit"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/sakit2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_tidak_ada_ket2"
+                        android:text="Tidak Ada Keterangan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/tidak_ada_keterangan2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TableRow
+                        android:id="@+id/tv_evaluasi_perkembangan_anak2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="Evaluasi Perkembangan Anak"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black" />
+
+                    </TableRow>
+
+                    <TextView
+                        android:id="@+id/tv_kondisi_psikologi_saat_ini2"
+                        android:layout_weight="0"
+                        android:text="Kondisi Anak Saat Ini"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/kondisi_psikologi_saat_ini2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_kondisi_ideal_psikologi2"
+                        android:layout_weight="0"
+                        android:text="Kondisi Ideal Anak"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/kondisi_ideal_psikologi2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_saran_psikologi2"
+                        android:text="Saran Psikolog"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/saran_psikolog2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TableRow
+                        android:id="@+id/tv_evaluasi_perkembangan_anak_okupasi2"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_weight="1"
+                            android:text="Evaluasi Perkembangan Anak"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="@android:color/black" />
+
+                    </TableRow>
+
+                    <TextView
+                        android:id="@+id/tv_kondisi_okupasi_saat_ini2"
+                        android:layout_weight="0"
+                        android:text="Kondisi Anak Saat Ini"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/kondisi_okupasi_saat_ini2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_kondisi_ideal_okupasi2"
+                        android:layout_weight="0"
+                        android:text="Kondisi Ideal Anak"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/kondisi_ideal_okupasi2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_saran_okupasi2"
+                        android:text="Saran Okupasi"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/saran_okupasi2"
+                        android:layout_weight="0"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                </TableLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
+

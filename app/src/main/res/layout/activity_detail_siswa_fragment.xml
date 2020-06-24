@@ -184,6 +184,13 @@
                 </TableRow>
 
             </TableLayout>
+
+            <include
+                layout="@layout/lihat_nilai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
             <TableLayout
                 android:layout_marginTop="25dp"
                 android:layout_width="match_parent"
@@ -213,6 +220,11 @@
                 android:id="@+id/hapus_akun"
                 android:text="Hapus Akun"
                 />
+
+
+
+
+
         </LinearLayout>
     </ScrollView>
 

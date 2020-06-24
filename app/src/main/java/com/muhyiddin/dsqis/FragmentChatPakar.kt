@@ -32,6 +32,7 @@ class FragmentChatPakar : Fragment() {
     val listChat:MutableList<ChatList> = mutableListOf()
     val list:MutableList<ChatList> = mutableListOf()
     private lateinit var chat:String
+    private lateinit var idRomm:String
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -81,9 +82,7 @@ class FragmentChatPakar : Fragment() {
                 snapshot.children.forEach{
                     val chatList = it.getValue(ChatList::class.java)
 //                    for (tes2 in chatList)
-                        Log.d("ini listchat", chatList?.last_chat)
                     if (chatList != null) {
-                        Log.d("ini tes", "MASUKKK")
 //                        listChat.add(chatList)
 //                        showListChat(listChat)
                         if (prefs.role==2){
@@ -101,9 +100,6 @@ class FragmentChatPakar : Fragment() {
                 }
                 hideLoading()
 
-
-//                for (tes2 in listChat)
-//                    Log.d("ini listchat", tes2.last_chat)
                 if (listChat.size>0){
                     listChat.sortByDescending { it.last_chat }
                     showListChat(listChat)
@@ -119,23 +115,60 @@ class FragmentChatPakar : Fragment() {
     }
 
     fun updateUnreadChat(roomId:String){
-        val rootRef = mFirestore.collection("chat-dokter").document(roomId).collection("chats")
-        rootRef.get()
-            .addOnSuccessListener {
-                it.forEach {doc ->
-                    val chat = doc.toObject(Chat::class.java)
-                    if (chat.pengirim!=prefs.uid){
-                        rootRef.document(doc.id)
-                            .update("isRead", true)
-                    }
+        val rootRef = mDatabase.getReference("chat").child("conversation")
+        rootRef
+        rootRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {
 
+            }
+            override fun onDataChange(p0: DataSnapshot) {
+                p0.children.forEach {
+                    val chatList = it.getValue(ChatList::class.java)
+                    if (chatList != null) {
+                        if (prefs.uid==chatList.id_pakar){
+                            val chat = it.child(roomId)
+//                            chat.ref.setValue("read", true)
+                            chat.children.forEach {
+                                val chatList2 = it.getValue(Chat::class.java)
+                                if(chatList2?.pengirim!=prefs.uid){
+                                    it.ref.child("read").updateChildren(mapOf(
+                                        "read" to true
+                                    ))
+                                }
+                            }
+                        }else if (prefs.uid==chatList.id_member){
+
+                            val chat = it.child(roomId)
+                            chat.children.forEach {
+                                val chatList2 = it.getValue(Chat::class.java)
+                                if(chatList2?.pengirim!=prefs.uid){
+                                    chatList2?.isRead==true
+                                }
+                            }
+
+                        }
+
+                    }
                 }
             }
-        if (prefs.role==2){
-            mFirestore.collection("chat").document(roomId).update("unread_dokter", 0)
-        } else{
-            mFirestore.collection("chat").document(roomId).update("unread_member", 0)
-        }
+
+        })
+//        rootRef.get()
+//            .addOnSuccessListener {
+//                it.forEach {doc ->
+//                    val chat = doc.toObject(Chat::class.java)
+//                    if (chat.pengirim!=prefs.uid){
+//                        rootRef.document(doc.id)
+//                            .update("isRead", true)
+//                    }
+//
+//                }
+//            }
+//        if (prefs.role==2){
+//            mFirestore.collection("chat").document(roomId).update("unread_dokter", 0)
+//        } else{
+//            mFirestore.collection("chat").document(roomId).update("unread_member", 0)
+//        }
 
     }
 

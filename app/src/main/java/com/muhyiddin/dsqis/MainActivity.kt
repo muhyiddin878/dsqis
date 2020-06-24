@@ -1,20 +1,18 @@
 package com.muhyiddin.dsqis
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.FirebaseApp
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import com.muhyiddin.dsqis.utils.AppPreferences
-import com.muhyiddin.qis.login.login
 import kotlinx.android.synthetic.main.activity_main.*
+import java.io.IOException
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener,
     BottomNavigationView.OnNavigationItemSelectedListener {
@@ -28,6 +26,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         prefs=AppPreferences(this)
         bottomNavigationView.setOnNavigationItemSelectedListener(this)
         frg2()
+
+
+
+//        FirebaseMessaging.getInstance().subscribeToTopic("weather")
+//            .addOnCompleteListener { task ->
+//                var msg = "Subscribed"
+//                if (!task.isSuccessful) {
+//                    msg = "Failed to subscribe"
+//                }
+//                Log.d("ISI MSG", msg)
+//                Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+//            }
+
+
+
 
 
     }
@@ -87,7 +100,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
 
         return true
+
+
+
+
     }
+
+    fun runtimeEnableAutoInit() {
+        // [START fcm_runtime_enable_auto_init]
+        FirebaseMessaging.getInstance().isAutoInitEnabled = true
+        // [END fcm_runtime_enable_auto_init]
+    }
+
+
+//    private fun getToken() {
+//
+//        Thread(Runnable {
+//            try {
+//
+//                val newToken = FirebaseInstanceId.getInstance()
+//                    .getToken(senderID, "FCM")
+//                println("Token --> $newToken")
+//
+//            } catch (e: IOException) {
+//                e.printStackTrace()
+//            }
+//        }).start()
+//    }
+
+
 
     override fun onBackPressed() {
         super.onBackPressed()

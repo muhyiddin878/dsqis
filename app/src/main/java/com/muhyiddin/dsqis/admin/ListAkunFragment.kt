@@ -94,8 +94,6 @@ class ListAkunFragment : Fragment() {
                     getSiswafromKelas(kelas)
                 }else if(kelas=="Semua"){
                     getAllSiswa()
-                }else if(kelas=="Lulus"){
-                    getSiswafromKelas(kelas)
                 }else{
                     getSiswafromKelas(kelas)
                 }

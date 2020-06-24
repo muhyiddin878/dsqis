@@ -28,7 +28,6 @@
     </array>
 
     <array name="kelas">
-        <item>Kelas</item>
         <item>Semua</item>
         <item>Persiapan</item>
         <item>Tahun Pertama</item>
@@ -57,8 +56,11 @@
         <item>2</item>
         <item>3</item>
         <item>4</item>
-
-
     </string-array>
+
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+
+    <string name="channel_id" translatable="false">DSQIS</string>
+    <string name="channel_name" translatable="false">QIS</string>
 
 </resources>
