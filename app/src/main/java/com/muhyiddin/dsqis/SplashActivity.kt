@@ -7,6 +7,7 @@ import android.os.Handler
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.firestore.FirebaseFirestore
+import com.muhyiddin.dsqis.admin.AdminActivity
 import com.muhyiddin.dsqis.utils.AppPreferences
 import com.muhyiddin.qis.login.login
 import kotlinx.android.synthetic.main.activity_splash.*
@@ -25,8 +26,14 @@ class SplashActivity : AppCompatActivity() {
             if (prefs.uid == null || prefs.role == null){
                 startActivity(Intent(this, login::class.java))
                 finish()
-            } else {
+            } else if (prefs.uid!=null && prefs.role==1 ) {
                 startActivity(Intent(this,MainActivity::class.java))
+                finish()
+            }else if (prefs.uid!=null && prefs.role==2 ) {
+                startActivity(Intent(this,MainActivityPakar::class.java))
+                finish()
+            }else{
+                startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME",prefs.nama))
                 finish()
             }
         },2500)

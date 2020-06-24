@@ -105,6 +105,7 @@ class FragmentChatPakar : Fragment() {
 //                for (tes2 in listChat)
 //                    Log.d("ini listchat", tes2.last_chat)
                 if (listChat.size>0){
+                    listChat.sortByDescending { it.last_chat }
                     showListChat(listChat)
                 } else{
                     showEmptyChat()
@@ -131,9 +132,9 @@ class FragmentChatPakar : Fragment() {
                 }
             }
         if (prefs.role==2){
-            mFirestore.collection("chat-dokter").document(roomId).update("unread_dokter", 0)
+            mFirestore.collection("chat").document(roomId).update("unread_dokter", 0)
         } else{
-            mFirestore.collection("chat-dokter").document(roomId).update("unread_member", 0)
+            mFirestore.collection("chat").document(roomId).update("unread_member", 0)
         }
 
     }

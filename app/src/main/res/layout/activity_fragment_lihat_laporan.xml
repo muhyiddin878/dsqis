@@ -19,11 +19,13 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/logo_siswa1"
                 android:layout_width="wrap_content"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#FF000000"
                 android:src="@drawable/avatar_male" />
 
             <TableLayout
@@ -226,6 +228,33 @@
 
                 </TableRow>
             </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border4"
+                android:padding="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp">
+
+
+
+
+            <TableRow>
+
+
+            <Spinner
+                android:id="@+id/tanggal_nilai1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="DuplicateIds"></Spinner>
+
+            </TableRow>
+
+            </TableLayout>
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"

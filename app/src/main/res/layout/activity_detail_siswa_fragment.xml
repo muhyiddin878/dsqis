@@ -163,7 +163,7 @@
                 </TableRow>
                 <TableRow>
                     <TextView
-                        android:text="NISN"
+                        android:text="NIK"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"
                         android:layout_weight="1"
@@ -193,7 +193,7 @@
                     <com.google.android.material.button.MaterialButton
                         app:cornerRadius="20dp"
                         android:textColor="@color/white"
-                        android:background="@color/success"
+                        android:backgroundTint="@color/success"
                         android:id="@+id/simpan_perubahan_siswa"
                         android:text="Simpan Perubahan"
                         android:layout_weight="0.5"
@@ -204,6 +204,7 @@
             </TableLayout>
             <com.google.android.material.button.MaterialButton
                 app:cornerRadius="20dp"
+                android:backgroundTint="@color/danger"
                 android:textColor="@color/white"
                 android:background="@color/danger"
                 android:layout_marginTop="10dp"

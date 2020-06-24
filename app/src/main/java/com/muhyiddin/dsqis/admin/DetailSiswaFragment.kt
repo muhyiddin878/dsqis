@@ -95,7 +95,6 @@ class DetailSiswaFragment : Fragment() {
 
         nama.setText(siswa.nama)
         ttl.setText(siswa.ttl)
-//        kelas.setText(siswa.kelas)
         alamat.setText(siswa.alamat)
         nisn.setText(siswa.nisn)
         JK_SISWA=siswa.gender
@@ -107,7 +106,9 @@ class DetailSiswaFragment : Fragment() {
             pr.isChecked = true
         }
 
-        if (kelas_siswa == "Kelas Persiapan") {
+        Log.d("Kelas",kelas_siswa)
+
+        if (kelas_siswa == "Persiapan") {
             persiapan_siswa.isChecked = true
         } else if (kelas_siswa== "Tahun Pertama") {
             pertama_siswa.isChecked = true

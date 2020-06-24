@@ -13,7 +13,11 @@ data class Nilai (
     var Kondisi_Kesehatan: HashMap<String, String>? = null,
     var Evaluasi_Pertumbuhan_Anak: HashMap<String, String>? = null,
     var Absensi: HashMap<String, Int>? = null,
-    var Evaluasi_Perkembangan_Anak: HashMap<String, String>? = null
+    var Evaluasi_Perkembangan_Anak: HashMap<String, String>? = null,
+    var idSiswa:String?=null,
+    var kelasSiswa:String?=null,
+    var tanggal:String?=null
+
 )
 
 

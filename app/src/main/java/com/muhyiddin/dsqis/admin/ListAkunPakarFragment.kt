@@ -71,6 +71,7 @@ class ListAkunPakarFragment : Fragment() {
                     pakar.add(expert.toObject(Pakar::class.java))
                 }
                 if (pakar.size>0){
+                    pakar.sortByDescending { it.namapakar }
                     showPakar(pakar)
                 }else{
                     showEmptyChat()

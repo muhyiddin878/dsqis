@@ -220,6 +220,7 @@ class DetailPostActivity : AppCompatActivity() {
                 for (comment in querySnapshot){
                     list.add(comment.toObject(Comment::class.java))
                 }
+                    list.reverse()
                 showComment(list)
 
                 }

@@ -10,6 +10,7 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_on_boarding.*
@@ -20,6 +21,7 @@ class OnBoardingActivity : AppCompatActivity() {
     private lateinit var uriProfilImage: Uri
     private val mAuth = FirebaseAuth.getInstance()
     private val mStorage = FirebaseStorage.getInstance()
+    private val mFirestore = FirebaseFirestore.getInstance()
     lateinit var prefs: AppPreferences
     private val mDatabase = FirebaseDatabase.getInstance()
 
@@ -84,6 +86,7 @@ class OnBoardingActivity : AppCompatActivity() {
 
     fun uploadImage(uri:Uri){
         showLoading()
+        var imageLocation = ""
         val ref = mStorage.getReference("profilepic/${prefs.uid}")
 
         ref.putFile(uri).continueWithTask {
@@ -96,13 +99,22 @@ class OnBoardingActivity : AppCompatActivity() {
             return@continueWithTask ref.downloadUrl
         }.addOnCompleteListener {
             if (it.isSuccessful){
-//                info(it.result)
+                imageLocation = it.result.toString()
+//                dbRef.update(mapOf(
+//                    "cover" to imageLocation,
+//                    "isi" to isi,
+//                    "judul" to judulBaru
+//                )).addOnSuccessListener {
+//                    hideLoading(true, "BERHASIL DI UPDATE")
+//                }
+//                    .addOnFailureListener {
+//                        hideLoading(false, "Error ${it.localizedMessage}")
+//                    }
                 val profile =  UserProfileChangeRequest.Builder().setPhotoUri(it.result).build()
                 mAuth.currentUser?.updateProfile(profile)?.addOnCompleteListener {
                     hideLoading(true, "")
                 }
             } else{
-//                info(it.exception?.message)
                 hideLoading(false, "Error ${it.exception?.message}")
             }
         }

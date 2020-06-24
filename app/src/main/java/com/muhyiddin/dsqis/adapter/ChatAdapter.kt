@@ -68,28 +68,27 @@ class ChatAdapter(private val ctx: Context,private val listChat:List<ChatList>,
             itemView.setOnClickListener() {
                 listener(item)
             }
-//
-            card_chat.setOnLongClickListener {
-                deleteChat()
-                return@setOnLongClickListener true
-            }
+//            card_chat.setOnLongClickListener {
+//                deleteChat()
+//                return@setOnLongClickListener true
+//            }
 
         }
+
+//        private fun deleteChat(){
+//            val view = LayoutInflater.from(ctx).inflate(R.layout.popup_option, null)
+//            val builder = AlertDialog.Builder(ctx)
+//                .setView(view)
 //
-        private fun deleteChat(){
-            val view = LayoutInflater.from(ctx).inflate(R.layout.popup_option, null)
-            val builder = AlertDialog.Builder(ctx)
-                .setView(view)
-
-            val dialog = builder.show()
-            val hapus = view.findViewById<TextView>(R.id.hapus)
-            hapus.setOnClickListener() {
-
-                dialog.dismiss()
-            }
-
-
-        }
+//            val dialog = builder.show()
+//            val hapus = view.findViewById<TextView>(R.id.hapus)
+//            hapus.setOnClickListener() {
+//
+//                dialog.dismiss()
+//            }
+//
+//
+//        }
     }
 
 

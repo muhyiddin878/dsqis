@@ -21,6 +21,8 @@ import com.muhyiddin.dsqis.model.Siswa
 import kotlinx.android.synthetic.main.activity_list_akun_fragment.*
 import android.R.attr.fragment
 import android.R.id.message
+import android.widget.AdapterView
+import android.widget.Spinner
 import com.muhyiddin.dsqis.FragmentLaporan
 import kotlinx.android.synthetic.main.activity_fragment_chat_pakar.*
 
@@ -32,6 +34,8 @@ class ListAkunFragment : Fragment() {
     private lateinit var adapter: ListSiswaAdapter
     private val siswa:MutableList<Siswa> = mutableListOf()
     private val list:MutableList<Siswa> = mutableListOf()
+    private lateinit var spinnerTanggal:Spinner
+    private lateinit var kelas:String
 
 
     override fun onCreateView(
@@ -51,11 +55,13 @@ class ListAkunFragment : Fragment() {
 //        val strtext = arguments!!.getString("siswa")
         var fragment=DetailSiswaFragment()
 
+        spinnerTanggal= view.findViewById<Spinner>(R.id.pilihkelas)
+
         var rv_siswaa = view.findViewById(R.id.rv_siswa) as RecyclerView
         rv_siswa.layoutManager = LinearLayoutManager(context)
 
 
-        getAllSiswa()
+//        getAllSiswa()
         adapter= ListSiswaAdapter(context!!,siswa){
 
             val bundle = Bundle()
@@ -67,6 +73,62 @@ class ListAkunFragment : Fragment() {
         }
 
         rv_siswaa.adapter = adapter
+
+        spinnerTanggal.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                kelas=spinnerTanggal.selectedItem.toString()
+                if(kelas=="Persiapan"){
+                    getSiswafromKelas(kelas)
+                }else if(kelas=="Tahun Pertama"){
+                    getSiswafromKelas(kelas)
+                }else if(kelas=="Tahun Kedua"){
+                    getSiswafromKelas(kelas)
+                }else if(kelas=="Semua"){
+                    getAllSiswa()
+                }else if(kelas=="Lulus"){
+                    getSiswafromKelas(kelas)
+                }else{
+                    getSiswafromKelas(kelas)
+                }
+            }
+
+        }
+    }
+
+
+
+    fun getSiswafromKelas(kelas:String){
+        refSemuaSiswa.whereEqualTo("kelas",kelas)
+            .addSnapshotListener { querySnapshot, error ->
+                if (error != null) {
+                    Toast.makeText(view?.context, error?.localizedMessage, Toast.LENGTH_SHORT).show()
+                    return@addSnapshotListener
+                }
+                if (querySnapshot != null) {
+                    siswa.clear()
+                    for (student in querySnapshot) {
+                        siswa.add(student.toObject(Siswa::class.java))
+                    }
+                    if (siswa.size>0){
+                        siswa.sortByDescending { it.nama }
+                        showSiswa(siswa)
+                        Toast.makeText(requireContext(),"Jumlah Data:${siswa.size}"  ,Toast.LENGTH_SHORT).show()
+                    }else{
+                        showSiswa(siswa)
+                        Toast.makeText(requireContext(),"DATA KOSONG",Toast.LENGTH_SHORT).show()
+                        showEmptyChat()
+                    }
+                }
+            }
 
     }
 
@@ -82,7 +144,9 @@ class ListAkunFragment : Fragment() {
                     siswa.add(student.toObject(Siswa::class.java))
                 }
                 if (siswa.size>0){
+                    siswa.sortByDescending { it.nama }
                     showSiswa(siswa)
+                    Toast.makeText(requireContext(),"Jumlah Data:${siswa.size}"  ,Toast.LENGTH_SHORT).show()
                 }else{
                     showEmptyChat()
                 }

@@ -15,6 +15,7 @@
             android:layout_height="match_parent">
             <TextView
                 android:text="Nama Siswa"
+                android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
@@ -38,10 +39,10 @@
 <!--                android:layout_width="match_parent"-->
 <!--                android:entries="@array/semester"-->
 <!--                android:layout_height="wrap_content"></Spinner>-->
-
             <TextView
                 android:layout_marginTop="15dp"
                 android:text="Aspek Penilaian"
+                android:textStyle="bold"
                 android:textColor="@android:color/black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
@@ -53,6 +54,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></Spinner>
 
+            <TextView
+                android:text="Tanggal"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/tanggal_nilai"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></Spinner>
+
+
             <TableLayout
                 android:layout_marginTop="15dp"
                 android:id="@+id/tabel"
@@ -62,22 +77,30 @@
                 <TextView
                     android:layout_width="178dp"
                     android:text="Sikap Spiritual"
+                    android:textStyle="bold"
                     android:id="@+id/tv_spiritual"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
                 <EditText
                     android:id="@+id/sikap_spiritual"
+                    android:layout_height="100dp"
+                    android:maxHeight="150dp"
+                    android:gravity="bottom"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Sikap Sosial"
                     android:id="@+id/tv_sosial"
                     />
                 <EditText
                     android:id="@+id/sikap_sosial"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -86,6 +109,7 @@
                         android:layout_marginTop="15dp"
                         android:id="@+id/tv_mingguke"
                         android:text="Minggu Ke"
+                        android:textStyle="bold"
                         android:textColor="@android:color/black"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:layout_width="wrap_content"
@@ -99,11 +123,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_materi"
                     android:text="Materi"
                     />
                 <EditText
                     android:id="@+id/materi_sikap_sosial"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -111,11 +139,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_ket"
                     android:text="Keterangan"
                     />
                 <EditText
                     android:id="@+id/ket_sikap_sosial"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -123,11 +155,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_nilai_sosial"
                     android:text="Nilai"
                     />
                 <EditText
                     android:id="@+id/nilai_sikap_sosial"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="number"
                     />
@@ -147,11 +183,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_materi_komputer"
                     android:text="Materi"
                     />
                 <EditText
                     android:id="@+id/nilaikomputer"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -159,11 +199,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_ket_komputer"
                     android:text="Keterangan"
                     />
                 <EditText
                     android:id="@+id/ket_komputer"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -171,11 +215,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_nilai_komputer"
                     android:text="Nilai"
                     />
                 <EditText
                     android:id="@+id/nilai_komputer"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="number"
                     />
@@ -183,6 +231,7 @@
                 <TextView
                     android:layout_marginTop="15dp"
                     android:text="Minggu Ke"
+                    android:textStyle="bold"
                     android:id="@+id/tv_mingguke_murajaah"
                     android:textColor="@android:color/black"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -197,11 +246,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_materi_murajaah"
                     android:text="Materi"
                     />
                 <EditText
                     android:id="@+id/materi_murajaah"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -209,11 +262,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Keterangan"
                     android:id="@+id/tv_ket_murajaah"
                     />
                 <EditText
                     android:id="@+id/ket_murajaah"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -221,11 +278,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Nilai"
                     android:id="@+id/tv_nilai_murajaah"
                     />
                 <EditText
                     android:id="@+id/nilai_murajaah"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="number"
                     />
@@ -244,11 +305,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_nama_ekstra"
                     android:text="Nama Kegiatan"
                     />
                 <EditText
                     android:id="@+id/nama_ekstra"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -256,11 +321,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Keterangan"
                     android:id="@+id/tv_ket_ekstra"
                     />
                 <EditText
                     android:id="@+id/ket_ekstra"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -271,6 +340,7 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_laporan_perkembangan_anak"
                     android:text="Laporan Perkembangan Anak"
                     android:layout_weight="0"
@@ -278,6 +348,7 @@
                 <TextView
                     android:layout_marginTop="15dp"
                     android:text="Minggu Ke"
+                    android:textStyle="bold"
                     android:id="@+id/tv_mingguke_perkembangan"
                     android:textColor="@android:color/black"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
@@ -288,8 +359,18 @@
                     android:entries="@array/minggu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"></Spinner>
+                <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:text="Angka"
+                    android:id="@+id/tv_angka_perkembangan"
+                    />
                 <EditText
                     android:id="@+id/perkembangan_anak"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="number"
                     />
@@ -299,7 +380,7 @@
                     android:backgroundTint="@color/danger"
                     android:id="@+id/submit_nilai_perkembangan"
                     android:layout_marginTop="10dp"
-                    android:text="Isi "
+                    android:text="Isi Perkembangan Anak"
                     app:cornerRadius="25dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -309,11 +390,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Saran Guru"
                     android:id="@+id/tv_saran_guru"
                     />
                 <EditText
                     android:id="@+id/saran_guru"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -322,22 +407,30 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Tinggi Badan"
                     android:id="@+id/tv_tinggi_badan"
                     />
                 <EditText
                     android:id="@+id/tinggi_badan"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="number"
                     />
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Berat Badan"
                     android:id="@+id/tv_berat_badan"
                     />
                 <EditText
                     android:id="@+id/berat_badan"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="number"
                     />
@@ -348,6 +441,7 @@
                     <TextView
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"
+                        android:textStyle="bold"
                         android:text="Kondisi Kesehatan"
                         android:layout_weight="1"
                         />
@@ -357,12 +451,16 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Penglihatan"
                     android:id="@+id/tv_penglihatan"
                     android:layout_weight="1"
                     />
                 <EditText
                     android:id="@+id/penglihatan"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="1"
                     android:inputType="textMultiLine"
                     />
@@ -370,11 +468,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Pendengaran"
                     android:id="@+id/tv_pendengaran"
                     />
                 <EditText
                     android:id="@+id/pendengaran"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -382,22 +484,30 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Gigi"
                     android:id="@+id/tv_gigi"
                     />
                 <EditText
                     android:id="@+id/gigi"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_daya_tahan_tubuh"
                     android:text="Daya Tahan Tubuh"
                     />
                 <EditText
                     android:id="@+id/daya_tahan"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -409,6 +519,7 @@
                     <TextView
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"
+                        android:textStyle="bold"
                         android:text="Evaluasi Pertumbuhan Anak"
                         android:layout_weight="1"
                         />
@@ -418,11 +529,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_kondisi_anak_saat_ini"
                     android:text="Kondisi Anak Saat Ini"
                     />
                 <EditText
                     android:id="@+id/kondisi_saat_ini"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -430,11 +545,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_kondisi_ideal"
                     android:text="Kondisi Ideal Anak"
                     />
                 <EditText
                     android:id="@+id/kondisi_ideal"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -442,11 +561,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_saran_dokter"
                     android:text="Saran Dokter"
                     />
                 <EditText
                     android:id="@+id/saran_dokter"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -458,6 +581,7 @@
                     <TextView
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black"
+                        android:textStyle="bold"
                         android:text="Absensi"
                         android:layout_weight="1"
                         />
@@ -467,35 +591,50 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Izin"
                     android:id="@+id/tv_izin"
                     />
                 <EditText
                     android:id="@+id/izin"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
+                    android:text="0"
                     android:inputType="number"
                     />
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_sakit"
                     android:text="Sakit"
                     />
                 <EditText
                     android:id="@+id/sakit"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
+                    android:text="0"
                     android:inputType="number"
                     />
 
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_tidak_ada_ket"
                     android:text="Tidak Ada Keterangan"
                     />
                 <EditText
                     android:id="@+id/tidak_ada_keterangan"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
+                    android:text="0"
                     android:inputType="number"
                     />
 
@@ -506,6 +645,7 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Evaluasi Perkembangan Anak"
                     android:layout_weight="1"
                     />
@@ -515,12 +655,16 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
-                    android:text="Kondisi Anak Saat Ini"
+                    android:textStyle="bold"
+                    android:text="Kondisi Psikologi Anak Saat Ini"
                     android:id="@+id/tv_kondisi_psikologi_saat_ini"
                     android:layout_weight="0"
                     />
                 <EditText
                     android:id="@+id/kondisi_psikologi_saat_ini"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -528,12 +672,16 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_kondisi_ideal_psikologi"
-                    android:text="Kondisi Ideal Anak"
+                    android:text="Kondisi Ideal Psikologi Anak"
                     android:layout_weight="0"
                     />
                 <EditText
                     android:id="@+id/kondisi_ideal_psikologi"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -541,37 +689,34 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:text="Saran Psikolog"
                     android:id="@+id/tv_saran_psikologi"
                     />
                 <EditText
                     android:id="@+id/saran_psikolog"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
 
-                <TableRow
-                    android:orientation="horizontal"
-                    android:id="@+id/tv_evaluasi_perkembangan_anak_okupasi"
-                    >
-                    <TextView
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/black"
-                        android:text="Evaluasi Perkembangan Anak"
-                        android:layout_weight="1"
-                        />
 
-                </TableRow>
 
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_kondisi_okupasi_saat_ini"
-                    android:text="Kondisi Anak Saat Ini"
+                    android:text="Kondisi Okupasi Anak Saat Ini"
                     android:layout_weight="0"
                     />
                 <EditText
                     android:id="@+id/kondisi_okupasi_saat_ini"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -579,12 +724,16 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_kondisi_ideal_okupasi"
-                    android:text="Kondisi Ideal Anak"
+                    android:text="Kondisi Ideal Okupasi Anak"
                     android:layout_weight="0"
                     />
                 <EditText
                     android:id="@+id/kondisi_ideal_okupasi"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
@@ -592,11 +741,15 @@
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
+                    android:textStyle="bold"
                     android:id="@+id/tv_saran_okupasi"
                     android:text="Saran Okupasi"
                     />
                 <EditText
                     android:id="@+id/saran_okupasi"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
                     android:layout_weight="0"
                     android:inputType="textMultiLine"
                     />

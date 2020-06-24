@@ -5,6 +5,27 @@
     android:orientation="vertical"
     >
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/border2"
+        android:padding="10dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="20dp">
+
+        <TableRow>
+
+            <Spinner
+                android:id="@+id/pilihkelas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/kelas"
+
+                ></Spinner>
+
+        </TableRow>
+    </TableLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="16dp"
         android:id="@+id/rv_siswa"

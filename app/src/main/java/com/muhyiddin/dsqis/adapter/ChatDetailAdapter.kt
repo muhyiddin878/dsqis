@@ -74,7 +74,6 @@ class ChatDetailAdapter(private val ctx: Context,val listChat:List<Chat>,
             val view = LayoutInflater.from(ctx).inflate(com.muhyiddin.dsqis.R.layout.popup_option_unsent, null)
             val builder = AlertDialog.Builder(ctx)
                 .setView(view)
-
             val dialog = builder.show()
             val unsent = view.findViewById<TextView>(com.muhyiddin.dsqis.R.id.unsent)
             unsent.setOnClickListener() {

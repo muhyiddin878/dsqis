@@ -106,6 +106,7 @@ class ListArtikelFragment : Fragment() {
                 for (artikel in querySnapshot){
                     list.add(artikel.toObject(Post::class.java))
                 }
+                list.sortByDescending { it.postDate }
                 showArtikel(list)
             }
         }

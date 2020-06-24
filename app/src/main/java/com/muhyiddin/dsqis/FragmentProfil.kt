@@ -89,6 +89,9 @@ class FragmentProfil : Fragment() {
         rv_profile.adapter = adapter
 //        getBookmark(listsemuaArtikel)
 
+        getArtikelSaya(listsemuaArtikel)
+        getBookmark(listsemuaArtikel)
+
 
         artikel_saya.setOnClickListener {
             artikel_saya.setTextColor(ContextCompat.getColor(context!!, R.color.colorPrimary))
@@ -179,7 +182,7 @@ class FragmentProfil : Fragment() {
             list.addAll(it)
             adapter.notifyDataSetChanged()
         }
-        count_artikel.text = list.size.toString()
+
     }
 
     fun showBookmark(data: List<Post>) {
@@ -188,7 +191,7 @@ class FragmentProfil : Fragment() {
             list.addAll(it)
             adapter.notifyDataSetChanged()
         }
-        count_bookmark.text = listBookmark.size.toString()
+
     }
 
 
@@ -206,7 +209,9 @@ class FragmentProfil : Fragment() {
                     val listFiltered=listSemuaArtikel.filter {
                         it.writerId in listArtikelSaya
                     }
+                    count_artikel.text = listFiltered.size.toString()
                     showArtikel(listFiltered)
+
 
                 }
             }
@@ -249,6 +254,7 @@ class FragmentProfil : Fragment() {
                     val listFiltered=listSemuaArtikel.filter {
                             it.postId in listBookmark
                     }
+                    count_bookmark.text = listBookmark.size.toString()
                     showBookmark(listFiltered)
 
                 }

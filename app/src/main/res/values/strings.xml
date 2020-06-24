@@ -8,6 +8,7 @@
         <item>Kelas Persiapan</item>
         <item>Tahun Pertama</item>
         <item>Tahun Kedua</item>
+        <item>Lulus</item>
 
     </array>
 
@@ -26,6 +27,15 @@
         <item>Evaluasi Perkembangan Anak</item>
     </array>
 
+    <array name="kelas">
+        <item>Kelas</item>
+        <item>Semua</item>
+        <item>Persiapan</item>
+        <item>Tahun Pertama</item>
+        <item>Tahun Kedua</item>
+        <item>Lulus</item>
+    </array>
+
     <string-array name="jenis_pakar">
         <item>Dokter Anak</item>
         <item>Dokter Gigi</item>
@@ -42,18 +52,12 @@
     </string-array>
 
     <string-array name="minggu">
+        <item>-</item>
         <item>1</item>
         <item>2</item>
         <item>3</item>
         <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
+
 
     </string-array>
 

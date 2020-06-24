@@ -14,20 +14,21 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.firestore.FirebaseFirestore
 import com.muhyiddin.dsqis.R
 import kotlinx.android.synthetic.main.activity_buat_akun_fragment.*
 import kotlinx.android.synthetic.main.activity_input_nilai_fragment.*
-import java.util.ArrayList
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.android.gms.tasks.Task
 import androidx.annotation.NonNull
 import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.firestore.DocumentReference
 import android.content.ContentValues.TAG
+import com.google.firebase.firestore.*
 import com.jjoe64.graphview.series.DataPoint
 import com.muhyiddin.dsqis.model.*
 import kotlinx.android.synthetic.main.activity_fragment_lihat_laporan.*
+import java.text.SimpleDateFormat
+import java.time.chrono.ThaiBuddhistEra
+import java.util.*
+import kotlin.collections.HashMap
 
 
 class InputNilaiFragment : Fragment() {
@@ -35,11 +36,13 @@ class InputNilaiFragment : Fragment() {
     private val mFirestore = FirebaseFirestore.getInstance()
     private val data_siswa = mFirestore.collection("students")
     private lateinit var akun: MutableList<Siswa>
-    private val siswa: MutableList<String> = mutableListOf()
-    private val siswaId: MutableList<String> = mutableListOf()
+    private val siswa: MutableList<Siswa> = mutableListOf()
+    private val namaSiswa: MutableList<String> = mutableListOf()
+    private var siswaId: String? = null
     private val grafik:MutableList<Grafik> = mutableListOf()
     private val murajaah:MutableList<Murajaah> = mutableListOf()
-    private val akademik:MutableList<Murajaah> = mutableListOf()
+    private val praAkademik:MutableList<Murajaah> = mutableListOf()
+    private val perkembangan:MutableList<Grafik> = mutableListOf()
     private lateinit var spinner: Spinner
     private lateinit var mapel: String
     private lateinit var minggu: String
@@ -49,8 +52,19 @@ class InputNilaiFragment : Fragment() {
     private lateinit var mingguke_murajaah: String
     private var mingguke_perkembangan: Int=0
     private lateinit var idSiswa: String
+    private lateinit var kelasSiswa:String
     private lateinit var minggukee: String
     private lateinit var mingguke_sikap_sosial_spinner:Spinner
+    private var Kelas_Murajaah = HashMap<String, MutableList<Murajaah>>()
+    private var Kelas_Pra_Akademik = HashMap<String, MutableList<Murajaah>>()
+    private var Laporan_Perkembangan_Anak = HashMap<String, MutableList<Grafik>>()
+    private val listTanggal = mutableListOf<String>()
+    private val listNilai = mutableListOf<Nilai>()
+
+    private val listMurajaah = mutableListOf<Murajaah>()
+    private val listPraAkademik = mutableListOf<Murajaah>()
+    private val listPerkembangan = mutableListOf<Grafik>()
+    private var nilai: Nilai? = null
 
 
     override fun onCreateView(
@@ -82,12 +96,15 @@ class InputNilaiFragment : Fragment() {
             }
             if (querySnapshot != null) {
                 for (student in querySnapshot) {
+
+                    siswa.add(student.toObject(Siswa::class.java))
                     val nama_siswa = student.toObject(Siswa::class.java)
-                    siswa.add(nama_siswa.nama)
-                    siswaId.add(nama_siswa.id)
+                    namaSiswa.add(nama_siswa.nama)
+
                 }
+
                 val adapter =
-                    ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, siswa)
+                    ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, namaSiswa)
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
                 spinner.setAdapter(adapter)
 
@@ -104,7 +121,10 @@ class InputNilaiFragment : Fragment() {
                 id: Long
             ) {
                 student = spinner.selectedItem.toString()
+                val selectedSiswa = siswa[position]
                 getIdSiswa(student)
+                getKelasSiswa(selectedSiswa.id)
+                getNilaiEachStudent(selectedSiswa.id)
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
@@ -116,31 +136,29 @@ class InputNilaiFragment : Fragment() {
                     minggu = mingguke_sikap_sosial_spinner.selectedItem.toString()
                     if (minggu == "1") {
                         mingguke_sikap_sosial = "1"
+                        nilai_sikap_sosial.setText("")
+                        ket_sikap_sosial.setText("")
+                        materi_sikap_sosial.setText("")
+                        setPraAkademikValue(mingguke_sikap_sosial)
                     } else if (minggu == "2") {
                         mingguke_sikap_sosial = "2"
+                        nilai_sikap_sosial.setText("")
+                        ket_sikap_sosial.setText("")
+                        materi_sikap_sosial.setText("")
+                        setPraAkademikValue(mingguke_sikap_sosial)
                     } else if (minggu == "3") {
                         mingguke_sikap_sosial = "3"
+                        nilai_sikap_sosial.setText("")
+                        ket_sikap_sosial.setText("")
+                        materi_sikap_sosial.setText("")
+                        setPraAkademikValue(mingguke_sikap_sosial)
                     } else if (minggu == "4") {
                         mingguke_sikap_sosial = "4"
-                    } else if (minggu == "5") {
-                        mingguke_sikap_sosial = "5"
-                    } else if (minggu == "6") {
-                        mingguke_sikap_sosial = "6"
-                    } else if (minggu == "7") {
-                        mingguke_sikap_sosial = "7"
-                    } else if (minggu == "8") {
-                        mingguke_sikap_sosial = "8"
-                    } else if (minggu == "9") {
-                        mingguke_sikap_sosial = "9"
-                    } else if (minggu == "10") {
-                        mingguke_sikap_sosial = "10"
-                    } else if (minggu == "11") {
-                        mingguke_sikap_sosial = "11"
-                    } else if (minggu == "12") {
-                        mingguke_sikap_sosial = "12"
+                        nilai_sikap_sosial.setText("")
+                        ket_sikap_sosial.setText("")
+                        materi_sikap_sosial.setText("")
+                        setPraAkademikValue(mingguke_sikap_sosial)
                     }
-
-//                    getIdSiswa(student)
 
                 }
 
@@ -153,30 +171,31 @@ class InputNilaiFragment : Fragment() {
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
                     minggumurajaah = mingguke_murajaah_spinner.selectedItem.toString()
+                    Log.d("minggu",minggumurajaah)
                     if (minggumurajaah == "1") {
                         mingguke_murajaah = "1"
+                        nilai_murajaah.setText("")
+                        ket_murajaah.setText("")
+                        materi_murajaah.setText("")
+                        setMurajaahValue(mingguke_murajaah)
                     } else if (minggumurajaah == "2") {
                         mingguke_murajaah = "2"
+                        nilai_murajaah.setText("")
+                        ket_murajaah.setText("")
+                        materi_murajaah.setText("")
+                        setMurajaahValue(mingguke_murajaah)
                     } else if (minggumurajaah == "3") {
                         mingguke_murajaah = "3"
+                        nilai_murajaah.setText("")
+                        ket_murajaah.setText("")
+                        materi_murajaah.setText("")
+                        setMurajaahValue(mingguke_murajaah)
                     } else if (minggumurajaah == "4") {
                         mingguke_murajaah = "4"
-                    } else if (minggumurajaah == "5") {
-                        mingguke_murajaah = "5"
-                    } else if (minggumurajaah == "6") {
-                        mingguke_murajaah = "6"
-                    } else if (minggumurajaah == "7") {
-                        mingguke_murajaah = "7"
-                    } else if (minggumurajaah == "8") {
-                        mingguke_murajaah = "8"
-                    } else if (minggumurajaah == "9") {
-                        mingguke_murajaah = "9"
-                    } else if (minggumurajaah == "10") {
-                        mingguke_murajaah = "10"
-                    } else if (minggumurajaah == "11") {
-                        mingguke_murajaah = "11"
-                    } else if (minggumurajaah == "12") {
-                        mingguke_murajaah = "12"
+                        nilai_murajaah.setText("")
+                        ket_murajaah.setText("")
+                        materi_murajaah.setText("")
+                        setMurajaahValue(mingguke_murajaah)
                     }
 //                    getIdSiswa(student)
 
@@ -194,30 +213,21 @@ class InputNilaiFragment : Fragment() {
                     minggu =  mingguke_perkembangan_spinner.selectedItem.toString()
                     if (minggu == "1") {
                         mingguke_perkembangan = 1
+                        perkembangan_anak.setText("")
+                        setPerkembanganValue(mingguke_perkembangan)
                     } else if (minggu == "2") {
                         mingguke_perkembangan = 2
+                        perkembangan_anak.setText("")
+                        setPerkembanganValue(mingguke_perkembangan)
                     } else if (minggu == "3") {
                         mingguke_perkembangan = 3
+                        perkembangan_anak.setText("")
+                        setPerkembanganValue(mingguke_perkembangan)
                     } else if (minggu == "4") {
                         mingguke_perkembangan = 4
-                    } else if (minggu == "5") {
-                        mingguke_perkembangan = 5
-                    } else if (minggu == "6") {
-                        mingguke_perkembangan = 6
-                    } else if (minggu == "7") {
-                        mingguke_perkembangan = 7
-                    } else if (minggu == "8") {
-                        mingguke_perkembangan = 8
-                    } else if (minggu == "9") {
-                        mingguke_perkembangan = 9
-                    } else if (minggu == "10") {
-                        mingguke_perkembangan = 10
-                    } else if (minggu == "11") {
-                        mingguke_perkembangan = 11
-                    } else if (minggu == "12") {
-                        mingguke_perkembangan = 12
+                        perkembangan_anak.setText("")
+                        setPerkembanganValue(mingguke_perkembangan)
                     }
-//                    getIdSiswa(student)
 
                 }
 
@@ -230,6 +240,7 @@ class InputNilaiFragment : Fragment() {
             submit_perkembangan()
         }
         submit_nilai_murajaah.setOnClickListener {
+            Toast.makeText(requireContext(),"MASUK TOMBOL SUBMIT MURAJAAH",Toast.LENGTH_SHORT).show()
             submit_murajaah1()
         }
         submit_nilai_akademik.setOnClickListener{
@@ -238,18 +249,25 @@ class InputNilaiFragment : Fragment() {
 
         submit_nilai.setOnClickListener {
 
+
+            val nilai = Nilai()
+
             val Penilaian_Sikap = HashMap<String, String>()
             Penilaian_Sikap.put("Sikap Spiritual", sikap_spiritual.text.toString())
-            Penilaian_Sikap.put("Sikap Sosisal", sikap_sosial.text.toString())
+            Penilaian_Sikap.put("Sikap Sosial", sikap_sosial.text.toString())
 
             val Kelas_Komputer = HashMap<String, Any>()
             Kelas_Komputer.put("Materi", nilaikomputer.text.toString())
             Kelas_Komputer.put("Keterangan", ket_komputer.text.toString())
             Kelas_Komputer.put("Nilai", nilai_komputer.text.toString())
 
+            Log.d("ISI KOMPUTER HASHMAP","${Kelas_Komputer}")
+
+            Toast.makeText(requireContext(),"${Kelas_Komputer}",Toast.LENGTH_SHORT).show()
+
 
             val Ekstrakulikuler = HashMap<String, String>()
-            Ekstrakulikuler.put("Nama Ektra", nama_ekstra.text.toString())
+            Ekstrakulikuler.put("Nama Ekstra", nama_ekstra.text.toString())
             Ekstrakulikuler.put("Keterangan", ket_ekstra.text.toString())
 
             val Saran_Guru = HashMap<String, String>()
@@ -270,46 +288,179 @@ class InputNilaiFragment : Fragment() {
             Evaluasi_Pertumbuhan_Anak.put("Saran Dokter", saran_dokter.text.toString())
 
             val Absensi = HashMap<String, Int>()
-            Absensi.put("Izin", izin.inputType)
-            Absensi.put("Sakit", sakit.inputType)
-            Absensi.put("Tanpa Keterangan", tidak_ada_keterangan.inputType)
+            val izin=izin.text.toString()
+            val sakit= sakit.text.toString()
+            val tanpa= tidak_ada_keterangan.text.toString()
+            izin?.toIntOrNull()?.let { it1 -> Absensi.put("Izin", it1) }
+            sakit?.toIntOrNull()?.let{itl->Absensi.put("Sakit", itl) }
+            tanpa?.toIntOrNull()?.let{itl->Absensi.put("Tanpa Keterangan", itl) }
+
+
+
 
             val Evaluasi_Perkembangan_Anak = HashMap<String, String>()
             Evaluasi_Perkembangan_Anak.put(
-                "Kondisi Psikologi Saat Ini",
-                kondisi_psikologi_saat_ini.text.toString()
-            )
+                    "Kondisi Psikologi Saat Ini",
+                    kondisi_psikologi_saat_ini.text.toString()
+                )
             Evaluasi_Perkembangan_Anak.put(
-                "Kondisi Psikologi Ideal",
-                kondisi_ideal_psikologi.text.toString()
-            )
+                    "Kondisi Psikologi Ideal",
+                    kondisi_ideal_psikologi.text.toString()
+                )
             Evaluasi_Perkembangan_Anak.put("Saran Psikolog", saran_psikolog.text.toString())
             Evaluasi_Perkembangan_Anak.put(
-                "Kondisi Okupasi Saat Ini",
-                kondisi_okupasi_saat_ini.text.toString()
-            )
+                    "Kondisi Okupasi Saat Ini",
+                    kondisi_okupasi_saat_ini.text.toString()
+                )
             Evaluasi_Perkembangan_Anak.put(
-                "Kondisi Okupasi Ideal",
-                kondisi_ideal_okupasi.text.toString()
-            )
+                    "Kondisi Okupasi Ideal",
+                    kondisi_ideal_okupasi.text.toString()
+                )
             Evaluasi_Perkembangan_Anak.put("Saran Okupasi", saran_okupasi.text.toString())
 
-            val nilai = Nilai()
+            val Kelas_Murajaah2 = HashMap<String, MutableList<Murajaah>>()
+            val praAkademik2=HashMap<String, MutableList<Murajaah>>()
+            val perkembangan2=HashMap<String, MutableList<Grafik>>()
 
-            nilai.Penilaian_Sikap = Penilaian_Sikap
-            nilai.Kelas_Komputer = Kelas_Komputer
-            nilai.Ekstrakulikuler = Ekstrakulikuler
-            nilai.Saran_Guru = Saran_Guru
-            nilai.TbBb = TbBb
-            nilai.Kondisi_Kesehatan = Kondisi_Kesehatan
-            nilai.Evaluasi_Pertumbuhan_Anak = Evaluasi_Pertumbuhan_Anak
-            nilai.Absensi = Absensi
-            nilai.Evaluasi_Perkembangan_Anak = Evaluasi_Perkembangan_Anak
 
-           inputNilai(nilai)
+
+            if (tanggal_nilai.selectedItemPosition == 0) {
+                nilai.Penilaian_Sikap = Penilaian_Sikap
+                nilai.Kelas_Komputer = Kelas_Komputer
+                nilai.Ekstrakulikuler = Ekstrakulikuler
+                nilai.Saran_Guru = Saran_Guru
+                nilai.TbBb = TbBb
+                nilai.Kondisi_Kesehatan = Kondisi_Kesehatan
+                nilai.Evaluasi_Pertumbuhan_Anak = Evaluasi_Pertumbuhan_Anak
+                nilai.Absensi = Absensi
+                nilai.Evaluasi_Perkembangan_Anak = Evaluasi_Perkembangan_Anak
+                nilai.kelasSiswa=kelasSiswa
+                nilai.idSiswa=idSiswa
+
+
+                if(Kelas_Murajaah.size>0){
+                    nilai.Kelas_Murajaah=Kelas_Murajaah
+                }else{
+
+                    Kelas_Murajaah2.put("Kelas Murajaah",murajaah)
+                    nilai.Kelas_Murajaah = Kelas_Murajaah2
+                }
+                if(Kelas_Pra_Akademik.size>0){
+                    nilai.Kelas_Pra_Akademik=Kelas_Pra_Akademik
+                }else{
+
+                    praAkademik2.put("Kelas Pra Akademik",praAkademik)
+                    nilai.Kelas_Pra_Akademik= praAkademik2
+                }
+
+                if(Laporan_Perkembangan_Anak.size>0){
+                    nilai.Laporan_Perkembangan_Anak=Laporan_Perkembangan_Anak
+                }else{
+
+                    perkembangan2.put("Laporan Perkembangan Anak",perkembangan)
+                    nilai.Laporan_Perkembangan_Anak=perkembangan2
+                }
+//                nilai.Laporan_Perkembangan_Anak=Laporan_Perkembangan_Anak
+                nilai.tanggal=SimpleDateFormat("dd-MM-yyyy").format(Date())
+            } else {
+
+                this.nilai?.Penilaian_Sikap?.forEach {
+                    if (Penilaian_Sikap?.get(it.key) == null || Penilaian_Sikap?.get(it.key) == "") {
+                        Penilaian_Sikap?.put(it.key, it.value)
+                    }
+                }
+                nilai.Penilaian_Sikap= Penilaian_Sikap
+
+                this.nilai?.Kelas_Komputer?.forEach {
+                    if (Kelas_Komputer?.get(it.key) == null || Kelas_Komputer?.get(it.key) == "") {
+                        Kelas_Komputer?.put(it.key, it.value)
+                    }
+                }
+                nilai.Kelas_Komputer = Kelas_Komputer
+
+                this.nilai?.Ekstrakulikuler?.forEach {
+                    if (Ekstrakulikuler?.get(it.key) == null || Ekstrakulikuler?.get(it.key) == "") {
+                        Ekstrakulikuler?.put(it.key, it.value)
+                    }
+                }
+                nilai.Ekstrakulikuler = Ekstrakulikuler
+
+                this.nilai?.Saran_Guru?.forEach {
+                    if (Saran_Guru?.get(it.key) == null || Saran_Guru?.get(it.key) == "") {
+                        Saran_Guru?.put(it.key, it.value)
+                    }
+                }
+                nilai.Saran_Guru = Saran_Guru
+
+                this.nilai?.TbBb?.forEach {
+                    if (TbBb?.get(it.key) == null || TbBb?.get(it.key) == "") {
+                        TbBb?.put(it.key, it.value)
+                    }
+                }
+                nilai.TbBb= TbBb
+
+                this.nilai?.Kondisi_Kesehatan?.forEach {
+                    if (Kondisi_Kesehatan?.get(it.key) == null || Kondisi_Kesehatan?.get(it.key) == "") {
+                        Kondisi_Kesehatan?.put(it.key, it.value)
+                    }
+                }
+                nilai.Kondisi_Kesehatan= Kondisi_Kesehatan
+
+                this.nilai?.Absensi?.forEach {
+                    if (Absensi?.get(it.key) == null ) {
+                        Absensi?.put(it.key, it.value)
+                    }
+                }
+                nilai.Absensi= Absensi
+
+                this.nilai?.Evaluasi_Perkembangan_Anak?.forEach {
+                    if (Evaluasi_Perkembangan_Anak?.get(it.key) == null || Evaluasi_Perkembangan_Anak?.get(it.key) == "") {
+                        Evaluasi_Perkembangan_Anak?.put(it.key, it.value)
+                    }
+                }
+                nilai.Evaluasi_Perkembangan_Anak= Evaluasi_Perkembangan_Anak
+
+                this.nilai?.Absensi?.forEach {
+                    if (Absensi?.get(it.key) == null || Kondisi_Kesehatan?.get(it.key) == "") {
+                        Absensi?.put(it.key, it.value)
+                    }
+                }
+                nilai.Absensi= Absensi
+
+
+                if(Kelas_Murajaah.size>0){
+                    Log.d("Masuk if 1","Masuk")
+                    nilai.Kelas_Murajaah = Kelas_Murajaah
+                }else{
+                    val isiMur=this.nilai?.Kelas_Murajaah?.get("Kelas Murajaah")
+                    Kelas_Murajaah2.put("Kelas Murajaah",isiMur!!)
+                    nilai.Kelas_Murajaah = Kelas_Murajaah2
+                }
+                if(Kelas_Pra_Akademik.size>0){
+                    nilai.Kelas_Pra_Akademik=Kelas_Pra_Akademik
+                }else{
+                    val isiPra=this.nilai?.Kelas_Pra_Akademik?.get("Kelas Pra Akademik")
+                    praAkademik2.put("Kelas Pra Akademik",isiPra!!)
+                    nilai.Kelas_Pra_Akademik= praAkademik2
+                }
+                if(Laporan_Perkembangan_Anak.size>0){
+                    nilai.Laporan_Perkembangan_Anak=Laporan_Perkembangan_Anak
+                }else{
+                    val isiPer=this.nilai?.Laporan_Perkembangan_Anak?.get("Laporan Perkembangan Anak")
+                    perkembangan2.put("Laporan Perkembangan Anak",isiPer!!)
+                    nilai.Laporan_Perkembangan_Anak=perkembangan2
+                }
+
+                nilai.tanggal= this.nilai?.tanggal
+                nilai.kelasSiswa= this.nilai?.kelasSiswa
+                nilai.idSiswa= this.nilai?.idSiswa
+
+            }
+
+            inputNilai(nilai)
+
+
         }
-
-
 
         mata_pelajaran.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
@@ -358,6 +509,7 @@ class InputNilaiFragment : Fragment() {
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
                     minggukePerkembangan.visibility=View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
                     tv_saran_guru.visibility = View.GONE
@@ -403,7 +555,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -455,6 +606,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -501,7 +653,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -553,6 +704,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -599,7 +751,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -651,6 +802,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -697,7 +849,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -749,6 +900,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -795,7 +947,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -847,6 +998,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.VISIBLE
                     perkembangan_anak.visibility = View.VISIBLE
                     tv_mingguke_perkembangan.visibility= View.VISIBLE
+                    tv_angka_perkembangan.visibility=View.VISIBLE
                     minggukePerkembangan.visibility=View.VISIBLE
                     submit_nilai_perkembangan.visibility=View.VISIBLE
 
@@ -893,7 +1045,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -945,6 +1096,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -992,7 +1144,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -1044,6 +1195,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -1090,7 +1242,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -1142,6 +1293,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -1187,7 +1339,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -1239,6 +1390,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -1284,7 +1436,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -1336,6 +1487,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -1382,7 +1534,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.GONE
                     saran_psikolog.visibility = View.GONE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.GONE
                     tv_kondisi_okupasi_saat_ini.visibility = View.GONE
                     kondisi_okupasi_saat_ini.visibility = View.GONE
                     tv_kondisi_ideal_okupasi.visibility = View.GONE
@@ -1434,6 +1585,7 @@ class InputNilaiFragment : Fragment() {
                     tv_laporan_perkembangan_anak.visibility = View.GONE
                     perkembangan_anak.visibility = View.GONE
                     tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
                     minggukePerkembangan.visibility=View.GONE
                     submit_nilai_perkembangan.visibility=View.GONE
 
@@ -1480,7 +1632,6 @@ class InputNilaiFragment : Fragment() {
                     tv_saran_psikologi.visibility = View.VISIBLE
                     saran_psikolog.visibility = View.VISIBLE
 
-                    tv_evaluasi_perkembangan_anak_okupasi.visibility = View.VISIBLE
                     tv_kondisi_okupasi_saat_ini.visibility = View.VISIBLE
                     kondisi_okupasi_saat_ini.visibility = View.VISIBLE
                     tv_kondisi_ideal_okupasi.visibility = View.VISIBLE
@@ -1497,96 +1648,415 @@ class InputNilaiFragment : Fragment() {
             }
         }
 
+        tanggal_nilai.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                if (tanggal_nilai.selectedItemPosition==0) {
+                    sikap_spiritual.setText("")
+                    sikap_sosial.setText("")
+
+                    nilaikomputer.setText("")
+                    ket_komputer.setText("")
+                    nilai_komputer.setText("")
+
+                    nama_ekstra.setText("")
+                    ket_ekstra.setText("")
+
+                    saran_guru.setText("")
+
+                    tinggi_badan.setText("")
+                    berat_badan.setText("")
+
+                    penglihatan.setText("")
+                    pendengaran.setText("")
+                    daya_tahan.setText("")
+                    gigi.setText("")
+
+                    kondisi_saat_ini.setText("")
+                    kondisi_ideal.setText("")
+                    saran_dokter.setText("")
+
+                    izin.setText("")
+                    sakit.setText("")
+                    tidak_ada_keterangan.setText("")
+
+                    kondisi_psikologi_saat_ini.setText("")
+                    kondisi_ideal_psikologi.setText("")
+                    saran_psikolog.setText("")
+                    kondisi_okupasi_saat_ini.setText("")
+                    tv_kondisi_ideal_okupasi.setText("")
+                    saran_okupasi.setText("")
+
+                } else {
+                    nilai = listNilai.find {
+                        it.tanggal == tanggal_nilai.selectedItem
+                    }
+                    siswaId = nilai?.idSiswa
+
+                    when(mata_pelajaran.selectedItem) {
+                        "Penilaian Sikap" -> {
+                            if (nilai?.Penilaian_Sikap?.get("Sikap Spiritual")!=null){
+                                sikap_spiritual.setText("${nilai?.Penilaian_Sikap?.get("Sikap Spiritual")}")
+                            }
+                            if(nilai?.Penilaian_Sikap?.get("Sikap Sosial")!=null){
+                                sikap_sosial.setText("${nilai?.Penilaian_Sikap?.get("Sikap Sosial")}")
+                            }
+                        }
+                        "Kelas Pra Akademik" -> {
+                            if(nilai?.Kelas_Pra_Akademik!=null){
+                                Log.d("Pra Akademik", "${nilai?.Kelas_Pra_Akademik}")
+                                Kelas_Pra_Akademik = nilai?.Kelas_Pra_Akademik!!
+                                Kelas_Pra_Akademik?.get("Kelas Pra Akademik")?.forEach {
+                                    listPraAkademik.add(it)
+                                }
+                                Log.d("LIST_MURAJAAH", "$listPraAkademik")
+                            }
+
+                        }
+                        "Kelas Komputer" -> {
+                            if(nilai?.Kelas_Komputer?.get("Materi")!=null){
+                                nilaikomputer.setText("${nilai?.Kelas_Komputer?.get("Materi")}")
+                            }
+                            if(nilai?.Kelas_Komputer?.get("Keterangan")!=null){
+                                ket_komputer.setText("${nilai?.Kelas_Komputer?.get("Keterangan")}")
+                            }
+                            if(nilai?.Kelas_Komputer?.get("Nilai")!=null){
+                                nilai_komputer.setText("${nilai?.Kelas_Komputer?.get("Nilai")}")
+                            }
+
+                        }
+                        "Kelas Muraja'ah" -> {
+                            if(nilai?.Kelas_Murajaah!=null){
+                                Log.d("MURAJAAH", "${nilai?.Kelas_Murajaah}")
+                                Kelas_Murajaah = nilai?.Kelas_Murajaah!!
+                                Kelas_Murajaah?.get("Kelas Murajaah")?.forEach {
+                                    listMurajaah.add(it)
+                                }
+                                Log.d("LIST_MURAJAAH", "$listMurajaah")
+                            }
+
+                        }
+                        "Ekstrakulikuler" -> {
+                            if(nilai?.Ekstrakulikuler?.get("Nama Ekstra")!=null){
+                                nama_ekstra.setText("${nilai?.Ekstrakulikuler?.get("Nama Ekstra")}")
+                            }
+                            if(nilai?.Ekstrakulikuler?.get("Keterangan")!=null){
+                                ket_ekstra.setText("${nilai?.Ekstrakulikuler?.get("Keterangan")}")
+                            }
+
+                        }
+                        "Laporan Perkembangan Anak" -> {
+                            if(nilai?.Laporan_Perkembangan_Anak!=null){
+                                Log.d("Perkembangan", "${nilai?.Laporan_Perkembangan_Anak}")
+                                Laporan_Perkembangan_Anak = nilai?.Laporan_Perkembangan_Anak!!
+                                Laporan_Perkembangan_Anak?.get("Laporan Perkembangan Anak")?.forEach {
+                                    listPerkembangan.add(it)
+                                }
+                                Log.d("LIST_MURAJAAH", "$listPerkembangan")
+                            }
+
+                        }
+                        "Saran Guru" -> {
+                            if(nilai?.Saran_Guru?.get("Saran Guru")!=null){
+                                saran_guru.setText("${nilai?.Saran_Guru?.get("Saran Guru")}")
+                            }
+
+                        }
+                        "Tinggi dan Berat Badan" -> {
+                            if(nilai?.TbBb?.get("Tinggi Badan")!=null){
+                                tinggi_badan.setText("${nilai?.TbBb?.get("Tinggi Badan")}")
+                            }
+                            if(nilai?.TbBb?.get("Berat Badan")!=null){
+                                berat_badan.setText("${nilai?.TbBb?.get("Berat Badan")}")
+                            }
+
+                        }
+                        "Kondisi Kesehatan" -> {
+                            if(nilai?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")!=null){
+                                penglihatan.setText("${nilai?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")!=null){
+                                pendengaran.setText("${nilai?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Daya Tahan")!=null){
+                                daya_tahan.setText("${nilai?.Kondisi_Kesehatan?.get("Daya Tahan")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Kondisi Gigi")!=null){
+                                gigi.setText("${nilai?.Kondisi_Kesehatan?.get("Kondisi Gigi")}")
+                            }
+
+                        }
+                        "Evaluasi Pertumbuhan Anak" -> {
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")!=null){
+                                kondisi_saat_ini.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")!=null){
+                                kondisi_ideal.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")!=null){
+                                saran_dokter.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")}")
+                            }
+
+                        }
+                        "Absensi" -> {
+
+                            if(nilai?.Absensi?.get("Izin")!=null){
+                                izin.setText("${nilai?.Absensi?.get("Izin")}")
+                            }
+                            if(nilai?.Absensi?.get("Sakit")!=null){
+                                sakit.setText("${nilai?.Absensi?.get("Sakit")}")
+                            }
+                            if(nilai?.Absensi?.get("Tanpa Keterangan")!=null){
+                                tidak_ada_keterangan.setText("${nilai?.Absensi?.get("Tanpa Keterangan")}")
+                            }
+
+                        }
+                        "Evaluasi Perkembangan Anak" -> {
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")!=null){
+                                kondisi_psikologi_saat_ini.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")!=null){
+                                kondisi_ideal_psikologi.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")!=null){
+                                saran_psikolog.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")!=null){
+                                kondisi_okupasi_saat_ini.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")!=null){
+                                kondisi_ideal_okupasi.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")!=null){
+                                saran_okupasi.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")}")
+                            }
+                        }
+
+                    }
+                }
+
+
+            }
+
+        }
+
+    }
+
+    private fun setMurajaahValue(minggukeMurajaah: String) {
+        val murajaah = listMurajaah.find {it.minggu == minggukeMurajaah}
+        if (murajaah!=null) {
+            val nilaii=murajaah.nilai
+            nilai_murajaah.setText(Integer.toString(nilaii!!))
+            ket_murajaah.setText(murajaah.keterangan)
+            materi_murajaah.setText(murajaah.materi)
+        }
+    }
+
+    private fun setPraAkademikValue(minggukePraAkademik:String){
+        val praAkademik = listPraAkademik.find { it.minggu==minggukePraAkademik }
+        if(praAkademik!=null){
+            val nilai=praAkademik.nilai
+            materi_sikap_sosial.setText(praAkademik.materi)
+            ket_sikap_sosial.setText(praAkademik.keterangan)
+            nilai_sikap_sosial.setText(Integer.toString((nilai!!)))
+
+        }
+    }
+
+    private fun setPerkembanganValue(mingguPerkembangan:Int){
+        val perkembangan=listPerkembangan.find { it.minggu==mingguke_perkembangan }
+        if(perkembangan!=null){
+            val nilai=perkembangan.angka
+            perkembangan_anak.setText(Integer.toString(nilai!!))
+        }
+    }
+
+    private fun getNilaiEachStudent(idSiswa: String) {
+//        tanggal_nilai.adapter = null
+        listTanggal.clear()
+        listTanggal.add("Tambah Data Baru")
+        var ref = mFirestore.collection("nilai")
+        ref.whereEqualTo("idSiswa", idSiswa).get()
+            .addOnSuccessListener {
+                listNilai.clear()
+                it.forEach {
+                    val nilai = it.toObject(Nilai::class.java)
+                    listNilai.add(nilai)
+                }
+                Log.d("LIST_NILAI", "${listNilai}")
+
+                if (listNilai.size > 0) {
+                    listNilai.map {nilai ->
+                        nilai.tanggal
+                    }.forEach {
+                        listTanggal.add(it.toString())
+                    }
+                }
+//                Log.d("LIST_TANGGAL", "$listTanggal")
+
+                tanggal_nilai.setAdapter(null)
+                tanggal_nilai.adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, listTanggal)
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
+            }
     }
 
 
     private fun inputNilai(nilai: Nilai) {
-        mFirestore.collection("nilai")
-            .document(idSiswa)
-            .set(nilai)
-            .addOnSuccessListener {
-                Toast.makeText(context, "Nilai Berhasil Ditambahkan", Toast.LENGTH_SHORT)
-                    .show()
 
-            }.addOnFailureListener {
-                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
-                    .show()
 
+        if (tanggal_nilai.selectedItemPosition == 0) {
+            val sekarang=SimpleDateFormat("dd-MM-yyyy").format(Date())
+            Log.d("sekarang:",sekarang)
+            val tanggal=listTanggal.find {
+                it==sekarang
             }
+                if(tanggal==null){
+                    Toast.makeText(requireContext(),"Atas",Toast.LENGTH_SHORT).show()
+                    mFirestore.collection("nilai").add(nilai)?.addOnSuccessListener {
+                        Toast.makeText(context, "Nilai Baru Berhasil Ditambahkan", Toast.LENGTH_SHORT)
+                            .show()
+
+                    }?.addOnFailureListener {
+                        Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
+                            .show()
+
+                    }
+                }else{
+                    Toast.makeText(requireContext(),"Bawah",Toast.LENGTH_SHORT).show()
+                    mFirestore.collection("nilai")
+                        .whereEqualTo("idSiswa", siswaId)
+                        .get()
+                        .addOnSuccessListener {
+                            it.forEach{itl ->
+                                itl.reference.update(
+                                    "idSiswa", nilai.idSiswa,
+                                    "kelasSiswa", nilai.kelasSiswa,
+                                    "penilaian_Sikap",nilai.Penilaian_Sikap,
+                                    "kelas_Pra_Akademik", nilai.Kelas_Pra_Akademik,
+                                    "kelas_Komputer",nilai.Kelas_Komputer,
+                                    "kelas_Murajaah",nilai.Kelas_Murajaah,
+                                    "ekstrakulikuler",nilai.Ekstrakulikuler,
+                                    "laporan_Perkembangan_Anak",nilai.Laporan_Perkembangan_Anak,
+                                    "saran_Guru",nilai.Saran_Guru,
+                                    "tinggi_dan_Berat_Badan",nilai.TbBb,
+                                    "kondisi_Kesehatan",nilai.Kondisi_Kesehatan,
+                                    "evaluasi_Pertumbuhan_Anak",nilai.Evaluasi_Pertumbuhan_Anak,
+                                    "absensi",nilai.Absensi,
+                                    "evaluasi_Perkembangan_Anak",nilai.Evaluasi_Perkembangan_Anak
+                                )
+                            }
+
+                            Toast.makeText(requireContext(),"Nilai Berhasil Di Update",Toast.LENGTH_SHORT).show()
+                        }
+                }
+
+        } else {
+//            Log.d("ISI TRANSFER NILAI","${nilai}")
+            mFirestore.collection("nilai")
+                .whereEqualTo("idSiswa", siswaId)
+                .get()
+                .addOnSuccessListener {
+                    it.forEach{itl ->
+                        itl.reference.update(
+                            "idSiswa", nilai.idSiswa,
+                            "kelasSiswa", nilai.kelasSiswa,
+                            "penilaian_Sikap",nilai.Penilaian_Sikap,
+                            "kelas_Pra_Akademik", nilai.Kelas_Pra_Akademik,
+                            "kelas_Komputer",nilai.Kelas_Komputer,
+                            "kelas_Murajaah",nilai.Kelas_Murajaah,
+                            "ekstrakulikuler",nilai.Ekstrakulikuler,
+                            "laporan_Perkembangan_Anak",nilai.Laporan_Perkembangan_Anak,
+                            "saran_Guru",nilai.Saran_Guru,
+                            "tinggi_dan_Berat_Badan",nilai.TbBb,
+                            "kondisi_Kesehatan",nilai.Kondisi_Kesehatan,
+                            "evaluasi_Pertumbuhan_Anak",nilai.Evaluasi_Pertumbuhan_Anak,
+                            "absensi",nilai.Absensi,
+                            "evaluasi_Perkembangan_Anak",nilai.Evaluasi_Perkembangan_Anak
+                        )
+                    }
+
+                    Toast.makeText(requireContext(),"Nilai Berhasil Di Update",Toast.LENGTH_SHORT).show()
+
+                }
+        }
+
+        perkembangan.clear()
+        murajaah.clear()
+        praAkademik.clear()
 
     }
     private fun submit_perkembangan(){
-        mFirestore.collection("nilai")
-            .document(idSiswa)
-            .get()
-            .addOnSuccessListener {
-                val isi = it.toObject(Nilai::class.java)
-                grafik.clear()
-                if (isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
-                    val graph1= isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak") as List<Grafik>
-                    grafik.addAll(graph1)
 
-                }
-                val graphic = Grafik(perkembangan_anak.text.toString().toInt(),mingguke_perkembangan)
-                grafik.add(graphic)
 
-                val Laporan_Perkembangan_Anak = HashMap<String, MutableList<Grafik>>()
-                Laporan_Perkembangan_Anak.put("Perkembangan Anak", grafik)
-                val nilai = Nilai()
-                nilai.Laporan_Perkembangan_Anak = Laporan_Perkembangan_Anak
-                inputNilai(nilai)
-
+        val perkembangan2=Grafik(perkembangan_anak.text.toString().toInt(), mingguke_perkembangan)
+        perkembangan.add(perkembangan2)
+        perkembangan.forEach { per ->
+            val listPerkembangan= Laporan_Perkembangan_Anak.get("Laporan Perkembangan Anak")
+            val index = listPerkembangan?.indexOfFirst {
+                it.minggu == per.minggu
             }
+            if (index != -1) {
+                index?.let { listPerkembangan[it] = per }
+            } else {
+                listPerkembangan.add(per)
+            }
+
+        }
+
+        Log.d("ISI LIST PERKEMBANGAN","${perkembangan}")
+
 
     }
 
     private fun submit_murajaah1(){
-        mFirestore.collection("nilai")
-            .document(idSiswa)
-            .get()
-            .addOnSuccessListener {
-                val isi = it.toObject(Nilai::class.java)
-                murajaah.clear()
-                if (isi?.Kelas_Murajaah?.get("Kelas Murajaah")!=null){
-                    val murajaah1= isi?.Kelas_Murajaah?.get("Kelas Murajaah") as List<Murajaah>
-                    murajaah.addAll(murajaah1)
-                }
 
-                val murajaah2 = Murajaah(mingguke_murajaah,materi_murajaah.text.toString(),ket_murajaah.text.toString(),nilai_murajaah.text.toString().toInt())
-                murajaah.add(murajaah2)
-
-                val Kelas_Murajaah = HashMap<String, MutableList<Murajaah>>()
-                Kelas_Murajaah.put("Kelas Murajaah", murajaah)
-                val nilai = Nilai()
-                nilai.Kelas_Murajaah = Kelas_Murajaah
-                inputNilai(nilai)
-
+        val murajaah2 = Murajaah(mingguke_murajaah,materi_murajaah.text.toString(),ket_murajaah.text.toString(),nilai_murajaah.text.toString().toInt())
+        murajaah.add(murajaah2)
+        murajaah.forEach { mur ->
+            val listMurajaah = Kelas_Murajaah.get("Kelas Murajaah")
+            val index = listMurajaah?.indexOfFirst {
+                it.minggu == mur.minggu
             }
+            if (index != -1) {
+                index?.let { listMurajaah[it] = mur }
+            } else {
+                listMurajaah.add(mur)
+            }
+
+        }
+        Log.d("ISI LIST MURAJAAH","${murajaah}")
 
     }
 
     private fun submit_akademik(){
-        mFirestore.collection("nilai")
-            .document(idSiswa)
-            .get()
-            .addOnSuccessListener {
-                val isi = it.toObject(Nilai::class.java)
-                akademik.clear()
-                if (isi?.Kelas_Pra_Akademik?.get("Penilaian Kelas Pra Akademik")!=null){
-                    val akademik1= isi?.Kelas_Pra_Akademik?.get("Penilaian Kelas Pra Akademik") as List<Murajaah>
-                    akademik.addAll(akademik1)
-                }
 
-                val akademik2 = Murajaah(mingguke_sikap_sosial,materi_sikap_sosial.text.toString(),ket_sikap_sosial.text.toString(),nilai_sikap_sosial.text.toString().toInt())
-                akademik.add(akademik2)
-
-                val Kelas_Pra_Akademik = HashMap<String, MutableList<Murajaah>>()
-                Kelas_Pra_Akademik.put("Kelas Pra Akademik", akademik)
-                val nilai = Nilai()
-                nilai.Kelas_Pra_Akademik= Kelas_Pra_Akademik
-                inputNilai(nilai)
-
+        val akademik= Murajaah(mingguke_sikap_sosial,materi_sikap_sosial.text.toString(),ket_sikap_sosial.text.toString(),nilai_sikap_sosial.text.toString().toInt())
+        praAkademik.add(akademik)
+        Log.d("PraBroooo","${praAkademik}")
+        praAkademik.forEach { akad->
+            val listPraAkademik= Kelas_Pra_Akademik.get("Kelas Pra Akademik")
+            val index = listPraAkademik?.indexOfFirst {
+                it.minggu == akad.minggu
             }
+            if (index != -1) {
+                index?.let { listPraAkademik[it] = akad }
+            } else {
+                listPraAkademik.add(akad)
+            }
+        }
+        Log.d("ISI LIST PRA AKADEMIK","${praAkademik}")
+
 
     }
 
@@ -1597,9 +2067,24 @@ class InputNilaiFragment : Fragment() {
             .get()
             .addOnSuccessListener {
                 for (siswa in it) {
-                    idSiswa = siswa.id
-                    getLatestNilai(idSiswa)
+                    val sis = siswa.toObject(Siswa::class.java)
+                    idSiswa = sis.id
+//                    getLatestNilai(idSiswa)
 //                    setMinggu(idSiswa)
+
+                }
+
+            }
+    }
+
+    private fun getKelasSiswa(idSiswa: String){
+        mFirestore.collection("students")
+            .whereEqualTo("id", idSiswa)
+            .get()
+            .addOnSuccessListener {
+                for (siswa in it) {
+                    val sis = siswa.toObject(Siswa::class.java)
+                    kelasSiswa = sis.kelas
 
                 }
 
@@ -1614,110 +2099,6 @@ class InputNilaiFragment : Fragment() {
         }
     }
 
-    private fun getLatestNilai(siswaId:String) {
-        mFirestore.collection("nilai")
-            .document(siswaId)
-            .get()
-            .addOnSuccessListener {
-                val isi=it.toObject(Nilai::class.java)
-
-
-                if (isi?.Kelas_Pra_Akademik?.get("Kelas Pra Akademik") != null) {
-                    val akademik1 = isi?.Kelas_Pra_Akademik?.get("Kelas Pra Akademik")
-                    for (i in akademik1!!.indices) {
-                        if (mingguke_sikap_sosial == akademik1[i].minggu) {
-                            materi_sikap_sosial.setText(akademik1[i].materi)
-                            ket_sikap_sosial.setText(akademik1[i].keterangan)
-                            nilai_sikap_sosial.setText(akademik1[i].nilai.toString())
-                            break
-                        }
-                    }
-                }
-                else if (isi?.Penilaian_Sikap?.get("Sikap Spiritual") !=null) {
-                    sikap_spiritual.setText("${isi?.Penilaian_Sikap?.get("Sikap Spiritual")}")
-                }else if(isi?.Penilaian_Sikap?.get("Sikap Sosial")!=null){
-                    sikap_sosial.setText("${isi?.Penilaian_Sikap?.get("Sikap Sosial")}")
-                }else if(isi?.Kelas_Komputer?.get("Materi")!=null){
-                    nilaikomputer.setText("${isi?.Kelas_Komputer?.get("Materi")}")
-                }else if(isi?.Kelas_Komputer?.get("Keterangan")!=null){
-                    ket_komputer.setText("${isi?.Kelas_Komputer?.get("Keterangan")}")
-                }else if(isi?.Kelas_Komputer?.get("Nilai")!=null){
-                    nilai_komputer.setText("${isi?.Kelas_Komputer?.get("Nilai")}")
-                }
-
-                else if (isi?.Kelas_Murajaah?.get("Kelas Murajaah") != null) {
-                    val murajaah1 = isi?.Kelas_Murajaah?.get("Kelas Murajaah")
-                    for (i in murajaah1!!.indices) {
-                        if (mingguke_murajaah == murajaah1[i].minggu) {
-                            materi_murajaah.setText(murajaah1[i].materi)
-                            ket_murajaah.setText(murajaah1[i].keterangan)
-                            nilai_murajaah.setText(murajaah1[i].nilai.toString())
-                            break
-                        }
-                    }
-
-                }
-
-
-                else if (isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak") != null) {
-                    val laporan1 = isi?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")
-                    for (i in laporan1!!.indices) {
-                        if (mingguke_perkembangan == laporan1[i].minggu) {
-                            perkembangan_anak.setText(laporan1[i].angka!!.toInt())
-                            break
-                        }
-                    }
-
-                }
-                else if(isi?.Ekstrakulikuler?.get("Nama Ektra")!=null){
-                    nama_ekstra.setText("${isi?.Ekstrakulikuler?.get("Nama Ektra")}")
-                }else if(isi?.Ekstrakulikuler?.get("Keterangan")!=null){
-                    ket_ekstra.setText("${isi?.Ekstrakulikuler?.get("Keterangan")}")
-                }else if (isi?.Saran_Guru?.get("Saran Guru")!=null){
-                    saran_guru.setText("${isi?.Saran_Guru?.get("Saran Guru")}")
-                }else if(isi?.TbBb?.get("Tinggi Badan")!=null){
-                    tinggi_badan.setText("${isi?.TbBb?.get("Tinggi Badan")}")
-                }else if (isi?.TbBb?.get("Berat Badan")!=null){
-                    berat_badan.setText("${isi?.TbBb?.get("Berat Badan")}")
-                }else if(isi?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")!=null){
-                    penglihatan.setText("${isi?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")}")
-                }else if(isi?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")!=null){
-                    pendengaran.setText("${isi?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")}")
-                }else if (isi?.Kondisi_Kesehatan?.get("Daya Tahan")!=null){
-                    daya_tahan.setText("${isi?.Kondisi_Kesehatan?.get("Daya Tahan")}")
-                }else if(isi?.Kondisi_Kesehatan?.get("Kondisi Gigi")!=null){
-                    gigi.setText("${isi?.Kondisi_Kesehatan?.get("Kondisi Gigi")}")
-                }else if(isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")!=null){
-                    kondisi_saat_ini.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")}")
-                }else if(isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")!=null){
-                    kondisi_ideal.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")}")
-                }else if(isi?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")!=null){
-                    saran_dokter.setText("${isi?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")}")
-                }else if(isi?.Absensi?.get("Izin")!= null){
-                    izin.setText("${isi?.Absensi?.get("Izin")}")
-                }else if(isi?.Absensi?.get("Sakit")!=null){
-                    sakit.setText("${isi?.Absensi?.get("Sakit")}")
-                }else if (isi?.Absensi?.get("Tanpa Keterangan")!=null){
-                    tidak_ada_keterangan.setText("${isi?.Absensi?.get("Tanpa Keterangan")}")
-                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")!=null){
-                    kondisi_psikologi_saat_ini.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")}")
-                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")!=null){
-                    kondisi_ideal_psikologi.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")}")
-                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")!=null){
-                    saran_psikolog.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")}")
-                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")!=null){
-                    kondisi_okupasi_saat_ini.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")}")
-                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")!=null){
-                    kondisi_ideal_okupasi.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")}")
-                }else if(isi?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")!=null){
-                    saran_okupasi.setText("${isi?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")}")
-                }
-//                mingguke
-//                mingguke_murajaah
-            }
-
-
-        }
 
 
 

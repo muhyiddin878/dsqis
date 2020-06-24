@@ -30,6 +30,7 @@ class login : AppCompatActivity(){
     private lateinit var prefs:AppPreferences
     val user = FirebaseAuth.getInstance().currentUser
     private val mStorage = FirebaseStorage.getInstance()
+    private val list:MutableList<String> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,20 +136,22 @@ class login : AppCompatActivity(){
     }
 
     fun showLoginSuccess() {
-        val ref = FirebaseStorage.getInstance().getReference("profilpic/${prefs.uid}")
-        val cek= ref.downloadUrl
-        Log.d("url:",cek.toString())
-        if(cek==null){
-            startActivity(Intent(this,OnBoardingActivity::class.java))
-        }else{
+        val ref = mStorage.getReference("profilpic/${prefs.uid}")
+        val cek= ref.downloadUrl.toString()
+        Log.d("url:",cek)
+        if(cek.length>0){
             startActivity(Intent(this,MainActivity::class.java))
+
+        }else{
+            startActivity(Intent(this,OnBoardingActivity::class.java))
         }
         finish()
     }
     fun showLoginSuccessPakar(){
-        val ref = FirebaseStorage.getInstance().getReference("profilpic/${prefs.uid}")
-        val cek= ref.downloadUrl
-        if(cek==null){
+        val ref = mStorage.getReference("profilpic/${prefs.uid}")
+        val cek= ref.downloadUrl.toString()
+        Log.d("url:",cek.toString())
+        if(cek.length>0){
             startActivity(Intent(this,OnBoardingActivity::class.java))
         }else{
             startActivity(Intent(this,MainActivityPakar::class.java))

@@ -35,13 +35,24 @@ class FragmentLihatLaporan : Fragment() {
     lateinit var prefs: AppPreferences
     private val CHOOSE_IMAGE = 101
     var resolver: ContentResolver?=null
+    private var siswaId: String? = null
     private lateinit var minggumurajaah: String
     private lateinit var mingguke_murajaah: String
     private lateinit var mingguke_murajaah_spinner:Spinner
     private lateinit var minggu: String
     private lateinit var mingguke_sikap_sosial: String
     private lateinit var mingguke_sikap_sosial_spinner:Spinner
-    private val murajaah2:MutableList<Murajaah> = mutableListOf()
+
+    private var Kelas_Murajaah = HashMap<String, MutableList<Murajaah>>()
+    private var Kelas_Pra_Akademik = HashMap<String, MutableList<Murajaah>>()
+    private var Laporan_Perkembangan_Anak = HashMap<String, MutableList<Grafik>>()
+    private val listTanggal = mutableListOf<String>()
+    private val listNilai = mutableListOf<Nilai>()
+
+    private val listMurajaah = mutableListOf<Murajaah>()
+    private val listPraAkademik = mutableListOf<Murajaah>()
+    private val listPerkembangan = mutableListOf<Grafik>()
+    private var nilai: Nilai? = null
 
 
 
@@ -72,30 +83,29 @@ class FragmentLihatLaporan : Fragment() {
                     minggu = mingguke_sikap_sosial_spinner.selectedItem.toString()
                     if (minggu == "1") {
                         mingguke_sikap_sosial = "1"
+                        nilai_sikap_sosial1.setText("")
+                        ket_sikap_sosial1.setText("")
+                        materi_sikap_sosial1.setText("")
+                        setPraAkademikValue(mingguke_sikap_sosial)
                     } else if (minggu == "2") {
                         mingguke_sikap_sosial = "2"
+                        nilai_sikap_sosial1.setText("")
+                        ket_sikap_sosial1.setText("")
+                        materi_sikap_sosial1.setText("")
+                        setPraAkademikValue(mingguke_sikap_sosial)
                     } else if (minggu == "3") {
                         mingguke_sikap_sosial = "3"
+                        nilai_sikap_sosial1.setText("")
+                        ket_sikap_sosial1.setText("")
+                        materi_sikap_sosial1.setText("")
+                        setPraAkademikValue(mingguke_sikap_sosial)
                     } else if (minggu == "4") {
                         mingguke_sikap_sosial = "4"
-                    } else if (minggu == "5") {
-                        mingguke_sikap_sosial = "5"
-                    } else if (minggu == "6") {
-                        mingguke_sikap_sosial = "6"
-                    } else if (minggu == "7") {
-                        mingguke_sikap_sosial = "7"
-                    } else if (minggu == "8") {
-                        mingguke_sikap_sosial = "8"
-                    } else if (minggu == "9") {
-                        mingguke_sikap_sosial = "9"
-                    } else if (minggu == "10") {
-                        mingguke_sikap_sosial = "10"
-                    } else if (minggu == "11") {
-                        mingguke_sikap_sosial = "11"
-                    } else if (minggu == "12") {
-                        mingguke_sikap_sosial = "12"
+                        nilai_sikap_sosial1.setText("")
+                        ket_sikap_sosial1.setText("")
+                        materi_sikap_sosial1.setText("")
+                        setPraAkademikValue(mingguke_sikap_sosial)
                     }
-                    getIdFromParent()
 
                 }
 
@@ -110,31 +120,30 @@ class FragmentLihatLaporan : Fragment() {
                     minggumurajaah = mingguke_murajaah_spinner.selectedItem.toString()
                     if (minggumurajaah == "1") {
                         mingguke_murajaah = "1"
+                        nilai_murajaah1.setText("")
+                        ket_murajaah1.setText("")
+                        materi_murajaah1.setText("")
+                        setMurajaahValue(mingguke_murajaah)
                     } else if (minggumurajaah == "2") {
                         mingguke_murajaah = "2"
+                        nilai_murajaah1.setText("")
+                        ket_murajaah1.setText("")
+                        materi_murajaah1.setText("")
+                        setMurajaahValue(mingguke_murajaah)
                     } else if (minggumurajaah == "3") {
                         mingguke_murajaah = "3"
+                        nilai_murajaah1.setText("")
+                        ket_murajaah1.setText("")
+                        materi_murajaah1.setText("")
+                        setMurajaahValue(mingguke_murajaah)
                     } else if (minggumurajaah == "4") {
                         mingguke_murajaah = "4"
-                    } else if (minggumurajaah == "5") {
-                        mingguke_murajaah = "5"
-                    } else if (minggumurajaah == "6") {
-                        mingguke_murajaah = "6"
-                    } else if (minggumurajaah == "7") {
-                        mingguke_murajaah = "7"
-                    } else if (minggumurajaah == "8") {
-                        mingguke_murajaah = "8"
-                    } else if (minggumurajaah == "9") {
-                        mingguke_murajaah = "9"
-                    } else if (minggumurajaah == "10") {
-                        mingguke_murajaah = "10"
-                    } else if (minggumurajaah == "11") {
-                        mingguke_murajaah = "11"
-                    } else if (minggumurajaah == "12") {
-                        mingguke_murajaah = "12"
+                        nilai_murajaah1.setText("")
+                        ket_murajaah1.setText("")
+                        materi_murajaah1.setText("")
+                        setMurajaahValue(mingguke_murajaah)
                     }
 
-                    getIdFromParent()
 
                 }
 
@@ -142,6 +151,231 @@ class FragmentLihatLaporan : Fragment() {
 
                 }
             }
+
+
+
+        tanggal_nilai1.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
+                if (tanggal_nilai1.selectedItemPosition==0) {
+                    sikap_spiritual1.setText("")
+                    sikap_sosial1.setText("")
+
+                    nilaikomputer1.setText("")
+                    ket_komputer1.setText("")
+                    nilai_komputer1.setText("")
+
+                    nama_ekstra1.setText("")
+                    ket_ekstra1.setText("")
+
+                    saran_guru1.setText("")
+
+                    tinggi_badan1.setText("")
+                    berat_badan1.setText("")
+
+                    penglihatan1.setText("")
+                    pendengaran1.setText("")
+                    daya_tahan1.setText("")
+                    gigi1.setText("")
+
+                    kondisi_saat_ini1.setText("")
+                    kondisi_ideal1.setText("")
+                    saran_dokter1.setText("")
+
+                    izin1.setText("")
+                    sakit1.setText("")
+                    tidak_ada_keterangan1.setText("")
+
+                    kondisi_psikologi_saat_ini1.setText("")
+                    kondisi_ideal_psikologi1.setText("")
+                    saran_psikolog1.setText("")
+                    kondisi_okupasi_saat_ini1.setText("")
+                    tv_kondisi_ideal_okupasi1.setText("")
+                    saran_okupasi1.setText("")
+
+                } else {
+                    nilai = listNilai.find {
+                        it.tanggal == tanggal_nilai1.selectedItem
+                    }
+                    siswaId = idSiswa
+
+                    when(mata_pelajaran.selectedItem) {
+                        "Penilaian Sikap" -> {
+                            if (nilai?.Penilaian_Sikap?.get("Sikap Spiritual")!=null){
+                                sikap_spiritual1.setText("${nilai?.Penilaian_Sikap?.get("Sikap Spiritual")}")
+                            }
+                            if(nilai?.Penilaian_Sikap?.get("Sikap Sosial")!=null){
+                                sikap_sosial1.setText("${nilai?.Penilaian_Sikap?.get("Sikap Sosial")}")
+                            }
+                        }
+                        "Kelas Pra Akademik" -> {
+                            if(nilai?.Kelas_Pra_Akademik!=null){
+                                Log.d("Pra Akademik", "${nilai?.Kelas_Pra_Akademik}")
+                                Kelas_Pra_Akademik = nilai?.Kelas_Pra_Akademik!!
+                                Kelas_Pra_Akademik?.get("Kelas Pra Akademik")?.forEach {
+                                    listPraAkademik.add(it)
+                                }
+                                Log.d("LIST_MURAJAAH", "$listPraAkademik")
+                            }
+
+                        }
+                        "Kelas Komputer" -> {
+                            if(nilai?.Kelas_Komputer?.get("Materi")!=null){
+                                nilaikomputer1.setText("${nilai?.Kelas_Komputer?.get("Materi")}")
+                            }
+                            if(nilai?.Kelas_Komputer?.get("Keterangan")!=null){
+                                ket_komputer1.setText("${nilai?.Kelas_Komputer?.get("Keterangan")}")
+                            }
+                            if(nilai?.Kelas_Komputer?.get("Nilai")!=null){
+                                nilai_komputer1.setText("${nilai?.Kelas_Komputer?.get("Nilai")}")
+                            }
+
+                        }
+                        "Kelas Muraja'ah" -> {
+                            if(nilai?.Kelas_Murajaah!=null){
+                                Log.d("MURAJAAH", "${nilai?.Kelas_Murajaah}")
+                                Kelas_Murajaah = nilai?.Kelas_Murajaah!!
+                                Kelas_Murajaah?.get("Kelas Murajaah")?.forEach {
+                                    listMurajaah.add(it)
+                                }
+                                Log.d("LIST_MURAJAAH", "$listMurajaah")
+                            }
+
+                        }
+                        "Ekstrakulikuler" -> {
+                            if(nilai?.Ekstrakulikuler?.get("Nama Ekstra")!=null){
+                                nama_ekstra1.setText("${nilai?.Ekstrakulikuler?.get("Nama Ekstra")}")
+                            }
+                            if(nilai?.Ekstrakulikuler?.get("Keterangan")!=null){
+                                ket_ekstra1.setText("${nilai?.Ekstrakulikuler?.get("Keterangan")}")
+                            }
+
+                        }
+                        "Laporan Perkembangan Anak" -> {
+
+                            if (nilai?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
+                                val graph1= nilai?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")
+                                Log.d("TES ISI graph1", "$graph1")
+                                val dataPoints =arrayOfNulls<DataPoint>(graph1!!.size)
+                                for (i in graph1.indices) {
+                                    dataPoints[i] = DataPoint(
+                                        graph1[i].angka!!.plus(0.0),
+                                        graph1[i].minggu!!.plus(0.0)
+                                    )
+                                }
+                                val series = LineGraphSeries<DataPoint>(dataPoints)
+                                val series2 = PointsGraphSeries<DataPoint>(dataPoints)
+                                graph.addSeries(series)
+                                graph.addSeries(series2)
+                                series2.setShape(PointsGraphSeries.Shape.POINT)
+                                series.setTitle("Perkembangan Anak")
+                                graph.getLegendRenderer().setVisible(true)
+                                graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
+
+                            }
+                            if(nilai?.Laporan_Perkembangan_Anak!=null){
+                                Log.d("Perkembangan", "${nilai?.Laporan_Perkembangan_Anak}")
+                                Laporan_Perkembangan_Anak = nilai?.Laporan_Perkembangan_Anak!!
+                                Laporan_Perkembangan_Anak?.get("Laporan Perkembangan Anak")?.forEach {
+                                    listPerkembangan.add(it)
+                                }
+                            }
+
+                        }
+                        "Saran Guru" -> {
+                            if(nilai?.Saran_Guru?.get("Saran Guru")!=null){
+                                saran_guru1.setText("${nilai?.Saran_Guru?.get("Saran Guru")}")
+                            }
+
+                        }
+                        "Tinggi dan Berat Badan" -> {
+                            if(nilai?.TbBb?.get("Tinggi Badan")!=null){
+                                tinggi_badan1.setText("${nilai?.TbBb?.get("Tinggi Badan")}")
+                            }
+                            if(nilai?.TbBb?.get("Berat Badan")!=null){
+                                berat_badan1.setText("${nilai?.TbBb?.get("Berat Badan")}")
+                            }
+
+                        }
+                        "Kondisi Kesehatan" -> {
+                            if(nilai?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")!=null){
+                                penglihatan1.setText("${nilai?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")!=null){
+                                pendengaran1.setText("${nilai?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Daya Tahan")!=null){
+                                daya_tahan1.setText("${nilai?.Kondisi_Kesehatan?.get("Daya Tahan")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Kondisi Gigi")!=null){
+                                gigi1.setText("${nilai?.Kondisi_Kesehatan?.get("Kondisi Gigi")}")
+                            }
+
+                        }
+                        "Evaluasi Pertumbuhan Anak" -> {
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")!=null){
+                                kondisi_saat_ini1.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")!=null){
+                                kondisi_ideal1.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")!=null){
+                                saran_dokter1.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")}")
+                            }
+
+                        }
+                        "Absensi" -> {
+
+                            if(nilai?.Absensi?.get("Izin")!=null){
+                                izin1.setText("${nilai?.Absensi?.get("Izin")}")
+                            }
+                            if(nilai?.Absensi?.get("Sakit")!=null){
+                                sakit1.setText("${nilai?.Absensi?.get("Sakit")}")
+                            }
+                            if(nilai?.Absensi?.get("Tanpa Keterangan")!=null){
+                                tidak_ada_keterangan1.setText("${nilai?.Absensi?.get("Tanpa Keterangan")}")
+                            }
+
+                        }
+                        "Evaluasi Perkembangan Anak" -> {
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")!=null){
+                                kondisi_psikologi_saat_ini1.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")!=null){
+                                kondisi_ideal_psikologi1.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")!=null){
+                                saran_psikolog1.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")!=null){
+                                kondisi_okupasi_saat_ini1.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")!=null){
+                                kondisi_ideal_okupasi1.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")!=null){
+                                saran_okupasi1.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")}")
+                            }
+                        }
+
+                    }
+                }
+
+
+            }
+
+        }
+
+
 
 
 
@@ -1285,48 +1519,109 @@ class FragmentLihatLaporan : Fragment() {
 
     }
 
-    fun getCurrentDate():String{
-        val date = Calendar.getInstance().get(Calendar.DATE)
-        val month = Calendar.getInstance().get(Calendar.MONTH)+1
-        val year = Calendar.getInstance().get(Calendar.YEAR)
-        when(month){
-            1 -> return "$date Januari $year"
-            2 -> return "$date Februari $year"
-            3 -> return "$date Maret $year"
-            4 -> return "$date April $year"
-            5 -> return "$date Mei $year"
-            6 -> return "$date Juni $year"
-            7 -> return "$date Juli $year"
-            8 -> return "$date Agustus $year"
-            9 -> return "$date September $year"
-            10 -> return "$date Oktober $year"
-            11 -> return "$date November $year"
-            12 -> return "$date Desember $year"
-            else -> return month.toString()
+    private fun setMurajaahValue(minggukeMurajaah: String) {
+        val murajaah = listMurajaah.find {it.minggu == minggukeMurajaah}
+        if (murajaah!=null) {
+            val nilaii=murajaah.nilai
+            nilai_murajaah1.setText(Integer.toString(nilaii!!))
+            ket_murajaah1.setText(murajaah.keterangan)
+            materi_murajaah1.setText(murajaah.materi)
         }
     }
+
+    private fun setPraAkademikValue(minggukePraAkademik:String){
+        val praAkademik = listPraAkademik.find { it.minggu==minggukePraAkademik }
+        if(praAkademik!=null){
+            val nilai=praAkademik.nilai
+            materi_sikap_sosial1.setText(praAkademik.materi)
+            ket_sikap_sosial1.setText(praAkademik.keterangan)
+            nilai_sikap_sosial1.setText(Integer.toString((nilai!!)))
+
+        }
+    }
+
+//    fun getCurrentDate():String{
+//        val date = Calendar.getInstance().get(Calendar.DATE)
+//        val month = Calendar.getInstance().get(Calendar.MONTH)+1
+//        val year = Calendar.getInstance().get(Calendar.YEAR)
+//        when(month){
+//            1 -> return "$date Januari $year"
+//            2 -> return "$date Februari $year"
+//            3 -> return "$date Maret $year"
+//            4 -> return "$date April $year"
+//            5 -> return "$date Mei $year"
+//            6 -> return "$date Juni $year"
+//            7 -> return "$date Juli $year"
+//            8 -> return "$date Agustus $year"
+//            9 -> return "$date September $year"
+//            10 -> return "$date Oktober $year"
+//            11 -> return "$date November $year"
+//            12 -> return "$date Desember $year"
+//            else -> return month.toString()
+//        }
+//    }
 
 
 
 
     private fun getIdFromParent() {
-        Log.d("ini uid",prefs.uid)
-        mFirestore.collection("parents")
-            .document(prefs.uid).collection("students")
+        Log.d("MASUK","MASUKKKK")
+        val id =prefs.uid
+        val ref= mFirestore.collection("parents")
+            ref.document(id).collection("students")
             .get()
             .addOnSuccessListener {
-                Log.d("ini size it","${it.size()}")
-                for (siswa in it) {
-                    val datasiswa = siswa.toObject(Siswa::class.java)
-                    Log.d("INI data siswa", "$datasiswa")
-                    idSiswa = datasiswa.id
-                    getLatestNilai(idSiswa)
-                    getDataSiswa(idSiswa)
-                }
+                Log.d("first it", it.first().id)
+                val sis =it.first().toObject(Siswa::class.java)
+                idSiswa= sis.id
+//                it.forEach {sis->
+//                    Log.d("testing", sis.id)
+//                    val datasiswa = sis.toObject(Siswa::class.java)
+//                    idSiswa = datasiswa.id
+//                    Log.d("ID",idSiswa)
+//                }
+
+                getDataSiswa(idSiswa)
+                getNilai(idSiswa)
 
             }.addOnFailureListener {
                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT)
                     .show()
+            }
+
+
+
+
+    }
+
+    fun getNilai(idSiswa: String){
+
+        listTanggal.clear()
+        listTanggal.add("Tanggal")
+        var ref = mFirestore.collection("nilai")
+        ref.whereEqualTo("idSiswa", idSiswa).get()
+            .addOnSuccessListener {
+                listNilai.clear()
+                it.forEach {
+                    val nilai = it.toObject(Nilai::class.java)
+                    listNilai.add(nilai)
+                }
+                Log.d("ISI NILAIII SELECTED","${listNilai}")
+                if (listNilai.size > 0) {
+
+                    listNilai.map {nilai ->
+                        nilai.tanggal
+                    }.forEach {
+                        listTanggal.add(it.toString())
+                    }
+                }
+                Log.d("LIST_TANGGAL", "$listTanggal")
+
+                tanggal_nilai1.setAdapter(null)
+                tanggal_nilai1.adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, listTanggal)
+            }
+            .addOnFailureListener {
+                Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
             }
     }
 
@@ -1343,6 +1638,7 @@ class FragmentLihatLaporan : Fragment() {
                 }else if(isi?.Penilaian_Sikap?.get("Sikap Sosial")!=null){
                     sikap_sosial1.setText("${isi?.Penilaian_Sikap?.get("Sikap Sosial")}")
                 }
+
                 if (isi?.Kelas_Pra_Akademik?.get("Kelas Pra Akademik") != null) {
                     val akademik1 = isi?.Kelas_Pra_Akademik?.get("Kelas Pra Akademik")
                     for (i in akademik1!!.indices) {
