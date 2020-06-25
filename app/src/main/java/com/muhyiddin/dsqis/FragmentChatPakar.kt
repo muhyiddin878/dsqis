@@ -9,10 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.muhyiddin.dsqis.adapter.ChatAdapter
 import com.muhyiddin.dsqis.model.Chat
@@ -32,7 +29,7 @@ class FragmentChatPakar : Fragment() {
     val listChat:MutableList<ChatList> = mutableListOf()
     val list:MutableList<ChatList> = mutableListOf()
     private lateinit var chat:String
-    private lateinit var idRomm:String
+    private lateinit var idRoom:String
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,8 +52,14 @@ class FragmentChatPakar : Fragment() {
 //            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         adapter = ChatAdapter(requireContext(),listChat){
+            val room= it.roomId
+            val namaPakar= it.nama_pakar
+            val namaMember=it.nama_member
+            val array= arrayOf("$room","$namaPakar","$namaMember")
+
             updateUnreadChat(it.roomId)
-            startActivity(Intent(context, ChatDetailActivity::class.java).putExtra("room_id",it.roomId))
+            startActivity(Intent(context, ChatDetailActivity::class.java).putExtra("array",array))
+
 
         }
         rv_chat.layoutManager = LinearLayoutManager(context)
@@ -64,10 +67,35 @@ class FragmentChatPakar : Fragment() {
 
         getAllChatList()
 
+//        mDatabase.getReference("chat").child(idRoom).addChildEventListener(object :ChildEventListener{
+//            override fun onCancelled(p0: DatabaseError) {
+//
+//            }
+//
+//            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+//            }
+//
+//            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+//                adapter.notifyDataSetChanged()
+//
+//            }
+//
+//            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+//                adapter.notifyDataSetChanged()
+//            }
+//
+//            override fun onChildRemoved(p0: DataSnapshot) {
+//            }
+//
+//        })
+//        onChange()
+
 
         start_new_chat.setOnClickListener() {
             startActivity(Intent(context,NewChatPakarActivity::class.java))
         }
+
+
 
     }
 
@@ -88,13 +116,19 @@ class FragmentChatPakar : Fragment() {
                         if (prefs.role==2){
                             if (prefs.uid==chatList.id_pakar){
                                  listChat.add(chatList)
+                                idRoom=chatList.roomId
+
                             }
                         }
                         else if (prefs.role==1){
                             if (prefs.uid==chatList.id_member){
                                 listChat.add(chatList)
+                                idRoom=chatList.roomId
                             }
                         }
+
+
+
 
                     }
                 }
@@ -114,36 +148,44 @@ class FragmentChatPakar : Fragment() {
         })
     }
 
-    fun updateUnreadChat(roomId:String){
-        val rootRef = mDatabase.getReference("chat").child("conversation")
-        rootRef
-        rootRef.addListenerForSingleValueEvent(object :ValueEventListener{
+    fun onChange(){
+        mDatabase.getReference("chat").child(idRoom).addChildEventListener(object :ChildEventListener{
             override fun onCancelled(p0: DatabaseError) {
 
             }
+
+            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+            }
+
+            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                adapter.notifyDataSetChanged()
+
+            }
+
+            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                adapter.notifyDataSetChanged()
+            }
+
+            override fun onChildRemoved(p0: DataSnapshot) {
+            }
+
+        })
+    }
+
+    fun updateUnreadChat(roomId:String){
+        val rootRef = mDatabase.getReference("chat/${roomId}/conversation")
+        rootRef.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 p0.children.forEach {
-                    val chatList = it.getValue(ChatList::class.java)
+                    val chatList = it.getValue(Chat::class.java)
                     if (chatList != null) {
-                        if (prefs.uid==chatList.id_pakar){
-                            val chat = it.child(roomId)
-//                            chat.ref.setValue("read", true)
-                            chat.children.forEach {
-                                val chatList2 = it.getValue(Chat::class.java)
-                                if(chatList2?.pengirim!=prefs.uid){
-                                    it.ref.child("read").updateChildren(mapOf(
-                                        "read" to true
-                                    ))
-                                }
-                            }
-                        }else if (prefs.uid==chatList.id_member){
-
-                            val chat = it.child(roomId)
-                            chat.children.forEach {
-                                val chatList2 = it.getValue(Chat::class.java)
-                                if(chatList2?.pengirim!=prefs.uid){
-                                    chatList2?.isRead==true
-                                }
+                        if(chatList?.pengirim!=prefs.uid){
+                            if (chatList.isRead==false){
+                                val key=chatList.id
+                                Log.d("isi ChatList","${chatList.message}")
+                                rootRef.child(key).ref.updateChildren(mapOf(
+                                    "read" to true
+                                ))
                             }
 
                         }
@@ -151,24 +193,12 @@ class FragmentChatPakar : Fragment() {
                     }
                 }
             }
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
 
         })
-//        rootRef.get()
-//            .addOnSuccessListener {
-//                it.forEach {doc ->
-//                    val chat = doc.toObject(Chat::class.java)
-//                    if (chat.pengirim!=prefs.uid){
-//                        rootRef.document(doc.id)
-//                            .update("isRead", true)
-//                    }
-//
-//                }
-//            }
-//        if (prefs.role==2){
-//            mFirestore.collection("chat").document(roomId).update("unread_dokter", 0)
-//        } else{
-//            mFirestore.collection("chat").document(roomId).update("unread_member", 0)
-//        }
+
 
     }
 

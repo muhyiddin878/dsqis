@@ -14,5 +14,6 @@
     <color name="info">#5bc0de</color>
     <color name="warning">#f0ad4e</color>
     <color name="danger">#d9534f</color>
+    <color name="unread">#524CAF50</color>
 
 </resources>

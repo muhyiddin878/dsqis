@@ -1,6 +1,7 @@
 package com.muhyiddin.dsqis.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +56,7 @@ class ChatAdapter(private val ctx: Context,private val listChat:MutableList<Chat
         val namaDokter = view.findViewById<TextView>(R.id.nama_pengirim)
         val isiChat = view.findViewById<TextView>(R.id.isi_chat)
         val badgeUnread = view.findViewById<TextView>(R.id.badge_unread_chat)
+        val cardChat= view.findViewById<RelativeLayout>(R.id.cardChat)
         val hapus = view.findViewById<TextView>(R.id.hapus)
 
 
@@ -63,38 +65,49 @@ class ChatAdapter(private val ctx: Context,private val listChat:MutableList<Chat
         fun bindItem(item:ChatList, listener:(ChatList)->Unit){
 
             val chats: MutableList<Chat> = mutableListOf()
-
             val mDatabase = FirebaseDatabase.getInstance()
+            val rootRef = mDatabase.getReference("chat/${item.roomId}/conversation")
+            rootRef.addListenerForSingleValueEvent(object :ValueEventListener{
+                override fun onDataChange(p0: DataSnapshot) {
+                    p0.children.forEach {
+                        val chatList = it.getValue(Chat::class.java)
+                        if (chatList != null) {
+                            if(chatList?.pengirim!=prefs.uid){
+                                if (chatList.isRead==false){
+                                    chats.clear()
+                                    chats.add(chatList)
+                                    Log.d("size",chats.size.toString())
+                                }
 
-
-            mDatabase.getReference("chat")
-                .child("conversation").child(item.roomId)
-                .addListenerForSingleValueEvent(object: ValueEventListener{
-                    override fun onCancelled(p0: DatabaseError) {
-                    }
-                    override fun onDataChange(p0: DataSnapshot) {
-                        p0.children.forEach{
-                            val chatList= it.getValue(Chat::class.java)
-                            if(chatList?.isRead==false){
-                                chats.clear()
-                                chats.add(chatList)
                             }
+
+                            if(chats.size>0){
+                                badgeUnread.visibility=View.VISIBLE
+                                badgeUnread.setText(chats.size.toString())
+                                cardChat.setBackgroundResource(R.color.unread)
+                            }else{
+
+                                badgeUnread.visibility=View.GONE
+                                badgeUnread.setText("")
+                                cardChat.setBackgroundResource(0)
+                            }
+
                         }
                     }
+                }
+                override fun onCancelled(p0: DatabaseError) {
 
-                })
+                }
+
+            })
+
+
             if (prefs.role==1){
                 namaDokter.text ="${item.nama_pakar}"
                 isiChat.text = item.last_chat
             } else{
                 namaDokter.text = "Orang Tua ${item.nama_member}"
                 isiChat.text = item.last_chat
-            }
-            listChat.forEach {
-
-            }
-            if(chats.size>0){
-                badgeUnread.setText(chats.size)
             }
 
             itemView.setOnClickListener() {

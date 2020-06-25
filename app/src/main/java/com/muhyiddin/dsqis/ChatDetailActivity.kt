@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -40,24 +41,33 @@ class ChatDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_detail)
 
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Chat"
 
-        val roomId = intent.getStringExtra("room_id")
+        val array=  intent.getStringArrayExtra("array")
+        Log.d("idroom",array[0])
+        Log.d("member",array[1])
+        Log.d("pakar",array[2])
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         prefs = AppPreferences(this)
-        adapter = ChatDetailAdapter(this,listChat, listViewType,roomId)
+        if(prefs.role==1){
+            supportActionBar?.title = array[1]
+        }else{
+            supportActionBar?.title = array[2]
+        }
+        adapter = ChatDetailAdapter(this,listChat, listViewType,array[0])
+
 
         rv_chat.layoutManager = LinearLayoutManager(this)
         rv_chat.adapter = adapter
 
 
 
-        getChats(roomId)
+        getChats(array[0])
 
 
 
-        mDatabase.getReference("chat/${roomId}/conversation")
+        mDatabase.getReference("chat/${array[0]}/conversation")
             .addChildEventListener(object : ChildEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                 }
@@ -84,7 +94,7 @@ class ChatDetailActivity : AppCompatActivity() {
                 btn_send_chat.isClickable = false
             } else {
                 btn_send_chat.isClickable = true
-                sendChat(roomId, input_chat.text.toString())
+                sendChat(array[0], input_chat.text.toString())
                 input_chat.text.clear()
             }
         }

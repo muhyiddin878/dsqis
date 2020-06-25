@@ -136,7 +136,6 @@ class NewPostActivity : AppCompatActivity() {
         showLoading()
         val dbRef = mFirestore.collection("posts")
             .document(id)
-        val savedDbRef = mFirestore.collection("user")
         val ref = mStorage.getReference("posts/$judulLama-$id")
 //        info("UPDATE MASUK LORD, URI -> $uri")
         if (uri!=null){
