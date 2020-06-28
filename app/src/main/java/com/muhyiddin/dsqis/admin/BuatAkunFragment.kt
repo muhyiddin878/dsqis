@@ -59,8 +59,6 @@ class BuatAkunFragment : Fragment() {
         (activity as AdminActivity).setActionBarTitle("Buat Siswa Siswa")
         return inflater.inflate(com.muhyiddin.dsqis.R.layout.activity_buat_akun_fragment, null)
 
-
-
     }
 
 
@@ -78,8 +76,6 @@ class BuatAkunFragment : Fragment() {
 
         val jenis_kelamin = view.findViewById<RadioGroup>(com.muhyiddin.dsqis.R.id.jenis_kelamin)
         val tingkatan_kelas = view.findViewById<RadioGroup>(com.muhyiddin.dsqis.R.id.tingkatan_kelas)
-
-
 
         (activity as AppCompatActivity).supportActionBar?.title = "Daftar Siswa Baru"
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -120,8 +116,6 @@ class BuatAkunFragment : Fragment() {
     }
 
 
-
-
     private fun showImageChooser() {
         val intent = Intent()
         intent.setType("image/*")
@@ -140,12 +134,6 @@ class BuatAkunFragment : Fragment() {
         } else{
             Toast.makeText(context,"BERHASIL DITAMBAHKAN",Toast.LENGTH_SHORT).show()
             activity?.supportFragmentManager?.beginTransaction()?.replace(com.muhyiddin.dsqis.R.id.screen_area, ListAkunFragment())?.commit()
-//            startActivity(Intent(context,HomeFragment::class.java))
-
-//            val ft = fragmentManager!!.beginTransaction()
-//            ft.replace(com.muhyiddin.dsqis.R.id.frame_admin, HomeFragment(), "HomeFragmentTag")
-//            ft.commit()
-//            ft.addToBackStack(null);
 
         }
     }
@@ -195,11 +183,9 @@ class BuatAkunFragment : Fragment() {
                                             .set(siswa)
                                             .addOnSuccessListener {
                                                 val firestore2 = firestore.document(ortu.id).collection("students")
-//                                              val key2 = firestore2.document().id
                                                 firestore2.add(siswa)
                                                     .addOnSuccessListener {
                                                         hideLoading(true, "newstudent")
-//                                                        HomeFragment()
                                                     }
                                                     .addOnFailureListener {
                                                         hideLoading(false, "Error ${it.localizedMessage}")

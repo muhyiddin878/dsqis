@@ -49,8 +49,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
         tx.commit()
 
 
-        toolbar = findViewById<Toolbar>(R.id.toolbar)
-//        setSupportActionBar(toolbar)
+        toolbar = findViewById(R.id.toolbar)
 
         val drawer = findViewById<DrawerLayout>(R.id.drawer_layout)
         val toggle = ActionBarDrawerToggle(
@@ -130,16 +129,7 @@ class AdminActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelect
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         val id = item.itemId
-
-
-        //        if (id == R.id.action_settings) {
-        //            return true;
-        //        }
-
         return super.onOptionsItemSelected(item)
     }
 

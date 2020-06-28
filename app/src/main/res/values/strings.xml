@@ -13,6 +13,8 @@
     </array>
 
     <array name="aspek_pelajaran">
+        <item>-</item>
+        <item>Semua</item>
         <item>Penilaian Sikap</item>
         <item>Kelas Pra Akademik</item>
         <item>Kelas Komputer</item>

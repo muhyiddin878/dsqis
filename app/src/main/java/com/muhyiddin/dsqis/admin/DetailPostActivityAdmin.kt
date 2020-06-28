@@ -30,24 +30,16 @@ class DetailPostActivityAdmin : AppCompatActivity() {
     private val list:MutableList<Comment> = mutableListOf()
 
     lateinit var post: Post
-//    private var comment: Comment? = null
-
     private val mDatabase = FirebaseFirestore.getInstance()
     private val mStorage = FirebaseStorage.getInstance()
-    private val mAuth = FirebaseAuth.getInstance().currentUser
     private val mFirestore = FirebaseFirestore.getInstance()
-
-
     private val currentUser = FirebaseAuth.getInstance().currentUser
-
     private lateinit var adapter: CommentAdapter
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_post_admin)
-
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -131,9 +123,6 @@ class DetailPostActivityAdmin : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-//    private fun deletePost(id: String, judul:String) {
-//        hapusArtikel(id, judul)
-//    }
 
 
     fun hapusArtikel(id:String, judul:String){
@@ -159,26 +148,6 @@ class DetailPostActivityAdmin : AppCompatActivity() {
         super.onResume()
 //        artikelPresenter.getArtikelById(post.postId)
     }
-
-
-
-
-    fun showArtikel(data: List<Post>) {
-        data.let{
-            Glide.with(this)
-                .asBitmap()
-                .thumbnail(0.5f)
-                .load(it.get(0)?.cover)
-                .into(image_post)
-
-            title_post_admin.text = it.get(0)?.judul
-            nama_penulis_admin.text = String.format(resources.getString(R.string.writer, it.get(0)?.writerName))
-            isi_post_admin.text = it.get(0)?.isi
-            tanggal_post_admin.text = it.get(0)?.postDate
-        }
-    }
-
-
 
 
     /////////////////////////////////////FUNCTION COMMENT/////////////////////////////////////

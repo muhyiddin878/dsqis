@@ -32,8 +32,6 @@ class NewChatPakarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_new_chat_pakar)
 
-
-
         progress_bar.visibility = View.VISIBLE
         prefs= AppPreferences(this)
 
@@ -78,15 +76,7 @@ class NewChatPakarActivity : AppCompatActivity() {
                 listNamaPakarFiltered = listNamaDokter.filter {
                     it !in listNamaPakar
                 }
-//                listNamaDokter.forEach {nama->
-//                    listNamaPakar.forEach {
-//                        if(nama!=it){
-//                            listNamaPakarFiltered.add(nama)
-//                            Log.d("FILTERED","${listNamaPakarFiltered}")
-//                        }
-//                    }
-//
-//                }
+
                 val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, listNamaPakarFiltered)
                 lv_kontak_dokter.adapter = adapter
             }

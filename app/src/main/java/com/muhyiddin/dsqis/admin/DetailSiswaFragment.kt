@@ -179,17 +179,17 @@ class DetailSiswaFragment : Fragment() {
             val builder = AlertDialog.Builder(context!!)
             // Set the alert dialog title
             builder.setTitle("HAPUS DATA")
-            builder.setMessage("Are you want to Delete This Data?")
+            builder.setMessage("Apakah Anda Yakin Akan Menghapus Data?")
             // Set a positive button and its click listener on alert dialog
-            builder.setPositiveButton("YES") { dialog, which ->
+            builder.setPositiveButton("YA") { dialog, which ->
                 hapusAkun(siswa.id,siswa.nama)
             }
             // Display a negative button on alert dialog
-            builder.setNegativeButton("No") { dialog, which ->
+            builder.setNegativeButton("TIDAK") { dialog, which ->
                 Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
             }
             // Display a neutral button on alert dialog
-            builder.setNeutralButton("Cancel") { _, _ ->
+            builder.setNeutralButton("BATALKAN") { _, _ ->
                 Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
             }
             builder.show()
@@ -285,6 +285,102 @@ class DetailSiswaFragment : Fragment() {
                 id: Long
             ) {
                 mapel = mata_pelajaran.selectedItem.toString()
+                if (mapel == "-") {
+                    tv_spiritual2.visibility = View.GONE
+                    sikap_spiritual2.visibility = View.GONE
+                    tv_sosial2.visibility = View.GONE
+                    sikap_sosial2.visibility = View.GONE
+
+                    tv_mingguke2.visibility = View.GONE
+                    mingguke2.visibility = View.GONE
+                    tv_materi2.visibility = View.GONE
+                    materi_sikap_sosial2.visibility = View.GONE
+                    tv_ket2.visibility = View.GONE
+                    ket_sikap_sosial2.visibility = View.GONE
+                    tv_nilai_sosial2.visibility = View.GONE
+                    nilai_sikap_sosial2.visibility = View.GONE
+
+                    tv_materi_komputer2.visibility = View.GONE
+                    nilaikomputer2.visibility = View.GONE
+                    tv_ket_komputer2.visibility = View.GONE
+                    ket_komputer2.visibility = View.GONE
+                    tv_nilai_komputer2.visibility = View.GONE
+                    nilai_komputer2.visibility = View.GONE
+
+
+                    tv_mingguke_murajaah2.visibility = View.GONE
+                    minggukeMurajaah2.visibility = View.GONE
+                    tv_materi_murajaah2.visibility = View.GONE
+                    materi_murajaah2.visibility = View.GONE
+                    tv_ket_murajaah2.visibility = View.GONE
+                    ket_murajaah2.visibility = View.GONE
+                    tv_nilai_murajaah2.visibility = View.GONE
+                    nilai_murajaah2.visibility = View.GONE
+
+                    tv_nama_ekstra2.visibility = View.GONE
+                    nama_ekstra2.visibility = View.GONE
+                    tv_ket_ekstra2.visibility = View.GONE
+                    ket_ekstra2.visibility = View.GONE
+
+
+                    tv_laporan_perkembangan_anak2.visibility = View.GONE
+//                    perkembangan_anak2.visibility = View.GONE
+                    graph2.visibility=View.GONE
+
+                    tv_saran_guru2.visibility = View.GONE
+                    saran_guru2.visibility = View.GONE
+                    tv_tinggi_badan2.visibility = View.GONE
+                    tinggi_badan2.visibility = View.GONE
+
+                    tv_berat_badan2.visibility = View.GONE
+                    berat_badan2.visibility = View.GONE
+
+                    tv_kondisi_kesehatan2.visibility = View.GONE
+                    tv_penglihatan2.visibility = View.GONE
+                    penglihatan2.visibility = View.GONE
+                    tv_pendengaran2.visibility = View.GONE
+                    pendengaran2.visibility = View.GONE
+                    tv_gigi2.visibility = View.GONE
+                    gigi2.visibility = View.GONE
+
+                    tv_daya_tahan_tubuh2.visibility = View.GONE
+                    daya_tahan2.visibility = View.GONE
+
+                    tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
+                    tv_kondisi_anak_saat_ini2.visibility = View.GONE
+                    kondisi_saat_ini2.visibility = View.GONE
+                    tv_kondisi_ideal2.visibility = View.GONE
+                    kondisi_ideal2.visibility = View.GONE
+                    tv_saran_dokter2.visibility = View.GONE
+                    saran_dokter2.visibility = View.GONE
+
+                    tv_absensi2.visibility = View.GONE
+                    tv_izin2.visibility = View.GONE
+                    izin2.visibility = View.GONE
+                    tv_sakit2.visibility = View.GONE
+                    sakit2.visibility = View.GONE
+                    tv_tidak_ada_ket2.visibility = View.GONE
+                    tidak_ada_keterangan2.visibility = View.GONE
+
+                    tv_evaluasi_perkembangan_anak2.visibility = View.GONE
+                    tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
+                    kondisi_psikologi_saat_ini2.visibility = View.GONE
+                    tv_kondisi_ideal_psikologi2.visibility = View.GONE
+                    kondisi_ideal_psikologi2.visibility = View.GONE
+                    tv_saran_psikologi2.visibility = View.GONE
+                    saran_psikolog2.visibility = View.GONE
+
+                    tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
+                    tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
+                    kondisi_okupasi_saat_ini2.visibility = View.GONE
+                    tv_kondisi_ideal_okupasi2.visibility = View.GONE
+                    kondisi_ideal_okupasi2.visibility = View.GONE
+                    tv_saran_okupasi2.visibility = View.GONE
+                    saran_okupasi2.visibility = View.GONE
+
+                }
+
+
                 if (mapel == "Penilaian Sikap") {
                     tv_spiritual2.visibility = View.VISIBLE
                     sikap_spiritual2.visibility = View.VISIBLE
@@ -1409,6 +1505,102 @@ class DetailSiswaFragment : Fragment() {
                     saran_okupasi2.visibility = View.GONE
 
                 }
+                if (mapel == "Semua") {
+                    tv_spiritual2.visibility = View.VISIBLE
+                    sikap_spiritual2.visibility = View.VISIBLE
+                    tv_sosial2.visibility = View.VISIBLE
+                    sikap_sosial2.visibility = View.VISIBLE
+
+                    tv_mingguke2.visibility = View.VISIBLE
+                    mingguke2.visibility = View.VISIBLE
+                    tv_materi2.visibility = View.VISIBLE
+                    materi_sikap_sosial2.visibility = View.VISIBLE
+                    tv_ket2.visibility = View.VISIBLE
+                    ket_sikap_sosial2.visibility = View.VISIBLE
+                    tv_nilai_sosial2.visibility = View.VISIBLE
+                    nilai_sikap_sosial2.visibility = View.VISIBLE
+
+                    tv_materi_komputer2.visibility = View.VISIBLE
+                    nilaikomputer2.visibility = View.VISIBLE
+                    tv_ket_komputer2.visibility = View.VISIBLE
+                    ket_komputer2.visibility = View.VISIBLE
+                    tv_nilai_komputer2.visibility = View.VISIBLE
+                    nilai_komputer2.visibility = View.VISIBLE
+
+
+                    tv_mingguke_murajaah2.visibility = View.VISIBLE
+                    minggukeMurajaah2.visibility = View.VISIBLE
+                    tv_materi_murajaah2.visibility = View.VISIBLE
+                    materi_murajaah2.visibility = View.VISIBLE
+                    tv_ket_murajaah2.visibility = View.VISIBLE
+                    ket_murajaah2.visibility = View.VISIBLE
+                    tv_nilai_murajaah2.visibility = View.VISIBLE
+                    nilai_murajaah2.visibility = View.VISIBLE
+
+                    tv_nama_ekstra2.visibility = View.VISIBLE
+                    nama_ekstra2.visibility = View.VISIBLE
+                    tv_ket_ekstra2.visibility = View.VISIBLE
+                    ket_ekstra2.visibility = View.VISIBLE
+
+
+                    tv_laporan_perkembangan_anak2.visibility = View.VISIBLE
+//                    perkembangan_anak2.visibility = View.VISIBLE
+                    graph2.visibility=View.VISIBLE
+
+                    tv_saran_guru2.visibility = View.VISIBLE
+                    saran_guru2.visibility = View.VISIBLE
+                    tv_tinggi_badan2.visibility = View.VISIBLE
+                    tinggi_badan2.visibility = View.VISIBLE
+
+                    tv_berat_badan2.visibility = View.VISIBLE
+                    berat_badan2.visibility = View.VISIBLE
+
+                    tv_kondisi_kesehatan2.visibility = View.VISIBLE
+                    tv_penglihatan2.visibility = View.VISIBLE
+                    penglihatan2.visibility = View.VISIBLE
+                    tv_pendengaran2.visibility = View.VISIBLE
+                    pendengaran2.visibility = View.VISIBLE
+                    tv_gigi2.visibility = View.VISIBLE
+                    gigi2.visibility = View.VISIBLE
+
+                    tv_daya_tahan_tubuh2.visibility = View.VISIBLE
+                    daya_tahan2.visibility = View.VISIBLE
+
+                    tv_evaluasi_pertumbuhan_anak2.visibility = View.VISIBLE
+                    tv_kondisi_anak_saat_ini2.visibility = View.VISIBLE
+                    kondisi_saat_ini2.visibility = View.VISIBLE
+                    tv_kondisi_ideal2.visibility = View.VISIBLE
+                    kondisi_ideal2.visibility = View.VISIBLE
+                    tv_saran_dokter2.visibility = View.VISIBLE
+                    saran_dokter2.visibility = View.VISIBLE
+
+                    tv_absensi2.visibility = View.VISIBLE
+                    tv_izin2.visibility = View.VISIBLE
+                    izin2.visibility = View.VISIBLE
+                    tv_sakit2.visibility = View.VISIBLE
+                    sakit2.visibility = View.VISIBLE
+                    tv_tidak_ada_ket2.visibility = View.VISIBLE
+                    tidak_ada_keterangan2.visibility = View.VISIBLE
+
+                    tv_evaluasi_perkembangan_anak2.visibility = View.VISIBLE
+                    tv_kondisi_psikologi_saat_ini2.visibility = View.VISIBLE
+                    kondisi_psikologi_saat_ini2.visibility = View.VISIBLE
+                    tv_kondisi_ideal_psikologi2.visibility = View.VISIBLE
+                    kondisi_ideal_psikologi2.visibility = View.VISIBLE
+                    tv_saran_psikologi2.visibility = View.VISIBLE
+                    saran_psikolog2.visibility = View.VISIBLE
+
+                    tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.VISIBLE
+                    tv_kondisi_okupasi_saat_ini2.visibility = View.VISIBLE
+                    kondisi_okupasi_saat_ini2.visibility = View.VISIBLE
+                    tv_kondisi_ideal_okupasi2.visibility = View.VISIBLE
+                    kondisi_ideal_okupasi2.visibility = View.VISIBLE
+                    tv_saran_okupasi2.visibility = View.VISIBLE
+                    saran_okupasi2.visibility = View.VISIBLE
+
+                }
+
+
 
 
             }
@@ -1525,33 +1717,34 @@ class DetailSiswaFragment : Fragment() {
                         }
                         "Laporan Perkembangan Anak" -> {
 
-                            if (nilai?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
-                                val graph2= nilai?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")
-                                Log.d("TES ISI graph2", "$graph2")
-                                val dataPoints =arrayOfNulls<DataPoint>(graph2!!.size)
-                                for (i in graph2.indices) {
+                            if (nilai?.Laporan_Perkembangan_Anak!=null){
+                                val graph3= nilai?.Laporan_Perkembangan_Anak?.get("Laporan Perkembangan Anak")
+                                Log.d("TES ISI graph2", "$graph3")
+                                val dataPoints =arrayOfNulls<DataPoint>(graph3!!.size)
+                                Log.d("datapoint", "${dataPoints}")
+                                for (i in graph3.indices) {
                                     dataPoints[i] = DataPoint(
-                                        graph2[i].angka!!.plus(0.0),
-                                        graph2[i].minggu!!.plus(0.0)
+                                        graph3[i].angka!!.plus(0.0),
+                                        graph3[i].minggu!!.plus(0.0)
                                     )
                                 }
                                 val series = LineGraphSeries<DataPoint>(dataPoints)
                                 val series2 = PointsGraphSeries<DataPoint>(dataPoints)
-                                graph.addSeries(series)
-                                graph.addSeries(series2)
+                                graph2.addSeries(series)
+                                graph2.addSeries(series2)
                                 series2.setShape(PointsGraphSeries.Shape.POINT)
                                 series.setTitle("Perkembangan Anak")
-                                graph.getLegendRenderer().setVisible(true)
-                                graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
+                                graph2.getLegendRenderer().setVisible(true)
+                                graph2.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
 
                             }
-                            if(nilai?.Laporan_Perkembangan_Anak!=null){
-                                Log.d("Perkembangan", "${nilai?.Laporan_Perkembangan_Anak}")
-                                Laporan_Perkembangan_Anak = nilai?.Laporan_Perkembangan_Anak!!
-                                Laporan_Perkembangan_Anak?.get("Laporan Perkembangan Anak")?.forEach {
-                                    listPerkembangan.add(it)
-                                }
-                            }
+//                            if(nilai?.Laporan_Perkembangan_Anak!=null){
+//                                Log.d("Perkembangan", "${nilai?.Laporan_Perkembangan_Anak}")
+//                                Laporan_Perkembangan_Anak = nilai?.Laporan_Perkembangan_Anak!!
+//                                Laporan_Perkembangan_Anak?.get("Laporan Perkembangan Anak")?.forEach {
+//                                    listPerkembangan.add(it)
+//                                }
+//                            }
 
                         }
                         "Saran Guru" -> {
@@ -1628,6 +1821,141 @@ class DetailSiswaFragment : Fragment() {
                             if(nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")!=null){
                                 saran_okupasi2.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")}")
                             }
+                        }
+                        "Semua"->{
+                            if (nilai?.Penilaian_Sikap?.get("Sikap Spiritual")!=null){
+                                sikap_spiritual2.setText("${nilai?.Penilaian_Sikap?.get("Sikap Spiritual")}")
+                            }
+                            if(nilai?.Penilaian_Sikap?.get("Sikap Sosial")!=null){
+                                sikap_sosial2.setText("${nilai?.Penilaian_Sikap?.get("Sikap Sosial")}")
+                            }
+
+                            if(nilai?.Kelas_Pra_Akademik!=null){
+                                Log.d("Pra Akademik", "${nilai?.Kelas_Pra_Akademik}")
+                                Kelas_Pra_Akademik = nilai?.Kelas_Pra_Akademik!!
+                                Kelas_Pra_Akademik?.get("Kelas Pra Akademik")?.forEach {
+                                    listPraAkademik.add(it)
+                                }
+                            }
+
+                            if(nilai?.Kelas_Komputer?.get("Materi")!=null){
+                                nilaikomputer2.setText("${nilai?.Kelas_Komputer?.get("Materi")}")
+                            }
+                            if(nilai?.Kelas_Komputer?.get("Keterangan")!=null){
+                                ket_komputer2.setText("${nilai?.Kelas_Komputer?.get("Keterangan")}")
+                            }
+                            if(nilai?.Kelas_Komputer?.get("Nilai")!=null){
+                                nilai_komputer2.setText("${nilai?.Kelas_Komputer?.get("Nilai")}")
+                            }
+
+                            if(nilai?.Kelas_Murajaah!=null){
+                                Log.d("MURAJAAH", "${nilai?.Kelas_Murajaah}")
+                                Kelas_Murajaah = nilai?.Kelas_Murajaah!!
+                                Kelas_Murajaah?.get("Kelas Murajaah")?.forEach {
+                                    listMurajaah.add(it)
+                                }
+                            }
+
+                            if(nilai?.Ekstrakulikuler?.get("Nama Ekstra")!=null){
+                                nama_ekstra2.setText("${nilai?.Ekstrakulikuler?.get("Nama Ekstra")}")
+                            }
+                            if(nilai?.Ekstrakulikuler?.get("Keterangan")!=null){
+                                ket_ekstra2.setText("${nilai?.Ekstrakulikuler?.get("Keterangan")}")
+                            }
+
+
+                            if (nilai?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")!=null){
+                                val graph2= nilai?.Laporan_Perkembangan_Anak?.get("Perkembangan Anak")
+                                Log.d("TES ISI graph2", "$graph2")
+                                val dataPoints =arrayOfNulls<DataPoint>(graph2!!.size)
+                                for (i in graph2.indices) {
+                                    dataPoints[i] = DataPoint(
+                                        graph2[i].angka!!.plus(0.0),
+                                        graph2[i].minggu!!.plus(0.0)
+                                    )
+                                }
+                                val series = LineGraphSeries<DataPoint>(dataPoints)
+                                val series2 = PointsGraphSeries<DataPoint>(dataPoints)
+                                graph.addSeries(series)
+                                graph.addSeries(series2)
+                                series2.setShape(PointsGraphSeries.Shape.POINT)
+                                series.setTitle("Perkembangan Anak")
+                                graph.getLegendRenderer().setVisible(true)
+                                graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP)
+
+                            }
+                            if(nilai?.Laporan_Perkembangan_Anak!=null){
+                                Log.d("Perkembangan", "${nilai?.Laporan_Perkembangan_Anak}")
+                                Laporan_Perkembangan_Anak = nilai?.Laporan_Perkembangan_Anak!!
+                                Laporan_Perkembangan_Anak?.get("Laporan Perkembangan Anak")?.forEach {
+                                    listPerkembangan.add(it)
+                                }
+                            }
+
+                            if(nilai?.Saran_Guru?.get("Saran Guru")!=null){
+                                saran_guru2.setText("${nilai?.Saran_Guru?.get("Saran Guru")}")
+                            }
+
+                            if(nilai?.TbBb?.get("Tinggi Badan")!=null){
+                                tinggi_badan2.setText("${nilai?.TbBb?.get("Tinggi Badan")}")
+                            }
+                            if(nilai?.TbBb?.get("Berat Badan")!=null){
+                                berat_badan2.setText("${nilai?.TbBb?.get("Berat Badan")}")
+                            }
+
+                            if(nilai?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")!=null){
+                                penglihatan2.setText("${nilai?.Kondisi_Kesehatan?.get("Kesehatan Penglihatan")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")!=null){
+                                pendengaran2.setText("${nilai?.Kondisi_Kesehatan?.get("Kesehatan Pendengaran")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Daya Tahan")!=null){
+                                daya_tahan2.setText("${nilai?.Kondisi_Kesehatan?.get("Daya Tahan")}")
+                            }
+                            if(nilai?.Kondisi_Kesehatan?.get("Kondisi Gigi")!=null){
+                                gigi2.setText("${nilai?.Kondisi_Kesehatan?.get("Kondisi Gigi")}")
+                            }
+
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")!=null){
+                                kondisi_saat_ini2.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")!=null){
+                                kondisi_ideal2.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Kondisi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")!=null){
+                                saran_dokter2.setText("${nilai?.Evaluasi_Pertumbuhan_Anak?.get("Saran Dokter")}")
+                            }
+
+                            if(nilai?.Absensi?.get("Izin")!=null){
+                                izin2.setText("${nilai?.Absensi?.get("Izin")}")
+                            }
+                            if(nilai?.Absensi?.get("Sakit")!=null){
+                                sakit2.setText("${nilai?.Absensi?.get("Sakit")}")
+                            }
+                            if(nilai?.Absensi?.get("Tanpa Keterangan")!=null){
+                                tidak_ada_keterangan2.setText("${nilai?.Absensi?.get("Tanpa Keterangan")}")
+                            }
+
+
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")!=null){
+                                kondisi_psikologi_saat_ini2.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")!=null){
+                                kondisi_ideal_psikologi2.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Psikologi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")!=null){
+                                saran_psikolog2.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Psikolog")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")!=null){
+                                kondisi_okupasi_saat_ini2.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Saat Ini")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")!=null){
+                                kondisi_ideal_okupasi2.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Kondisi Okupasi Ideal")}")
+                            }
+                            if(nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")!=null){
+                                saran_okupasi2.setText("${nilai?.Evaluasi_Perkembangan_Anak?.get("Saran Okupasi")}")
+                            }
+
                         }
 
 
@@ -1882,21 +2210,4 @@ class DetailSiswaFragment : Fragment() {
             }
     }
 
-
-
-
-
-
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean  {
-//
-//        val id = item!!.itemId
-//        if (id==android.R.id.home){
-//            val itung=(activity as AppCompatActivity).supportFragmentManager.getBackStackEntryCount()
-//            Log.d("isi itung:",itung.toString())
-//            if (itung > 0) {
-//                (activity as AppCompatActivity).supportFragmentManager.popBackStackImmediate()
-//            }
-//        }
-//        return super.onOptionsItemSelected(item)
-//    }
 }

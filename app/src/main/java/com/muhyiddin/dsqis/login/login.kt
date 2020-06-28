@@ -125,7 +125,7 @@ class login : AppCompatActivity(){
                         mFirestore.collection("token")
                             .document().set(isiToken)
                             .addOnSuccessListener {
-                                Toast.makeText(this,"Berhasil Menambahkan TOKEN ",Toast.LENGTH_SHORT).show()
+//                                Toast.makeText(this,"Berhasil Menambahkan TOKEN ",Toast.LENGTH_SHORT).show()
                             }
                     }
                     .addOnFailureListener {
@@ -168,9 +168,6 @@ class login : AppCompatActivity(){
 
         val ref2= mAuth.currentUser?.photoUrl
         Log.d("photo URL",ref2.toString())
-//        val ref = mStorage.getReference("profilpic/${prefs.uid}")
-//        val cek= ref.downloadUrl.toString()
-//        Log.d("url:",cek)
         if(ref2!=null){
             startActivity(Intent(this,MainActivity::class.java))
 

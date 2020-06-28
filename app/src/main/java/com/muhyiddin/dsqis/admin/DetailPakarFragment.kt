@@ -35,12 +35,7 @@ import kotlinx.android.synthetic.main.activity_tambah_pakar_fragment.*
 class DetailPakarFragment : Fragment() {
 
     private val CHOOSE_IMAGE = 101
-    private var onGoing = false
-    private var pakar: Pakar? = null
-    private var ortu: Ortu? = null
     private lateinit var bundlesiswa:Bundle
-
-    private val mAuth = FirebaseAuth.getInstance()
     private val mStorage = FirebaseStorage.getInstance()
     private val mFirestore = FirebaseFirestore.getInstance()
     lateinit var prefs: AppPreferences
@@ -69,13 +64,10 @@ class DetailPakarFragment : Fragment() {
         bundlesiswa = Bundle()
         val pakar = arguments?.getSerializable("pakar") as Pakar
 
-       
-
         val submit = view.findViewById<Button>(R.id.submit_button_pakar)
         jenis_pakar = view.findViewById(R.id.listpakar2)
         jenis_pakar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
             }
 
             override fun onItemSelected(
@@ -108,24 +100,21 @@ class DetailPakarFragment : Fragment() {
             val builder = AlertDialog.Builder(context!!)
             // Set the alert dialog title
             builder.setTitle("HAPUS DATA")
-            builder.setMessage("Are you want to Delete This Data?")
+            builder.setMessage("PApakah Anda Yakin Anda Akan Menghapusnya?")
             // Set a positive button and its click listener on alert dialog
-            builder.setPositiveButton("YES") { dialog, which ->
+            builder.setPositiveButton("IYA") { dialog, which ->
                 hapusAkun(pakar.id,pakar.namapakar)
             }
             // Display a negative button on alert dialog
-            builder.setNegativeButton("No") { dialog, which ->
+            builder.setNegativeButton("TIDAK") { dialog, which ->
                 Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
             }
             // Display a neutral button on alert dialog
-            builder.setNeutralButton("Cancel") { _, _ ->
+            builder.setNeutralButton("BATALKAN") { _, _ ->
                 Toast.makeText(context, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
             }
             builder.show()
         }
-
-
-       
 
         jenispakartext=pakar.jenis
         val arrayJenisPakar = resources.getStringArray(R.array.jenis_pakar)
@@ -133,7 +122,6 @@ class DetailPakarFragment : Fragment() {
         jenis_pakar.setSelection(pos)
 
         submit.setOnClickListener {
-            Log.d("ini isi jenis",jenispakar)
             updatePakar(pakar!!.id,uriImagePakar,pakar!!.namapakar,namapakar1.text.toString(),emailpakar1.text.toString(),jenispakar)
 
         }
@@ -158,19 +146,7 @@ class DetailPakarFragment : Fragment() {
         } else{
             Toast.makeText(context,"BERHASIL DI UPDATE", Toast.LENGTH_SHORT).show()
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunPakarFragment())?.commit()
-//            if (message=="update"){
-//                FirebaseDatabase.getInstance().getReference("expert/${pakar?.id}").addListenerForSingleValueEvent(object:
-//                    ValueEventListener {
-//                    override fun onCancelled(p0: DatabaseError) {
-//                    }
-//                    override fun onDataChange(snapshot: DataSnapshot) {
-//                        val value = snapshot.getValue(Post::class.java)
-//                        Toast.makeText(context,"BERHASIL", Toast.LENGTH_SHORT).show()
-//                        HomeFragment()
-//                    }
-//
-//                })
-//            }
+
         }
     }
 
@@ -189,7 +165,6 @@ class DetailPakarFragment : Fragment() {
 
     fun updatePakar(id:String, uri:Uri?, namaLama: String, namaBaru:String,emailBaru:String,jenisBaru:String){
         var imageLocation = ""
-//        showLoading()
         val dbRef = mFirestore.collection("expert")
             .document(id)
         val ref = mStorage.getReference("expert/$namaLama-$id")
