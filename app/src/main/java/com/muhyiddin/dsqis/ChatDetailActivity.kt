@@ -73,6 +73,7 @@ class ChatDetailActivity : AppCompatActivity() {
                 }
 
                 override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                    adapter.notifyDataSetChanged()
                 }
 
                 override fun onChildChanged(p0: DataSnapshot, p1: String?) {
@@ -81,6 +82,7 @@ class ChatDetailActivity : AppCompatActivity() {
                 }
 
                 override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                    adapter.notifyDataSetChanged()
                 }
 
                 override fun onChildRemoved(p0: DataSnapshot) {
@@ -117,7 +119,7 @@ class ChatDetailActivity : AppCompatActivity() {
 
     private fun scrollDown() {
         rv_chat.post {
-            rv_chat.scrollToPosition(listChat.size)
+            rv_chat.scrollToPosition(listChat.size-1)
         }
     }
 
@@ -209,6 +211,7 @@ class ChatDetailActivity : AppCompatActivity() {
                     mDatabase.getReference("chat/${roomId}/conversation").child(key).setValue(chat)
                         .addOnSuccessListener {
                             getChats(roomId)
+                            scrollDown()
                         }
                 }
             }
@@ -219,6 +222,7 @@ class ChatDetailActivity : AppCompatActivity() {
             mDatabase.getReference("chat/${roomId}/conversation").child(key).setValue(chat)
                 .addOnSuccessListener {
                     getChats(roomId)
+                    scrollDown()
 
                 }
 

@@ -166,11 +166,12 @@ class login : AppCompatActivity(){
 
     fun showLoginSuccess() {
 
-
-        val ref = mStorage.getReference("profilpic/${prefs.uid}")
-        val cek= ref.downloadUrl.toString()
-        Log.d("url:",cek)
-        if(cek.length>0){
+        val ref2= mAuth.currentUser?.photoUrl
+        Log.d("photo URL",ref2.toString())
+//        val ref = mStorage.getReference("profilpic/${prefs.uid}")
+//        val cek= ref.downloadUrl.toString()
+//        Log.d("url:",cek)
+        if(ref2!=null){
             startActivity(Intent(this,MainActivity::class.java))
 
         }else{
@@ -179,10 +180,8 @@ class login : AppCompatActivity(){
         finish()
     }
     fun showLoginSuccessPakar(){
-        val ref = mStorage.getReference("profilpic/${prefs.uid}")
-        val cek= ref.downloadUrl.toString()
-        Log.d("url:",cek.toString())
-        if(cek.length>0){
+        val ref= mAuth.currentUser?.photoUrl
+        if(ref!=null){
             startActivity(Intent(this,OnBoardingActivity::class.java))
         }else{
             startActivity(Intent(this,MainActivityPakar::class.java))

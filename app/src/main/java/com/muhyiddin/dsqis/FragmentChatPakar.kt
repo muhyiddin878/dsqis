@@ -29,7 +29,7 @@ class FragmentChatPakar : Fragment() {
     val listChat:MutableList<ChatList> = mutableListOf()
     val list:MutableList<ChatList> = mutableListOf()
     private lateinit var chat:String
-    private lateinit var idRoom:String
+    private var idRoom:String=""
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -66,29 +66,6 @@ class FragmentChatPakar : Fragment() {
         rv_chat.adapter = adapter
 
         getAllChatList()
-
-//        mDatabase.getReference("chat").child(idRoom).addChildEventListener(object :ChildEventListener{
-//            override fun onCancelled(p0: DatabaseError) {
-//
-//            }
-//
-//            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-//            }
-//
-//            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-//                adapter.notifyDataSetChanged()
-//
-//            }
-//
-//            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-//                adapter.notifyDataSetChanged()
-//            }
-//
-//            override fun onChildRemoved(p0: DataSnapshot) {
-//            }
-//
-//        })
-//        onChange()
 
 
         start_new_chat.setOnClickListener() {
@@ -132,7 +109,9 @@ class FragmentChatPakar : Fragment() {
 
                     }
                 }
+                onChange()
                 hideLoading()
+
 
                 if (listChat.size>0){
                     listChat.sortByDescending { it.last_chat }
@@ -149,27 +128,32 @@ class FragmentChatPakar : Fragment() {
     }
 
     fun onChange(){
-        mDatabase.getReference("chat").child(idRoom).addChildEventListener(object :ChildEventListener{
-            override fun onCancelled(p0: DatabaseError) {
+        if (idRoom!=""){
 
-            }
+            mDatabase.getReference("chat").child(idRoom).addChildEventListener(object :ChildEventListener{
+                override fun onCancelled(p0: DatabaseError) {
 
-            override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-            }
+                }
 
-            override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                adapter.notifyDataSetChanged()
+                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                    adapter.notifyDataSetChanged()
+                }
 
-            }
+                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                    adapter.notifyDataSetChanged()
 
-            override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                adapter.notifyDataSetChanged()
-            }
+                }
 
-            override fun onChildRemoved(p0: DataSnapshot) {
-            }
+                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                    adapter.notifyDataSetChanged()
+                }
 
-        })
+                override fun onChildRemoved(p0: DataSnapshot) {
+                    adapter.notifyDataSetChanged()
+                }
+
+            })
+        }
     }
 
     fun updateUnreadChat(roomId:String){

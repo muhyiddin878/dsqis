@@ -74,7 +74,7 @@ class ChatAdapter(private val ctx: Context,private val listChat:MutableList<Chat
                         if (chatList != null) {
                             if(chatList?.pengirim!=prefs.uid){
                                 if (chatList.isRead==false){
-                                    chats.clear()
+//                                    chats.clear()
                                     chats.add(chatList)
                                     Log.d("size",chats.size.toString())
                                 }
@@ -86,10 +86,10 @@ class ChatAdapter(private val ctx: Context,private val listChat:MutableList<Chat
                                 badgeUnread.setText(chats.size.toString())
                                 cardChat.setBackgroundResource(R.color.unread)
                             }else{
-
                                 badgeUnread.visibility=View.GONE
                                 badgeUnread.setText("")
                                 cardChat.setBackgroundResource(0)
+                                chats.clear()
                             }
 
                         }
