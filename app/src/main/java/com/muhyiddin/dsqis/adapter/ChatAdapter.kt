@@ -58,11 +58,14 @@ class ChatAdapter(private val ctx: Context,private val listChat:MutableList<Chat
         val badgeUnread = view.findViewById<TextView>(R.id.badge_unread_chat)
         val cardChat= view.findViewById<RelativeLayout>(R.id.cardChat)
         val hapus = view.findViewById<TextView>(R.id.hapus)
+        val time = view.findViewById<TextView>(R.id.time)
 
 
         val prefs = AppPreferences(view.context)
 
         fun bindItem(item:ChatList, listener:(ChatList)->Unit){
+
+
 
             val chats: MutableList<Chat> = mutableListOf()
             val mDatabase = FirebaseDatabase.getInstance()
@@ -76,7 +79,6 @@ class ChatAdapter(private val ctx: Context,private val listChat:MutableList<Chat
                                 if (chatList.isRead==false){
 //                                    chats.clear()
                                     chats.add(chatList)
-                                    Log.d("size",chats.size.toString())
                                 }
 
                             }
@@ -109,6 +111,8 @@ class ChatAdapter(private val ctx: Context,private val listChat:MutableList<Chat
                 namaDokter.text = "Orang Tua ${item.nama_member}"
                 isiChat.text = item.last_chat
             }
+
+            time.setText(item.time)
 
             itemView.setOnClickListener() {
                 listener(item)

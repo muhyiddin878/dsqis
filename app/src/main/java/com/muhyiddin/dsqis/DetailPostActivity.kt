@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -26,6 +27,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.muhyiddin.dsqis.adapter.CommentAdapter
 import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.model.Comment
+import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_detail_post.*
 import kotlinx.android.synthetic.main.comment_layout.*
 import kotlinx.android.synthetic.main.popup_option.*
@@ -36,16 +38,13 @@ import java.util.*
 class DetailPostActivity : AppCompatActivity() {
 
     private val list:MutableList<Comment> = mutableListOf()
-
+    lateinit var prefs: AppPreferences
     lateinit var post: Post
 //    private var comment: Comment? = null
 
     private val mDatabase = FirebaseFirestore.getInstance()
     private val mStorage = FirebaseStorage.getInstance()
-    private val mAuth = FirebaseAuth.getInstance().currentUser
     private val mFirestore = FirebaseFirestore.getInstance()
-
-
     private val currentUser = FirebaseAuth.getInstance().currentUser
 
     private lateinit var adapter: CommentAdapter
@@ -58,8 +57,11 @@ class DetailPostActivity : AppCompatActivity() {
 
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        prefs= AppPreferences(this)
 
         post = intent.extras.getSerializable("post") as Post
+
+        Log.d("display name",currentUser?.displayName.toString())
 
         Glide.with(this)
             .asBitmap()
@@ -196,7 +198,7 @@ class DetailPostActivity : AppCompatActivity() {
     fun submitKomentar(komentar:String, postId:String){
         val firestore = mFirestore.collection("posts").document(postId).collection("comment")
         val key = firestore.document().id
-        val comment = Comment(key, komentar,getCurrentDate(), currentUser?.uid.toString(), currentUser?.displayName.toString(), currentUser?.photoUrl.toString())
+        val comment = Comment(key, komentar,getCurrentDate(), currentUser?.uid.toString(), prefs.nama, currentUser?.photoUrl.toString())
         firestore.document(key)
             .set(comment)
             .addOnSuccessListener {
@@ -220,7 +222,9 @@ class DetailPostActivity : AppCompatActivity() {
                 for (comment in querySnapshot){
                     list.add(comment.toObject(Comment::class.java))
                 }
-                    list.reverse()
+                    list.sortBy {
+                        it.commentDate
+                    }
                 showComment(list)
 
                 }

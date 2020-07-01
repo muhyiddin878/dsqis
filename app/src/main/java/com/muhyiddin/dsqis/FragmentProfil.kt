@@ -45,7 +45,6 @@ class FragmentProfil : Fragment() {
     private lateinit var adapter: ArtikelAdapter
     private val mDatabase = FirebaseFirestore.getInstance()
     private val refSemuaArtikel = mDatabase.collection("posts")
-    private val mAuth = FirebaseAuth.getInstance().currentUser
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,8 +81,8 @@ class FragmentProfil : Fragment() {
 
 
         adapter = ArtikelAdapter(context!!, list) {
-            //            startActivity<DetailPostActivity>("post" to it, "source" to "profile")
-//            startActivity(Intent(context, DetailPostActivity::class.java).putExtra("post",it).putExtra("source","profile"))
+//                        startActivity<DetailPostActivity>("post" to it, "source" to "profile")
+            startActivity(Intent(context, DetailPostActivity::class.java).putExtra("post",it))
         }
 
         rv_profile.adapter = adapter
@@ -209,8 +208,10 @@ class FragmentProfil : Fragment() {
                     val listFiltered=listSemuaArtikel.filter {
                         it.writerId in listArtikelSaya
                     }
-                    count_artikel.text = listFiltered.size.toString()
-                    showArtikel(listFiltered)
+                    if(count_artikel!=null){
+                        count_artikel.text = listFiltered.size.toString()
+                        showArtikel(listFiltered)
+                    }
 
 
                 }
@@ -254,8 +255,10 @@ class FragmentProfil : Fragment() {
                     val listFiltered=listSemuaArtikel.filter {
                             it.postId in listBookmark
                     }
-                    count_bookmark.text = listBookmark.size.toString()
-                    showBookmark(listFiltered)
+                    if(count_bookmark!=null){
+                        count_bookmark.text = listBookmark.size.toString()
+                        showBookmark(listFiltered)
+                    }
 
                 }
             }

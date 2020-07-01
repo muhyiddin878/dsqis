@@ -144,7 +144,7 @@ class ListAkunFragment : Fragment() {
                 if (siswa.size>0){
                     siswa.sortByDescending { it.nama }
                     showSiswa(siswa)
-                    Toast.makeText(requireContext(),"Jumlah Data:${siswa.size}"  ,Toast.LENGTH_SHORT).show()
+//                    Toast.makeText(requireContext(),"Jumlah Data:${siswa.size}"  ,Toast.LENGTH_SHORT).show()
                 }else{
                     showEmptyChat()
                 }

@@ -39,32 +39,44 @@ class InputNilaiFragment : Fragment() {
     private val siswa: MutableList<Siswa> = mutableListOf()
     private val namaSiswa: MutableList<String> = mutableListOf()
     private var siswaId: String? = null
-    private val grafik:MutableList<Grafik> = mutableListOf()
+    private var selectedIdSiswa:String?=null
     private val murajaah:MutableList<Murajaah> = mutableListOf()
     private val praAkademik:MutableList<Murajaah> = mutableListOf()
+    private val komunal:MutableList<Murajaah> = mutableListOf()
+    private val sensori:MutableList<Murajaah> = mutableListOf()
     private val perkembangan:MutableList<Grafik> = mutableListOf()
-    private lateinit var spinner: Spinner
+    private lateinit var kelas: String
     private lateinit var mapel: String
     private lateinit var minggu: String
     private lateinit var student: String
+    private lateinit var isiMingguKomunal: String
+    private lateinit var isiMingguSensori: String
     private lateinit var mingguke_sikap_sosial: String
     private lateinit var minggumurajaah: String
     private lateinit var mingguke_murajaah: String
     private var mingguke_perkembangan: Int=0
     private lateinit var idSiswa: String
-    private lateinit var kelasSiswa:String
+    private var kelasSiswa=mutableListOf<String>()
     private lateinit var minggukee: String
     private lateinit var mingguke_sikap_sosial_spinner:Spinner
     private var Kelas_Murajaah = HashMap<String, MutableList<Murajaah>>()
     private var Kelas_Pra_Akademik = HashMap<String, MutableList<Murajaah>>()
+    private var Kelas_Komunal = HashMap<String, MutableList<Murajaah>>()
+    private var Kelas_Sensori = HashMap<String, MutableList<Murajaah>>()
     private var Laporan_Perkembangan_Anak = HashMap<String, MutableList<Grafik>>()
     private val listTanggal = mutableListOf<String>()
+    private val mingguKomunal = mutableListOf<String>()
+    private val mingguSensori = mutableListOf<String>()
     private val listNilai = mutableListOf<Nilai>()
 
     private val listMurajaah = mutableListOf<Murajaah>()
     private val listPraAkademik = mutableListOf<Murajaah>()
+    private val listKomunal = mutableListOf<Murajaah>()
+    private val listSensori = mutableListOf<Murajaah>()
     private val listPerkembangan = mutableListOf<Grafik>()
     private var nilai: Nilai? = null
+
+    private lateinit var spinnerKelas:Spinner
 
 
     override fun onCreateView(
@@ -80,6 +92,9 @@ class InputNilaiFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val spinner = view.findViewById<Spinner>(R.id.daftar_siswa)
+        val spinnerKomunal= view.findViewById<Spinner>(R.id.daftar_komunal)
+        val spinnerSensori=view.findViewById<Spinner>(R.id.daftar_sensori)
+        spinnerKelas = view.findViewById<Spinner>(R.id.daftar_kelas)
         val mata_pelajaran = view.findViewById<Spinner>(R.id.pelajaran)
         mingguke_sikap_sosial_spinner = view.findViewById(R.id.mingguke)
         val mingguke_murajaah_spinner = view.findViewById<Spinner>(R.id.minggukeMurajaah)
@@ -89,12 +104,14 @@ class InputNilaiFragment : Fragment() {
         val submit_nilai_murajaah = view.findViewById<Button>(R.id.submit_nilai_murajaah1)
         val submit_nilai_akademik = view.findViewById<Button>(R.id.submit_nilai_akademik)
 
+
         data_siswa.addSnapshotListener { querySnapshot, error ->
             if (error != null) {
                 Toast.makeText(view?.context, error?.localizedMessage, Toast.LENGTH_SHORT).show()
                 return@addSnapshotListener
             }
             if (querySnapshot != null) {
+                namaSiswa.clear()
                 for (student in querySnapshot) {
 
                     siswa.add(student.toObject(Siswa::class.java))
@@ -124,7 +141,59 @@ class InputNilaiFragment : Fragment() {
                 val selectedSiswa = siswa[position]
                 getIdSiswa(student)
                 getKelasSiswa(selectedSiswa.id)
-                getNilaiEachStudent(selectedSiswa.id)
+                selectedIdSiswa=selectedSiswa.id
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+        }
+
+        spinnerKelas.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                kelas = spinnerKelas.selectedItem.toString()
+                getNilaiEachStudent(selectedIdSiswa!!,kelas)
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+        }
+
+        spinnerKomunal.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                isiMingguKomunal = spinnerKomunal.selectedItem.toString()
+                nilai_komunal.setText("")
+                ket_komunal.setText("")
+                materi_komunal.setText("")
+                setKomunalValue( isiMingguKomunal)
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+        }
+
+        spinnerSensori.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                isiMingguSensori = spinnerSensori.selectedItem.toString()
+                nilai_sensori.setText("")
+                ket_sensori.setText("")
+                materi_sensori.setText("")
+                setSensoriValue(isiMingguSensori)
+
             }
             override fun onNothingSelected(parent: AdapterView<*>) {
             }
@@ -239,11 +308,20 @@ class InputNilaiFragment : Fragment() {
             submit_perkembangan()
         }
         submit_nilai_murajaah.setOnClickListener {
-            Toast.makeText(requireContext(),"Data Murajaah Ditambahkan ke Lokal",Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),"Data Ditambahkan ke Lokal",Toast.LENGTH_SHORT).show()
             submit_murajaah1()
         }
         submit_nilai_akademik.setOnClickListener{
+            Toast.makeText(requireContext(),"Data Ditambahkan ke Lokal",Toast.LENGTH_SHORT).show()
             submit_akademik()
+        }
+        submit_nilai_sensori.setOnClickListener{
+
+             submit_sensori()
+        }
+        submit_nilai_komunal.setOnClickListener{
+
+            submit_komunal()
         }
 
         submit_nilai.setOnClickListener {
@@ -317,6 +395,8 @@ class InputNilaiFragment : Fragment() {
             val Kelas_Murajaah2 = HashMap<String, MutableList<Murajaah>>()
             val praAkademik2=HashMap<String, MutableList<Murajaah>>()
             val perkembangan2=HashMap<String, MutableList<Grafik>>()
+            val komunal2=HashMap<String, MutableList<Murajaah>>()
+            val sensori2=HashMap<String, MutableList<Murajaah>>()
 
 
 
@@ -330,7 +410,7 @@ class InputNilaiFragment : Fragment() {
                 nilai.Evaluasi_Pertumbuhan_Anak = Evaluasi_Pertumbuhan_Anak
                 nilai.Absensi = Absensi
                 nilai.Evaluasi_Perkembangan_Anak = Evaluasi_Perkembangan_Anak
-                nilai.kelasSiswa=kelasSiswa
+                nilai.kelasSiswa=kelas
                 nilai.idSiswa=idSiswa
 
 
@@ -347,6 +427,24 @@ class InputNilaiFragment : Fragment() {
 
                     praAkademik2.put("Kelas Pra Akademik",praAkademik)
                     nilai.Kelas_Pra_Akademik= praAkademik2
+                }
+
+
+                if(Kelas_Komunal.size>0){
+                    nilai.Kelas_Komunal=Kelas_Komunal
+                }else{
+
+                    komunal2.put("Kelas Komunikasi Lanjutan",komunal)
+                    nilai.Kelas_Komunal = komunal2
+                }
+
+
+                if(Kelas_Sensori.size>0){
+                    nilai.Kelas_Sensori=Kelas_Sensori
+                }else{
+
+                    sensori2.put("Kelas Sensori Integrasi",sensori)
+                    nilai.Kelas_Sensori = sensori2
                 }
 
                 if(Laporan_Perkembangan_Anak.size>0){
@@ -446,6 +544,22 @@ class InputNilaiFragment : Fragment() {
                     nilai.Laporan_Perkembangan_Anak=perkembangan2
                 }
 
+                if(Kelas_Komunal.size>0){
+                    nilai.Kelas_Komunal=Kelas_Komunal
+                }else{
+                    val isiKom=this.nilai?.Kelas_Komunal?.get("Kelas Komunikasi Lanjutan")
+                    komunal2.put("Kelas Komunikasi Lanjutan",isiKom!!)
+                    nilai.Kelas_Komunal=komunal2
+                }
+
+                if(Kelas_Sensori.size>0){
+                    nilai.Kelas_Sensori=Kelas_Sensori
+                }else{
+                    val isiSen=this.nilai?.Kelas_Sensori?.get("Kelas Sensori Integrasi")
+                    sensori2.put("Kelas Sensori Integrasi",isiSen!!)
+                    nilai.Kelas_Sensori=sensori2
+                }
+
                 nilai.tanggal= this.nilai?.tanggal
                 nilai.kelasSiswa= this.nilai?.kelasSiswa
                 nilai.idSiswa= this.nilai?.idSiswa
@@ -475,6 +589,28 @@ class InputNilaiFragment : Fragment() {
                     tv_nilai_sosial.visibility = View.GONE
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
+
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
 
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
@@ -574,6 +710,29 @@ class InputNilaiFragment : Fragment() {
                     nilai_sikap_sosial.visibility = View.VISIBLE
                     submit_nilai_akademik.visibility=View.VISIBLE
 
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.VISIBLE
+                    mingguke_komunal.visibility = View.VISIBLE
+                    tv_materi_komunal.visibility = View.VISIBLE
+                    materi_komunal.visibility = View.VISIBLE
+                    tv_ket_komunal.visibility = View.VISIBLE
+                    ket_komunal.visibility = View.VISIBLE
+                    tv_nilai_komunal.visibility = View.VISIBLE
+                    nilai_komunal.visibility = View.VISIBLE
+                    submit_nilai_komunal.visibility=View.VISIBLE
+
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
                     tv_ket_komputer.visibility = View.GONE
@@ -671,6 +830,28 @@ class InputNilaiFragment : Fragment() {
                     tv_nilai_sosial.visibility = View.GONE
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
+
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
 
                     tv_materi_komputer.visibility = View.VISIBLE
                     nilaikomputer.visibility = View.VISIBLE
@@ -770,6 +951,28 @@ class InputNilaiFragment : Fragment() {
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
 
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
                     tv_ket_komputer.visibility = View.GONE
@@ -867,6 +1070,28 @@ class InputNilaiFragment : Fragment() {
                     tv_nilai_sosial.visibility = View.GONE
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
+
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
 
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
@@ -966,6 +1191,28 @@ class InputNilaiFragment : Fragment() {
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
 
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
                     tv_ket_komputer.visibility = View.GONE
@@ -1063,6 +1310,29 @@ class InputNilaiFragment : Fragment() {
                     tv_nilai_sosial.visibility = View.GONE
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
+
+
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
 
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
@@ -1163,6 +1433,28 @@ class InputNilaiFragment : Fragment() {
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
 
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
                     tv_ket_komputer.visibility = View.GONE
@@ -1261,6 +1553,28 @@ class InputNilaiFragment : Fragment() {
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
 
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
                     tv_ket_komputer.visibility = View.GONE
@@ -1358,6 +1672,29 @@ class InputNilaiFragment : Fragment() {
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
 
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
                     tv_ket_komputer.visibility = View.GONE
@@ -1454,6 +1791,28 @@ class InputNilaiFragment : Fragment() {
                     tv_nilai_sosial.visibility = View.GONE
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
+
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
 
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
@@ -1553,6 +1912,28 @@ class InputNilaiFragment : Fragment() {
                     nilai_sikap_sosial.visibility = View.GONE
                     submit_nilai_akademik.visibility=View.GONE
 
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
                     tv_materi_komputer.visibility = View.GONE
                     nilaikomputer.visibility = View.GONE
                     tv_ket_komputer.visibility = View.GONE
@@ -1635,6 +2016,368 @@ class InputNilaiFragment : Fragment() {
                     saran_okupasi.visibility = View.VISIBLE
 
                 }
+                if(mapel=="Kelas Komunikasi Lanjutan"){
+                    tv_spiritual.visibility = View.GONE
+                    sikap_spiritual.visibility = View.GONE
+                    tv_sosial.visibility = View.GONE
+                    sikap_sosial.visibility = View.GONE
+
+                    tv_mingguke.visibility = View.GONE
+                    mingguke.visibility = View.GONE
+                    tv_materi.visibility = View.GONE
+                    materi_sikap_sosial.visibility = View.GONE
+                    tv_ket.visibility = View.GONE
+                    ket_sikap_sosial.visibility = View.GONE
+                    tv_nilai_sosial.visibility = View.GONE
+                    nilai_sikap_sosial.visibility = View.GONE
+                    submit_nilai_akademik.visibility=View.GONE
+
+                    daftar_komunal.visibility=View.VISIBLE
+                    tv_mingguke_komunal.visibility = View.VISIBLE
+                    mingguke_komunal.visibility = View.VISIBLE
+                    tv_materi_komunal.visibility = View.VISIBLE
+                    materi_komunal.visibility = View.VISIBLE
+                    tv_ket_komunal.visibility = View.VISIBLE
+                    ket_komunal.visibility = View.VISIBLE
+                    tv_nilai_komunal.visibility = View.VISIBLE
+                    nilai_komunal.visibility = View.VISIBLE
+                    submit_nilai_komunal.visibility=View.VISIBLE
+
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
+                    tv_materi_komputer.visibility = View.GONE
+                    nilaikomputer.visibility = View.GONE
+                    tv_ket_komputer.visibility = View.GONE
+                    ket_komputer.visibility = View.GONE
+                    tv_nilai_komputer.visibility = View.GONE
+                    nilai_komputer.visibility = View.GONE
+
+
+                    tv_mingguke_murajaah.visibility = View.GONE
+                    minggukeMurajaah.visibility = View.GONE
+                    tv_materi_murajaah.visibility = View.GONE
+                    materi_murajaah.visibility = View.GONE
+                    tv_ket_murajaah.visibility = View.GONE
+                    ket_murajaah.visibility = View.GONE
+                    tv_nilai_murajaah.visibility = View.GONE
+                    nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
+
+                    tv_nama_ekstra.visibility = View.GONE
+                    nama_ekstra.visibility = View.GONE
+                    tv_ket_ekstra.visibility = View.GONE
+                    ket_ekstra.visibility = View.GONE
+
+
+                    tv_laporan_perkembangan_anak.visibility = View.GONE
+                    perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
+                    minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
+
+                    tv_saran_guru.visibility = View.GONE
+                    saran_guru.visibility = View.GONE
+                    tv_tinggi_badan.visibility = View.GONE
+                    tinggi_badan.visibility = View.GONE
+
+                    tv_berat_badan.visibility = View.GONE
+                    berat_badan.visibility = View.GONE
+
+                    tv_kondisi_kesehatan.visibility = View.GONE
+                    tv_penglihatan.visibility = View.GONE
+                    penglihatan.visibility = View.GONE
+                    tv_pendengaran.visibility = View.GONE
+                    pendengaran.visibility = View.GONE
+                    tv_gigi.visibility = View.GONE
+                    gigi.visibility = View.GONE
+
+                    tv_daya_tahan_tubuh.visibility = View.GONE
+                    daya_tahan.visibility = View.GONE
+
+                    tv_evaluasi_pertumbuhan_anak.visibility = View.GONE
+                    tv_kondisi_anak_saat_ini.visibility = View.GONE
+                    kondisi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal.visibility = View.GONE
+                    kondisi_ideal.visibility = View.GONE
+                    tv_saran_dokter.visibility = View.GONE
+                    saran_dokter.visibility = View.GONE
+
+                    tv_absensi.visibility = View.GONE
+                    tv_izin.visibility = View.GONE
+                    izin.visibility = View.GONE
+                    tv_sakit.visibility = View.GONE
+                    sakit.visibility = View.GONE
+                    tv_tidak_ada_ket.visibility = View.GONE
+                    tidak_ada_keterangan.visibility = View.GONE
+
+                    tv_evaluasi_perkembangan_anak.visibility = View.GONE
+                    tv_kondisi_psikologi_saat_ini.visibility = View.GONE
+                    kondisi_psikologi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal_psikologi.visibility = View.GONE
+                    kondisi_ideal_psikologi.visibility = View.GONE
+                    tv_saran_psikologi.visibility = View.GONE
+                    saran_psikolog.visibility = View.GONE
+
+                    tv_kondisi_okupasi_saat_ini.visibility = View.GONE
+                    kondisi_okupasi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal_okupasi.visibility = View.GONE
+                    kondisi_ideal_okupasi.visibility = View.GONE
+                    tv_saran_okupasi.visibility = View.GONE
+                    saran_okupasi.visibility = View.GONE
+                }
+                if(mapel=="Kelas Sensori Integrasi"){
+                    tv_spiritual.visibility = View.GONE
+                    sikap_spiritual.visibility = View.GONE
+                    tv_sosial.visibility = View.GONE
+                    sikap_sosial.visibility = View.GONE
+
+                    tv_mingguke.visibility = View.GONE
+                    mingguke.visibility = View.GONE
+                    tv_materi.visibility = View.GONE
+                    materi_sikap_sosial.visibility = View.GONE
+                    tv_ket.visibility = View.GONE
+                    ket_sikap_sosial.visibility = View.GONE
+                    tv_nilai_sosial.visibility = View.GONE
+                    nilai_sikap_sosial.visibility = View.GONE
+                    submit_nilai_akademik.visibility=View.GONE
+
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+
+
+                    daftar_sensori.visibility=View.VISIBLE
+                    tv_mingguke_sensori.visibility = View.VISIBLE
+                    mingguke_sensori.visibility = View.VISIBLE
+                    tv_materi_sensori.visibility = View.VISIBLE
+                    materi_sensori.visibility = View.VISIBLE
+                    tv_ket_sensori.visibility = View.VISIBLE
+                    ket_sensori.visibility = View.VISIBLE
+                    tv_nilai_sensori.visibility = View.VISIBLE
+                    nilai_sensori.visibility = View.VISIBLE
+                    submit_nilai_sensori.visibility=View.VISIBLE
+
+                    tv_materi_komputer.visibility = View.GONE
+                    nilaikomputer.visibility = View.GONE
+                    tv_ket_komputer.visibility = View.GONE
+                    ket_komputer.visibility = View.GONE
+                    tv_nilai_komputer.visibility = View.GONE
+                    nilai_komputer.visibility = View.GONE
+
+
+                    tv_mingguke_murajaah.visibility = View.GONE
+                    minggukeMurajaah.visibility = View.GONE
+                    tv_materi_murajaah.visibility = View.GONE
+                    materi_murajaah.visibility = View.GONE
+                    tv_ket_murajaah.visibility = View.GONE
+                    ket_murajaah.visibility = View.GONE
+                    tv_nilai_murajaah.visibility = View.GONE
+                    nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
+
+                    tv_nama_ekstra.visibility = View.GONE
+                    nama_ekstra.visibility = View.GONE
+                    tv_ket_ekstra.visibility = View.GONE
+                    ket_ekstra.visibility = View.GONE
+
+
+                    tv_laporan_perkembangan_anak.visibility = View.GONE
+                    perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
+                    minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
+
+                    tv_saran_guru.visibility = View.GONE
+                    saran_guru.visibility = View.GONE
+                    tv_tinggi_badan.visibility = View.GONE
+                    tinggi_badan.visibility = View.GONE
+
+                    tv_berat_badan.visibility = View.GONE
+                    berat_badan.visibility = View.GONE
+
+                    tv_kondisi_kesehatan.visibility = View.GONE
+                    tv_penglihatan.visibility = View.GONE
+                    penglihatan.visibility = View.GONE
+                    tv_pendengaran.visibility = View.GONE
+                    pendengaran.visibility = View.GONE
+                    tv_gigi.visibility = View.GONE
+                    gigi.visibility = View.GONE
+
+                    tv_daya_tahan_tubuh.visibility = View.GONE
+                    daya_tahan.visibility = View.GONE
+
+                    tv_evaluasi_pertumbuhan_anak.visibility = View.GONE
+                    tv_kondisi_anak_saat_ini.visibility = View.GONE
+                    kondisi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal.visibility = View.GONE
+                    kondisi_ideal.visibility = View.GONE
+                    tv_saran_dokter.visibility = View.GONE
+                    saran_dokter.visibility = View.GONE
+
+                    tv_absensi.visibility = View.GONE
+                    tv_izin.visibility = View.GONE
+                    izin.visibility = View.GONE
+                    tv_sakit.visibility = View.GONE
+                    sakit.visibility = View.GONE
+                    tv_tidak_ada_ket.visibility = View.GONE
+                    tidak_ada_keterangan.visibility = View.GONE
+
+                    tv_evaluasi_perkembangan_anak.visibility = View.GONE
+                    tv_kondisi_psikologi_saat_ini.visibility = View.GONE
+                    kondisi_psikologi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal_psikologi.visibility = View.GONE
+                    kondisi_ideal_psikologi.visibility = View.GONE
+                    tv_saran_psikologi.visibility = View.GONE
+                    saran_psikolog.visibility = View.GONE
+
+                    tv_kondisi_okupasi_saat_ini.visibility = View.GONE
+                    kondisi_okupasi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal_okupasi.visibility = View.GONE
+                    kondisi_ideal_okupasi.visibility = View.GONE
+                    tv_saran_okupasi.visibility = View.GONE
+                    saran_okupasi.visibility = View.GONE
+                }
+                if (mapel=="-"){
+                    tv_spiritual.visibility = View.GONE
+                    sikap_spiritual.visibility = View.GONE
+                    tv_sosial.visibility = View.GONE
+                    sikap_sosial.visibility = View.GONE
+
+                    tv_mingguke.visibility = View.GONE
+                    mingguke.visibility = View.GONE
+                    tv_materi.visibility = View.GONE
+                    materi_sikap_sosial.visibility = View.GONE
+                    tv_ket.visibility = View.GONE
+                    ket_sikap_sosial.visibility = View.GONE
+                    tv_nilai_sosial.visibility = View.GONE
+                    nilai_sikap_sosial.visibility = View.GONE
+                    submit_nilai_akademik.visibility=View.GONE
+
+                    daftar_komunal.visibility=View.GONE
+                    tv_mingguke_komunal.visibility = View.GONE
+                    mingguke_komunal.visibility = View.GONE
+                    tv_materi_komunal.visibility = View.GONE
+                    materi_komunal.visibility = View.GONE
+                    tv_ket_komunal.visibility = View.GONE
+                    ket_komunal.visibility = View.GONE
+                    tv_nilai_komunal.visibility = View.GONE
+                    nilai_komunal.visibility = View.GONE
+                    submit_nilai_komunal.visibility=View.GONE
+
+
+
+                    daftar_sensori.visibility=View.GONE
+                    tv_mingguke_sensori.visibility = View.GONE
+                    mingguke_sensori.visibility = View.GONE
+                    tv_materi_sensori.visibility = View.GONE
+                    materi_sensori.visibility = View.GONE
+                    tv_ket_sensori.visibility = View.GONE
+                    ket_sensori.visibility = View.GONE
+                    tv_nilai_sensori.visibility = View.GONE
+                    nilai_sensori.visibility = View.GONE
+                    submit_nilai_sensori.visibility=View.GONE
+
+                    tv_materi_komputer.visibility = View.GONE
+                    nilaikomputer.visibility = View.GONE
+                    tv_ket_komputer.visibility = View.GONE
+                    ket_komputer.visibility = View.GONE
+                    tv_nilai_komputer.visibility = View.GONE
+                    nilai_komputer.visibility = View.GONE
+
+
+                    tv_mingguke_murajaah.visibility = View.GONE
+                    minggukeMurajaah.visibility = View.GONE
+                    tv_materi_murajaah.visibility = View.GONE
+                    materi_murajaah.visibility = View.GONE
+                    tv_ket_murajaah.visibility = View.GONE
+                    ket_murajaah.visibility = View.GONE
+                    tv_nilai_murajaah.visibility = View.GONE
+                    nilai_murajaah.visibility = View.GONE
+                    submit_nilai_murajaah.visibility=View.GONE
+
+                    tv_nama_ekstra.visibility = View.GONE
+                    nama_ekstra.visibility = View.GONE
+                    tv_ket_ekstra.visibility = View.GONE
+                    ket_ekstra.visibility = View.GONE
+
+
+                    tv_laporan_perkembangan_anak.visibility = View.GONE
+                    perkembangan_anak.visibility = View.GONE
+                    tv_mingguke_perkembangan.visibility= View.GONE
+                    tv_angka_perkembangan.visibility=View.GONE
+                    minggukePerkembangan.visibility=View.GONE
+                    submit_nilai_perkembangan.visibility=View.GONE
+
+                    tv_saran_guru.visibility = View.GONE
+                    saran_guru.visibility = View.GONE
+                    tv_tinggi_badan.visibility = View.GONE
+                    tinggi_badan.visibility = View.GONE
+
+                    tv_berat_badan.visibility = View.GONE
+                    berat_badan.visibility = View.GONE
+
+                    tv_kondisi_kesehatan.visibility = View.GONE
+                    tv_penglihatan.visibility = View.GONE
+                    penglihatan.visibility = View.GONE
+                    tv_pendengaran.visibility = View.GONE
+                    pendengaran.visibility = View.GONE
+                    tv_gigi.visibility = View.GONE
+                    gigi.visibility = View.GONE
+
+                    tv_daya_tahan_tubuh.visibility = View.GONE
+                    daya_tahan.visibility = View.GONE
+
+                    tv_evaluasi_pertumbuhan_anak.visibility = View.GONE
+                    tv_kondisi_anak_saat_ini.visibility = View.GONE
+                    kondisi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal.visibility = View.GONE
+                    kondisi_ideal.visibility = View.GONE
+                    tv_saran_dokter.visibility = View.GONE
+                    saran_dokter.visibility = View.GONE
+
+                    tv_absensi.visibility = View.GONE
+                    tv_izin.visibility = View.GONE
+                    izin.visibility = View.GONE
+                    tv_sakit.visibility = View.GONE
+                    sakit.visibility = View.GONE
+                    tv_tidak_ada_ket.visibility = View.GONE
+                    tidak_ada_keterangan.visibility = View.GONE
+
+                    tv_evaluasi_perkembangan_anak.visibility = View.GONE
+                    tv_kondisi_psikologi_saat_ini.visibility = View.GONE
+                    kondisi_psikologi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal_psikologi.visibility = View.GONE
+                    kondisi_ideal_psikologi.visibility = View.GONE
+                    tv_saran_psikologi.visibility = View.GONE
+                    saran_psikolog.visibility = View.GONE
+
+                    tv_kondisi_okupasi_saat_ini.visibility = View.GONE
+                    kondisi_okupasi_saat_ini.visibility = View.GONE
+                    tv_kondisi_ideal_okupasi.visibility = View.GONE
+                    kondisi_ideal_okupasi.visibility = View.GONE
+                    tv_saran_okupasi.visibility = View.GONE
+                    saran_okupasi.visibility = View.GONE
+                }
 
             }
 
@@ -1653,7 +2396,21 @@ class InputNilaiFragment : Fragment() {
                 id: Long
             ) {
 
+
+
                 if (tanggal_nilai.selectedItemPosition==0) {
+                    mingguKomunal.clear()
+                    mingguSensori.clear()
+                    mingguKomunal.add("Tambah Minggu Baru")
+                    mingguSensori.add("Tambah Minggu Baru")
+                    val adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, mingguKomunal)
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinnerKomunal.setAdapter(adapter)
+
+                    val adapter2 = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, mingguSensori)
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                    spinnerSensori.setAdapter(adapter2)
+
                     sikap_spiritual.setText("")
                     sikap_sosial.setText("")
 
@@ -1693,6 +2450,8 @@ class InputNilaiFragment : Fragment() {
                     nilai = listNilai.find {
                         it.tanggal == tanggal_nilai.selectedItem
                     }
+                    val coba=nilai?.Kelas_Sensori?.get("Kelas Sensori Integrasi")
+                    Log.d("COBA","${coba}")
                     siswaId = nilai?.idSiswa
 
                     when(mata_pelajaran.selectedItem) {
@@ -1702,6 +2461,33 @@ class InputNilaiFragment : Fragment() {
                             }
                             if(nilai?.Penilaian_Sikap?.get("Sikap Sosial")!=null){
                                 sikap_sosial.setText("${nilai?.Penilaian_Sikap?.get("Sikap Sosial")}")
+                            }
+                        }
+                        "Kelas Komunikasi Lanjutan"->{
+
+                            if(nilai?.Kelas_Komunal!=null){
+                                Kelas_Komunal = nilai?.Kelas_Komunal!!
+                                Kelas_Komunal?.get("Kelas Komunikasi Lanjutan")?.forEach {
+                                    listKomunal.add(it)
+                                    mingguKomunal.add(it.minggu!!)
+                                }
+                                Log.d("listKomunal","${listKomunal}")
+                                val adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, mingguKomunal)
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                                spinnerKomunal.setAdapter(adapter)
+                            }
+                        }
+                        "Kelas Sensori Integrasi"->{
+
+                            if(nilai?.Kelas_Sensori!=null){
+                                Kelas_Sensori = nilai?.Kelas_Sensori!!
+                                Kelas_Sensori?.get("Kelas Sensori Integrasi")?.forEach {
+                                    listSensori.add(it)
+                                    mingguSensori.add(it.minggu!!)
+                                }
+                                val adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, mingguSensori)
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                                spinnerSensori.setAdapter(adapter)
                             }
                         }
                         "Kelas Pra Akademik" -> {
@@ -1859,6 +2645,28 @@ class InputNilaiFragment : Fragment() {
         }
     }
 
+    private fun setKomunalValue(minggukeKomunal:String){
+        val komunal= listKomunal.find { it.minggu==minggukeKomunal}
+        if(komunal!=null){
+            val nilai=komunal.nilai
+            materi_komunal.setText(komunal.materi)
+            ket_komunal.setText(komunal.keterangan)
+            nilai_komunal.setText(Integer.toString((nilai!!)))
+
+        }
+    }
+
+    private fun setSensoriValue(minggukeSensori:String){
+        val sensori= listSensori.find { it.minggu==minggukeSensori}
+        if(sensori!=null){
+            val nilai=sensori.nilai
+            materi_sensori.setText(sensori.materi)
+            ket_sensori.setText(sensori.keterangan)
+            nilai_sensori.setText(Integer.toString((nilai!!)))
+
+        }
+    }
+
     private fun setPerkembanganValue(mingguPerkembangan:Int){
         val perkembangan=listPerkembangan.find { it.minggu==mingguke_perkembangan }
         if(perkembangan!=null){
@@ -1867,17 +2675,19 @@ class InputNilaiFragment : Fragment() {
         }
     }
 
-    private fun getNilaiEachStudent(idSiswa: String) {
+
+    private fun getNilaiEachStudent(idSiswa: String,kelas1:String) {
         listTanggal.clear()
         listTanggal.add("Tambah Data Baru")
         var ref = mFirestore.collection("nilai")
-        ref.whereEqualTo("idSiswa", idSiswa).get()
+        ref.whereEqualTo("idSiswa", idSiswa).whereEqualTo("kelasSiswa",kelas1).get()
             .addOnSuccessListener {
                 listNilai.clear()
                 it.forEach {
                     val nilai = it.toObject(Nilai::class.java)
-                    listNilai.add(nilai)
+                        listNilai.add(nilai)
                 }
+                Log.d("Isi ListNilai","${listNilai}")
 
                 if (listNilai.size > 0) {
                     listNilai.map {nilai ->
@@ -1897,6 +2707,7 @@ class InputNilaiFragment : Fragment() {
 
 
     private fun inputNilai(nilai: Nilai) {
+
         if (tanggal_nilai.selectedItemPosition == 0) {
             val sekarang=SimpleDateFormat("dd-MM-yyyy").format(Date())
             val tanggal=listTanggal.find {
@@ -1914,7 +2725,7 @@ class InputNilaiFragment : Fragment() {
                     }
                 }else{
                     mFirestore.collection("nilai")
-                        .whereEqualTo("idSiswa", siswaId)
+                        .whereEqualTo("idSiswa", siswaId).whereEqualTo("kelasSiswa",kelas)
                         .get()
                         .addOnSuccessListener {
                             it.forEach{itl ->
@@ -1922,6 +2733,8 @@ class InputNilaiFragment : Fragment() {
                                     "idSiswa", nilai.idSiswa,
                                     "kelasSiswa", nilai.kelasSiswa,
                                     "penilaian_Sikap",nilai.Penilaian_Sikap,
+                                    "kelas_Komunal",nilai.Kelas_Komunal,
+                                    "kelas_Sensori",nilai.Kelas_Sensori,
                                     "kelas_Pra_Akademik", nilai.Kelas_Pra_Akademik,
                                     "kelas_Komputer",nilai.Kelas_Komputer,
                                     "kelas_Murajaah",nilai.Kelas_Murajaah,
@@ -1942,7 +2755,7 @@ class InputNilaiFragment : Fragment() {
 
         } else {
             mFirestore.collection("nilai")
-                .whereEqualTo("idSiswa", siswaId)
+                .whereEqualTo("idSiswa", siswaId).whereEqualTo("kelasSiswa",kelas)
                 .get()
                 .addOnSuccessListener {
                     it.forEach{itl ->
@@ -1950,6 +2763,8 @@ class InputNilaiFragment : Fragment() {
                             "idSiswa", nilai.idSiswa,
                             "kelasSiswa", nilai.kelasSiswa,
                             "penilaian_Sikap",nilai.Penilaian_Sikap,
+                            "kelas_Komunal",nilai.Kelas_Komunal,
+                            "kelas_Sensori",nilai.Kelas_Sensori,
                             "kelas_Pra_Akademik", nilai.Kelas_Pra_Akademik,
                             "kelas_Komputer",nilai.Kelas_Komputer,
                             "kelas_Murajaah",nilai.Kelas_Murajaah,
@@ -2030,6 +2845,76 @@ class InputNilaiFragment : Fragment() {
     }
 
 
+    private fun submit_komunal(){
+        var komunal1:Murajaah
+        if(isiMingguKomunal!=null){
+            if(isiMingguKomunal=="Tambah Minggu Baru"){
+                Log.d("MASUK ATAS","MASUK")
+                if(mingguke_komunal.text.toString()==""){
+                    Toast.makeText(requireContext(),"Minggu Harus Di Isi!!",Toast.LENGTH_SHORT).show()
+                }else{
+                    komunal1= Murajaah(mingguke_komunal.text.toString(),materi_komunal.text.toString(),ket_komunal.text.toString(),nilai_komunal.text.toString().toInt())
+                    komunal.add(komunal1)
+                }
+            }else{
+                Log.d("MASUK BAWAH","MASUK")
+                komunal1= Murajaah(isiMingguKomunal,materi_komunal.text.toString(),ket_komunal.text.toString(),nilai_komunal.text.toString().toInt())
+                komunal.add(komunal1)
+            }
+
+            komunal.forEach { kom->
+                val komunal2= Kelas_Komunal.get("Kelas Komunikasi Lanjutan")
+                val index = komunal2?.indexOfFirst {
+                    it.minggu == kom.minggu
+                }
+                if (index != -1) {
+                    index?.let { komunal2[it] = kom}
+                } else {
+                    komunal2.add(kom)
+                }
+                Toast.makeText(requireContext(),"Data Ditambahkan ke Lokal",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+    }
+
+    private fun submit_sensori(){
+        var sensori1:Murajaah
+        val cek=mingguke_sensori.text.toString()
+        if(isiMingguSensori!=null){
+            if(isiMingguSensori=="Tambah Minggu Baru"){
+                if(cek==""){
+                    Toast.makeText(requireContext(),"Minggu Harus Di Isi!!",Toast.LENGTH_SHORT).show()
+                }else{
+                    sensori1= Murajaah(mingguke_sensori.text.toString(),materi_sensori.text.toString(),ket_sensori.text.toString(),nilai_sensori.text.toString().toInt())
+                    sensori.add(sensori1)
+                }
+            }else{
+                sensori1= Murajaah(isiMingguSensori,materi_sensori.text.toString(),ket_sensori.text.toString(),nilai_sensori.text.toString().toInt())
+                sensori.add(sensori1)
+            }
+
+            sensori.forEach { sen->
+                val sensori2= Kelas_Sensori.get("Kelas Sensori Integrasi")
+                val index = sensori2?.indexOfFirst {
+                    it.minggu == sen.minggu
+                }
+                if (index != -1) {
+                    index?.let { sensori2[it] = sen}
+                } else {
+                    sensori2.add(sen)
+                }
+
+                Toast.makeText(requireContext(),"Data Ditambahkan ke Lokal",Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+
+    }
+
+
+
     private fun getIdSiswa(namaSiswa: String) {
         mFirestore.collection("students")
             .whereEqualTo("nama", namaSiswa)
@@ -2044,15 +2929,34 @@ class InputNilaiFragment : Fragment() {
     }
 
     private fun getKelasSiswa(idSiswa: String){
+        lateinit var kelastunggal:String
         mFirestore.collection("students")
             .whereEqualTo("id", idSiswa)
             .get()
             .addOnSuccessListener {
                 for (siswa in it) {
+                    kelasSiswa.clear()
                     val sis = siswa.toObject(Siswa::class.java)
-                    kelasSiswa = sis.kelas
-
+                    kelastunggal=sis.kelas
+                    kelasSiswa.add(sis.kelas)
                 }
+
+                Log.d("Kelas dari students","${kelasSiswa}")
+                mFirestore.collection("nilai").whereEqualTo("idSiswa", idSiswa)
+                    .get()
+                    .addOnSuccessListener {
+                        for (siswa in it){
+                            val sis = siswa.toObject(Nilai::class.java)
+                            if(sis.kelasSiswa!=kelastunggal){
+                                kelasSiswa.add(sis.kelasSiswa!!)
+                            }
+                        }
+                    }
+
+                val adapter =ArrayAdapter<String>(context, android.R.layout.simple_spinner_item, kelasSiswa)
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                spinnerKelas.setAdapter(adapter)
+
 
             }
     }

@@ -25,6 +25,18 @@
                 android:id="@+id/daftar_siswa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></Spinner>
+            <TextView
+                android:text="Kelas Siswa"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/daftar_kelas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></Spinner>
 
 <!--            <TextView-->
 <!--                android:layout_marginTop="15dp"-->
@@ -50,7 +62,7 @@
 
             <Spinner
                 android:id="@+id/pelajaran"
-                android:entries="@array/aspek_pelajaran"
+                android:entries="@array/aspek_pelajaran2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></Spinner>
 
@@ -104,6 +116,173 @@
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tv_mingguke_komunal"
+                    android:text="Minggu Ke"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/daftar_komunal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+
+                <EditText
+                    android:id="@+id/mingguke_komunal"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
+                    android:layout_weight="2"
+                    android:inputType="textMultiLine"
+                    />
+
+                <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_materi_komunal"
+                    android:text="Materi"
+                    />
+                <EditText
+                    android:id="@+id/materi_komunal"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
+                    android:layout_weight="2"
+                    android:inputType="textMultiLine"
+                    />
+
+                <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_ket_komunal"
+                    android:text="Keterangan"
+                    />
+                <EditText
+                    android:id="@+id/ket_komunal"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
+                    android:layout_weight="2"
+                    android:inputType="textMultiLine"
+                    />
+
+                <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_nilai_komunal"
+                    android:text="Nilai"
+                    />
+                <EditText
+                    android:id="@+id/nilai_komunal"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/danger"
+                    android:id="@+id/submit_nilai_komunal"
+                    android:layout_marginTop="10dp"
+                    android:text="Isi Komunal"
+                    app:cornerRadius="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <TextView
+                    android:layout_marginTop="15dp"
+                    android:id="@+id/tv_mingguke_sensori"
+                    android:text="Minggu Ke"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/black"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/daftar_sensori"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></Spinner>
+
+                <EditText
+                    android:id="@+id/mingguke_sensori"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
+                    android:layout_weight="2"
+                    android:inputType="textMultiLine"
+                    />
+
+                <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_materi_sensori"
+                    android:text="Materi"
+                    />
+                <EditText
+                    android:id="@+id/materi_sensori"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
+                    android:layout_weight="2"
+                    android:inputType="textMultiLine"
+                    />
+
+                <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_ket_sensori"
+                    android:text="Keterangan"
+                    />
+                <EditText
+                    android:id="@+id/ket_sensori"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
+                    android:layout_weight="2"
+                    android:inputType="textMultiLine"
+                    />
+
+                <TextView
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                    android:textColor="@android:color/black"
+                    android:textStyle="bold"
+                    android:id="@+id/tv_nilai_sensori"
+                    android:text="Nilai"
+                    />
+                <EditText
+                    android:id="@+id/nilai_sensori"
+                    android:layout_height="100dp"
+                    android:gravity="bottom"
+                    android:maxHeight="150dp"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    />
+
+                <com.google.android.material.button.MaterialButton
+                    android:textColor="@color/white"
+                    android:backgroundTint="@color/danger"
+                    android:id="@+id/submit_nilai_sensori"
+                    android:layout_marginTop="10dp"
+                    android:text="Isi Sensori"
+                    app:cornerRadius="25dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
 
                     <TextView
                         android:layout_marginTop="15dp"
@@ -372,7 +551,7 @@
                     android:gravity="bottom"
                     android:maxHeight="150dp"
                     android:layout_weight="2"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     />
 
                 <com.google.android.material.button.MaterialButton

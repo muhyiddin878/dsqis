@@ -16,6 +16,26 @@
         <item>-</item>
         <item>Semua</item>
         <item>Penilaian Sikap</item>
+        <item>Kelas Komunikasi Lanjutan</item>
+        <item>Kelas Sensori Integrasi</item>
+        <item>Kelas Pra Akademik</item>
+        <item>Kelas Komputer</item>
+        <item>Kelas Muraja\'ah</item>
+        <item>Ekstrakulikuler</item>
+        <item>Laporan Perkembangan Anak</item>
+        <item>Saran Guru</item>
+        <item>Tinggi dan Berat Badan</item>
+        <item>Kondisi Kesehatan</item>
+        <item>Evaluasi Pertumbuhan Anak</item>
+        <item>Absensi</item>
+        <item>Evaluasi Perkembangan Anak</item>
+    </array>
+
+    <array name="aspek_pelajaran2">
+        <item>-</item>
+        <item>Penilaian Sikap</item>
+        <item>Kelas Komunikasi Lanjutan</item>
+        <item>Kelas Sensori Integrasi</item>
         <item>Kelas Pra Akademik</item>
         <item>Kelas Komputer</item>
         <item>Kelas Muraja\'ah</item>

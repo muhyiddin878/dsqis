@@ -19,6 +19,16 @@
         android:id="@+id/isi_chat"
         android:text="Selamat malam, ada yang bisa saya bantu ?"
         android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_below="@id/isi_chat"
+        android:layout_marginTop="8dp"
+        android:id="@+id/time"
+        android:textSize="10sp"
+        android:textColor="@color/warning"
+        android:text="22-01-2020 17:52 AM"
+        android:layout_height="wrap_content"/>
     <TextView
         android:layout_alignParentEnd="true"
         android:id="@+id/waktu_chat"

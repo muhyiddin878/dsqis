@@ -17,6 +17,8 @@ import com.muhyiddin.dsqis.model.ChatList
 import com.muhyiddin.dsqis.model.User
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_fragment_chat_pakar.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class FragmentChatPakar : Fragment() {
     lateinit var prefs: AppPreferences
@@ -30,6 +32,7 @@ class FragmentChatPakar : Fragment() {
     val list:MutableList<ChatList> = mutableListOf()
     private lateinit var chat:String
     private var idRoom:String=""
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -86,35 +89,29 @@ class FragmentChatPakar : Fragment() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 snapshot.children.forEach{
                     val chatList = it.getValue(ChatList::class.java)
-//                    for (tes2 in chatList)
                     if (chatList != null) {
-//                        listChat.add(chatList)
-//                        showListChat(listChat)
                         if (prefs.role==2){
                             if (prefs.uid==chatList.id_pakar){
                                  listChat.add(chatList)
                                 idRoom=chatList.roomId
-
+                                onChange()
                             }
                         }
                         else if (prefs.role==1){
                             if (prefs.uid==chatList.id_member){
                                 listChat.add(chatList)
                                 idRoom=chatList.roomId
+                                onChange()
                             }
                         }
-
-
-
-
                     }
                 }
-                onChange()
+
                 hideLoading()
-
-
                 if (listChat.size>0){
-                    listChat.sortByDescending { it.last_chat }
+                    listChat.sortBy {
+                        it.time.reversed()
+                    }
                     showListChat(listChat)
                 } else{
                     showEmptyChat()
@@ -136,7 +133,6 @@ class FragmentChatPakar : Fragment() {
                 }
 
                 override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                    adapter.notifyDataSetChanged()
                 }
 
                 override fun onChildChanged(p0: DataSnapshot, p1: String?) {
@@ -154,6 +150,32 @@ class FragmentChatPakar : Fragment() {
 
             })
         }
+
+        if (idRoom!=""){
+
+            mDatabase.getReference("chat/${idRoom}/conversation").addChildEventListener(object :ChildEventListener{
+                override fun onCancelled(p0: DatabaseError) {
+
+                }
+
+                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+                    adapter.notifyDataSetChanged()
+
+                }
+
+                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+                    adapter.notifyDataSetChanged()
+                }
+
+                override fun onChildRemoved(p0: DataSnapshot) {
+                }
+
+            })
+        }
     }
 
     fun updateUnreadChat(roomId:String){
@@ -166,7 +188,6 @@ class FragmentChatPakar : Fragment() {
                         if(chatList?.pengirim!=prefs.uid){
                             if (chatList.isRead==false){
                                 val key=chatList.id
-                                Log.d("isi ChatList","${chatList.message}")
                                 rootRef.child(key).ref.updateChildren(mapOf(
                                     "read" to true
                                 ))
@@ -193,8 +214,10 @@ class FragmentChatPakar : Fragment() {
     }
 
     fun hideLoading() {
-        progress_bar.visibility = View.GONE
-        prefs.isLoading=false
+        if(progress_bar!=null){
+            progress_bar.visibility = View.GONE
+            prefs.isLoading=false
+        }
     }
 
     fun showEmptyChat() {
@@ -206,11 +229,13 @@ class FragmentChatPakar : Fragment() {
     }
 
     fun showListChat(data: List<ChatList>) {
-        rv_chat.visibility = View.VISIBLE
-        data.let {
-        list.clear()
-        list.addAll(it)
-        adapter.notifyDataSetChanged()
+        if (rv_chat!=null){
+            rv_chat.visibility = View.VISIBLE
+            data.let {
+                list.clear()
+                list.addAll(it)
+                adapter.notifyDataSetChanged()
+            }
         }
     }
 

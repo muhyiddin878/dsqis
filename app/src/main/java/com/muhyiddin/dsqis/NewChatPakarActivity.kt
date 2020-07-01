@@ -18,6 +18,8 @@ import com.muhyiddin.dsqis.model.Pakar
 import com.muhyiddin.dsqis.model.User
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_new_chat_pakar.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NewChatPakarActivity : AppCompatActivity() {
 
@@ -27,6 +29,7 @@ class NewChatPakarActivity : AppCompatActivity() {
     val listNamaDokter:MutableList<String> = mutableListOf()
     lateinit var prefs: AppPreferences
     val mDatabase = FirebaseDatabase.getInstance()
+    private lateinit var time:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +59,8 @@ class NewChatPakarActivity : AppCompatActivity() {
             }
 
         })
+
+        time= SimpleDateFormat("dd-MM-yyy HH:mm:ss").format(Date())
 
 
         val ref = FirebaseFirestore.getInstance()
@@ -89,7 +94,7 @@ class NewChatPakarActivity : AppCompatActivity() {
             val namaPakar=  listNamaDokter[position]
             val namaMember=listUser[position]
             val array= arrayOf("$room","$namaPakar","$namaMember")
-            val chatList = ChatList(listNamaDokter[position], listUser[position].userId.toString(), prefs.nama, prefs.uid, "", key)
+            val chatList = ChatList(listNamaDokter[position], listUser[position].userId.toString(), prefs.nama, prefs.uid, "", key,time)
             ref.child(key).setValue(chatList).addOnSuccessListener {
                 startActivity(Intent(this, ChatDetailActivity::class.java).putExtra("array",array))
                 finish()

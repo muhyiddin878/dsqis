@@ -17,7 +17,7 @@ import com.google.firebase.database.*
 
 
 class ChatDetailAdapter(private val ctx: Context,val listChat:List<Chat>,
-                        val listViewType:List<Int>,private val roomId:String): RecyclerView.Adapter<ChatDetailAdapter.ViewHolder>(){
+                        val listViewType:List<Int>,private val roomId:String,private val idSender:String): RecyclerView.Adapter<ChatDetailAdapter.ViewHolder>(){
 
     override fun getItemViewType(position: Int): Int {
 //        info("position ${position}, item ${listViewType[position]}")
@@ -62,11 +62,13 @@ class ChatDetailAdapter(private val ctx: Context,val listChat:List<Chat>,
                     .into(chat_image)
 
             }
-
-            msg.setOnLongClickListener {
-                unsentChat(item.id)
-                return@setOnLongClickListener true
+            if(item.pengirim==idSender){
+                msg.setOnLongClickListener {
+                    unsentChat(item.id)
+                    return@setOnLongClickListener true
+                }
             }
+
 
         }
 
@@ -102,41 +104,3 @@ class ChatDetailAdapter(private val ctx: Context,val listChat:List<Chat>,
     }
 
 }
-
-
-
-
-
-
-//                .addChildEventListener(object :ChildEventListener{
-//                    override fun onCancelled(p0: DatabaseError) {
-//                    }
-//
-//                    override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-//                    }
-//
-//                    override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-//                        mDatabase.getReference("chat/${roomId}/conversation")
-//                        .child(id).removeValue()
-//                    }
-//
-//                    override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-//                    }
-//
-//                    override fun onChildRemoved(p0: DataSnapshot) {
-//                    }
-//
-//                })
-
-//                .addListenerForSingleValueEvent(object :ValueEventListener{
-//                override fun onCancelled(p0: DatabaseError) {
-//
-//                }
-//
-//                override fun onDataChange(p0: DataSnapshot) {
-//                    mDatabase.getReference("chat/${roomId}/conversation")
-//                        .child(id).removeValue()
-//
-//
-//                }
-//            })

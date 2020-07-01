@@ -21,7 +21,7 @@
     <TextView
         android:visibility="gone"
         android:id="@+id/empty_chat"
-        android:text="Mulai chat dokter sekarang"
+        android:text="Mulai Chat Pakar Sekarang"
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

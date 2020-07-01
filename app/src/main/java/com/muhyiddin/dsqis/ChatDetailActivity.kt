@@ -24,6 +24,10 @@ import com.muhyiddin.dsqis.model.Post
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_chat_detail.*
 import kotlinx.android.synthetic.main.activity_new_post.*
+import java.text.SimpleDateFormat
+import java.time.Clock
+import java.time.LocalDateTime
+import java.util.*
 
 class ChatDetailActivity : AppCompatActivity() {
     private val CHOOSE_IMAGE = 101
@@ -36,6 +40,7 @@ class ChatDetailActivity : AppCompatActivity() {
     lateinit var adapter: ChatDetailAdapter
     private var uri: Uri?=null
     lateinit var type:String
+    private lateinit var date:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +48,6 @@ class ChatDetailActivity : AppCompatActivity() {
 
 
         val array=  intent.getStringArrayExtra("array")
-        Log.d("idroom",array[0])
-        Log.d("member",array[1])
-        Log.d("pakar",array[2])
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -55,41 +57,21 @@ class ChatDetailActivity : AppCompatActivity() {
         }else{
             supportActionBar?.title = array[2]
         }
-        adapter = ChatDetailAdapter(this,listChat, listViewType,array[0])
-
+        adapter = ChatDetailAdapter(this,listChat, listViewType,array[0],prefs.uid)
 
         rv_chat.layoutManager = LinearLayoutManager(this)
         rv_chat.adapter = adapter
 
 
+        date= SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS").format(Date())
 
         getChats(array[0])
 
+        scrollDown()
 
 
-        mDatabase.getReference("chat/${array[0]}/conversation")
-            .addChildEventListener(object : ChildEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                }
 
-                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                    adapter.notifyDataSetChanged()
-                }
 
-                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                    adapter.notifyDataSetChanged()
-
-                }
-
-                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                    adapter.notifyDataSetChanged()
-                }
-
-                override fun onChildRemoved(p0: DataSnapshot) {
-                    adapter.notifyDataSetChanged()
-                }
-
-            })
 
         btn_send_chat.setOnClickListener() {
             if (input_chat.text.isEmpty() &&  uri==null) {
@@ -104,8 +86,6 @@ class ChatDetailActivity : AppCompatActivity() {
         btn_send_image.setOnClickListener() {
             showImageChooser()
         }
-
-        scrollDown()
 
     }
 
@@ -129,7 +109,10 @@ class ChatDetailActivity : AppCompatActivity() {
 
     fun hideLoading() {
         progress_bar.visibility = View.GONE
+
     }
+
+
 
     fun showChats(chats: List<Chat>) {
         listChat.clear()
@@ -142,6 +125,7 @@ class ChatDetailActivity : AppCompatActivity() {
             }
         }
         adapter.notifyDataSetChanged()
+        scrollDown()
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -154,7 +138,7 @@ class ChatDetailActivity : AppCompatActivity() {
     fun getChats(roomId: String) {
         showLoading()
         val ref = mDatabase.getReference("chat/${roomId}/conversation")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
             override fun onDataChange(p0: DataSnapshot) {
@@ -164,21 +148,26 @@ class ChatDetailActivity : AppCompatActivity() {
                     if (data != null) {
                         chats.add(data)
                     }
-                }
 
+
+                }
+                chats.sortBy {
+                    it.time
+                }
                 showChats(chats)
                 hideLoading()
+                updateUnreadChat(roomId)
             }
 
         })
+
+
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-//        info("ACTIVITY RESULT $data AND ${data?.data}")
         if (requestCode == CHOOSE_IMAGE && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
-//            info("MASUK COY BISMILLAH")
             uri = data.data
             val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
             chat_image_preview.visibility= View.VISIBLE
@@ -205,7 +194,7 @@ class ChatDetailActivity : AppCompatActivity() {
             }.addOnCompleteListener {
                 if (it.isSuccessful) {
                     imageLocation = it.result.toString()
-                    val chat = Chat(false, msg, imageLocation, prefs.uid, type,key)
+                    val chat = Chat(false, msg, imageLocation, prefs.uid, type,key,date)
                     chat_image_preview.visibility= View.GONE
                     mDatabase.getReference("chat/${roomId}").child("last_chat").setValue("Gambar")
                     mDatabase.getReference("chat/${roomId}/conversation").child(key).setValue(chat)
@@ -217,7 +206,7 @@ class ChatDetailActivity : AppCompatActivity() {
             }
         } else {
             type = "text"
-            val chat = Chat(false, msg, imageLocation, prefs.uid, type,key)
+            val chat = Chat(false, msg, imageLocation, prefs.uid, type,key,date)
             mDatabase.getReference("chat/${roomId}").child("last_chat").setValue(msg)
             mDatabase.getReference("chat/${roomId}/conversation").child(key).setValue(chat)
                 .addOnSuccessListener {
@@ -227,6 +216,37 @@ class ChatDetailActivity : AppCompatActivity() {
                 }
 
         }
+
+
+    }
+
+
+    fun updateUnreadChat(roomId:String){
+        val rootRef = mDatabase.getReference("chat/${roomId}/conversation")
+        rootRef.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                p0.children.forEach {
+                    val chatList = it.getValue(Chat::class.java)
+                    if (chatList != null) {
+                        if(chatList?.pengirim!=prefs.uid){
+                            if (chatList.isRead==false){
+                                val key=chatList.id
+                                Log.d("isi ChatList","${chatList.message}")
+                                rootRef.child(key).ref.updateChildren(mapOf(
+                                    "read" to true
+                                ))
+                            }
+
+                        }
+
+                    }
+                }
+            }
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+
+        })
 
 
     }

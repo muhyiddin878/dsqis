@@ -26,13 +26,16 @@ class SplashActivity : AppCompatActivity() {
             if (prefs.uid == null || prefs.role == null){
                 startActivity(Intent(this, login::class.java))
                 finish()
-            } else if (prefs.uid!=null && prefs.role==1 ) {
+            }
+            if (prefs.uid!=null && prefs.role==1 ) {
                 startActivity(Intent(this,MainActivity::class.java))
                 finish()
-            }else if (prefs.uid!=null && prefs.role==2 ) {
+            }
+            if (prefs.uid!=null && prefs.role==2 ) {
                 startActivity(Intent(this,MainActivityPakar::class.java))
                 finish()
-            }else{
+            }
+            if(prefs.uid!=null && prefs.role==3 ){
                 startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME",prefs.nama))
                 finish()
             }

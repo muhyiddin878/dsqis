@@ -146,7 +146,7 @@ class BuatAkunFragment : Fragment() {
         showLoading()
         val firestore = mFirestore.collection("students")
         val key = firestore.document().id
-        val ref = mStorage.getReference("students/$nama-$key")
+        val ref = mStorage.getReference("students/$nama")
         if (uri!=null) {
             ref.putFile(uri).continueWithTask {
                 setProgressBarLength(45)

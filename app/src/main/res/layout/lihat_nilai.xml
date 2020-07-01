@@ -33,6 +33,27 @@
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/border2"
+                android:padding="10dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="20dp">
+
+                <TableRow>
+
+                    <Spinner
+                        android:id="@+id/kelas2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        ></Spinner>
+
+                </TableRow>
+            </TableLayout>
+
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@drawable/border3"
                 android:padding="10dp"
                 android:layout_marginTop="25dp"
@@ -119,6 +140,124 @@
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_mingguke_komunal2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Minggu Ke"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <Spinner
+                        android:id="@+id/mingguke_komunal2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/minggu"></Spinner>
+
+                    <TextView
+                        android:id="@+id/tv_materi_komunal2"
+                        android:text="Materi"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/materi_komunal2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ket_komunal2"
+                        android:text="Keterangan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/ket_komunal2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_nilai_komunal2"
+                        android:text="Nilai"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nilai_komunal2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_mingguke_sensori2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Minggu Ke"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <Spinner
+                        android:id="@+id/mingguke_sensori2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:entries="@array/minggu"></Spinner>
+
+                    <TextView
+                        android:id="@+id/tv_materi_sensori2"
+                        android:text="Materi"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/materi_sensori2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_ket_sensori2"
+                        android:text="Keterangan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/ket_sensori2"
+                        android:layout_weight="2"
+                        android:inputType="text"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+                    <TextView
+                        android:id="@+id/tv_nilai_sensori2"
+                        android:text="Nilai"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/nilai_sensori2"
+                        android:layout_weight="2"
+                        android:inputType="number"
+                        android:text="Kosong"
+                        android:textColor="#FFF"
+                        android:textSize="20sp"/>
+
+
 
                     <TextView
                         android:id="@+id/tv_mingguke2"

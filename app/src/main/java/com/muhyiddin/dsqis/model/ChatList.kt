@@ -7,6 +7,7 @@ class ChatList {
     var id_member:String = ""
     var last_chat:String = ""
     var roomId:String = ""
+    var time:String=""
 
     constructor()
     constructor(
@@ -15,7 +16,8 @@ class ChatList {
         nama_member: String,
         id_member: String,
         last_chat:String,
-        roomId: String
+        roomId: String,
+        time:String
     ) {
         this.nama_pakar = nama_pakar
         this.id_pakar = id_pakar
@@ -23,5 +25,6 @@ class ChatList {
         this.id_member = id_member
         this.roomId = roomId
         this.last_chat = last_chat
+        this.time=time
     }
 }
