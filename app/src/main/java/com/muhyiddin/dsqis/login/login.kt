@@ -179,9 +179,9 @@ class login : AppCompatActivity(){
     fun showLoginSuccessPakar(){
         val ref= mAuth.currentUser?.photoUrl
         if(ref!=null){
-            startActivity(Intent(this,OnBoardingActivity::class.java))
-        }else{
             startActivity(Intent(this,MainActivityPakar::class.java))
+        }else{
+            startActivity(Intent(this,OnBoardingActivity::class.java))
         }
         finish()
     }

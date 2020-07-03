@@ -16,6 +16,7 @@
             <TextView
                 android:text="Nama Siswa"
                 android:textStyle="bold"
+
                 android:textColor="@android:color/black"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                 android:layout_width="wrap_content"
@@ -880,8 +881,6 @@
                     android:layout_weight="2"
                     android:inputType="textMultiLine"
                     />
-
-
 
                 <TextView
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"

@@ -1096,10 +1096,6 @@ class FragmentLihatLaporan : Fragment() {
         }
     }
 
-
-
-
-
     fun mapel14(){
         tv_spiritual1.visibility = View.VISIBLE
         sikap_spiritual1.visibility = View.VISIBLE

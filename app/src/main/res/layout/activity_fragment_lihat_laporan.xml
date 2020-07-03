@@ -37,6 +37,7 @@
 
                     <TextView
                         android:layout_weight="1"
+                        android:fontFamily="@font/archivo_black"
                         android:text="Nama Lengkap"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
@@ -62,6 +63,7 @@
                     <TextView
                         android:layout_weight="1"
                         android:text="TTL"
+                        android:fontFamily="@font/archivo_black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
 
@@ -86,6 +88,7 @@
                     <TextView
                         android:layout_weight="1"
                         android:text="Jenis Kelamin"
+                        android:fontFamily="@font/archivo_black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
 
@@ -112,6 +115,7 @@
                     <TextView
                         android:layout_weight="1"
                         android:text="Kelas"
+                        android:fontFamily="@font/archivo_black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
 
@@ -129,32 +133,6 @@
                         android:textColor="@android:color/black"
                         android:text="kelas Persiapan"
                         android:textSize="20sp" />
-                    <!--                    <RadioGroup-->
-                    <!--                        android:id="@+id/tingkatan_kelas_siswa"-->
-                    <!--                        android:layout_weight="20"-->
-                    <!--                        android:orientation="vertical"-->
-                    <!--                        android:layout_width="wrap_content"-->
-                    <!--                        android:layout_height="wrap_content">-->
-                    <!--                        <RadioButton-->
-                    <!--                            android:id="@+id/persiapan_siswa"-->
-                    <!--                            android:text="Tahun Persiapan"-->
-                    <!--                            android:textSize="15sp"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content" />-->
-                    <!--                        <RadioButton-->
-                    <!--                            android:id="@+id/pertama_siswa"-->
-                    <!--                            android:text="Tahun Pertama"-->
-                    <!--                            android:textSize="15sp"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content" />-->
-                    <!--                        <RadioButton-->
-                    <!--                            android:id="@+id/kedua_siswa"-->
-                    <!--                            android:text="Tahun Kedua"-->
-                    <!--                            android:textSize="15sp"-->
-                    <!--                            android:layout_width="wrap_content"-->
-                    <!--                            android:layout_height="wrap_content" />-->
-
-                    <!--                    </RadioGroup>-->
                 </TableRow>
 
                 <TableRow>
@@ -162,6 +140,7 @@
                     <TextView
                         android:layout_weight="1"
                         android:text="Alamat"
+                        android:fontFamily="@font/archivo_black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
 
@@ -186,6 +165,7 @@
                     <TextView
                         android:layout_weight="1"
                         android:text="NIK"
+                        android:fontFamily="@font/archivo_black"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
 
@@ -294,7 +274,10 @@
                     android:layout_width="178dp"
                     android:text="Sikap Spiritual"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                    android:textColor="@android:color/black" />
+                    android:textColor="@android:color/black"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
+                    />
 
                 <TextView
                     android:id="@+id/sikap_spiritual1"
@@ -307,6 +290,8 @@
                 <TextView
                     android:id="@+id/tv_sosial1"
                     android:text="Sikap Sosial"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -324,6 +309,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="Minggu Ke"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -336,6 +323,8 @@
                 <TextView
                     android:id="@+id/tv_materi_komunal1"
                     android:text="Materi"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -350,6 +339,8 @@
                 <TextView
                     android:id="@+id/tv_ket_komunal1"
                     android:text="Keterangan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -364,6 +355,8 @@
                 <TextView
                     android:id="@+id/tv_nilai_komunal1"
                     android:text="Nilai"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -382,6 +375,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="Minggu Ke"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -394,6 +389,8 @@
                 <TextView
                     android:id="@+id/tv_materi_sensori1"
                     android:text="Materi"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -408,6 +405,8 @@
                 <TextView
                     android:id="@+id/tv_ket_sensori1"
                     android:text="Keterangan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -422,6 +421,8 @@
                 <TextView
                     android:id="@+id/tv_nilai_sensori1"
                     android:text="Nilai"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -441,6 +442,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="Minggu Ke"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -453,6 +456,8 @@
                 <TextView
                     android:id="@+id/tv_materi1"
                     android:text="Materi"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -467,6 +472,8 @@
                 <TextView
                     android:id="@+id/tv_ket1"
                     android:text="Keterangan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -481,6 +488,8 @@
                 <TextView
                     android:id="@+id/tv_nilai_sosial1"
                     android:text="Nilai"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -495,6 +504,8 @@
                 <TextView
                     android:id="@+id/tv_materi_komputer1"
                     android:text="Materi"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -509,6 +520,8 @@
                 <TextView
                     android:id="@+id/tv_ket_komputer1"
                     android:text="Keterangan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -523,6 +536,8 @@
                 <TextView
                     android:id="@+id/tv_nilai_komputer1"
                     android:text="Nilai"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -540,6 +555,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:text="Minggu Ke"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -552,6 +569,8 @@
                 <TextView
                     android:id="@+id/tv_materi_murajaah1"
                     android:text="Materi"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -566,6 +585,8 @@
                 <TextView
                     android:id="@+id/tv_ket_murajaah1"
                     android:text="Keterangan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -580,6 +601,8 @@
                 <TextView
                     android:id="@+id/tv_nilai_murajaah1"
                     android:text="Nilai"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -595,6 +618,8 @@
                 <TextView
                     android:id="@+id/tv_nama_ekstra1"
                     android:text="Nama Kegiatan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -609,6 +634,8 @@
                 <TextView
                     android:id="@+id/tv_ket_ekstra1"
                     android:text="Keterangan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -624,6 +651,8 @@
                 <TextView
                     android:id="@+id/tv_laporan_perkembangan_anak1"
                     android:layout_weight="0"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:text="Laporan Perkembangan Anak"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
@@ -645,6 +674,8 @@
                 <TextView
                     android:id="@+id/tv_saran_guru1"
                     android:text="Saran Guru"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -660,6 +691,8 @@
                 <TextView
                     android:id="@+id/tv_tinggi_badan1"
                     android:text="Tinggi Badan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -674,6 +707,8 @@
                 <TextView
                     android:id="@+id/tv_berat_badan1"
                     android:text="Berat Badan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -691,7 +726,9 @@
 
                     <TextView
                         android:layout_weight="1"
-                        android:text="Kondisi Kesehatan1"
+                        android:fontFamily="@font/londrina_solid"
+                        android:textSize="35sp"
+                        android:text="Kondisi Kesehatan"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
 
@@ -700,6 +737,8 @@
                 <TextView
                     android:id="@+id/tv_penglihatan1"
                     android:layout_weight="1"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:text="Penglihatan"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
@@ -715,6 +754,8 @@
                 <TextView
                     android:id="@+id/tv_pendengaran1"
                     android:text="Pendengaran"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -729,6 +770,8 @@
                 <TextView
                     android:id="@+id/tv_gigi1"
                     android:text="Gigi"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -743,6 +786,8 @@
                 <TextView
                     android:id="@+id/tv_daya_tahan_tubuh1"
                     android:text="Daya Tahan Tubuh"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -760,7 +805,9 @@
 
                     <TextView
                         android:layout_weight="1"
-                        android:text="Evaluasi Pertumbuhan Anak1"
+                        android:fontFamily="@font/londrina_solid"
+                        android:textSize="35sp"
+                        android:text="Evaluasi Pertumbuhan Anak"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
 
@@ -769,6 +816,8 @@
                 <TextView
                     android:id="@+id/tv_kondisi_anak_saat_ini1"
                     android:text="Kondisi Anak Saat Ini"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -783,6 +832,8 @@
                 <TextView
                     android:id="@+id/tv_kondisi_ideal1"
                     android:text="Kondisi Ideal Anak"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -797,6 +848,8 @@
                 <TextView
                     android:id="@+id/tv_saran_dokter1"
                     android:text="Saran Dokter"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -815,12 +868,16 @@
                     <TextView
                         android:layout_weight="1"
                         android:text="Absensi"
+                        android:fontFamily="@font/londrina_solid"
+                        android:textSize="35sp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
                 </TableRow>
                 <TextView
                     android:id="@+id/tv_izin1"
                     android:text="Izin"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -835,6 +892,8 @@
                 <TextView
                     android:id="@+id/tv_sakit1"
                     android:text="Sakit"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -849,6 +908,8 @@
                 <TextView
                     android:id="@+id/tv_tidak_ada_ket1"
                     android:text="Tidak Ada Keterangan"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -866,6 +927,8 @@
 
                     <TextView
                         android:layout_weight="1"
+                        android:fontFamily="@font/londrina_solid"
+                        android:textSize="35sp"
                         android:text="Evaluasi Perkembangan Anak"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:textColor="@android:color/black" />
@@ -875,6 +938,8 @@
                 <TextView
                     android:id="@+id/tv_kondisi_psikologi_saat_ini1"
                     android:layout_weight="0"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:text="Kondisi Psikologi Anak Saat Ini"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
@@ -890,6 +955,8 @@
                 <TextView
                     android:id="@+id/tv_kondisi_ideal_psikologi1"
                     android:layout_weight="0"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:text="Kondisi Psikologi Ideal Anak"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
@@ -905,6 +972,8 @@
                 <TextView
                     android:id="@+id/tv_saran_psikologi1"
                     android:text="Saran Psikolog"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -931,6 +1000,8 @@
                 <TextView
                     android:id="@+id/tv_kondisi_okupasi_saat_ini1"
                     android:layout_weight="0"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:text="Kondisi Okupasi Anak Saat Ini"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
@@ -946,6 +1017,8 @@
                 <TextView
                     android:id="@+id/tv_kondisi_ideal_okupasi1"
                     android:layout_weight="0"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:text="Kondisi Okupasi Ideal Anak"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
@@ -961,6 +1034,8 @@
                 <TextView
                     android:id="@+id/tv_saran_okupasi1"
                     android:text="Saran Okupasi"
+                    android:fontFamily="@font/londrina_solid"
+                    android:textSize="35sp"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 

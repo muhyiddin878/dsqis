@@ -148,6 +148,7 @@ class ChatDetailActivity : AppCompatActivity() {
                     if (data != null) {
                         chats.add(data)
                     }
+                    updateUnreadChat(roomId)
 
 
                 }
@@ -156,7 +157,6 @@ class ChatDetailActivity : AppCompatActivity() {
                 }
                 showChats(chats)
                 hideLoading()
-                updateUnreadChat(roomId)
             }
 
         })

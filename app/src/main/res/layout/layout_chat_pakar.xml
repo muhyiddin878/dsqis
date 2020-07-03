@@ -9,6 +9,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@android:color/black"
         android:text="Dokter Gigi"
+        android:fontFamily="@font/amaranth_bold"
         android:id="@+id/nama_pengirim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

@@ -31,6 +31,7 @@
                 android:layout_height="wrap_content"
                 tools:text="Petani Masa Kini Harus Coba Tanaman Hidroponik"
                 android:textColor="@android:color/black"
+                android:fontFamily="@font/londrina_solid"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:id="@+id/title_post"
