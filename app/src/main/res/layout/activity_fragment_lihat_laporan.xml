@@ -875,7 +875,7 @@
                 <TextView
                     android:id="@+id/tv_kondisi_psikologi_saat_ini1"
                     android:layout_weight="0"
-                    android:text="Kondisi Anak Saat Ini"
+                    android:text="Kondisi Psikologi Anak Saat Ini"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -890,7 +890,7 @@
                 <TextView
                     android:id="@+id/tv_kondisi_ideal_psikologi1"
                     android:layout_weight="0"
-                    android:text="Kondisi Ideal Anak"
+                    android:text="Kondisi Psikologi Ideal Anak"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -916,22 +916,22 @@
                     android:textColor="#FFF"
                     android:textSize="20sp"/>
 
-                <TableRow
-                    android:id="@+id/tv_evaluasi_perkembangan_anak_okupasi1"
-                    android:orientation="horizontal">
+<!--                <TableRow-->
+<!--                    android:id="@+id/tv_evaluasi_perkembangan_anak_okupasi1"-->
+<!--                    android:orientation="horizontal">-->
 
-                    <TextView
-                        android:layout_weight="1"
-                        android:text="Evaluasi Perkembangan Anak"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:textColor="@android:color/black" />
+<!--                    <TextView-->
+<!--                        android:layout_weight="1"-->
+<!--                        android:text="Evaluasi Perkembangan Anak"-->
+<!--                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"-->
+<!--                        android:textColor="@android:color/black" />-->
 
-                </TableRow>
+<!--                </TableRow>-->
 
                 <TextView
                     android:id="@+id/tv_kondisi_okupasi_saat_ini1"
                     android:layout_weight="0"
-                    android:text="Kondisi Anak Saat Ini"
+                    android:text="Kondisi Okupasi Anak Saat Ini"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 
@@ -946,7 +946,7 @@
                 <TextView
                     android:id="@+id/tv_kondisi_ideal_okupasi1"
                     android:layout_weight="0"
-                    android:text="Kondisi Ideal Anak"
+                    android:text="Kondisi Okupasi Ideal Anak"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black" />
 

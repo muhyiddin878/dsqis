@@ -472,7 +472,7 @@
                 <com.google.android.material.button.MaterialButton
                     android:textColor="@color/white"
                     android:backgroundTint="@color/danger"
-                    android:id="@+id/submit_nilai_murajaah1"
+                    android:id="@+id/submit_nilai_murajaah"
                     android:layout_marginTop="10dp"
                     android:text="Isi Murajaah"
                     app:cornerRadius="25dp"
@@ -901,13 +901,14 @@
                     />
 
                 <TextView
+                    android:id="@+id/tv_kondisi_ideal_okupasi"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                     android:textColor="@android:color/black"
                     android:textStyle="bold"
-                    android:id="@+id/tv_kondisi_ideal_okupasi"
                     android:text="Kondisi Ideal Okupasi Anak"
                     android:layout_weight="0"
                     />
+
                 <EditText
                     android:id="@+id/kondisi_ideal_okupasi"
                     android:layout_height="100dp"

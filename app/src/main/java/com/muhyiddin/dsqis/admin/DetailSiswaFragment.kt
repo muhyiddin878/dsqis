@@ -455,56 +455,56 @@ class DetailSiswaFragment : Fragment() {
                     mapel1()
                 }
                 if (mapel == "Penilaian Sikap") {
-                    mapel2()
+                    mapel1()
                 }
                 if (mapel == "Kelas Pra Akademik") {
-                    mapel3()
+                    mapel1()
                 }
                 if (mapel == "Kelas Komputer") {
-                    mapel4()
+                    mapel1()
                 }
                 if (mapel == "Kelas Muraja'ah") {
-                    mapel5()
+                    mapel1()
                 }
                 if (mapel == "Ekstrakulikuler") {
-                    mapel6()
+                    mapel1()
                 }
                 if (mapel == "Laporan Perkembangan Anak") {
-                    mapel7()
+                    mapel1()
 
                 }
                 if (mapel == "Saran Guru") {
-                    mapel8()
+                    mapel1()
                 }
                 if (mapel == "Tinggi dan Berat Badan") {
-                    mapel9()
+                    mapel1()
 
                 }
                 if (mapel == "Kondisi Kesehatan") {
-                    mapel10()
+                    mapel1()
 
                 }
                 if (mapel == "Evaluasi Pertumbuhan Anak") {
-                    mapel11()
+                    mapel1()
 
                 }
                 if (mapel == "Absensi") {
-                    mapel12()
+                    mapel1()
 
                 }
                 if (mapel == "Evaluasi Perkembangan Anak") {
-                    mapel13()
+                    mapel1()
 
                 }
                 if (mapel == "Semua") {
                     mapel14()
                 }
                 if(mapel=="Kelas Komunikasi Lanjutan"){
-                    mapel15()
+                    mapel1()
 
                 }
                 if(mapel=="Kelas Sensori Integrasi"){
-                    mapel16()
+                    mapel1()
                 }
 
 
@@ -1328,1364 +1328,132 @@ class DetailSiswaFragment : Fragment() {
         kondisi_ideal_okupasi2.visibility = View.GONE
         tv_saran_okupasi2.visibility = View.GONE
         saran_okupasi2.visibility = View.GONE
-    }
-    fun mapel2(){
-        tv_spiritual2.visibility = View.VISIBLE
-        sikap_spiritual2.visibility = View.VISIBLE
-        tv_sosial2.visibility = View.VISIBLE
-        sikap_sosial2.visibility = View.VISIBLE
 
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
+        when(mapel){
+            "Penilaian Sikap" ->{
+                tv_spiritual2.visibility = View.VISIBLE
+                sikap_spiritual2.visibility = View.VISIBLE
+                tv_sosial2.visibility = View.VISIBLE
+                sikap_sosial2.visibility = View.VISIBLE
+            }
+            "Kelas Pra Akademik" ->{
+                tv_mingguke2.visibility = View.VISIBLE
+                mingguke2.visibility = View.VISIBLE
+                tv_materi2.visibility = View.VISIBLE
+                materi_sikap_sosial2.visibility = View.VISIBLE
+                tv_ket2.visibility = View.VISIBLE
+                ket_sikap_sosial2.visibility = View.VISIBLE
+                tv_nilai_sosial2.visibility = View.VISIBLE
+                nilai_sikap_sosial2.visibility = View.VISIBLE
+            }
+            "Kelas Komputer"->{
+                tv_materi_komputer2.visibility = View.VISIBLE
+                nilaikomputer2.visibility = View.VISIBLE
+                tv_ket_komputer2.visibility = View.VISIBLE
+                ket_komputer2.visibility = View.VISIBLE
+                tv_nilai_komputer2.visibility = View.VISIBLE
+                nilai_komputer2.visibility = View.VISIBLE
+            }
+            "Kelas Murajaah" ->{
+                tv_mingguke_murajaah2.visibility = View.VISIBLE
+                minggukeMurajaah2.visibility = View.VISIBLE
+                tv_materi_murajaah2.visibility = View.VISIBLE
+                materi_murajaah2.visibility = View.VISIBLE
+                tv_ket_murajaah2.visibility = View.VISIBLE
+                ket_murajaah2.visibility = View.VISIBLE
+                tv_nilai_murajaah2.visibility = View.VISIBLE
+                nilai_murajaah2.visibility = View.VISIBLE
+            }
+            "Ekstrakulikuler" ->{
+                tv_nama_ekstra2.visibility = View.VISIBLE
+                nama_ekstra2.visibility = View.VISIBLE
+                tv_ket_ekstra2.visibility = View.VISIBLE
+                ket_ekstra2.visibility = View.VISIBLE
+            }
+            "Laporan Perkembangan Anak" ->{
+                tv_laporan_perkembangan_anak2.visibility = View.VISIBLE
+                graph.visibility=View.VISIBLE
+            }
+            "Saran Guru" ->{
+                tv_saran_guru2.visibility = View.VISIBLE
+                saran_guru2.visibility = View.VISIBLE
+            }
+            "Tinggi dan Berat Badan" ->{
+                tv_tinggi_badan2.visibility = View.VISIBLE
+                tinggi_badan2.visibility = View.VISIBLE
+                tv_berat_badan2.visibility = View.VISIBLE
+                berat_badan2.visibility = View.VISIBLE
+            }
+            "Kondisi Kesehatan" ->{
+                tv_kondisi_kesehatan2.visibility = View.VISIBLE
+                tv_penglihatan2.visibility = View.VISIBLE
+                penglihatan2.visibility = View.VISIBLE
+                tv_pendengaran2.visibility = View.VISIBLE
+                pendengaran2.visibility = View.VISIBLE
+                tv_gigi2.visibility = View.VISIBLE
+                gigi2.visibility = View.VISIBLE
+                tv_daya_tahan_tubuh2.visibility = View.VISIBLE
+                daya_tahan2.visibility = View.VISIBLE
+            }
+            "Evaluasi Pertumbuhan Anak" ->{
+                tv_evaluasi_pertumbuhan_anak2.visibility = View.VISIBLE
+                tv_kondisi_anak_saat_ini2.visibility = View.VISIBLE
+                kondisi_saat_ini2.visibility = View.VISIBLE
+                tv_kondisi_ideal2.visibility = View.VISIBLE
+                kondisi_ideal2.visibility = View.VISIBLE
+                tv_saran_dokter2.visibility = View.VISIBLE
+                saran_dokter2.visibility = View.VISIBLE
+            }
+            "Absensi" ->{
+                tv_absensi2.visibility = View.VISIBLE
+                tv_izin2.visibility = View.VISIBLE
+                izin2.visibility = View.VISIBLE
+                tv_sakit2.visibility = View.VISIBLE
+                sakit2.visibility = View.VISIBLE
+                tv_tidak_ada_ket2.visibility = View.VISIBLE
+                tidak_ada_keterangan2.visibility = View.VISIBLE
+            }
+            "Evaluasi Perkembangan Anak" ->{
+                tv_evaluasi_perkembangan_anak2.visibility = View.VISIBLE
+                tv_kondisi_psikologi_saat_ini2.visibility = View.VISIBLE
+                kondisi_psikologi_saat_ini2.visibility = View.VISIBLE
+                tv_kondisi_ideal_psikologi2.visibility = View.VISIBLE
+                kondisi_ideal_psikologi2.visibility = View.VISIBLE
+                tv_saran_psikologi2.visibility = View.VISIBLE
+                saran_psikolog2.visibility = View.VISIBLE
+
+//                tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.VISIBLE
+                tv_kondisi_okupasi_saat_ini2.visibility = View.VISIBLE
+                kondisi_okupasi_saat_ini2.visibility = View.VISIBLE
+                tv_kondisi_ideal_okupasi2.visibility = View.VISIBLE
+                kondisi_ideal_okupasi2.visibility = View.VISIBLE
+                tv_saran_okupasi2.visibility = View.VISIBLE
+                saran_okupasi2.visibility = View.VISIBLE
+            }
+            "Kelas Komunikasi Lanjutan" ->{
+                mingguke_komunal2.visibility=View.VISIBLE
+                tv_mingguke_komunal2.visibility = View.VISIBLE
+                mingguke_komunal2.visibility = View.VISIBLE
+                tv_materi_komunal2.visibility = View.VISIBLE
+                materi_komunal2.visibility = View.VISIBLE
+                tv_ket_komunal2.visibility = View.VISIBLE
+                ket_komunal2.visibility = View.VISIBLE
+                tv_nilai_komunal2.visibility = View.VISIBLE
+                nilai_komunal2.visibility = View.VISIBLE
+            }
+            "Kelas Sensori Integrasi" ->{
+                mingguke_sensori2.visibility=View.VISIBLE
+                tv_mingguke_sensori2.visibility = View.VISIBLE
+                mingguke_sensori2.visibility = View.VISIBLE
+                tv_materi_sensori2.visibility = View.VISIBLE
+                materi_sensori2.visibility = View.VISIBLE
+                tv_ket_sensori2.visibility = View.VISIBLE
+                ket_sensori2.visibility = View.VISIBLE
+                tv_nilai_sensori2.visibility = View.VISIBLE
+                nilai_sensori2.visibility = View.VISIBLE
+            }
+        }
 
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-    }
-    fun mapel3(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.VISIBLE
-        mingguke2.visibility = View.VISIBLE
-        tv_materi2.visibility = View.VISIBLE
-        materi_sikap_sosial2.visibility = View.VISIBLE
-        tv_ket2.visibility = View.VISIBLE
-        ket_sikap_sosial2.visibility = View.VISIBLE
-        tv_nilai_sosial2.visibility = View.VISIBLE
-        nilai_sikap_sosial2.visibility = View.VISIBLE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-    }
-    fun mapel4(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.VISIBLE
-        nilaikomputer2.visibility = View.VISIBLE
-        tv_ket_komputer2.visibility = View.VISIBLE
-        ket_komputer2.visibility = View.VISIBLE
-        tv_nilai_komputer2.visibility = View.VISIBLE
-        nilai_komputer2.visibility = View.VISIBLE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-    }
-    fun mapel5(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.VISIBLE
-        minggukeMurajaah2.visibility = View.VISIBLE
-        tv_materi_murajaah2.visibility = View.VISIBLE
-        materi_murajaah2.visibility = View.VISIBLE
-        tv_ket_murajaah2.visibility = View.VISIBLE
-        ket_murajaah2.visibility = View.VISIBLE
-        tv_nilai_murajaah2.visibility = View.VISIBLE
-        nilai_murajaah2.visibility = View.VISIBLE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-    }
-    fun mapel6(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.VISIBLE
-        nama_ekstra2.visibility = View.VISIBLE
-        tv_ket_ekstra2.visibility = View.VISIBLE
-        ket_ekstra2.visibility = View.VISIBLE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-    }
-    fun mapel7(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.VISIBLE
-//                    perkembangan_anak2.visibility = View.VISIBLE
-        graph2.visibility=View.VISIBLE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-    }
-    fun mapel8(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.VISIBLE
-        saran_guru2.visibility = View.VISIBLE
-
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-    }
-    fun mapel9(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-
-        tv_tinggi_badan2.visibility = View.VISIBLE
-        tinggi_badan2.visibility = View.VISIBLE
-        tv_berat_badan2.visibility = View.VISIBLE
-        berat_badan2.visibility = View.VISIBLE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-    }
-    fun mapel10(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.VISIBLE
-        tv_penglihatan2.visibility = View.VISIBLE
-        penglihatan2.visibility = View.VISIBLE
-        tv_pendengaran2.visibility = View.VISIBLE
-        pendengaran2.visibility = View.VISIBLE
-        tv_gigi2.visibility = View.VISIBLE
-        gigi2.visibility = View.VISIBLE
-        tv_daya_tahan_tubuh2.visibility = View.VISIBLE
-        daya_tahan2.visibility = View.VISIBLE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-    }
-    fun mapel11(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.VISIBLE
-        tv_kondisi_anak_saat_ini2.visibility = View.VISIBLE
-        kondisi_saat_ini2.visibility = View.VISIBLE
-        tv_kondisi_ideal2.visibility = View.VISIBLE
-        kondisi_ideal2.visibility = View.VISIBLE
-        tv_saran_dokter2.visibility = View.VISIBLE
-        saran_dokter2.visibility = View.VISIBLE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-    }
-    fun mapel12(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.VISIBLE
-        tv_izin2.visibility = View.VISIBLE
-        izin2.visibility = View.VISIBLE
-        tv_sakit2.visibility = View.VISIBLE
-        sakit2.visibility = View.VISIBLE
-        tv_tidak_ada_ket2.visibility = View.VISIBLE
-        tidak_ada_keterangan2.visibility = View.VISIBLE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-    }
-    fun mapel13(){
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.VISIBLE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.VISIBLE
-        kondisi_psikologi_saat_ini2.visibility = View.VISIBLE
-        tv_kondisi_ideal_psikologi2.visibility = View.VISIBLE
-        kondisi_ideal_psikologi2.visibility = View.VISIBLE
-        tv_saran_psikologi2.visibility = View.VISIBLE
-        saran_psikolog2.visibility = View.VISIBLE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
     }
     fun mapel14(){
         tv_spiritual2.visibility = View.VISIBLE
@@ -2800,244 +1568,7 @@ class DetailSiswaFragment : Fragment() {
         saran_okupasi2.visibility = View.VISIBLE
 
     }
-    fun mapel15(){
 
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-
-        mingguke_komunal2.visibility=View.VISIBLE
-        tv_mingguke_komunal2.visibility = View.VISIBLE
-        mingguke_komunal2.visibility = View.VISIBLE
-        tv_materi_komunal2.visibility = View.VISIBLE
-        materi_komunal2.visibility = View.VISIBLE
-        tv_ket_komunal2.visibility = View.VISIBLE
-        ket_komunal2.visibility = View.VISIBLE
-        tv_nilai_komunal2.visibility = View.VISIBLE
-        nilai_komunal2.visibility = View.VISIBLE
-
-
-        mingguke_sensori2.visibility=View.GONE
-        tv_mingguke_sensori2.visibility = View.GONE
-        mingguke_sensori2.visibility = View.GONE
-        tv_materi_sensori2.visibility = View.GONE
-        materi_sensori2.visibility = View.GONE
-        tv_ket_sensori2.visibility = View.GONE
-        ket_sensori2.visibility = View.GONE
-        tv_nilai_sensori2.visibility = View.GONE
-        nilai_sensori2.visibility = View.GONE
-
-
-    }
-    fun mapel16(){
-
-        tv_spiritual2.visibility = View.GONE
-        sikap_spiritual2.visibility = View.GONE
-        tv_sosial2.visibility = View.GONE
-        sikap_sosial2.visibility = View.GONE
-
-        tv_mingguke2.visibility = View.GONE
-        mingguke2.visibility = View.GONE
-        tv_materi2.visibility = View.GONE
-        materi_sikap_sosial2.visibility = View.GONE
-        tv_ket2.visibility = View.GONE
-        ket_sikap_sosial2.visibility = View.GONE
-        tv_nilai_sosial2.visibility = View.GONE
-        nilai_sikap_sosial2.visibility = View.GONE
-
-
-        tv_materi_komputer2.visibility = View.GONE
-        nilaikomputer2.visibility = View.GONE
-        tv_ket_komputer2.visibility = View.GONE
-        ket_komputer2.visibility = View.GONE
-        tv_nilai_komputer2.visibility = View.GONE
-        nilai_komputer2.visibility = View.GONE
-
-
-        tv_mingguke_murajaah2.visibility = View.GONE
-        minggukeMurajaah2.visibility = View.GONE
-        tv_materi_murajaah2.visibility = View.GONE
-        materi_murajaah2.visibility = View.GONE
-        tv_ket_murajaah2.visibility = View.GONE
-        ket_murajaah2.visibility = View.GONE
-        tv_nilai_murajaah2.visibility = View.GONE
-        nilai_murajaah2.visibility = View.GONE
-
-        tv_nama_ekstra2.visibility = View.GONE
-        nama_ekstra2.visibility = View.GONE
-        tv_ket_ekstra2.visibility = View.GONE
-        ket_ekstra2.visibility = View.GONE
-
-
-        tv_laporan_perkembangan_anak2.visibility = View.GONE
-//                    perkembangan_anak2.visibility = View.GONE
-        graph2.visibility=View.GONE
-
-        tv_saran_guru2.visibility = View.GONE
-        saran_guru2.visibility = View.GONE
-
-        tv_tinggi_badan2.visibility = View.GONE
-        tinggi_badan2.visibility = View.GONE
-        tv_berat_badan2.visibility = View.GONE
-        berat_badan2.visibility = View.GONE
-
-        tv_kondisi_kesehatan2.visibility = View.GONE
-        tv_penglihatan2.visibility = View.GONE
-        penglihatan2.visibility = View.GONE
-        tv_pendengaran2.visibility = View.GONE
-        pendengaran2.visibility = View.GONE
-        tv_gigi2.visibility = View.GONE
-        gigi2.visibility = View.GONE
-        tv_daya_tahan_tubuh2.visibility = View.GONE
-        daya_tahan2.visibility = View.GONE
-
-        tv_evaluasi_pertumbuhan_anak2.visibility = View.GONE
-        tv_kondisi_anak_saat_ini2.visibility = View.GONE
-        kondisi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal2.visibility = View.GONE
-        kondisi_ideal2.visibility = View.GONE
-        tv_saran_dokter2.visibility = View.GONE
-        saran_dokter2.visibility = View.GONE
-
-        tv_absensi2.visibility = View.GONE
-        tv_izin2.visibility = View.GONE
-        izin2.visibility = View.GONE
-        tv_sakit2.visibility = View.GONE
-        sakit2.visibility = View.GONE
-        tv_tidak_ada_ket2.visibility = View.GONE
-        tidak_ada_keterangan2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak2.visibility = View.GONE
-        tv_kondisi_psikologi_saat_ini2.visibility = View.GONE
-        kondisi_psikologi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_psikologi2.visibility = View.GONE
-        kondisi_ideal_psikologi2.visibility = View.GONE
-        tv_saran_psikologi2.visibility = View.GONE
-        saran_psikolog2.visibility = View.GONE
-
-        tv_evaluasi_perkembangan_anak_okupasi2.visibility = View.GONE
-        tv_kondisi_okupasi_saat_ini2.visibility = View.GONE
-        kondisi_okupasi_saat_ini2.visibility = View.GONE
-        tv_kondisi_ideal_okupasi2.visibility = View.GONE
-        kondisi_ideal_okupasi2.visibility = View.GONE
-        tv_saran_okupasi2.visibility = View.GONE
-        saran_okupasi2.visibility = View.GONE
-
-        mingguke_komunal2.visibility=View.GONE
-        tv_mingguke_komunal2.visibility = View.GONE
-        mingguke_komunal2.visibility = View.GONE
-        tv_materi_komunal2.visibility = View.GONE
-        materi_komunal2.visibility = View.GONE
-        tv_ket_komunal2.visibility = View.GONE
-        ket_komunal2.visibility = View.GONE
-        tv_nilai_komunal2.visibility = View.GONE
-        nilai_komunal2.visibility = View.GONE
-
-
-
-
-
-        mingguke_sensori2.visibility=View.VISIBLE
-        tv_mingguke_sensori2.visibility = View.VISIBLE
-        mingguke_sensori2.visibility = View.VISIBLE
-        tv_materi_sensori2.visibility = View.VISIBLE
-        materi_sensori2.visibility = View.VISIBLE
-        tv_ket_sensori2.visibility = View.VISIBLE
-        ket_sensori2.visibility = View.VISIBLE
-        tv_nilai_sensori2.visibility = View.VISIBLE
-        nilai_sensori2.visibility = View.VISIBLE
-
-
-    }
 
 
 
