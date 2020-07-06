@@ -92,6 +92,8 @@ class DetailSiswaFragment : Fragment() {
     private var Kelas_Sensori = HashMap<String, MutableList<Murajaah>>()
     private val mingguKomunal = mutableListOf<String>()
     private val mingguSensori = mutableListOf<String>()
+    private val minggu_murajaah:MutableList<String> = mutableListOf()
+    private val minggu_pra_akademik :MutableList<String> = mutableListOf()
     private var kelasSiswa=mutableListOf<String>()
 
     private var nilai: Nilai? = null
@@ -269,80 +271,42 @@ class DetailSiswaFragment : Fragment() {
         mingguke_murajaah_spinner = view.findViewById(R.id.minggukeMurajaah2)
         mingguke_sikap_sosial_spinner = view.findViewById(R.id.mingguke2)
 
-        mingguke_sikap_sosial_spinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
-                    minggu = mingguke_sikap_sosial_spinner.selectedItem.toString()
-                    if (minggu == "1") {
-                        mingguke_sikap_sosial = "1"
-                        nilai_sikap_sosial2.setText("")
-                        ket_sikap_sosial2.setText("")
-                        materi_sikap_sosial2.setText("")
-                        setPraAkademikValue(mingguke_sikap_sosial)
-                    } else if (minggu == "2") {
-                        mingguke_sikap_sosial = "2"
-                        nilai_sikap_sosial2.setText("")
-                        ket_sikap_sosial2.setText("")
-                        materi_sikap_sosial2.setText("")
-                        setPraAkademikValue(mingguke_sikap_sosial)
-                    } else if (minggu == "3") {
-                        mingguke_sikap_sosial = "3"
-                        nilai_sikap_sosial2.setText("")
-                        ket_sikap_sosial2.setText("")
-                        materi_sikap_sosial2.setText("")
-                        setPraAkademikValue(mingguke_sikap_sosial)
-                    } else if (minggu == "4") {
-                        mingguke_sikap_sosial = "4"
-                        nilai_sikap_sosial2.setText("")
-                        ket_sikap_sosial2.setText("")
-                        materi_sikap_sosial2.setText("")
-                        setPraAkademikValue(mingguke_sikap_sosial)
-                    }
+        mingguke_sikap_sosial_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                mingguke_sikap_sosial = mingguke_sikap_sosial_spinner.selectedItem.toString()
+                nilai_sikap_sosial2.setText("")
+                ket_sikap_sosial2.setText("")
+                materi_sikap_sosial2.setText("")
+                setPraAkademikValue( mingguke_sikap_sosial)
 
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-
-                }
             }
-
-        mingguke_murajaah_spinner.onItemSelectedListener =
-            object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(parent: AdapterView<*>, view: View, i: Int, l: Long) {
-                    minggumurajaah = mingguke_murajaah_spinner.selectedItem.toString()
-                    if (minggumurajaah == "1") {
-                        mingguke_murajaah = "1"
-                        nilai_murajaah2.setText("")
-                        ket_murajaah2.setText("")
-                        materi_murajaah2.setText("")
-                        setMurajaahValue(mingguke_murajaah)
-                    } else if (minggumurajaah == "2") {
-                        mingguke_murajaah = "2"
-                        nilai_murajaah2.setText("")
-                        ket_murajaah2.setText("")
-                        materi_murajaah2.setText("")
-                        setMurajaahValue(mingguke_murajaah)
-                    } else if (minggumurajaah == "3") {
-                        mingguke_murajaah = "3"
-                        nilai_murajaah2.setText("")
-                        ket_murajaah2.setText("")
-                        materi_murajaah2.setText("")
-                        setMurajaahValue(mingguke_murajaah)
-                    } else if (minggumurajaah == "4") {
-                        mingguke_murajaah = "4"
-                        nilai_murajaah2.setText("")
-                        ket_murajaah2.setText("")
-                        materi_murajaah2.setText("")
-                        setMurajaahValue(mingguke_murajaah)
-                    }
-
-
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>) {
-
-                }
+            override fun onNothingSelected(parent: AdapterView<*>) {
             }
+        }
+
+        mingguke_murajaah_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                mingguke_murajaah =  mingguke_murajaah_spinner.selectedItem.toString()
+                nilai_murajaah2.setText("")
+                ket_murajaah2.setText("")
+                materi_murajaah2.setText("")
+                setMurajaahValue(mingguke_murajaah)
+
+            }
+            override fun onNothingSelected(parent: AdapterView<*>) {
+            }
+        }
+
 
         mata_pelajaran.onItemSelectedListener= object :AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -528,6 +492,11 @@ class DetailSiswaFragment : Fragment() {
             ) {
 
                 if (tanggal_nilai2.selectedItemPosition==0) {
+                    minggu_pra_akademik.clear()
+                    minggu_murajaah.clear()
+                    mingguKomunal.clear()
+                    mingguSensori.clear()
+
                     sikap_spiritual2.setText("")
                     sikap_sosial2.setText("")
 
@@ -611,8 +580,12 @@ class DetailSiswaFragment : Fragment() {
                                 Kelas_Pra_Akademik = nilai?.Kelas_Pra_Akademik!!
                                 Kelas_Pra_Akademik?.get("Kelas Pra Akademik")?.forEach {
                                     listPraAkademik.add(it)
+                                    minggu_pra_akademik.add(it.minggu!!)
                                 }
                                 Log.d("LIST_MURAJAAH", "$listPraAkademik")
+                                val adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, minggu_pra_akademik)
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                                mingguke_sikap_sosial_spinner.setAdapter(adapter)
                             }
 
                         }
@@ -634,8 +607,12 @@ class DetailSiswaFragment : Fragment() {
                                 Kelas_Murajaah = nilai?.Kelas_Murajaah!!
                                 Kelas_Murajaah?.get("Kelas Murajaah")?.forEach {
                                     listMurajaah.add(it)
+                                    minggu_murajaah.add(it.minggu!!)
                                 }
                                 Log.d("LIST_MURAJAAH", "$listMurajaah")
+                                val adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, minggu_murajaah)
+                                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                                mingguke_murajaah_spinner.setAdapter(adapter)
                             }
 
                         }
@@ -1124,9 +1101,12 @@ class DetailSiswaFragment : Fragment() {
         val murajaah = listMurajaah.find {it.minggu == minggukeMurajaah}
         if (murajaah!=null) {
             val nilaii=murajaah.nilai
-            nilai_murajaah2.setText(Integer.toString(nilaii!!))
+            Log.d("nilai",Integer.toString(nilaii!!))
+            Log.d("ket",murajaah.keterangan)
+            Log.d("materi",murajaah.materi)
             ket_murajaah2.setText(murajaah.keterangan)
             materi_murajaah2.setText(murajaah.materi)
+            nilai_murajaah2.setText(Integer.toString(nilaii!!))
         }
     }
 
@@ -1138,16 +1118,6 @@ class DetailSiswaFragment : Fragment() {
             ket_sikap_sosial2.setText(praAkademik.keterangan)
             nilai_sikap_sosial2.setText(Integer.toString((nilai!!)))
 
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CHOOSE_IMAGE && resultCode == Activity.RESULT_OK && data!=null && data.data!=null){
-            uriImageSiswa = data.data
-            val bitmap = MediaStore.Images.Media.getBitmap(resolver, uriImageSiswa)
-            logo_siswa.setImageBitmap(bitmap)
-            logo_siswa.scaleType = ImageView.ScaleType.CENTER_CROP
         }
     }
 
@@ -1172,6 +1142,18 @@ class DetailSiswaFragment : Fragment() {
 
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CHOOSE_IMAGE && resultCode == Activity.RESULT_OK && data!=null && data.data!=null){
+            uriImageSiswa = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(resolver, uriImageSiswa)
+            logo_siswa.setImageBitmap(bitmap)
+            logo_siswa.scaleType = ImageView.ScaleType.CENTER_CROP
+        }
+    }
+
+
 
     private fun hapusAkun(id:String,namaSiswa:String){
         mFirestore.collection("students").document(id)
@@ -1354,7 +1336,7 @@ class DetailSiswaFragment : Fragment() {
                 tv_nilai_komputer2.visibility = View.VISIBLE
                 nilai_komputer2.visibility = View.VISIBLE
             }
-            "Kelas Murajaah" ->{
+            "Kelas Muraja'ah" ->{
                 tv_mingguke_murajaah2.visibility = View.VISIBLE
                 minggukeMurajaah2.visibility = View.VISIBLE
                 tv_materi_murajaah2.visibility = View.VISIBLE

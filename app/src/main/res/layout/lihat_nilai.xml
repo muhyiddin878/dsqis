@@ -271,8 +271,7 @@
                     <Spinner
                         android:id="@+id/mingguke2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/minggu"></Spinner>
+                        android:layout_height="wrap_content"/>
 
                     <TextView
                         android:id="@+id/tv_materi2"
@@ -370,8 +369,7 @@
                     <Spinner
                         android:id="@+id/minggukeMurajaah2"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:entries="@array/minggu"></Spinner>
+                        android:layout_height="wrap_content"/>
 
                     <TextView
                         android:id="@+id/tv_materi_murajaah2"
