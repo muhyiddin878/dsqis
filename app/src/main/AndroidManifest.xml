@@ -16,7 +16,8 @@
         <activity android:name=".admin.DetailPostActivityAdmin" />
         <activity android:name=".admin.ListArtikelFragment" />
         <activity android:name=".MainActivityPakar" />
-        <activity android:name=".OnBoardingActivity" />
+        <activity android:name=".OnBoardingActivity"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
         <activity android:name=".EditProfilFragment" />
         <activity android:name=".admin.DetailPakarFragment" />
         <activity android:name=".admin.DetailSiswaFragment" />
@@ -38,7 +39,8 @@
         <activity android:name=".DetailPostActivity" />
         <activity android:name=".NewPostActivity" />
         <activity android:name=".ArtikelActivity" />
-        <activity android:name="com.muhyiddin.qis.login.login" />
+        <activity android:name="com.muhyiddin.qis.login.login"
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
         <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashActivity"

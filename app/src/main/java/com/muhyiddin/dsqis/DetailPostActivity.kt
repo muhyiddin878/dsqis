@@ -223,7 +223,7 @@ class DetailPostActivity : AppCompatActivity() {
                     list.add(comment.toObject(Comment::class.java))
                 }
                     list.sortBy {
-                        it.commentDate
+                        it.commentDate.reversed()
                     }
                 showComment(list)
 

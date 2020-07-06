@@ -179,6 +179,9 @@ class DetailPostActivityAdmin : AppCompatActivity() {
                     for (comment in querySnapshot){
                         list.add(comment.toObject(Comment::class.java))
                     }
+                    list.sortBy {
+                        it.commentDate.reversed()
+                    }
                     showComment(list)
 
                 }

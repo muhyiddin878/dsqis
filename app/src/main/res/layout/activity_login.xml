@@ -86,6 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:text="Login"
+                android:backgroundTint="@color/colorPrimary"
                 android:id="@+id/go_login"
                 android:elevation="0dp"
                 android:textAllCaps="false"

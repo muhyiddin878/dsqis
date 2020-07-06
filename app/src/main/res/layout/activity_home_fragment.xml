@@ -1,161 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:padding="15dp"
-        android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
+
             <ImageView
                 android:id="@+id/admin_image"
                 android:layout_gravity="center"
                 android:src="@drawable/admin"
                 android:layout_width="match_parent"
-                android:layout_height="170dp" />
+                android:layout_height="170dp"
+                tools:ignore="MissingConstraints" />
+
+
+    <TextView
+        android:id="@+id/greetings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="40sp"
+        app:layout_constraintTop_toBottomOf="@+id/admin_image"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/jumlahartikel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="7dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:contentPadding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jumlahsiswa">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_article_2" />
+
             <TextView
-                android:id="@+id/greetings"
-                android:textSize="40sp"
-                android:textColor="@android:color/black"
-                android:layout_marginTop="20dp"
-                android:textAllCaps="false"
-                android:textAlignment="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:id="@+id/jumlah_artikel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/amaranth_bold"
+                android:text="60"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/warning"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-
-<!--            <TableLayout-->
-<!--                android:layout_marginTop="10dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-<!--                <TableRow>-->
-
-
-<!--                    <TextView-->
-<!--                        android:text="Nama"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_weight="1"-->
-<!--                        />-->
-<!--                    <TextView-->
-<!--                        android:text=":"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_weight="0.3"-->
-<!--                        />-->
-<!--                    <EditText-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:id="@+id/username"-->
-<!--                        android:layout_weight="20"-->
-<!--                        />-->
-<!--                </TableRow>-->
-<!--                <TableRow-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    >-->
-<!--                    <TextView-->
-<!--                        android:text="Email"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_weight="1"-->
-<!--                        />-->
-<!--                    <TextView-->
-<!--                        android:text=":"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_weight="0.3"-->
-<!--                        />-->
-<!--                    <EditText-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:id="@+id/email"-->
-<!--                        android:layout_weight="20"-->
-<!--                        />-->
-<!--                </TableRow>-->
-<!--                <TableRow-->
-<!--                    android:layout_marginTop="10dp"-->
-<!--                    >-->
-<!--                    <TextView-->
-<!--                        android:text="Password"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_weight="1"-->
-<!--                        />-->
-<!--                    <TextView-->
-<!--                        android:text=":"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_weight="0.3"-->
-<!--                        />-->
-<!--                    <EditText-->
-<!--                        android:layout_marginLeft="10dp"-->
-<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-<!--                        android:textColor="@android:color/black"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:id="@+id/password"-->
-<!--                        android:inputType="textPassword"-->
-<!--                        android:layout_weight="20"-->
-<!--                        />-->
-<!--                </TableRow>-->
-<!--            </TableLayout>-->
-<!--            <TableLayout-->
-<!--                android:layout_marginTop="15dp"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content">-->
-<!--                <TableRow>-->
-<!--                    <com.google.android.material.button.MaterialButton-->
-<!--                        android:text="Edit Info"-->
-<!--                        android:id="@+id/edit_info_admin"-->
-<!--                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"-->
-<!--                        android:elevation="0dp"-->
-<!--                        app:cornerRadius="25dp"-->
-<!--                        android:layout_weight="2"-->
-
-<!--                        ></com.google.android.material.button.MaterialButton>-->
-
-<!--                    <com.google.android.material.button.MaterialButton-->
-<!--                        android:id="@+id/simpan_perubahan"-->
-<!--                        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"-->
-<!--                        android:elevation="0dp"-->
-<!--                        android:text="Simpan Perubahan"-->
-<!--                        app:cornerRadius="25dp"-->
-<!--                        android:layout_weight="2"-->
-
-<!--                        ></com.google.android.material.button.MaterialButton>-->
-<!--                    &lt;!&ndash;                    <Button&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:text="Edit info"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColor="@color/white"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:id="@+id/edit_info_admin"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_weight="2"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:background="@color/info"&ndash;&gt;-->
-<!--&lt;!&ndash;                        />&ndash;&gt;-->
-<!--&lt;!&ndash;                    <Button&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:textColor="@color/white"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:background="@color/success"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_width="match_parent"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_height="wrap_content"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:text="Simpan Perubahan"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:id="@+id/simpan_perubahan"&ndash;&gt;-->
-<!--&lt;!&ndash;                        android:layout_weight="1"&ndash;&gt;-->
-<!--&lt;!&ndash;                        />&ndash;&gt;-->
-<!--                </TableRow>-->
-<!--            </TableLayout>-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="Artikel"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.cardview.widget.CardView>
 
-</LinearLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/jumlahsiswa"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="28dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:contentPadding="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greetings">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_student" />
+
+            <TextView
+                android:id="@+id/jumlah_siswa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/amaranth_bold"
+                android:text="60"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/warning"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="Siswa"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/jumlahorangtua"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="68dp"
+        android:layout_marginBottom="7dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:contentPadding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/jumlahpakar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_family" />
+
+            <TextView
+                android:id="@+id/jumlah_ortu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/amaranth_bold"
+                android:text="60"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/warning"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="Ortu"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/jumlahpakar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="68dp"
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="4dp"
+        app:contentPadding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/greetings">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/ic_doctor" />
+
+            <TextView
+                android:id="@+id/jumlah_pakar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/amaranth_bold"
+                android:text="60"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@color/warning"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:text="Pakar"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/white" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
