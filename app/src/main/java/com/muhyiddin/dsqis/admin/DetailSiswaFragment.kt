@@ -36,6 +36,7 @@ import java.util.HashMap
 
 
 class DetailSiswaFragment : Fragment() {
+    private val mAuth = FirebaseAuth.getInstance()
     private lateinit var JK_SISWA: String
     private lateinit var  nama: EditText
     private lateinit var  ttl:EditText
@@ -1171,61 +1172,64 @@ class DetailSiswaFragment : Fragment() {
                     .addOnSuccessListener {
                         Log.d("SUKSES 2","SUKSES")
                         mFirestore.collection("parents")
+                            .whereEqualTo("idAnak",id)
                             .get()
                             .addOnSuccessListener {
-                                it.forEach {
-                                    it.reference.collection("students")
-                                        .document(id)
-                                        .parent
-                                        .get()
-                                        .addOnSuccessListener {
-                                            it.forEach {
-                                                ortu.clear()
-                                                val isi=(it.toObject(Ortu::class.java))
-                                                ortu.add(isi)
-                                            }
-                                            ortu.forEach {
-                                                idOrtu=it.id
-                                            }
-                                            mFirestore.collection("parents")
-                                                .document(idOrtu)
-                                                .delete()
-                                                .addOnSuccessListener {
-                                                    Log.d("SUKSES 3","SUKSES")
-                                                    mFirestore.collection("nilai")
-                                                        .whereEqualTo("idSiswa",id)
-                                                        .get()
-                                                        .addOnSuccessListener {
-                                                            it.forEach { isi->
-                                                                if (isi!=null){
-                                                                    isi.reference.delete()
-                                                                }
-                                                                mFirestore.collection("user")
-                                                                    .document(idOrtu)
-                                                                    .delete()
-                                                                    .addOnSuccessListener {
-                                                                        Log.d("SUKSES 4","SUKSES")
-                                                                        Toast.makeText(requireContext(), "Data Berhasil Di Hapus", Toast.LENGTH_SHORT).show()
-                                                                        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
-
-                                                                    }.addOnFailureListener {
-                                                                        Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
-                                                                    }
-                                                            }
-
-                                                            }.addOnFailureListener {
-                                                            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
-                                                        }
-                                                }
-                                        }
-
-                                       .addOnFailureListener {
-                                            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
-                                        }
+                                ortu.clear()
+                                    for(isi in it){
+                                        ortu.add(isi.toObject(Ortu::class.java))
+                                    }
+                                ortu.forEach {
+                                    idOrtu=it.id
                                 }
+                                Log.d("idOrtu:",idOrtu)
+                                it.forEach {isi->
+                                    isi.reference.delete()
+                                }
+                                mFirestore.collection("parents").document(idOrtu).collection("students")
+                                    .get()
+                                    .addOnSuccessListener {
+                                        it.forEach {
+                                            it.reference.delete()
+                                        }
+                                        mFirestore.collection("user").document(idOrtu)
+                                            .delete()
+                                            .addOnSuccessListener {
+                                                mFirestore.collection("nilai")
+                                                    .whereEqualTo("idSiswa",id)
+                                                    .get()
+                                                    .addOnSuccessListener {
+                                                        it.forEach {isi ->
+                                                            if(isi!=null){
+                                                                isi.reference.delete()
+                                                                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
+                                                            }else{
+                                                                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
+                                                            }
+                                                        }
+                                                    }
+                                            }.addOnFailureListener {
+                                                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                                            }
+                                    }.addOnFailureListener {
+                                        Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                                    }
+
                             }.addOnFailureListener {
                                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                             }
+//                            .addSnapshotListener { querySnapshot, error ->
+//                                if (error != null) {
+//                                    Toast.makeText(view?.context, error?.localizedMessage, Toast.LENGTH_SHORT).show()
+//                                    return@addSnapshotListener
+//                                }
+//                                if(querySnapshot != null){
+//                                    ortu.clear()
+//                                    for(isi in querySnapshot){
+//                                        ortu.add(isi.toObject(Ortu::class.java))
+//                                    }
+//                                }
+//                            }
                     }.addOnFailureListener {
                         Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                     }

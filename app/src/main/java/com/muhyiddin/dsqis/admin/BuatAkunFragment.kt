@@ -99,6 +99,7 @@ class BuatAkunFragment : Fragment() {
                 com.muhyiddin.dsqis.R.id.persiapan -> kls = "Persiapan"
                 com.muhyiddin.dsqis.R.id.pertama -> kls = "Tahun Pertama"
                 com.muhyiddin.dsqis.R.id.kedua -> kls = "Tahun Kedua"
+                com.muhyiddin.dsqis.R.id.ketiga -> kls = "Tahun Ketiga"
             }
         }
 
@@ -169,21 +170,22 @@ class BuatAkunFragment : Fragment() {
                             .document(prefs.uid)
                             .set(user)
                             .addOnSuccessListener {
-                                val firestore = mFirestore.collection("parents")
-                                val key = prefs.uid
-                                val ortu = Ortu(key,namaortu,email,password)
-                                firestore.document(key)
-                                    .set(ortu)
+                                val firestore3 = mFirestore.collection("students")
+                                val key2 = firestore3.document().id
+                                val siswa = Siswa(key2,input_nama.text.toString(),jk, ttl, nisn,kls,alamat,nomor,imageLocation)
+                                firestore3.document(key2)
+                                    .set(siswa)
                                     .addOnSuccessListener {
                                         setProgressBarLength(75)
-                                        val firestore3 = mFirestore.collection("students")
-                                        val key2 = firestore3.document().id
-                                        val siswa = Siswa(key2,input_nama.text.toString(),jk, ttl, nisn,kls,alamat,nomor,imageLocation)
-                                        firestore3.document(key2)
-                                            .set(siswa)
+                                        val firestore = mFirestore.collection("parents")
+                                        val key = prefs.uid
+                                        val ortu = Ortu(key,namaortu,email,password,key2)
+                                        firestore.document(key)
+                                            .set(ortu)
                                             .addOnSuccessListener {
                                                 val firestore2 = firestore.document(ortu.id).collection("students")
-                                                firestore2.add(siswa)
+                                                firestore2.document(key2)
+                                                    .set(siswa)
                                                     .addOnSuccessListener {
                                                         hideLoading(true, "newstudent")
                                                     }

@@ -248,7 +248,7 @@ class NewPostActivityAdmin : AppCompatActivity() {
         if (post==null){
             publishPost(uriImageArtikel,judul_post_admin.text.toString(),isi_post_admin.text.toString())
         } else{
-            updatePost(post?.postId.toString(), uriImageArtikel, post?.judul.toString(), judul_post.text.toString(), isi_post.text.toString())
+            updatePost(post?.postId.toString(), uriImageArtikel, post?.judul.toString(), judul_post_admin.text.toString(), isi_post_admin.text.toString())
         }
 
     }
@@ -274,7 +274,7 @@ class NewPostActivityAdmin : AppCompatActivity() {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         val value = snapshot.getValue(Post::class.java)
                         Toast.makeText(this@NewPostActivityAdmin,"BERHASIL", Toast.LENGTH_SHORT).show()
-                        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
+                        supportFragmentManager.beginTransaction().replace(R.id.screen_area, ListArtikelFragment()).commit()
                         finish()
 
                     }
