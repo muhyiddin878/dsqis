@@ -138,6 +138,12 @@
                             android:textSize="15sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
+                        <RadioButton
+                            android:id="@+id/ketiga_siswa"
+                            android:text="Tahun Ketiga"
+                            android:textSize="15sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
                     </RadioGroup>
                 </TableRow>

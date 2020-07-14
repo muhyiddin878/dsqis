@@ -7,7 +7,6 @@
 
     >
 
-
     <ScrollView
         android:padding="15dp"
         android:id="@+id/scroll_view"

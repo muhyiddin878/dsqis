@@ -49,6 +49,7 @@ class DetailSiswaFragment : Fragment() {
     private lateinit var persiapan_siswa:RadioButton
     private lateinit var pertama_siswa:RadioButton
     private lateinit var kedua_siswa:RadioButton
+    private lateinit var ketiga_siswa:RadioButton
     private lateinit var bundlesiswa:Bundle
 
     private var siswa:Siswa? = null
@@ -133,6 +134,7 @@ class DetailSiswaFragment : Fragment() {
         persiapan_siswa= view.findViewById(R.id.persiapan_siswa) as RadioButton
         pertama_siswa=view.findViewById(R.id.pertama_siswa) as RadioButton
         kedua_siswa=view.findViewById(R.id.kedua_siswa)
+        ketiga_siswa=view.findViewById(R.id.ketiga_siswa)
         lk = view.findViewById(R.id.lk_detail) as RadioButton
         pr = view.findViewById(R.id.pr_detail) as RadioButton
         simpan = view.findViewById(R.id.simpan_perubahan_siswa) as Button
@@ -164,6 +166,8 @@ class DetailSiswaFragment : Fragment() {
             pertama_siswa.isChecked = true
         }else if(kelas_siswa=="Tahun Kedua"){
             kedua_siswa.isChecked=true
+        }else if(kelas_siswa=="Tahun Ketiga"){
+            ketiga_siswa.isChecked=true
         }
 
 
@@ -187,6 +191,7 @@ class DetailSiswaFragment : Fragment() {
                 R.id.persiapan_siswa -> kls2 = "Persiapan"
                 R.id.pertama_siswa -> kls2 = "Tahun Pertama"
                 R.id.kedua_siswa -> kls2 = "Tahun Kedua"
+                R.id.ketiga_siswa -> kls2= "Tahun Ketiga"
             }
         })
         simpan.setOnClickListener {
@@ -1156,6 +1161,8 @@ class DetailSiswaFragment : Fragment() {
 
 
     private fun hapusAkun(id:String,namaSiswa:String){
+        val ortu:MutableList<Ortu> = mutableListOf()
+        lateinit var idOrtu:String
         mFirestore.collection("students").document(id)
             .delete()
             .addOnSuccessListener {
@@ -1169,22 +1176,50 @@ class DetailSiswaFragment : Fragment() {
                                 it.forEach {
                                     it.reference.collection("students")
                                         .document(id)
-                                        .delete()
+                                        .parent
+                                        .get()
                                         .addOnSuccessListener {
-                                            Log.d("SUKSES 3","SUKSES")
-                                            mFirestore.collection("nilai")
-                                                .whereEqualTo("idSiswa",id)
-                                                .get()
+                                            it.forEach {
+                                                ortu.clear()
+                                                val isi=(it.toObject(Ortu::class.java))
+                                                ortu.add(isi)
+                                            }
+                                            ortu.forEach {
+                                                idOrtu=it.id
+                                            }
+                                            mFirestore.collection("parents")
+                                                .document(idOrtu)
+                                                .delete()
                                                 .addOnSuccessListener {
-                                                        it.forEach { isi->
-                                                            isi.reference.delete()
+                                                    Log.d("SUKSES 3","SUKSES")
+                                                    mFirestore.collection("nilai")
+                                                        .whereEqualTo("idSiswa",id)
+                                                        .get()
+                                                        .addOnSuccessListener {
+                                                            it.forEach { isi->
+                                                                if (isi!=null){
+                                                                    isi.reference.delete()
+                                                                }
+                                                                mFirestore.collection("user")
+                                                                    .document(idOrtu)
+                                                                    .delete()
+                                                                    .addOnSuccessListener {
+                                                                        Log.d("SUKSES 4","SUKSES")
+                                                                        Toast.makeText(requireContext(), "Data Berhasil Di Hapus", Toast.LENGTH_SHORT).show()
+                                                                        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
+
+                                                                    }.addOnFailureListener {
+                                                                        Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
+                                                                    }
+                                                            }
+
+                                                            }.addOnFailureListener {
+                                                            Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                                                         }
-                                                    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
-                                                    Toast.makeText(context, "Data Berhasil Di Hapus", Toast.LENGTH_SHORT).show()
-                                                }.addOnFailureListener {
-                                                    Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                                                 }
-                                        }.addOnFailureListener {
+                                        }
+
+                                       .addOnFailureListener {
                                             Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                                         }
                                 }

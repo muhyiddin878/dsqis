@@ -41,24 +41,5 @@ class SplashActivity : AppCompatActivity() {
             }
         },2500)
 
-//        val firestore = FirebaseFirestore.getInstance()
-//
-//        kirim.setOnClickListener {
-//            progress_bar.visibility = View.VISIBLE
-//            val text = nama_gambar.text.toString()
-//
-//            firestore.collection("gambar")
-//                .add(hashMapOf("text" to text))
-////                .document("1qw23er4")
-////                .set()
-//                .addOnSuccessListener {
-//                    progress_bar.visibility = View.GONE
-//                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show()
-//                }
-//                .addOnFailureListener {
-//                    progress_bar.visibility = View.GONE
-//                    Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
-//                }
-//        }
     }
 }

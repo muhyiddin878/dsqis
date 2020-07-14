@@ -68,7 +68,10 @@ class HomeFragment : Fragment() {
                 for (expert in querySnapshot) {
                     pakar.add(expert.toObject(Pakar::class.java))
                 }
-                jumlah_pakar.setText(pakar.size.toString())
+                if(jumlah_pakar!=null){
+
+                    jumlah_pakar.setText(pakar.size.toString())
+                }
 
             }
 
@@ -87,9 +90,11 @@ class HomeFragment : Fragment() {
                 for (student in querySnapshot) {
                     siswa.add(student.toObject(Siswa::class.java))
                 }
+                if(jumlah_ortu!=null && jumlah_siswa!=null){
 
-                jumlah_siswa.setText(siswa.size.toString())
-                jumlah_ortu.setText(siswa.size.toString())
+                    jumlah_siswa.setText(siswa.size.toString())
+                    jumlah_ortu.setText(siswa.size.toString())
+                }
             }
 
         }
@@ -107,7 +112,9 @@ class HomeFragment : Fragment() {
                 for (artikel in querySnapshot){
                     list.add(artikel.toObject(Post::class.java))
                 }
-                jumlah_artikel.setText(list.size.toString())
+                if(jumlah_artikel!=null){
+                    jumlah_artikel.setText(list.size.toString())
+                }
             }
         }
 

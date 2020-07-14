@@ -11,14 +11,16 @@
     android:layout_height="match_parent"
     >
 
-            <ImageView
-                android:id="@+id/admin_image"
-                android:layout_gravity="center"
-                android:src="@drawable/admin"
-                android:layout_width="match_parent"
-                android:layout_height="170dp"
-                tools:ignore="MissingConstraints" />
 
+    <ImageView
+        android:id="@+id/admin_image"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_gravity="center"
+        android:src="@drawable/admin"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/greetings"
