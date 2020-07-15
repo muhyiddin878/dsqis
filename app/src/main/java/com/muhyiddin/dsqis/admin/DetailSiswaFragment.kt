@@ -1176,9 +1176,9 @@ class DetailSiswaFragment : Fragment() {
                             .get()
                             .addOnSuccessListener {
                                 ortu.clear()
-                                    for(isi in it){
-                                        ortu.add(isi.toObject(Ortu::class.java))
-                                    }
+                                for(isi in it){
+                                    ortu.add(isi.toObject(Ortu::class.java))
+                                }
                                 ortu.forEach {
                                     idOrtu=it.id
                                 }
@@ -1192,25 +1192,15 @@ class DetailSiswaFragment : Fragment() {
                                         it.forEach {
                                             it.reference.delete()
                                         }
-                                        mFirestore.collection("user").document(idOrtu)
+                                        mFirestore.collection("parents").document(idOrtu).collection("students")
+                                            .document()
                                             .delete()
                                             .addOnSuccessListener {
-                                                mFirestore.collection("nilai")
-                                                    .whereEqualTo("idSiswa",id)
-                                                    .get()
-                                                    .addOnSuccessListener {
-                                                        it.forEach {isi ->
-                                                            if(isi!=null){
-                                                                isi.reference.delete()
-                                                                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
-                                                            }else{
-                                                                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
-                                                            }
-                                                        }
-                                                    }
+                                                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
                                             }.addOnFailureListener {
                                                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                                             }
+
                                     }.addOnFailureListener {
                                         Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                                     }

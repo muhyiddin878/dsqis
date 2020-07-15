@@ -132,7 +132,7 @@ class DetailPostActivityAdmin : AppCompatActivity() {
                 mStorage.getReference("posts/$judul-$id").delete()
                     .addOnSuccessListener {
                         Toast.makeText(this,"Artikel Berhasil dihapus", Toast.LENGTH_SHORT).show()
-                        supportFragmentManager.beginTransaction().replace(R.id.screen_area, ListArtikelFragment()).commit()
+                        ListArtikelFragment()
                         finish()
                     }.addOnFailureListener {
                         Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
@@ -207,7 +207,7 @@ class DetailPostActivityAdmin : AppCompatActivity() {
     }
 
     fun clearField(){
-        input_komentar.text.clear()
+        input_komentar_admin.text.clear()
 
     }
 

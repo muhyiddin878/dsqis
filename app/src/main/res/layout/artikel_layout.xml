@@ -10,7 +10,7 @@
     app:cardElevation="5dp"
     >
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical">
-        <com.github.chrisbanes.photoview.PhotoView
+        <ImageView
             android:background="#ededed"
             android:src="@drawable/ic_photo_camera_black_24dp"
             android:id="@+id/image_post"

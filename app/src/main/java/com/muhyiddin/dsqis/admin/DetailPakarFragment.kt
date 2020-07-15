@@ -90,7 +90,7 @@ class DetailPakarFragment : Fragment() {
             .into(logo_pakar)
 
         namapakar1.setText(pakar.namapakar)
-        emailpakar1.setText(pakar.email)
+//        emailpakar1.setText(pakar.email)
 
         foto.setOnClickListener() {
             showImageChooser()
@@ -100,7 +100,7 @@ class DetailPakarFragment : Fragment() {
             val builder = AlertDialog.Builder(context!!)
             // Set the alert dialog title
             builder.setTitle("HAPUS DATA")
-            builder.setMessage("PApakah Anda Yakin Anda Akan Menghapusnya?")
+            builder.setMessage("Apakah Anda Yakin Anda Akan Menghapusnya?")
             // Set a positive button and its click listener on alert dialog
             builder.setPositiveButton("IYA") { dialog, which ->
                 hapusAkun(pakar.id,pakar.namapakar)
@@ -122,7 +122,7 @@ class DetailPakarFragment : Fragment() {
         jenis_pakar.setSelection(pos)
 
         submit.setOnClickListener {
-            updatePakar(pakar!!.id,uriImagePakar,pakar!!.namapakar,namapakar1.text.toString(),emailpakar1.text.toString(),jenispakar)
+            updatePakar(pakar!!.id,uriImagePakar,pakar!!.namapakar,namapakar1.text.toString(),jenispakar)
 
         }
 
@@ -163,7 +163,7 @@ class DetailPakarFragment : Fragment() {
         }
     }
 
-    fun updatePakar(id:String, uri:Uri?, namaLama: String, namaBaru:String,emailBaru:String,jenisBaru:String){
+    fun updatePakar(id:String, uri:Uri?, namaLama: String, namaBaru:String,jenisBaru:String){
         var imageLocation = ""
         val dbRef = mFirestore.collection("expert")
             .document(id)
@@ -185,7 +185,6 @@ class DetailPakarFragment : Fragment() {
                     dbRef.update(mapOf(
                         "cover" to imageLocation,
                         "namapakar" to namaBaru,
-                        "email" to emailBaru,
                         "jenis" to jenisBaru
                     )).addOnSuccessListener {
                         hideLoading(true, "BERHASIL DI UPDATE")
@@ -200,7 +199,6 @@ class DetailPakarFragment : Fragment() {
         } else{
             dbRef.update(mapOf(
                 "namapakar" to namaBaru,
-                "email" to emailBaru,
                 "jenis" to jenisBaru
             )).addOnCompleteListener {
                 hideLoading(true, "BERHASIL DI UPDATE")
@@ -218,7 +216,13 @@ class DetailPakarFragment : Fragment() {
             .addOnSuccessListener {
                 mStorage.getReference("expert/$namaPakar-$id").delete()
                     .addOnSuccessListener {
-                        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunPakarFragment())?.commit()
+                        mFirestore.collection("user").document(id)
+                            .delete()
+                            .addOnSuccessListener {
+                                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunPakarFragment())?.commit()
+                            }.addOnFailureListener {
+                                Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                            }
                     }.addOnFailureListener {
                         Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                     }

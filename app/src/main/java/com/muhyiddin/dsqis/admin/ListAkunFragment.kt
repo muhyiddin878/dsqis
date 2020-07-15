@@ -163,6 +163,8 @@ class ListAkunFragment : Fragment() {
 
     }
     fun showEmptyChat() {
-        empty_chat1.visibility = View.VISIBLE
+        if(empty_chat1!=null){
+            empty_chat1.visibility = View.VISIBLE
+        }
     }
 }
