@@ -12,6 +12,7 @@ import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.muhyiddin.dsqis.admin.AdminActivity
 import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_on_boarding.*
 
@@ -39,8 +40,16 @@ class OnBoardingActivity : AppCompatActivity() {
             if (progress_bar.visibility== View.VISIBLE){
 //                toast("Tunggu sebentar ya kak :)")
             } else{
-                finish()
-                startActivity(Intent(this,MainActivity::class.java))
+                if(prefs.role==1){
+                    finish()
+                    startActivity(Intent(this,MainActivity::class.java))
+                }else if(prefs.role==2){
+                    finish()
+                    startActivity(Intent(this,MainActivityPakar::class.java))
+                }else if(prefs.role==3){
+                    finish()
+                    startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME",prefs.nama))
+                }
             }
 
         }

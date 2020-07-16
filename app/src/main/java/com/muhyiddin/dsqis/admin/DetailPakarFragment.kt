@@ -103,7 +103,7 @@ class DetailPakarFragment : Fragment() {
             builder.setMessage("Apakah Anda Yakin Anda Akan Menghapusnya?")
             // Set a positive button and its click listener on alert dialog
             builder.setPositiveButton("IYA") { dialog, which ->
-                hapusAkun(pakar.id,pakar.namapakar)
+                hapusAkun(pakar.id,pakar.namapakar,pakar.uid)
             }
             // Display a negative button on alert dialog
             builder.setNegativeButton("TIDAK") { dialog, which ->
@@ -210,13 +210,14 @@ class DetailPakarFragment : Fragment() {
 
     }
 
-    private fun hapusAkun(id:String,namaPakar:String){
+    private fun hapusAkun(id:String,namaPakar:String,uid:String){
         mFirestore.collection("expert").document(id)
             .delete()
             .addOnSuccessListener {
-                mStorage.getReference("expert/$namaPakar-$id").delete()
+                mStorage.getReference("expert/$namaPakar-$id")
+                    .delete()
                     .addOnSuccessListener {
-                        mFirestore.collection("user").document(id)
+                        mFirestore.collection("user").document(uid)
                             .delete()
                             .addOnSuccessListener {
                                 activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunPakarFragment())?.commit()

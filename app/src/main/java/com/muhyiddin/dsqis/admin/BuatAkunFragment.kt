@@ -161,30 +161,30 @@ class BuatAkunFragment : Fragment() {
             }.addOnCompleteListener {
                 imageLocation = it.result.toString()
                 mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener{
-                    prefs.role =1
-                    prefs.uid = it.user?.uid
-                    prefs.nama = namaortu
-                    val user = User(prefs.role, namaortu, prefs.uid)
-                    if (prefs.role==1){
+//                    prefs.role =1
+//                    prefs.uid = it.user?.uid
+                    val uid=it.user?.uid
+//                    prefs.nama = namaortu
+                    val user = User(1, namaortu, it.user?.uid)
                         mFirestore.collection("user")
-                            .document(prefs.uid)
+                            .document(uid!!)
                             .set(user)
                             .addOnSuccessListener {
-                                val firestore3 = mFirestore.collection("students")
-                                val key2 = firestore3.document().id
-                                val siswa = Siswa(key2,input_nama.text.toString(),jk, ttl, nisn,kls,alamat,nomor,imageLocation)
-                                firestore3.document(key2)
+//                                val firestore3 = mFirestore.collection("students")
+//                                val key2 = firestore3.document().id
+                                val siswa = Siswa(key,input_nama.text.toString(),jk, ttl, nisn,kls,alamat,nomor,imageLocation)
+                                firestore.document(key)
                                     .set(siswa)
                                     .addOnSuccessListener {
                                         setProgressBarLength(75)
-                                        val firestore = mFirestore.collection("parents")
-                                        val key = prefs.uid
-                                        val ortu = Ortu(key,namaortu,email,password,key2)
-                                        firestore.document(key)
+                                        val firestore2 = mFirestore.collection("parents")
+//                                        val key = prefs.uid
+                                        val ortu = Ortu(uid!!,namaortu,email,password,key)
+                                        firestore2.document(uid!!)
                                             .set(ortu)
                                             .addOnSuccessListener {
-                                                val firestore2 = firestore.document(ortu.id).collection("students")
-                                                firestore2.document(key2)
+                                                val firestore3 = firestore2.document(uid).collection("students")
+                                                firestore3.document(key)
                                                     .set(siswa)
                                                     .addOnSuccessListener {
                                                         hideLoading(true, "newstudent")
@@ -206,7 +206,7 @@ class BuatAkunFragment : Fragment() {
                             .addOnFailureListener{
                                 hideLoading(false, "Error ${it.localizedMessage}")
                             }
-                    }
+
 
 
                 }

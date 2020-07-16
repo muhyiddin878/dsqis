@@ -1196,7 +1196,13 @@ class DetailSiswaFragment : Fragment() {
                                             .document()
                                             .delete()
                                             .addOnSuccessListener {
-                                                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
+                                                mFirestore.collection("user").document(idOrtu)
+                                                    .delete()
+                                                    .addOnSuccessListener {
+                                                        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.screen_area, ListAkunFragment())?.commit()
+                                                    }.addOnFailureListener {
+                                                        Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                                                    }
                                             }.addOnFailureListener {
                                                 Toast.makeText(context, it.localizedMessage, Toast.LENGTH_SHORT).show()
                                             }

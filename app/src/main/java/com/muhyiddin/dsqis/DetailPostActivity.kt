@@ -138,7 +138,7 @@ class DetailPostActivity : AppCompatActivity() {
                 finish()
                 startActivity(Intent(this, NewPostActivity::class.java).putExtra("post", post))
             }
-            R.id.hapus_post -> hapusArtikel(post.postId, post.judul)
+            R.id.hapus_post -> deleteArtikel(post.postId, post.judul)
         }
         return super.onOptionsItemSelected(item)
     }
@@ -146,6 +146,26 @@ class DetailPostActivity : AppCompatActivity() {
 //    private fun deletePost(id: String, judul:String) {
 //        hapusArtikel(id, judul)
 //    }
+
+    fun deleteArtikel(id:String,judul:String){
+        val builder = AlertDialog.Builder(this!!)
+        // Set the alert dialog title
+        builder.setTitle("HAPUS DATA")
+        builder.setMessage("Apakah Anda Yakin Akan Menghapus Data?")
+        // Set a positive button and its click listener on alert dialog
+        builder.setPositiveButton("YA") { dialog, which ->
+            hapusArtikel(id,judul)
+        }
+        // Display a negative button on alert dialog
+        builder.setNegativeButton("TIDAK") { dialog, which ->
+            Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+        }
+        // Display a neutral button on alert dialog
+        builder.setNeutralButton("BATALKAN") { _, _ ->
+            Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+        }
+        builder.show()
+    }
 
 
     fun hapusArtikel(id:String, judul:String){

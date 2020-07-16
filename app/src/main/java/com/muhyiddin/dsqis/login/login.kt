@@ -186,7 +186,12 @@ class login : AppCompatActivity(){
         finish()
     }
     fun showLoginSuccessAdmin() {
-        startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME",prefs.nama))
+        val ref= mAuth.currentUser?.photoUrl
+        if(ref!=null){
+            startActivity(Intent(this,AdminActivity::class.java).putExtra("USERNAME",prefs.nama))
+        }else{
+            startActivity(Intent(this,OnBoardingActivity::class.java))
+        }
         finish()
     }
 

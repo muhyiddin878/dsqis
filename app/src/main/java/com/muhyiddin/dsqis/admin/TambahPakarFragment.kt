@@ -144,18 +144,18 @@ class TambahPakarFragment : Fragment() {
             }.addOnCompleteListener {
                 imageLocation = it.result.toString()
                 mAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener{
-                    prefs.role =2
-                    prefs.uid = it.user?.uid
-                    prefs.nama = namapakar
-                    val user = User(prefs.role, namapakar, prefs.uid)
-                    if (prefs.role==2){
+//                    prefs.role =2
+//                    prefs.uid = it.user?.uid
+                    val uid=it.user?.uid
+//                    prefs.nama = namapakar
+                    val user = User(2, namapakar, uid)
                         mFirestore.collection("user")
-                            .document(prefs.uid)
+                            .document(uid!!)
                             .set(user)
                             .addOnSuccessListener {
-                                val firestore = mFirestore.collection("expert")
-                                val key = firestore.document().id
-                                val expert = Pakar(key,namapakar,email,password,jenispakar,imageLocation)
+//                                val firestore = mFirestore.collection("expert")
+//                                val key = firestore.document().id
+                                val expert = Pakar(key,namapakar,email,password,jenispakar,imageLocation,uid)
                                 firestore.document(key)
                                     .set(expert)
                                     .addOnSuccessListener {
@@ -169,7 +169,7 @@ class TambahPakarFragment : Fragment() {
                             .addOnFailureListener{
                                 hideLoading(false, "Error ${it.localizedMessage}")
                             }
-                    }
+
 
 
                 }

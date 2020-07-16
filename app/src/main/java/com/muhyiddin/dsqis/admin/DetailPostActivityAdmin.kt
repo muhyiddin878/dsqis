@@ -20,6 +20,7 @@ import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.adapter.CommentAdapter
 import com.muhyiddin.dsqis.model.Comment
 import com.muhyiddin.dsqis.model.Post
+import com.muhyiddin.dsqis.utils.AppPreferences
 import kotlinx.android.synthetic.main.activity_detail_post.*
 import kotlinx.android.synthetic.main.activity_detail_post.image_post
 import kotlinx.android.synthetic.main.activity_detail_post_admin.*
@@ -35,6 +36,7 @@ class DetailPostActivityAdmin : AppCompatActivity() {
     private val mFirestore = FirebaseFirestore.getInstance()
     private val currentUser = FirebaseAuth.getInstance().currentUser
     private lateinit var adapter: CommentAdapter
+    lateinit var prefs: AppPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +44,7 @@ class DetailPostActivityAdmin : AppCompatActivity() {
         setContentView(R.layout.activity_detail_post_admin)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        prefs = AppPreferences(this)
 
         post = intent.extras.getSerializable("post") as Post
 
@@ -118,9 +121,29 @@ class DetailPostActivityAdmin : AppCompatActivity() {
                 finish()
                 startActivity(Intent(this, NewPostActivityAdmin::class.java).putExtra("post", post))
             }
-            R.id.hapus_post -> hapusArtikel(post.postId, post.judul)
+            R.id.hapus_post -> deleteArtikel(post.postId, post.judul)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun deleteArtikel(id:String,judul:String){
+        val builder = AlertDialog.Builder(this!!)
+        // Set the alert dialog title
+        builder.setTitle("HAPUS DATA")
+        builder.setMessage("Apakah Anda Yakin Akan Menghapus Data?")
+        // Set a positive button and its click listener on alert dialog
+        builder.setPositiveButton("YA") { dialog, which ->
+            hapusArtikel(id,judul)
+        }
+        // Display a negative button on alert dialog
+        builder.setNegativeButton("TIDAK") { dialog, which ->
+            Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+        }
+        // Display a neutral button on alert dialog
+        builder.setNeutralButton("BATALKAN") { _, _ ->
+            Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+        }
+        builder.show()
     }
 
 
@@ -155,7 +178,7 @@ class DetailPostActivityAdmin : AppCompatActivity() {
     fun submitKomentar(komentar:String, postId:String){
         val firestore = mFirestore.collection("posts").document(postId).collection("comment")
         val key = firestore.document().id
-        val comment = Comment(key, komentar,getCurrentDate(), currentUser?.uid.toString(), currentUser?.displayName.toString(), currentUser?.photoUrl.toString())
+        val comment = Comment(key, komentar,getCurrentDate(), currentUser?.uid.toString(), prefs.nama, currentUser?.photoUrl.toString())
         firestore.document(key)
             .set(comment)
             .addOnSuccessListener {
