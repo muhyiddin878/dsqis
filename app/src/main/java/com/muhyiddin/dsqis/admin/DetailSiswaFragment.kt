@@ -97,6 +97,8 @@ class DetailSiswaFragment : Fragment() {
     private val minggu_murajaah:MutableList<String> = mutableListOf()
     private val minggu_pra_akademik :MutableList<String> = mutableListOf()
     private var kelasSiswa=mutableListOf<String>()
+    private lateinit var namaortu:String
+    private lateinit var emailortu:String
 
     private var nilai: Nilai? = null
 
@@ -124,6 +126,7 @@ class DetailSiswaFragment : Fragment() {
         val siswa = arguments?.getSerializable("siswa") as Siswa
         idSiswa=siswa.id
         getKelasSiswa(idSiswa)
+        getOrtu(idSiswa)
 
 
         nama=view.findViewById(R.id.nama_siswa)
@@ -1157,6 +1160,22 @@ class DetailSiswaFragment : Fragment() {
             logo_siswa.setImageBitmap(bitmap)
             logo_siswa.scaleType = ImageView.ScaleType.CENTER_CROP
         }
+    }
+
+    private fun getOrtu(id:String){
+        mFirestore.collection("parents").whereEqualTo("idAnak",id)
+            .get()
+            .addOnSuccessListener {
+                for (ortu1 in it){
+                    val or = ortu1.toObject(Ortu::class.java)
+                    namaortu=or.namaortu
+                    emailortu=or.email
+                }
+                nama_ortu.setText(namaortu)
+                email_ortu.setText(emailortu)
+            }.addOnFailureListener {
+                Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
+            }
     }
 
 

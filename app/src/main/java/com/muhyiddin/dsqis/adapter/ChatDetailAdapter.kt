@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.muhyiddin.dsqis.model.Chat
 import android.R
 import android.util.Log
+import com.ceylonlabs.imageviewpopup.ImagePopup
 import com.google.firebase.database.*
 
 
@@ -67,6 +68,12 @@ class ChatDetailAdapter(private val ctx: Context,val listChat:List<Chat>,
                     unsentChat(item.id)
                     return@setOnLongClickListener true
                 }
+            }
+
+            val imagePopup = ImagePopup(ctx)
+            imagePopup.initiatePopupWithPicasso(item.image)
+            chat_image.setOnClickListener {
+                imagePopup.viewPopup()
             }
 
 

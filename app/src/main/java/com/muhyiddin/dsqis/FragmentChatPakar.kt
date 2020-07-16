@@ -151,31 +151,31 @@ class FragmentChatPakar : Fragment() {
             })
         }
 
-        if (idRoom!=""){
-
-            mDatabase.getReference("chat/${idRoom}/conversation").addChildEventListener(object :ChildEventListener{
-                override fun onCancelled(p0: DatabaseError) {
-
-                }
-
-                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-                    adapter.notifyDataSetChanged()
-                }
-
-                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-                    adapter.notifyDataSetChanged()
-
-                }
-
-                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-                    adapter.notifyDataSetChanged()
-                }
-
-                override fun onChildRemoved(p0: DataSnapshot) {
-                }
-
-            })
-        }
+//        if (idRoom!=""){
+//
+//            mDatabase.getReference("chat/${idRoom}/conversation").addChildEventListener(object :ChildEventListener{
+//                override fun onCancelled(p0: DatabaseError) {
+//
+//                }
+//
+//                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
+//                    adapter.notifyDataSetChanged()
+//                }
+//
+//                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
+//                    adapter.notifyDataSetChanged()
+//
+//                }
+//
+//                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
+//                    adapter.notifyDataSetChanged()
+//                }
+//
+//                override fun onChildRemoved(p0: DataSnapshot) {
+//                }
+//
+//            })
+//        }
     }
 
     fun updateUnreadChat(roomId:String){

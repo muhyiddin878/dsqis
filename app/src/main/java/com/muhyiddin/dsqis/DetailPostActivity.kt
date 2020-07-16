@@ -174,9 +174,16 @@ class DetailPostActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 mStorage.getReference("posts/$judul-$id").delete()
                     .addOnSuccessListener {
-                    Toast.makeText(this,"Artikel Berhasil dihapus",Toast.LENGTH_SHORT).show()
-//                        supportFragmentManager.beginTransaction().replace(R.id.frame_container, FragmentArtikel()).commit()
-                        finish()
+                        mDatabase.collection("posts").document(id).collection("comment")
+                            .document()
+                            .delete()
+                            .addOnSuccessListener {
+                                Toast.makeText(this,"Artikel Berhasil dihapus",Toast.LENGTH_SHORT).show()
+                                FragmentArtikel()
+                                finish()
+                            }.addOnFailureListener {
+                                Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                            }
                     }.addOnFailureListener {
                         Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
                     }

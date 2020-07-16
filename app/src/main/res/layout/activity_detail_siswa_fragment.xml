@@ -189,6 +189,50 @@
                         />
                 </TableRow>
 
+                <TableRow>
+                    <TextView
+                        android:text="Orang Tua"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="0.3"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/nama_ortu"
+                        android:inputType="number"
+                        android:layout_weight="20"
+                        />
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:text="Email"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="1"
+                        />
+                    <TextView
+                        android:text=":"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@android:color/black"
+                        android:layout_weight="0.3"
+                        />
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/email_ortu"
+                        android:inputType="number"
+                        android:layout_weight="20"
+                        />
+                </TableRow>
+
             </TableLayout>
 
             <include

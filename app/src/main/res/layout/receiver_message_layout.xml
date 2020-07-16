@@ -24,8 +24,8 @@
         android:layout_alignParentStart="true"
         android:src="@drawable/logoqis"
         android:id="@+id/chat_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="200dp"
+        android:layout_height="200dp">
 
     </ImageView>
 </RelativeLayout>

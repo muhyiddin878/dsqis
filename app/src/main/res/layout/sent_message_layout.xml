@@ -18,14 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <com.github.chrisbanes.photoview.PhotoView
+    <ImageView
         android:background="@drawable/rounded_rectangle_sent"
         android:visibility="gone"
         android:layout_alignParentEnd="true"
         android:src="@drawable/logoqis"
         android:id="@+id/chat_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_width="200dp"
+        android:layout_height="200dp">
 
-    </com.github.chrisbanes.photoview.PhotoView>
+    </ImageView>
 </RelativeLayout>

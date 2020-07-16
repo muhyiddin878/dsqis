@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
+import com.muhyiddin.dsqis.FragmentArtikel
 import com.muhyiddin.dsqis.NewPostActivity
 import com.muhyiddin.dsqis.R
 import com.muhyiddin.dsqis.adapter.CommentAdapter
@@ -154,9 +155,16 @@ class DetailPostActivityAdmin : AppCompatActivity() {
             .addOnSuccessListener {
                 mStorage.getReference("posts/$judul-$id").delete()
                     .addOnSuccessListener {
-                        Toast.makeText(this,"Artikel Berhasil dihapus", Toast.LENGTH_SHORT).show()
-                        ListArtikelFragment()
-                        finish()
+                        mDatabase.collection("posts").document(id).collection("comment")
+                            .document()
+                            .delete()
+                            .addOnSuccessListener {
+                                Toast.makeText(this,"Artikel Berhasil dihapus",Toast.LENGTH_SHORT).show()
+                                FragmentArtikel()
+                                finish()
+                            }.addOnFailureListener {
+                                Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
+                            }
                     }.addOnFailureListener {
                         Toast.makeText(this, it.localizedMessage, Toast.LENGTH_SHORT).show()
                     }
