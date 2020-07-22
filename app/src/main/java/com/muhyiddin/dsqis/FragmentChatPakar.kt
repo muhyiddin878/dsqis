@@ -48,10 +48,10 @@ class FragmentChatPakar : Fragment() {
 
         if (prefs.role==2){
             start_new_chat.hide()
-            (activity as AppCompatActivity).supportActionBar?.title = "Chat"
+            (activity as AppCompatActivity).supportActionBar?.title = "Konsultasi"
         } else{
             start_new_chat.show()
-            (activity as AppCompatActivity).supportActionBar?.title = "Chat Pakar"
+            (activity as AppCompatActivity).supportActionBar?.title = "Konsultasi Pakar"
 //            (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
         }
         adapter = ChatAdapter(requireContext(),listChat){
@@ -151,31 +151,7 @@ class FragmentChatPakar : Fragment() {
             })
         }
 
-//        if (idRoom!=""){
-//
-//            mDatabase.getReference("chat/${idRoom}/conversation").addChildEventListener(object :ChildEventListener{
-//                override fun onCancelled(p0: DatabaseError) {
-//
-//                }
-//
-//                override fun onChildMoved(p0: DataSnapshot, p1: String?) {
-//                    adapter.notifyDataSetChanged()
-//                }
-//
-//                override fun onChildChanged(p0: DataSnapshot, p1: String?) {
-//                    adapter.notifyDataSetChanged()
-//
-//                }
-//
-//                override fun onChildAdded(p0: DataSnapshot, p1: String?) {
-//                    adapter.notifyDataSetChanged()
-//                }
-//
-//                override fun onChildRemoved(p0: DataSnapshot) {
-//                }
-//
-//            })
-//        }
+
     }
 
     fun updateUnreadChat(roomId:String){

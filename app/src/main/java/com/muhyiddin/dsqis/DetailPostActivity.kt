@@ -9,12 +9,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.firebase.auth.FirebaseAuth
@@ -75,6 +77,17 @@ class DetailPostActivity : AppCompatActivity() {
         tanggal_post.text = post.postDate
 
         supportActionBar?.title = post.judul
+
+        if(post.writerName==prefs.nama){
+            val status=post.status
+            status_post_user.visibility=View.VISIBLE
+            if(status==true){
+                status_post_user.setText("Telah Disetujui Oleh Admin")
+                status_post_user.setBackgroundResource(R.drawable.border3)
+            }else{
+                status_post_user.setText("Masih dalam Peninjauan Oleh Admin")
+            }
+        }
 
 
 

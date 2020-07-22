@@ -61,11 +61,24 @@
                 android:layout_marginBottom="16dp"
                 />
             <TextView
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tanggal_post"
                 tools:text="11 November 2018"
                 android:textStyle="bold"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/status_post_user"
+                tools:text="Sedang Dalam Peninjauan"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:textAlignment="center"
+                android:background="@drawable/border2"
                 />
         </LinearLayout>
         <View

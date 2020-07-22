@@ -12,10 +12,11 @@ class Post:Serializable{
     var writerId:String? = null
     var writerPic:String? = null
     lateinit var postId:String
+    var status:Boolean?=false
 
     constructor(){}
 
-    constructor(judul:String, isi:String, cover:String?, postDate:String, writerName:String?, writerId:String?, writerPic:String?, postId:String){
+    constructor(judul:String, isi:String, cover:String?, postDate:String, writerName:String?, writerId:String?, writerPic:String?, postId:String,status:Boolean){
         this.judul = judul
         this.isi = isi
         this.cover = cover
@@ -24,5 +25,6 @@ class Post:Serializable{
         this.writerId = writerId
         this.writerPic = writerPic
         this.postId = postId
+        this.status=status
     }
 }

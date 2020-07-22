@@ -8,53 +8,85 @@
     android:paddingTop="5dp"
     android:paddingBottom="5dp">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginBottom="16dp"
         >
+
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/pic_artikel"
             android:layout_width="65dp"
             android:layout_height="65dp"
-            android:id="@+id/pic_artikel"
             android:src="@color/dark_grey"
-            android:layout_marginRight="16dp"
             app:civ_border_color="@color/colorPrimaryDark"
             app:civ_border_width="1dp"
-            />
-        <TextView
-            android:layout_marginTop="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/pic_artikel"
-            android:id="@+id/judul_artikel"
-            tools:text="Deliar Nur"
-            android:textColor="@android:color/black"
-            android:textSize="15sp"
-            />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
+
         <TextView
             android:id="@+id/writer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Okupasi"
             android:layout_below="@id/judul_artikel"
+            android:layout_marginStart="17dp"
             android:layout_toEndOf="@id/pic_artikel"
             android:textSize="12sp"
-            />
+            app:layout_constraintStart_toEndOf="@+id/pic_artikel"
+            app:layout_constraintTop_toBottomOf="@+id/judul_artikel"
+            tools:ignore="MissingConstraints"
+            tools:text="Okupasi" />
 
         <TextView
+            android:id="@+id/judul_artikel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="4dp"
+            android:layout_toEndOf="@id/pic_artikel"
+            android:textColor="@android:color/black"
+            android:textSize="15sp"
+            app:layout_constraintStart_toEndOf="@+id/pic_artikel"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"
+            tools:text="Deliar Nur" />
+
+        <TextView
             android:id="@+id/tanggal_artikel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/writer"
+            android:layout_marginStart="17dp"
+            android:layout_toEndOf="@id/pic_artikel"
             android:text="24-12-2019"
             android:textSize="12sp"
-            android:layout_below="@+id/writer"
-            android:layout_toEndOf="@id/pic_artikel">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/pic_artikel"
+            app:layout_constraintTop_toBottomOf="@+id/writer"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/status_artikel"
+            android:layout_width="98dp"
+            android:layout_height="29dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/pic_artikel"
+            android:text="Pending"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:background="@drawable/border5"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/writer"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints" />
 
 
-        </TextView>
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>

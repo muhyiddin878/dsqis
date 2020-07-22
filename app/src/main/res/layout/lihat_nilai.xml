@@ -122,7 +122,8 @@
                     <TextView
                         android:id="@+id/sikap_spiritual2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFFF"
                         android:textSize="20sp"/>
@@ -136,7 +137,8 @@
                     <TextView
                         android:id="@+id/sikap_sosial2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -166,7 +168,8 @@
                     <TextView
                         android:id="@+id/materi_komunal2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -180,7 +183,8 @@
                     <TextView
                         android:id="@+id/ket_komunal2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -224,7 +228,8 @@
                     <TextView
                         android:id="@+id/materi_sensori2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -238,7 +243,8 @@
                     <TextView
                         android:id="@+id/ket_sensori2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -282,7 +288,8 @@
                     <TextView
                         android:id="@+id/materi_sikap_sosial2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -324,7 +331,8 @@
                     <TextView
                         android:id="@+id/nilaikomputer2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -338,7 +346,8 @@
                     <TextView
                         android:id="@+id/ket_komputer2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -380,7 +389,8 @@
                     <TextView
                         android:id="@+id/materi_murajaah2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -394,7 +404,8 @@
                     <TextView
                         android:id="@+id/ket_murajaah2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -423,7 +434,8 @@
                     <TextView
                         android:id="@+id/nama_ekstra2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -437,7 +449,8 @@
                     <TextView
                         android:id="@+id/ket_ekstra2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -473,7 +486,8 @@
                     <TextView
                         android:id="@+id/saran_guru2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -529,7 +543,8 @@
                     <TextView
                         android:id="@+id/penglihatan2"
                         android:layout_weight="1"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -543,7 +558,8 @@
                     <TextView
                         android:id="@+id/pendengaran2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -557,7 +573,8 @@
                     <TextView
                         android:id="@+id/gigi2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -571,7 +588,8 @@
                     <TextView
                         android:id="@+id/daya_tahan2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -597,7 +615,8 @@
                     <TextView
                         android:id="@+id/kondisi_saat_ini2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -611,7 +630,8 @@
                     <TextView
                         android:id="@+id/kondisi_ideal2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -625,7 +645,8 @@
                     <TextView
                         android:id="@+id/saran_dokter2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -704,7 +725,8 @@
                     <TextView
                         android:id="@+id/kondisi_psikologi_saat_ini2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -719,7 +741,8 @@
                     <TextView
                         android:id="@+id/kondisi_ideal_psikologi2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -733,7 +756,8 @@
                     <TextView
                         android:id="@+id/saran_psikolog2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -760,7 +784,8 @@
                     <TextView
                         android:id="@+id/kondisi_okupasi_saat_ini2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -775,7 +800,8 @@
                     <TextView
                         android:id="@+id/kondisi_ideal_okupasi2"
                         android:layout_weight="2"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>
@@ -789,7 +815,8 @@
                     <TextView
                         android:id="@+id/saran_okupasi2"
                         android:layout_weight="0"
-                        android:inputType="text"
+                        android:inputType="textMultiLine"
+                        android:layout_height="wrap_content"
                         android:text="Kosong"
                         android:textColor="#FFF"
                         android:textSize="20sp"/>

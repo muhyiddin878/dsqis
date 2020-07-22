@@ -117,7 +117,7 @@ class NewPostActivityAdmin : AppCompatActivity() {
                 if (it.isSuccessful) {
                     imageLocation = it.result.toString()
                     setProgressBarLength(75)
-                    val post = Post(judul,isi,imageLocation,getCurrentDate(), "Admin", mAuth.currentUser?.uid, mAuth.currentUser?.photoUrl.toString(), key)
+                    val post = Post(judul,isi,imageLocation,getCurrentDate(), prefs.nama, mAuth.currentUser?.uid, mAuth.currentUser?.photoUrl.toString(), key,true)
                     firestore.document(key)
                         .set(post)
                         .addOnSuccessListener {

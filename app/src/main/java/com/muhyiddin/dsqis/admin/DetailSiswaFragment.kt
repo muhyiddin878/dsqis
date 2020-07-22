@@ -1186,10 +1186,8 @@ class DetailSiswaFragment : Fragment() {
         mFirestore.collection("students").document(id)
             .delete()
             .addOnSuccessListener {
-                Log.d("SUKSES 1","SUKSES")
                 mStorage.getReference("students/$namaSiswa").delete()
                     .addOnSuccessListener {
-                        Log.d("SUKSES 2","SUKSES")
                         mFirestore.collection("parents")
                             .whereEqualTo("idAnak",id)
                             .get()
@@ -1201,7 +1199,6 @@ class DetailSiswaFragment : Fragment() {
                                 ortu.forEach {
                                     idOrtu=it.id
                                 }
-                                Log.d("idOrtu:",idOrtu)
                                 it.forEach {isi->
                                     isi.reference.delete()
                                 }

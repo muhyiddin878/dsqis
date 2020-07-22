@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -63,6 +64,63 @@ class DetailPostActivityAdmin : AppCompatActivity() {
         supportActionBar?.title = post.judul
 
 
+            if(post.status==false ){
+                if(post.writerName!=prefs.nama){
+                    acc_post.visibility=View.VISIBLE
+                }else{
+                    acc_post.visibility=View.GONE
+                }
+            }else if (post.status==true ){
+                if(post.writerName!=prefs.nama){
+                    acc_post.visibility=View.VISIBLE
+                    acc_post.setBackgroundResource(R.drawable.border4)
+                    acc_post.setText("Tolak")
+
+                }else{
+                    acc_post.visibility=View.GONE
+                }
+            }
+
+
+        acc_post.setOnClickListener {
+            val status= acc_post.text.toString()
+            if(status=="Setujui"){
+                val status2=true
+                val builder = AlertDialog.Builder(this!!)
+                builder.setTitle("Setujui Artikel")
+                builder.setMessage("Apakah Anda Yakin Akan Menyetujui Artikel ini?")
+                builder.setPositiveButton("YA") { dialog, which ->
+                    accPost(status2,post.postId)
+                }
+                builder.setNegativeButton("TIDAK") { dialog, which ->
+                    Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+                }
+                builder.setNeutralButton("BATALKAN") { _, _ ->
+                    Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+                }
+                builder.show()
+
+            }else{
+                val status2=false
+
+                val builder = AlertDialog.Builder(this!!)
+                builder.setTitle("Setujui Artikel")
+                builder.setMessage("Apakah Anda Yakin Akan Membatalkan Persetujuan Artikel ini?")
+                builder.setPositiveButton("YA") { dialog, which ->
+                    accPost(status2,post.postId)
+                }
+                builder.setNegativeButton("TIDAK") { dialog, which ->
+                    Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+                }
+                builder.setNeutralButton("BATALKAN") { _, _ ->
+                    Toast.makeText(this, "You cancelled the dialog.", Toast.LENGTH_SHORT).show()
+                }
+                builder.show()
+
+            }
+        }
+
+
 
         adapter = CommentAdapter(this, list){comment ->
 
@@ -105,6 +163,18 @@ class DetailPostActivityAdmin : AppCompatActivity() {
         submit_komentar_admin.setOnClickListener(){
             submitKomentar(input_komentar_admin.text.toString(), post.postId)
         }
+    }
+
+    private fun accPost(status:Boolean,idPost:String){
+        val dbRef = mFirestore.collection("posts")
+            dbRef.document(idPost)
+                .get()
+                .addOnSuccessListener {
+                    it.reference.update(
+                        "status",status
+                    )
+                }
+
     }
 
 

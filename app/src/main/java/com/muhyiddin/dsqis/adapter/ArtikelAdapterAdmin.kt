@@ -35,6 +35,7 @@ class ArtikelAdapterAdmin (private val context: Context, private val list:List<P
         private val titlePost: TextView = view.findViewById(R.id.judul_artikel)
         private val username: TextView = view.findViewById(R.id.writer)
         private val tanggal: TextView = view.findViewById(R.id.tanggal_artikel)
+        private val status_artikel:TextView=view.findViewById(R.id.status_artikel)
         private val mDatabase = FirebaseFirestore.getInstance()
         private val refSemuaBookmark = mDatabase.collection("posts")
 
@@ -46,6 +47,14 @@ class ArtikelAdapterAdmin (private val context: Context, private val list:List<P
             titlePost.text = item.judul
             tanggal.text = item.postDate
             username.text = item.writerName
+            val status= item.status
+            if (status==true){
+                status_artikel.setText("Accepted")
+                status_artikel.setBackgroundResource(R.drawable.border3)
+            }else{
+                status_artikel.setText("Pending")
+                status_artikel.setBackgroundResource(R.drawable.border5)
+            }
             Glide
                 .with(view)
                 .asBitmap()

@@ -27,6 +27,9 @@ import com.muhyiddin.dsqis.model.*
 import kotlinx.android.synthetic.main.activity_input_nilai_fragment.*
 import kotlinx.android.synthetic.main.lihat_nilai.*
 import java.util.*
+import android.text.method.ScrollingMovementMethod
+
+
 
 
 class FragmentLihatLaporan : Fragment() {
@@ -746,11 +749,13 @@ class FragmentLihatLaporan : Fragment() {
                     }.forEach {
                         listTanggal.add(it.toString())
                     }
+
                 }
                 Log.d("LIST_TANGGAL", "$listTanggal")
 
 //                tanggal_nilai1.setAdapter(null)
                 if (tanggal_nilai1!=null){
+                    listTanggal.reverse()
                     tanggal_nilai1.adapter = ArrayAdapter<String>(requireContext(), R.layout.spinner_row, listTanggal)
                 }
             }
@@ -1071,116 +1076,115 @@ class FragmentLihatLaporan : Fragment() {
     }
 
     fun mapel14(){
-        tv_spiritual1.visibility = View.VISIBLE
-        sikap_spiritual1.visibility = View.VISIBLE
-        tv_sosial1.visibility = View.VISIBLE
-        sikap_sosial1.visibility = View.VISIBLE
 
-        tv_mingguke1.visibility = View.VISIBLE
-        mingguke1.visibility = View.VISIBLE
-        tv_materi1.visibility = View.VISIBLE
-        materi_sikap_sosial1.visibility = View.VISIBLE
-        tv_ket1.visibility = View.VISIBLE
-        ket_sikap_sosial1.visibility = View.VISIBLE
-        tv_nilai_sosial1.visibility = View.VISIBLE
-        nilai_sikap_sosial1.visibility = View.VISIBLE
+            tv_spiritual1.visibility = View.VISIBLE
+            sikap_spiritual1.visibility = View.VISIBLE
+            tv_sosial1.visibility = View.VISIBLE
+            sikap_sosial1.visibility = View.VISIBLE
 
-        mingguke_komunal1.visibility=View.VISIBLE
-        tv_mingguke_komunal1.visibility = View.VISIBLE
-        mingguke_komunal1.visibility = View.VISIBLE
-        tv_materi_komunal1.visibility = View.VISIBLE
-        materi_komunal1.visibility = View.VISIBLE
-        tv_ket_komunal1.visibility = View.VISIBLE
-        ket_komunal1.visibility = View.VISIBLE
-        tv_nilai_komunal1.visibility = View.VISIBLE
-        nilai_komunal1.visibility = View.VISIBLE
+            tv_mingguke1.visibility = View.VISIBLE
+            mingguke1.visibility = View.VISIBLE
+            tv_materi1.visibility = View.VISIBLE
+            materi_sikap_sosial1.visibility = View.VISIBLE
+            tv_ket1.visibility = View.VISIBLE
+            ket_sikap_sosial1.visibility = View.VISIBLE
+            tv_nilai_sosial1.visibility = View.VISIBLE
+            nilai_sikap_sosial1.visibility = View.VISIBLE
 
-        mingguke_sensori1.visibility=View.VISIBLE
-        tv_mingguke_sensori1.visibility = View.VISIBLE
-        mingguke_sensori1.visibility = View.VISIBLE
-        tv_materi_sensori1.visibility = View.VISIBLE
-        materi_sensori1.visibility = View.VISIBLE
-        tv_ket_sensori1.visibility = View.VISIBLE
-        ket_sensori1.visibility = View.VISIBLE
-        tv_nilai_sensori1.visibility = View.VISIBLE
-        nilai_sensori1.visibility = View.VISIBLE
+            tv_materi_komputer1.visibility = View.VISIBLE
+            nilaikomputer1.visibility = View.VISIBLE
+            tv_ket_komputer1.visibility = View.VISIBLE
+            ket_komputer1.visibility = View.VISIBLE
+            tv_nilai_komputer1.visibility = View.VISIBLE
+            nilai_komputer1.visibility = View.VISIBLE
 
-        tv_materi_komputer1.visibility = View.VISIBLE
-        nilaikomputer1.visibility = View.VISIBLE
-        tv_ket_komputer1.visibility = View.VISIBLE
-        ket_komputer1.visibility = View.VISIBLE
-        tv_nilai_komputer1.visibility = View.VISIBLE
-        nilai_komputer1.visibility = View.VISIBLE
+            tv_mingguke_murajaah1.visibility = View.VISIBLE
+            minggukeMurajaah1.visibility = View.VISIBLE
+            tv_materi_murajaah1.visibility = View.VISIBLE
+            materi_murajaah1.visibility = View.VISIBLE
+            tv_ket_murajaah1.visibility = View.VISIBLE
+            ket_murajaah1.visibility = View.VISIBLE
+            tv_nilai_murajaah1.visibility = View.VISIBLE
+            nilai_murajaah1.visibility = View.VISIBLE
 
+            tv_nama_ekstra1.visibility = View.VISIBLE
+            nama_ekstra1.visibility = View.VISIBLE
+            tv_ket_ekstra1.visibility = View.VISIBLE
+            ket_ekstra1.visibility = View.VISIBLE
 
-        tv_mingguke_murajaah1.visibility = View.VISIBLE
-        minggukeMurajaah1.visibility = View.VISIBLE
-        tv_materi_murajaah1.visibility = View.VISIBLE
-        materi_murajaah1.visibility = View.VISIBLE
-        tv_ket_murajaah1.visibility = View.VISIBLE
-        ket_murajaah1.visibility = View.VISIBLE
-        tv_nilai_murajaah1.visibility = View.VISIBLE
-        nilai_murajaah1.visibility = View.VISIBLE
+            tv_laporan_perkembangan_anak1.visibility = View.VISIBLE
+            graph.visibility=View.VISIBLE
 
-        tv_nama_ekstra1.visibility = View.VISIBLE
-        nama_ekstra1.visibility = View.VISIBLE
-        tv_ket_ekstra1.visibility = View.VISIBLE
-        ket_ekstra1.visibility = View.VISIBLE
+            tv_saran_guru1.visibility = View.VISIBLE
+            saran_guru1.visibility = View.VISIBLE
 
+            tv_tinggi_badan1.visibility = View.VISIBLE
+            tinggi_badan1.visibility = View.VISIBLE
+            tv_berat_badan1.visibility = View.VISIBLE
+            berat_badan1.visibility = View.VISIBLE
 
-        tv_laporan_perkembangan_anak1.visibility = View.VISIBLE
-//                    perkembangan_anak1.visibility = View.VISIBLE
-        graph.visibility=View.VISIBLE
+            tv_kondisi_kesehatan1.visibility = View.VISIBLE
+            tv_penglihatan1.visibility = View.VISIBLE
+            penglihatan1.visibility = View.VISIBLE
+            tv_pendengaran1.visibility = View.VISIBLE
+            pendengaran1.visibility = View.VISIBLE
+            tv_gigi1.visibility = View.VISIBLE
+            gigi1.visibility = View.VISIBLE
+            tv_daya_tahan_tubuh1.visibility = View.VISIBLE
+            daya_tahan1.visibility = View.VISIBLE
 
-        tv_saran_guru1.visibility = View.VISIBLE
-        saran_guru1.visibility = View.VISIBLE
+            tv_evaluasi_pertumbuhan_anak1.visibility = View.VISIBLE
+            tv_kondisi_anak_saat_ini1.visibility = View.VISIBLE
+            kondisi_saat_ini1.visibility = View.VISIBLE
+            tv_kondisi_ideal1.visibility = View.VISIBLE
+            kondisi_ideal1.visibility = View.VISIBLE
+            tv_saran_dokter1.visibility = View.VISIBLE
+            saran_dokter1.visibility = View.VISIBLE
 
-        tv_tinggi_badan1.visibility = View.VISIBLE
-        tinggi_badan1.visibility = View.VISIBLE
-        tv_berat_badan1.visibility = View.VISIBLE
-        berat_badan1.visibility = View.VISIBLE
+            tv_absensi1.visibility = View.VISIBLE
+            tv_izin1.visibility = View.VISIBLE
+            izin1.visibility = View.VISIBLE
+            tv_sakit1.visibility = View.VISIBLE
+            sakit1.visibility = View.VISIBLE
+            tv_tidak_ada_ket1.visibility = View.VISIBLE
+            tidak_ada_keterangan1.visibility = View.VISIBLE
 
-        tv_kondisi_kesehatan1.visibility = View.VISIBLE
-        tv_penglihatan1.visibility = View.VISIBLE
-        penglihatan1.visibility = View.VISIBLE
-        tv_pendengaran1.visibility = View.VISIBLE
-        pendengaran1.visibility = View.VISIBLE
-        tv_gigi1.visibility = View.VISIBLE
-        gigi1.visibility = View.VISIBLE
-        tv_daya_tahan_tubuh1.visibility = View.VISIBLE
-        daya_tahan1.visibility = View.VISIBLE
+            tv_evaluasi_perkembangan_anak1.visibility = View.VISIBLE
+            tv_kondisi_psikologi_saat_ini1.visibility = View.VISIBLE
+            kondisi_psikologi_saat_ini1.visibility = View.VISIBLE
+            tv_kondisi_ideal_psikologi1.visibility = View.VISIBLE
+            kondisi_ideal_psikologi1.visibility = View.VISIBLE
+            tv_saran_psikologi1.visibility = View.VISIBLE
+            saran_psikolog1.visibility = View.VISIBLE
 
-        tv_evaluasi_pertumbuhan_anak1.visibility = View.VISIBLE
-        tv_kondisi_anak_saat_ini1.visibility = View.VISIBLE
-        kondisi_saat_ini1.visibility = View.VISIBLE
-        tv_kondisi_ideal1.visibility = View.VISIBLE
-        kondisi_ideal1.visibility = View.VISIBLE
-        tv_saran_dokter1.visibility = View.VISIBLE
-        saran_dokter1.visibility = View.VISIBLE
+//                tv_evaluasi_perkembangan_anak_okupasi1.visibility = View.VISIBLE
+            tv_kondisi_okupasi_saat_ini1.visibility = View.VISIBLE
+            kondisi_okupasi_saat_ini1.visibility = View.VISIBLE
+            tv_kondisi_ideal_okupasi1.visibility = View.VISIBLE
+            kondisi_ideal_okupasi1.visibility = View.VISIBLE
+            tv_saran_okupasi1.visibility = View.VISIBLE
+            saran_okupasi1.visibility = View.VISIBLE
 
-        tv_absensi1.visibility = View.VISIBLE
-        tv_izin1.visibility = View.VISIBLE
-        izin1.visibility = View.VISIBLE
-        tv_sakit1.visibility = View.VISIBLE
-        sakit1.visibility = View.VISIBLE
-        tv_tidak_ada_ket1.visibility = View.VISIBLE
-        tidak_ada_keterangan1.visibility = View.VISIBLE
+            mingguke_komunal1.visibility=View.VISIBLE
+            tv_mingguke_komunal1.visibility = View.VISIBLE
+            mingguke_komunal1.visibility = View.VISIBLE
+            tv_materi_komunal1.visibility = View.VISIBLE
+            materi_komunal1.visibility = View.VISIBLE
+            tv_ket_komunal1.visibility = View.VISIBLE
+            ket_komunal1.visibility = View.VISIBLE
+            tv_nilai_komunal1.visibility = View.VISIBLE
+            nilai_komunal1.visibility = View.VISIBLE
 
-        tv_evaluasi_perkembangan_anak1.visibility = View.VISIBLE
-        tv_kondisi_psikologi_saat_ini1.visibility = View.VISIBLE
-        kondisi_psikologi_saat_ini1.visibility = View.VISIBLE
-        tv_kondisi_ideal_psikologi1.visibility = View.VISIBLE
-        kondisi_ideal_psikologi1.visibility = View.VISIBLE
-        tv_saran_psikologi1.visibility = View.VISIBLE
-        saran_psikolog1.visibility = View.VISIBLE
+            mingguke_sensori1.visibility=View.VISIBLE
+            tv_mingguke_sensori1.visibility = View.VISIBLE
+            mingguke_sensori1.visibility = View.VISIBLE
+            tv_materi_sensori1.visibility = View.VISIBLE
+            materi_sensori1.visibility = View.VISIBLE
+            tv_ket_sensori1.visibility = View.VISIBLE
+            ket_sensori1.visibility = View.VISIBLE
+            tv_nilai_sensori1.visibility = View.VISIBLE
+            nilai_sensori1.visibility = View.VISIBLE
 
-//        tv_evaluasi_perkembangan_anak_okupasi1.visibility = View.VISIBLE
-        tv_kondisi_okupasi_saat_ini1.visibility = View.VISIBLE
-        kondisi_okupasi_saat_ini1.visibility = View.VISIBLE
-        tv_kondisi_ideal_okupasi1.visibility = View.VISIBLE
-        kondisi_ideal_okupasi1.visibility = View.VISIBLE
-        tv_saran_okupasi1.visibility = View.VISIBLE
-        saran_okupasi1.visibility = View.VISIBLE
 
     }
 

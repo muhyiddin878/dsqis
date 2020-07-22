@@ -108,7 +108,7 @@ class ChatAdapter(private val ctx: Context,private val listChat:MutableList<Chat
                 namaDokter.text ="${item.nama_pakar}"
                 isiChat.text = item.last_chat
             } else{
-                namaDokter.text = "Orang Tua ${item.nama_member}"
+                namaDokter.text = "${item.nama_member}"
                 isiChat.text = item.last_chat
             }
 

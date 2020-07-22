@@ -40,7 +40,7 @@ class FragmentArtikel:Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "Artikel"
+        (activity as AppCompatActivity).supportActionBar?.title = "Board"
 //        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
@@ -93,7 +93,9 @@ class FragmentArtikel:Fragment() {
 
 
     fun getAllArtikel(){
-        refSemuaArtikel.addSnapshotListener { querySnapshot, error ->
+        refSemuaArtikel
+            .whereEqualTo("status",true)
+            .addSnapshotListener { querySnapshot, error ->
             if(error!=null){
                 Toast.makeText(view?.context, error?.localizedMessage, Toast.LENGTH_SHORT).show()
                 return@addSnapshotListener
@@ -114,8 +116,6 @@ class FragmentArtikel:Fragment() {
     fun showArtikel(data: List<Post>){
         adapter.notifyDataSetChanged()
     }
-    fun showMessage(message:String){}
-
 
 
 }
